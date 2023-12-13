@@ -2,6 +2,9 @@ const Project = require("../models/Project");
 const Client = require("../models/Client");
 const User = require("../models/User");
 const Destination = require("../models/Destination");
+const Country = require("../models/Country");
+const TourSpot = require("../models/TourSpot");
+const Continent = require("../models/Continent");
 
 const {
   GraphQLObjectType,
@@ -12,7 +15,6 @@ const {
   GraphQLNonNull,
   GraphQLEnumType,
 } = require("graphql");
-const Country = require("../models/Country");
 
 // project type
 const ProjectType = new GraphQLObjectType({
@@ -64,27 +66,21 @@ const DestinationType = new GraphQLObjectType({
     description: { type: GraphQLString },
   }),
 });
-// const ContinentType = new GraphQLObjectType({
-//   name: "Continent",
-//   fields: () => ({
-//     name: { type: GraphQLString },
-//   }),
-// });
-// const TourSpotType = new GraphQLObjectType({
-//   name: "TourSpot",
-//   fields: () => ({
-//     name: { type: GraphQLString },
-//   }),
-// });
-// const DivisionType = new GraphQLObjectType({
-//   name: "Division",
-//   fields: () => ({
-//     name: { type: GraphQLString },
-//     distric: { type: GraphQLString },
-//     photo: { type: GraphQLString },
-//     details: { type: GraphQLString },
-//   }),
-// });
+// Continent Type
+const ContinentType = new GraphQLObjectType({
+  name: "Continent",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    code: { type: GraphQLString },
+    countries: {
+      type: new GraphQLList(CountryType),
+      resolve: (parent, args) => {
+        return Country.find();
+      },
+    },
+  }),
+});
 // country type
 const CountryType = new GraphQLObjectType({
   name: "Country",
@@ -92,10 +88,30 @@ const CountryType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     touristSpots: { type: GraphQLString },
-    // tourSpotId: { type: GraphQLString },
-    continent: { type: GraphQLString },
+    continent: {
+      type: ContinentType,
+      resolve: (parent, args) => {
+        return Continent.findById(parent.continent);
+      },
+    },
     description: { type: GraphQLString },
     division: { type: GraphQLString },
+    photo: { type: GraphQLString },
+  }),
+});
+// tour spot type
+const TourSpotType = new GraphQLObjectType({
+  name: "TourSpot",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+    country: {
+      type: CountryType,
+      resolve: (parent, args) => {
+        return Country.findById(parent.countryId);
+      },
+    },
   }),
 });
 //main query
@@ -161,6 +177,36 @@ const RootQuery = new GraphQLObjectType({
           return await Destination.findById(args.id);
         } catch (error) {
           throw new Error("Error fetching destination");
+        }
+      },
+    },
+    continents: {
+      type: new GraphQLList(ContinentType),
+      resolve: async () => {
+        try {
+          return await Continent.find();
+        } catch (error) {
+          throw new Error(`Error fetching country: ${error}`);
+        }
+      },
+    },
+    countries: {
+      type: new GraphQLList(CountryType),
+      resolve: async () => {
+        try {
+          return await Country.find();
+        } catch (error) {
+          throw new Error(`Error fetching country: ${error}`);
+        }
+      },
+    },
+    tourSpots: {
+      type: new GraphQLList(TourSpotType),
+      resolve: async () => {
+        try {
+          return await TourSpot.find();
+        } catch (error) {
+          throw new Error(`Error fetching TourSpot: ${error}`);
         }
       },
     },
@@ -399,27 +445,37 @@ const mutation = new GraphQLObjectType({
     addCountry: {
       type: CountryType,
       args: {
-        id: { type: GraphQLID },
         name: { type: GraphQLString },
         touristSpots: { type: GraphQLString },
-        // tourSpotId: { type: GraphQLString },
-        continent: { type: GraphQLString },
+        continent: { type: GraphQLID },
         description: { type: GraphQLString },
         division: { type: GraphQLString },
+        photo: { type: GraphQLString },
       },
-      resolve(parent, args) {
-        const country = new Country({
-          id: { type: GraphQLID },
-          name: { type: GraphQLString },
-          touristSpots: { type: GraphQLString },
-          // tourSpotId: { type: GraphQLString },
-          continent: { type: GraphQLString },
-          description: { type: GraphQLString },
-          division: { type: GraphQLString },
-          // tourSpotId: args.tourSpotId,
-        });
-        return country.save();
-        // Client.create();
+      resolve: async (parent, args) => {
+        try {
+          const country = new Country(args);
+          return await country.save();
+        } catch (error) {
+          throw new Error("Error adding country");
+        }
+      },
+    },
+    // add tourspot
+    addTourSpot: {
+      type: TourSpotType,
+      args: {
+        name: { type: GraphQLString },
+        countryId: { type: GraphQLID },
+        description: { type: GraphQLString },
+      },
+      resolve: async (parent, args) => {
+        try {
+          const tourSpot = new TourSpot(args);
+          return await tourSpot.save();
+        } catch (error) {
+          throw new Error("Error adding tourSpot");
+        }
       },
     },
   },
