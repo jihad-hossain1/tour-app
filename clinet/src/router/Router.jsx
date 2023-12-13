@@ -1,11 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "../App";
+// import App from "../App";
 import Layout from "../layout/Layout";
 import Clients from "../components/clients/Clients";
 import AddClientForm from "../components/AddClientForm";
 import Projects from "../pages/projects/Projects";
 import Project from "../pages/projects/Project";
 import AddProject from "../pages/projects/AddProject";
+import Home from "../pages/home/Home";
+import Continent from "../pages/home/Continent";
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +16,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <Home />,
       },
       {
         path: "/clients",
@@ -35,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/project/:id",
         element: <Project />,
+      },
+      {
+        path: "/continent/:id",
+        element: <Continent />,
       },
     ],
   },
