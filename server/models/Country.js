@@ -2,12 +2,14 @@ const mongoose = require("mongoose");
 
 const CountrySchema = new mongoose.Schema({
   name: String,
-  division: String,
-  touristSpots: String,
+  divisionId: { type: mongoose.Schema.Types.ObjectId, ref: "Division" },
+  cityId: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
+  touristSpotsId: { type: mongoose.Schema.Types.ObjectId, ref: "TourSpot" },
   photo: String,
-  continent: { type: mongoose.Schema.Types.ObjectId, ref: "Continent" },
+  continentId: { type: mongoose.Schema.Types.ObjectId, ref: "Continent" },
   description: String,
-  countryCode: String
+  countryCode: String,
+  continent: String,
 });
 
 module.exports = mongoose.model("Country", CountrySchema);
