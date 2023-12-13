@@ -74,11 +74,15 @@ const ContinentType = new GraphQLObjectType({
     name: { type: GraphQLString },
     code: { type: GraphQLString },
     countries: {
-      type: new GraphQLList(CountryType),
-      resolve: (parent, args) => {
-        return Country.find();
-      },
-    },
+      fields: ()=>({
+      type: [CountryType],
+        resolve: async (isCountryCode) => {
+          let totalCountry = await Country.find();
+         return  totalCountry?.filter(item =>item?.countryCode === isCountryCode)
+      }
+
+    })
+    }
   }),
 });
 // country type
@@ -97,6 +101,7 @@ const CountryType = new GraphQLObjectType({
     description: { type: GraphQLString },
     division: { type: GraphQLString },
     photo: { type: GraphQLString },
+    countryCode: { type: GraphQLString }
   }),
 });
 // tour spot type
@@ -451,6 +456,7 @@ const mutation = new GraphQLObjectType({
         description: { type: GraphQLString },
         division: { type: GraphQLString },
         photo: { type: GraphQLString },
+        countryCode: { type: GraphQLString }
       },
       resolve: async (parent, args) => {
         try {

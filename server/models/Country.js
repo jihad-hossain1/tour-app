@@ -7,6 +7,7 @@ const CountrySchema = new mongoose.Schema({
   photo: String,
   continent: { type: mongoose.Schema.Types.ObjectId, ref: "Continent" },
   description: String,
+  countryCode: String
 });
 
 module.exports = mongoose.model("Country", CountrySchema);
