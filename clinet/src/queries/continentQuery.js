@@ -7,15 +7,23 @@ const GET_CONTINETS = gql`
       id
       name
       code
+      countries {
+        name
+        continentId
+      }
     }
   }
 `;
 
 const GET_CONTINET = gql`
   #graphql
-  query getContinent{
-     countries{
+  query getContinent {
+    continents {
       name
+      countries {
+        name
+        continentId
+      }
     }
   }
 `;

@@ -8,18 +8,23 @@ const Continent = () => {
   const { loading, error, data } = useQuery(GET_CONTINET, {
     variables: { id },
   });
-  console.log(data);
+  const { continents } = data;
+  // console.log(data);
+
   if (loading) {
     return <div>Loading....</div>;
   }
   if (error) {
     return <div>{error.message}</div>;
   }
+  // let { continents } = data;
+  // const _cn = continents?.map((item) => item?.countries);
+  // console.log(_cn);
   return (
     <div>
       <div>
-        {data?.countries?.map((country, _i) => (
-          <SingleCountry key={_i} country={country} />
+        {continents?.map((country, _i) => (
+          <SingleCountry key={_i} cId={id} country={country} />
         ))}
       </div>
     </div>

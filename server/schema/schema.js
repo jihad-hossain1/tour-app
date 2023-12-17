@@ -7,8 +7,7 @@ const TourSpot = require("../models/TourSpot");
 const Continent = require("../models/Continent");
 const Division = require("../models/Division");
 const City = require("../models/City");
-const { continents, countries, languages } = require('countries-list')
-
+const { continents, countries, languages } = require("countries-list");
 
 const {
   GraphQLObjectType,
@@ -70,94 +69,39 @@ const DestinationType = new GraphQLObjectType({
     description: { type: GraphQLString },
   }),
 });
-// // Continent Type
-// const ContinentType = new GraphQLObjectType({
-//   name: "Continent",
-//   fields: () => ({
-//     id: { type: GraphQLID },
-//     name: { type: GraphQLString },
-//     code: { type: GraphQLString },
-//     countries: {
-//       fields: ()=>({
-//       type: [CountryType],
-//         resolve: async (isCountryCode) => {
-//           let totalCountry = await Country.find();
-//          return  totalCountry?.filter(item =>item?.countryCode === isCountryCode)
-//       }
 
-//     })
-//     }
-//   }),
-// });
-// // country type
-// const CountryType = new GraphQLObjectType({
-//   name: "Country",
-//   fields: () => ({
-//     id: { type: GraphQLID },
-//     name: { type: GraphQLString },
-//     touristSpots: { type: GraphQLString },
-//     continent: {
-//       type: ContinentType,
-//       resolve: (parent, args) => {
-//         return Continent.findById(parent.continent);
-//       },
-//     },
-//     description: { type: GraphQLString },
-//     division: { type: GraphQLString },
-//     photo: { type: GraphQLString },
-//     countryCode: { type: GraphQLString }
-//   }),
-// });
-// // tour spot type
-//  const TourSpotType = new GraphQLObjectType({
-//   name: "TourSpot",
-//   fields: () => ({
-//     id: { type: GraphQLID },
-//     name: { type: GraphQLString },
-//     description: { type: GraphQLString },
-//     country: {
-//       type: CountryType,
-//       resolve: (parent, args) => {
-//         return Country.findById(parent.countryId);
-//       },
-//     },
-//   }),
-//  });
-
- const TourSpotType = new GraphQLObjectType({
+const TourSpotType = new GraphQLObjectType({
   name: "TourSpot",
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     photo: { type: GraphQLString },
-    cityId: { type:GraphQLID },
+    cityId: { type: GraphQLID },
     countryId: { type: GraphQLID },
 
     city: {
       type: CityForAdd,
       resolve: async (parent, args) => {
-
         try {
-          let _i = await City.find()
-        let result = _i?.find(item=>item?.id == parent.cityId)
-        return result;
+          let _i = await City.find();
+          let result = _i?.find((item) => item?.id == parent.cityId);
+          return result;
         } catch (error) {
-          throw new Error("Error fetching city name")
+          throw new Error("Error fetching city name");
         }
-        
-      }
+      },
     },
-    code: {type: GraphQLString},
+    code: { type: GraphQLString },
     country: {
       type: CountryType,
       resolve: async (parent, args) => {
         try {
-          let _i = await Country.find()
-        let result = _i?.find(item=>item?.id == parent.countryId)
-        return result;
+          let _i = await Country.find();
+          let result = _i?.find((item) => item?.id == parent.countryId);
+          return result;
         } catch (error) {
-          throw new Error("Error fetching country name")
+          throw new Error("Error fetching country name");
         }
       },
     },
@@ -170,35 +114,36 @@ const CityType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     touristSpots: {
-          type: new GraphQLList(TourSpotType),
-          resolve: async (parent, args) => {
-              return await TourSpot.find();
-    } },
+      type: new GraphQLList(TourSpotType),
+      resolve: async (parent, args) => {
+        return await TourSpot.find();
+      },
+    },
     description: { type: GraphQLString },
     division: {
-          type: new GraphQLList(DivisionType),
-          resolve: async (parent, args) => {
-        return await Division.find()
-    }  },
+      type: new GraphQLList(DivisionType),
+      resolve: async (parent, args) => {
+        return await Division.find();
+      },
+    },
     photo: { type: new GraphQLList(GraphQLString) },
-
   }),
 });
 const CityForAdd = new GraphQLObjectType({
   name: "AddCity",
   fields: () => ({
     id: { type: GraphQLID },
-     name: { type: GraphQLString },
+    name: { type: GraphQLString },
     description: { type: GraphQLString },
     photo: { type: GraphQLString },
-    divisionId: {type: GraphQLID},
+    divisionId: { type: GraphQLID },
     division: {
       type: DivisionType,
       resolve: async (parent, args) => {
-        let _i = await Division?.findById(parent.divisionId)
+        let _i = await Division?.findById(parent.divisionId);
         return _i;
-      }
-    }  
+      },
+    },
   }),
 });
 const DivisionType = new GraphQLObjectType({
@@ -212,10 +157,17 @@ const DivisionType = new GraphQLObjectType({
         return Country.findById(parent.countryId);
       },
     },
-    countryId: {type: GraphQLID},
+    countryId: { type: GraphQLID },
     description: { type: GraphQLString },
     photo: { type: GraphQLString },
-    
+    cities: {
+      type: new GraphQLList(CityType),
+      resolve: async (parent, args) => {
+        let _i = await City.find();
+        let result = _i?.filter((item) => item?.divisionId == parent.id);
+        return result;
+      },
+    },
   }),
 });
 
@@ -224,71 +176,63 @@ const CountryType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
-    continent: { type: GraphQLString },
+    description: { type: GraphQLString },
+    photo: { type: GraphQLString },
+    continentId: { type: GraphQLID },
     touristSpots: {
       type: new GraphQLList(TourSpotType),
       resolve: async (parent, args) => {
-        let tourt = await TourSpot.find()
-        let result = tourt?.filter(item=>item?.countryCode === parent.countryCode)
+        let tourt = await TourSpot.find();
+        let result = tourt?.filter(
+          (item) => item?.countryCode === parent.countryCode
+        );
         return result;
-        }
       },
-    description: { type: GraphQLString },
+    },
     division: {
-          type: DivisionType, resolve: async (parent,args) => {
-          return await Division.findById(parent.divisionId)
-      } },
-    city: {
-          type: CityType,
-          resolve: async (parent,args) => {
-            let _i = await City.find()
-            let result = _i?.filter(item => item.division == parent.divisionId);
-            return result
-            }
+      type: new GraphQLList(DivisionType),
+      resolve: async (parent, args) => {
+        let _i = await Division.find();
+        let result = _i?.filter((item) => item?.countryId == parent.id);
+        return result;
       },
-    photo: { type: GraphQLString },
-    countryCode: { type: GraphQLString }
+    },
+    city: {
+      type: CityType,
+      resolve: async (parent, args) => {
+        let _i = await City.find();
+        let result = _i?.filter((item) => item.division == parent.divisionId);
+        return result;
+      },
+    },
   }),
 });
-
+// const SingleContinentType = new GraphQLObjectType({
+//   name: "SingleContinent",
+//   fields: () => ({
+//     countries: async (parent, args) => {
+//       let _i = await Country.find();
+//       let result = _i?.filter((item) => item.id === parent.continentId);
+//       return result;
+//     },
+//   }),
+// });
 const ContinentType = new GraphQLObjectType({
   name: "Continent",
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     code: { type: GraphQLString },
-    // countries: {
-    //       type: CountryType,
-    //       resolve: async(parent, args) => {
-    //         return await Country.findById(parent.countryId)
-    //         // return await Country.find()
-    //       }
-    // }
-
     countries: {
       type: new GraphQLList(CountryType),
       resolve: async (parent, args) => {
-        let contr = await Country.find()
-        let result = contr?.filter(item=>item?.continent === parent.code)
-        return result
-      }
-    }
-
-    // countries: {
-    //   type: new GraphQLList(CountryType),
-      
-    // resolve: (continent) =>
-    //     Object.entries(countries)
-    //       .filter(([, country]) => country.continent === continent.code)
-    //       .map(([code, country]) => ({
-    //         ...country,
-    //         code,
-    //       })),
-    // }
+        let _i = await Country.find();
+        let result = _i?.filter((item) => item?.continentId == parent.id);
+        return result;
+      },
+    },
   }),
 });
-
-
 
 //main query
 const RootQuery = new GraphQLObjectType({
@@ -641,15 +585,10 @@ const mutation = new GraphQLObjectType({
     addCountry: {
       type: CountryType,
       args: {
-      name: { type: GraphQLNonNull(GraphQLString) },
-    touristSpotsId: { type: GraphQLNonNull(GraphQLID) },
-        // continentId: { type: GraphQLNonNull(GraphQLID) },
-    continent: { type: GraphQLNonNull(GraphQLString) },
-    description: { type: GraphQLString },
-    divisionId: { type: GraphQLNonNull(GraphQLID) },
-    cityId: { type: GraphQLNonNull(GraphQLID) },
-    photo: { type: GraphQLString },
-    countryCode: { type: GraphQLNonNull(GraphQLString) }
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        photo: { type: GraphQLString },
+        continentId: { type: GraphQLID },
       },
       resolve: async (parent, args) => {
         try {
@@ -667,7 +606,7 @@ const mutation = new GraphQLObjectType({
         name: { type: GraphQLString },
         description: { type: GraphQLString },
         photo: { type: GraphQLString },
-        cityId: { type:GraphQLID },
+        cityId: { type: GraphQLID },
         countryId: { type: GraphQLID },
         // code: {type: GraphQLString},
         // country: {type: GraphQLString}
@@ -686,8 +625,8 @@ const mutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLString },
         description: { type: GraphQLString },
-       photo: { type: GraphQLString },
-       divisionId: { type: GraphQLID },
+        photo: { type: GraphQLString },
+        divisionId: { type: GraphQLID },
       },
       resolve: async (parent, args) => {
         try {
@@ -701,10 +640,10 @@ const mutation = new GraphQLObjectType({
     addDivision: {
       type: DivisionType,
       args: {
-      name: { type: GraphQLString },
-    countryId: { type: GraphQLID },
-    description: { type: GraphQLString },
-    photo: { type: GraphQLString },
+        name: { type: GraphQLString },
+        countryId: { type: GraphQLID },
+        description: { type: GraphQLString },
+        photo: { type: GraphQLString },
       },
       resolve: async (parent, args) => {
         try {
