@@ -17,6 +17,7 @@ const {
   GraphQLList,
   GraphQLNonNull,
   GraphQLEnumType,
+  GraphQLInt,
 } = require("graphql");
 
 // project type
@@ -27,6 +28,7 @@ const ProjectType = new GraphQLObjectType({
     name: { type: GraphQLString },
     details: { type: GraphQLString },
     status: { type: GraphQLString },
+    clientId: { type: GraphQLID },
     client: {
       type: ClientType,
       resolve(parent, args) {
@@ -43,6 +45,24 @@ const ClientType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     phone: { type: GraphQLString },
+    projects: {
+      type: new GraphQLList(ProjectType),
+      resolve: async (parent, args) => {
+        let _i = await Project.find();
+        let result = _i?.filter((item) => item?.clientId == parent?.id);
+        return result;
+      },
+    },
+    clientProject: {
+      type: new GraphQLList(ProjectType),
+      args: {
+        userId: { type: GraphQLID },
+      },
+      resolve: async (_p, args) => {
+        let p = await Project.find();
+        let result = p?.filter((item) => item?.clientId == args?.userId);
+      },
+    },
   }),
 });
 // user type
@@ -116,7 +136,9 @@ const CityType = new GraphQLObjectType({
     touristSpots: {
       type: new GraphQLList(TourSpotType),
       resolve: async (parent, args) => {
-        return await TourSpot.find();
+        let _i = await TourSpot.find();
+        let result = _i?.filter((item) => item?.cityId == parent.id);
+        return result;
       },
     },
     description: { type: GraphQLString },
@@ -240,8 +262,8 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     projects: {
       type: new GraphQLList(ProjectType),
-      resolve(parent, args) {
-        return Project.find();
+      resolve: async (parent, args) => {
+        return await Project.find();
       },
     },
     project: {
@@ -251,10 +273,50 @@ const RootQuery = new GraphQLObjectType({
         return Project.findById(args.id);
       },
     },
+    clientProjects: {
+      type: new GraphQLList(ProjectType),
+      args: { id: { type: GraphQLID } },
+      resolve: async (parent, args) => {
+        const fetchData = await Project.find();
+        let result = fetchData?.filter((item) => item?.clientId == args?.id);
+        return result;
+      },
+    },
+    wpClients: {
+      type: new GraphQLList(ClientType),
+      resolve: async (parent, args) => {
+        try {
+          let allClients = await Client.find();
+          return allClients;
+        } catch (error) {
+          console.log("failed to fetch: ", error);
+        }
+      },
+    },
+    /* 
+    <--- Pagination Client -->
+    query{
+    clients(page: 1,limit: 10){
+      id
+     name
+    phone} }
+    */
     clients: {
       type: new GraphQLList(ClientType),
-      resolve(parent, args) {
-        return Client.find();
+      args: {
+        page: { type: GraphQLInt },
+        limit: { type: GraphQLInt },
+      },
+      resolve: async (parent, args) => {
+        try {
+          const { page, limit } = args;
+          const startIndex = (page - 1) * limit;
+          const endIndex = startIndex + limit;
+          let clientsData = await Client.find();
+          return clientsData.slice(startIndex, endIndex);
+        } catch (error) {
+          return error;
+        }
       },
     },
     client: {
@@ -310,6 +372,15 @@ const RootQuery = new GraphQLObjectType({
         }
       },
     },
+    singleContinent: {
+      type: new GraphQLList(CountryType),
+      args: { id: { type: GraphQLID } },
+      resolve: async (parent, args) => {
+        const fetchData = await Country.find();
+        let result = fetchData?.filter((item) => item?.continentId == args?.id);
+        return result;
+      },
+    },
     countries: {
       type: new GraphQLList(CountryType),
       resolve: async () => {
@@ -320,6 +391,16 @@ const RootQuery = new GraphQLObjectType({
         }
       },
     },
+    singleCountryTourspotList: {
+      type: new GraphQLList(TourSpotType),
+      args: { id: { type: GraphQLID } },
+      resolve: async (parent, args) => {
+        const fetchData = await TourSpot.find();
+        let result = fetchData?.filter((item) => item?.countryId == args?.id);
+        return result;
+      },
+    },
+
     tourSpots: {
       type: new GraphQLList(TourSpotType),
       resolve: async () => {
@@ -327,6 +408,18 @@ const RootQuery = new GraphQLObjectType({
           return await TourSpot.find();
         } catch (error) {
           throw new Error(`Error fetching TourSpot: ${error}`);
+        }
+      },
+    },
+    singleTourspotDetails: {
+      type: TourSpotType,
+      args: { id: { type: GraphQLID } },
+      resolve: async (parent, args) => {
+        try {
+          const fetchData = await TourSpot.findById(args?.id);
+          return fetchData;
+        } catch (error) {
+          console.log(error);
         }
       },
     },

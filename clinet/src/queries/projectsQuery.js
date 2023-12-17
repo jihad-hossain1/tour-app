@@ -17,13 +17,6 @@ const GET_PROJECT = gql`
     project(id: $id) {
       id
       name
-      details
-      status
-      client {
-        id
-        name
-        phone
-      }
     }
   }
 `;

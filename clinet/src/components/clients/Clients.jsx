@@ -1,10 +1,25 @@
 import { FaTrash, FaUser } from "react-icons/fa";
 import { gql, useQuery } from "@apollo/client";
-import { GET_CLIENTS } from "../../queries/clientsQuery";
+// import { GET_CLIENTS } from "../../queries/clientsQuery";
 import DeleteClient from "../DeleteClient";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Clients = () => {
+  const [inLimit, setInlimit] = useState(4);
+  const [inPage, setinPage] = useState(1);
+
+  const GET_CLIENTS = gql`
+  #graphql
+  query getClients {
+    clients(page: ${inPage}, limit: ${inLimit}) {
+      id
+      name
+      phone
+    }
+  }
+`;
+
   const { loading, error, data } = useQuery(GET_CLIENTS);
 
   if (loading) {
@@ -14,6 +29,7 @@ const Clients = () => {
   if (error) {
     return <div>{error.message}</div>;
   }
+
   return (
     <div>
       {!loading && !error && (
@@ -51,6 +67,14 @@ const Clients = () => {
           </table>
         </div>
       )}
+      <div className="flex gap-4 ">
+        <button className="btn" onClick={() => setinPage(inPage - 1)}>
+          prev
+        </button>
+        <button className="btn" onClick={() => setinPage(inPage + 1)}>
+          next
+        </button>
+      </div>
     </div>
   );
 };

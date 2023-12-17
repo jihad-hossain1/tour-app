@@ -8,8 +8,6 @@ const Continent = () => {
   const { loading, error, data } = useQuery(GET_CONTINET, {
     variables: { id },
   });
-  const { continents } = data;
-  // console.log(data);
 
   if (loading) {
     return <div>Loading....</div>;
@@ -17,13 +15,14 @@ const Continent = () => {
   if (error) {
     return <div>{error.message}</div>;
   }
-  // let { continents } = data;
-  // const _cn = continents?.map((item) => item?.countries);
-  // console.log(_cn);
+
   return (
     <div>
-      <div>
-        {continents?.map((country, _i) => (
+      <div className="text-center py-4">
+        Total-country: {data?.singleContinent?.length}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 m-4">
+        {data?.singleContinent?.map((country, _i) => (
           <SingleCountry key={_i} cId={id} country={country} />
         ))}
       </div>

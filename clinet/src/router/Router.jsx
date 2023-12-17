@@ -8,6 +8,8 @@ import Project from "../pages/projects/Project";
 import AddProject from "../pages/projects/AddProject";
 import Home from "../pages/home/Home";
 import Continent from "../pages/home/Continent";
+import CountryListByTour from "../pages/tours/CountryListByTour";
+import SingleToursportDetails from "../pages/tours/SingleToursportDetails";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path: "/continent/:id",
         element: <Continent />,
+      },
+      {
+        path: "/countryListByTour/:id",
+        element: <CountryListByTour />,
+      },
+      {
+        path: "/singleToursportDetails/:id",
+        element: <SingleToursportDetails />,
       },
     ],
   },

@@ -17,13 +17,11 @@ const GET_CONTINETS = gql`
 
 const GET_CONTINET = gql`
   #graphql
-  query getContinent {
-    continents {
+  query getContinent($id: ID!) {
+    singleContinent(id: $id) {
+      id
       name
-      countries {
-        name
-        continentId
-      }
+      description
     }
   }
 `;

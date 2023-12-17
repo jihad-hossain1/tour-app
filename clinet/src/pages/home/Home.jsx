@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_CONTINETS } from "../../queries/continentQuery";
 import SingleContinent from "../../components/continents/SingleContinent/SingleContinent";
+import Test from "../../components/test/Test";
 
 const Home = () => {
   const { loading, error, data } = useQuery(GET_CONTINETS);
@@ -17,6 +18,9 @@ const Home = () => {
         {data?.continents?.map((continent, _i) => (
           <SingleContinent key={_i} continent={continent} />
         ))}
+      </div>
+      <div>
+        <Test />
       </div>
     </div>
   );

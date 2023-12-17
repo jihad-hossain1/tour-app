@@ -1,15 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const SingleCountry = ({ country, cId }) => {
-  let { countries } = country;
-  let _filtr = countries?.flat((item) => item);
-  console.log(_filtr);
-
+const SingleCountry = ({ country }) => {
   return (
     <div>
-      {countries?.map((item, _i) => (
-        <div key={_i}>{item?.name}</div>
-      ))}
+      <Link
+        to={`/countryListByTour/${country?.id}`}
+        className="hover:underline"
+      >
+        {country?.name}
+      </Link>
     </div>
   );
 };
