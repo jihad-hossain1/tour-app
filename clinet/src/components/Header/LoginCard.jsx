@@ -72,8 +72,12 @@ const LoginCard = () => {
   const handleClose = () => setOpen(false);
   return (
     <div className="">
-      <Avatar onClick={handleOpen} className="cursor-pointer">
-        <LuUser2 size={25} />
+      <Avatar
+        style={{ backgroundColor: "#fff" }}
+        onClick={handleOpen}
+        className="cursor-pointer"
+      >
+        <LuUser2 className="text-zinc-900" size={25} />
       </Avatar>
 
       <Modal

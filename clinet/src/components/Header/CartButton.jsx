@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Button, Menu, MenuItem, Avatar } from "@mui/material";
 import { MdAddShoppingCart } from "react-icons/md";
 
 const CartButton = () => {
@@ -14,16 +14,18 @@ const CartButton = () => {
   };
   return (
     <div>
-      <Button
+      <Avatar
+        style={{ backgroundColor: "#fff" }}
         id="basic-button"
         aria-controls={cart ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={cart ? "true" : undefined}
         onClick={handlecartClick}
       >
-        <MdAddShoppingCart size={25} />
-      </Button>
+        <MdAddShoppingCart className="text-zinc-900" size={25} />
+      </Avatar>
       <Menu
+        className="mt-4"
         id="basic-menu"
         anchorEl={cartToggle}
         open={cart}

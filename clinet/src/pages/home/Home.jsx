@@ -11,7 +11,12 @@ const Home = () => {
           backgroundImage:
             "url('https://res.cloudinary.com/dqfi9zw3e/image/upload/v1702948003/images/ya1b7b2wmtv6fmoi0fyl.webp')",
         }}
-      ></div>
+      >
+        <div className="text-[#fff] text-center ">
+          <h4>Let the journey begin</h4>
+          <p>Get the best prices on 2,000,000+ properties, worldwide</p>
+        </div>
+      </div>
       <Container maxWidth={"lg"}>
         {/* offers section  */}
         <div>offer...</div>
