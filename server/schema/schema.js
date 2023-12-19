@@ -229,22 +229,14 @@ const CountryType = new GraphQLObjectType({
     },
   }),
 });
-// const SingleContinentType = new GraphQLObjectType({
-//   name: "SingleContinent",
-//   fields: () => ({
-//     countries: async (parent, args) => {
-//       let _i = await Country.find();
-//       let result = _i?.filter((item) => item.id === parent.continentId);
-//       return result;
-//     },
-//   }),
-// });
+
 const ContinentType = new GraphQLObjectType({
   name: "Continent",
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     code: { type: GraphQLString },
+    img: { type: GraphQLString },
     countries: {
       type: new GraphQLList(CountryType),
       resolve: async (parent, args) => {

@@ -7,6 +7,7 @@ const GET_CONTINETS = gql`
       id
       name
       code
+      img
       countries {
         name
         continentId

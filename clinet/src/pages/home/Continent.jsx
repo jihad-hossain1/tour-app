@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { GET_CONTINET } from "../../queries/continentQuery";
 import { useQuery } from "@apollo/client";
 import SingleCountry from "../../components/countries/SingleCountry/SingleCountry";
+import { Container } from "@mui/material";
 
 const Continent = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ const Continent = () => {
   }
 
   return (
-    <div>
+    <Container maxWidth={"xl"} className="pt-16">
       <div className="text-center py-4">
         Total-country: {data?.singleContinent?.length}
       </div>
@@ -26,7 +27,7 @@ const Continent = () => {
           <SingleCountry key={_i} cId={id} country={country} />
         ))}
       </div>
-    </div>
+    </Container>
   );
 };
 

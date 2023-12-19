@@ -1,12 +1,14 @@
 import React from "react";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div className="text-zinc-50 bg-zinc-700 w-full min-h-screen ">
-      <Header />
-      <div className="max-w-screen-xl mx-auto p-2">
+    <div className="text-zinc-950 bg-zinc-50 w-full min-h-screen ">
+      <div className="fixed z-50 w-full">
+        <Header />
+      </div>
+      <div className="">
         <Outlet />
       </div>
     </div>

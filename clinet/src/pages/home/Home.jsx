@@ -1,27 +1,24 @@
-import { useQuery } from "@apollo/client";
-import { GET_CONTINETS } from "../../queries/continentQuery";
-import SingleContinent from "../../components/continents/SingleContinent/SingleContinent";
+import HomeContinent from "../../components/continents/HomeContinent";
 import Test from "../../components/test/Test";
+import { Container } from "@mui/material";
 
 const Home = () => {
-  const { loading, error, data } = useQuery(GET_CONTINETS);
-
-  if (loading) {
-    return <div>Loadnig......</div>;
-  }
-  if (error) {
-    return <div>{error.message}</div>;
-  }
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-7 gap-3">
-        {data?.continents?.map((continent, _i) => (
-          <SingleContinent key={_i} continent={continent} />
-        ))}
-      </div>
-      <div>
-        <Test />
-      </div>
+      <div
+        className="bg-no-repeat bg-cover min-h-[400px] w-full"
+        style={{
+          backgroundImage:
+            "url('https://res.cloudinary.com/dqfi9zw3e/image/upload/v1702948003/images/ya1b7b2wmtv6fmoi0fyl.webp')",
+        }}
+      ></div>
+      <Container maxWidth={"lg"}>
+        {/* offers section  */}
+        <div>offer...</div>
+        {/* top destinations section  */}
+        <HomeContinent />
+        <div>{/* <Test /> */}</div>
+      </Container>
     </div>
   );
 };
