@@ -35,14 +35,14 @@ const SerachForm = () => {
         component="form"
         noValidate
         autoComplete="off"
-        className="flex md:flex-row flex-col gap-5 items-center bg-zinc-50 w-fit px-4 py-4 rounded-2xl"
+        className="flex md:flex-row flex-col gap-5 items-center bg-zinc-50 md:w-fit w-full px-4 py-4 rounded-2xl"
       >
         <TextField
           color="info"
           variant="outlined"
           required
           id="outlined-required"
-          label="Required"
+          label="Tour place"
           type="text"
           className="w-full"
           name="country"
@@ -73,7 +73,7 @@ const SerachForm = () => {
         />
         <button
           type="submit"
-          className=" bg-[#0288d1] px-6 py-4 rounded-lg w-full"
+          className=" shadow hover:shadow-md transition-all duration-300 bg-[#0288d1] px-6 py-4 rounded-lg w-full text-white hover:bg-[#0288d1]/85"
         >
           Search
         </button>

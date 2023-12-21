@@ -6,6 +6,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { useState } from "react";
 import SerachForm from "./SearchForm";
+import { motion } from "framer-motion";
 
 const SearchTab = () => {
   const [value, setValue] = useState("tour");
@@ -14,8 +15,8 @@ const SearchTab = () => {
     setValue(newValue);
   };
   return (
-    <div className="pt-10 ">
-      <Box sx={{ width: "80%", typography: "body1" }}>
+    <div className="pt-4 ">
+      <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <TabList
@@ -25,7 +26,6 @@ const SearchTab = () => {
             >
               <Tab
                 style={{
-                  color: "#fff",
                   textTransform: "capitalize",
                   borderBottom: "1px solid #fff",
                 }}
@@ -34,7 +34,6 @@ const SearchTab = () => {
               />
               <Tab
                 style={{
-                  color: "#fff",
                   textTransform: "capitalize",
                   borderBottom: "1px solid #fff",
                 }}
@@ -43,7 +42,6 @@ const SearchTab = () => {
               />
               <Tab
                 style={{
-                  color: "#fff",
                   textTransform: "capitalize",
                   borderBottom: "1px solid #fff",
                 }}

@@ -1,13 +1,26 @@
 import SearchTab from "../../components/SearchCompo/SearchTab";
 import HomeContinent from "../../components/continents/HomeContinent";
-import Test from "../../components/test/Test";
-import { Container } from "@mui/material";
+import TextAnimation from "./TextAnimation";
 
 const Home = () => {
   return (
-    <div className="pb-6">
-      <div
-        className="bg-no-repeat bg-cover  w-full "
+    <div className="">
+      <div className="relative">
+        <img
+          className="absolute object-cover w-full h-full"
+          src="https://res.cloudinary.com/dqfi9zw3e/image/upload/v1702948003/images/ya1b7b2wmtv6fmoi0fyl.webp"
+          alt=""
+        />
+        <div className="pt-36 relative z-10 text-zinc-50 py-6 ">
+          <TextAnimation />
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <SearchTab />
+      </div>
+
+      {/* <div
+        className="hidden bg-no-repeat bg-cover  w-full "
         style={{
           backgroundImage:
             "url('https://res.cloudinary.com/dqfi9zw3e/image/upload/v1702948003/images/ya1b7b2wmtv6fmoi0fyl.webp')",
@@ -22,14 +35,13 @@ const Home = () => {
         <div className="max-w-[1000px] mx-auto">
           <SearchTab />
         </div>
-      </div>
-      <Container maxWidth={"lg"}>
+      </div> */}
+      <div maxWidth={"lg"} className="max-w-screen-xl mx-auto ">
         {/* offers section  */}
         {/* <div>offer...</div> */}
         {/* top destinations section  */}
         <HomeContinent />
-        <div>{/* <Test /> */}</div>
-      </Container>
+      </div>
     </div>
   );
 };
