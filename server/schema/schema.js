@@ -94,11 +94,18 @@ const TourSpotType = new GraphQLObjectType({
   name: "TourSpot",
   fields: () => ({
     id: { type: GraphQLID },
+
     name: { type: GraphQLString },
+
     description: { type: GraphQLString },
+
     photo: { type: GraphQLString },
+
     cityId: { type: GraphQLID },
+
     countryId: { type: GraphQLID },
+
+    divisionId: { type: GraphQLID },
 
     city: {
       type: CityForAdd,
@@ -112,7 +119,9 @@ const TourSpotType = new GraphQLObjectType({
         }
       },
     },
+
     code: { type: GraphQLString },
+
     country: {
       type: CountryType,
       resolve: async (parent, args) => {
@@ -125,6 +134,20 @@ const TourSpotType = new GraphQLObjectType({
         }
       },
     },
+
+    perfectTourTime: { type: GraphQLString },
+
+    howToGoThere: { type: GraphQLString },
+
+    howToStayThere: { type: GraphQLString },
+
+    howDoHere: { type: GraphQLString },
+
+    whereToEat: { type: GraphQLString },
+
+    tourTipsGuide: { type: GraphQLString },
+
+    topTourPlace: { type: GraphQLString },
   }),
 });
 
@@ -142,12 +165,7 @@ const CityType = new GraphQLObjectType({
       },
     },
     description: { type: GraphQLString },
-    division: {
-      type: new GraphQLList(DivisionType),
-      resolve: async (parent, args) => {
-        return await Division.find();
-      },
-    },
+    divisionId: { type: GraphQLID },
     photo: { type: new GraphQLList(GraphQLString) },
   }),
 });
@@ -425,6 +443,24 @@ const RootQuery = new GraphQLObjectType({
         }
       },
     },
+    cityByDivision: {
+      type: new GraphQLList(CityType),
+      args: { id: { type: GraphQLID } },
+      resolve: async (parent, args) => {
+        const fetchData = await City.find();
+        let result = fetchData?.filter((item) => item?.divisionId == args?.id);
+        return result;
+      },
+    },
+    divisionByCountry: {
+      type: new GraphQLList(DivisionType),
+      args: { id: { type: GraphQLID } },
+      resolve: async (parent, args) => {
+        const fetchData = await Division.find();
+        let result = fetchData?.filter((item) => item?.countryId == args?.id);
+        return result;
+      },
+    },
     divisions: {
       type: new GraphQLList(DivisionType),
       resolve: async () => {
@@ -693,8 +729,20 @@ const mutation = new GraphQLObjectType({
         photo: { type: GraphQLString },
         cityId: { type: GraphQLID },
         countryId: { type: GraphQLID },
-        // code: {type: GraphQLString},
-        // country: {type: GraphQLString}
+        divisionId: { type: GraphQLID },
+        perfectTourTime: { type: GraphQLString },
+
+        howToGoThere: { type: GraphQLString },
+
+        howToStayThere: { type: GraphQLString },
+
+        howDoHere: { type: GraphQLString },
+
+        whereToEat: { type: GraphQLString },
+
+        tourTipsGuide: { type: GraphQLString },
+
+        topTourPlace: { type: GraphQLString },
       },
       resolve: async (parent, args) => {
         try {

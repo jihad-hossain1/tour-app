@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 .btn {
   @apply bg-gray-500 px-5 py-2 rounded-md w-fit shadow hover:shadow-md border border-zinc-400 hover:border-zinc-600 hover:translate-x-1 ease-in-out transition-all duration-300 uppercase text-sm;
 }
