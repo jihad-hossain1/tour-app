@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 // import App from "../App";
 import Layout from "../layout/Layout";
 import Clients from "../components/clients/Clients";
@@ -10,6 +10,9 @@ import Home from "../pages/home/Home";
 import Continent from "../pages/home/Continent";
 import CountryListByTour from "../pages/tours/CountryListByTour";
 import SingleToursportDetails from "../pages/tours/SingleToursportDetails";
+import DashboardLayout from "../layout/DashboardLayout";
+import Dashborad from "../pages/dashboard/Dashborad";
+import ManageTourSpot from "../pages/dashboard/TourSpot/ManageTourSpot";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +54,20 @@ export const router = createBrowserRouter([
       {
         path: "/singleToursportDetails/:id",
         element: <SingleToursportDetails />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashborad />,
+      },
+      {
+        path: "/dashboard/tourSpot",
+        element: <ManageTourSpot />,
       },
     ],
   },

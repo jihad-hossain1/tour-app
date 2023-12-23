@@ -1,5 +1,14 @@
 import { gql } from "@apollo/client";
 
+const GET_TOURSPOTS = gql`
+  #graphql
+  query getTourSpots {
+    tourSpots {
+      id
+      name
+    }
+  }
+`;
 const GET_SINGLE_COUNTRY_TOURSPOT_LIST = gql`
   #graphql
   query getSingleCountryTourspotList($id: ID!) {
@@ -20,4 +29,8 @@ const GET_SINGLE_TOURSPOT_DETAILS = gql`
   }
 `;
 
-export { GET_SINGLE_COUNTRY_TOURSPOT_LIST, GET_SINGLE_TOURSPOT_DETAILS };
+export {
+  GET_SINGLE_COUNTRY_TOURSPOT_LIST,
+  GET_SINGLE_TOURSPOT_DETAILS,
+  GET_TOURSPOTS,
+};
