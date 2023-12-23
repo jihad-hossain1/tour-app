@@ -11,7 +11,7 @@ const Header = () => {
         Traveler
       </Link>
       {/* navlist  */}
-      <nav className="flex items-center gap-4">
+      <nav className="hidden md:flex items-center gap-4">
         <div>
           <NavLink
             to={"/"}
@@ -26,7 +26,7 @@ const Header = () => {
         <ActivityNav />
       </nav>
       {/* extra section  */}
-      <div>
+      <div className="hidden md:block">
         <ExtraButton />
       </div>
     </main>
