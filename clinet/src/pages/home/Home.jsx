@@ -36,7 +36,7 @@ const Home = () => {
           <SearchTab />
         </div>
       </div> */}
-      <div maxWidth={"lg"} className="max-w-screen-xl mx-auto ">
+      <div className="max-w-screen-xl mx-auto ">
         {/* offers section  */}
         {/* <div>offer...</div> */}
         {/* top destinations section  */}
