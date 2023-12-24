@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Button, TextField, styled, Box } from "@mui/material";
+import { Button, TextField, Box } from "@mui/material";
 import ModalAll from "../../../components/ModalAll/ModalAll";
 import { ADD_TOURSPOT } from "../../../mutation/tourSpotMutation";
 import { GET_TOURSPOTS } from "../../../queries/toursQuery";
@@ -9,9 +9,12 @@ import OthersInputField from "./OthersInputField";
 import FileUploader from "./FileUploader";
 import axios from "axios";
 
+import toast, { Toaster } from "react-hot-toast";
+
 const AddTourSpot = () => {
   const [photo, setPhoto] = useState("");
   const [image, setimage] = useState(null);
+
   const scafolding = {
     name: "",
     description: "",
@@ -108,10 +111,12 @@ const AddTourSpot = () => {
       tourTipsGuide,
       topTourPlace
     );
+    toast.success("Tour spot added");
   };
 
   return (
     <>
+      <Toaster />
       <Button onClick={() => setOpen(!open)} color="warning" variant="outlined">
         Add TourSpot
       </Button>

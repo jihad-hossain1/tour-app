@@ -28,9 +28,31 @@ const GET_SINGLE_TOURSPOT_DETAILS = gql`
     }
   }
 `;
+const GET_SINGLE_TOURSPOT = gql`
+  #graphql
+  query getSingleTourspot($id: ID!) {
+    singleTourspot(id: $id) {
+      id
+      name
+      description
+      photo
+      countryId
+      cityId
+      divisionId
+      perfectTourTime
+      howToGoThere
+      howToStayThere
+      howDoHere
+      whereToEat
+      tourTipsGuide
+      topTourPlace
+    }
+  }
+`;
 
 export {
   GET_SINGLE_COUNTRY_TOURSPOT_LIST,
   GET_SINGLE_TOURSPOT_DETAILS,
   GET_TOURSPOTS,
+  GET_SINGLE_TOURSPOT,
 };

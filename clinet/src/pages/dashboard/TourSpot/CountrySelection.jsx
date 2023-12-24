@@ -12,10 +12,12 @@ const CountrySelection = ({ handleChange, formData }) => {
     error: cError,
     data: countries,
   } = useQuery(GET_COUNTIRES);
+
   const { loading: dload, data: divisions } = useQuery(GET_DIVISIONS);
   const { loading: ciload, data: cities } = useQuery(GET_CITIE);
+
   return (
-    <>
+    <div className="flex flex-col gap-3">
       {/* select country  */}
       <FormControl variant="outlined">
         <InputLabel id="demo-simple-select-standard-label">Country</InputLabel>
@@ -24,7 +26,7 @@ const CountrySelection = ({ handleChange, formData }) => {
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           name="countryId"
-          value={formData?.countryId}
+          defaultValue={formData?.countryId}
           onChange={handleChange}
           label="Country"
         >
@@ -47,7 +49,7 @@ const CountrySelection = ({ handleChange, formData }) => {
           labelId="demo-simple-select-standard-label2"
           id="demo-simple-select-standard2"
           name="divisionId"
-          value={formData?.divisionId}
+          defaultValue={formData?.divisionId}
           onChange={handleChange}
           label="Division"
         >
@@ -61,14 +63,14 @@ const CountrySelection = ({ handleChange, formData }) => {
       </FormControl>
 
       {/* select cities  */}
-      <FormControl variant="outlined">
+      <FormControl variant="outlined" style={{ marginBottom: "8px" }}>
         <InputLabel id="demo-simple-select-standard-label3">city</InputLabel>
         <Select
           className="w-full"
           labelId="demo-simple-select-standard-label3"
           id="demo-simple-select-standard3"
           name="cityId"
-          value={formData?.cityId}
+          defaultValue={formData?.cityId}
           onChange={handleChange}
           label="city"
         >
@@ -80,7 +82,7 @@ const CountrySelection = ({ handleChange, formData }) => {
             ))}
         </Select>
       </FormControl>
-    </>
+    </div>
   );
 };
 
