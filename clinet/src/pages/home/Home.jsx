@@ -1,4 +1,6 @@
+import OfferSection from "../../components/OfferSection/OfferSection";
 import SearchTab from "../../components/SearchCompo/SearchTab";
+import TopDestinationation from "../../components/TopDestinationation/TopDestinationation";
 import HomeContinent from "../../components/continents/HomeContinent";
 import TextAnimation from "./TextAnimation";
 
@@ -19,6 +21,10 @@ const Home = () => {
         <SearchTab />
       </div>
 
+      {/* Offer Section */}
+      <OfferSection />
+      {/* top destinationation */}
+      {/* <TopDestinationation /> */}
       {/* <div
         className="hidden bg-no-repeat bg-cover  w-full "
         style={{
