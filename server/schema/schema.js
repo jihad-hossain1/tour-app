@@ -37,6 +37,7 @@ const ProjectType = new GraphQLObjectType({
     },
   }),
 });
+
 // client type
 const ClientType = new GraphQLObjectType({
   name: "Client",
@@ -107,6 +108,19 @@ const TourSpotType = new GraphQLObjectType({
 
     divisionId: { type: GraphQLID },
 
+    perfectTourTime: { type: GraphQLString },
+
+    howToGoThere: { type: GraphQLString },
+
+    howToStayThere: { type: GraphQLString },
+
+    howDoHere: { type: GraphQLString },
+
+    whereToEat: { type: GraphQLString },
+
+    tourTipsGuide: { type: GraphQLString },
+
+    topTourPlace: { type: GraphQLString },
     city: {
       type: CityForAdd,
       resolve: async (parent, args) => {
@@ -134,20 +148,6 @@ const TourSpotType = new GraphQLObjectType({
         }
       },
     },
-
-    perfectTourTime: { type: GraphQLString },
-
-    howToGoThere: { type: GraphQLString },
-
-    howToStayThere: { type: GraphQLString },
-
-    howDoHere: { type: GraphQLString },
-
-    whereToEat: { type: GraphQLString },
-
-    tourTipsGuide: { type: GraphQLString },
-
-    topTourPlace: { type: GraphQLString },
   }),
 });
 
@@ -418,6 +418,18 @@ const RootQuery = new GraphQLObjectType({
           return await TourSpot.find();
         } catch (error) {
           throw new Error(`Error fetching TourSpot: ${error}`);
+        }
+      },
+    },
+    singleTourspot: {
+      type: TourSpotType,
+      args: { id: { type: GraphQLID } },
+      resolve: async (parent, args) => {
+        try {
+          const fetchData = await TourSpot.findById(args?.id);
+          return fetchData;
+        } catch (error) {
+          console.log(error);
         }
       },
     },
@@ -751,6 +763,63 @@ const mutation = new GraphQLObjectType({
         } catch (error) {
           throw new Error("Error adding tourSpot");
         }
+      },
+    },
+    // delete tour spot
+    deleteTourspot: {
+      type: TourSpotType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (parent, args) => {
+        try {
+          return await TourSpot.findByIdAndDelete(args.id);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    },
+    // update tourspot
+    updateTourspot: {
+      type: TourSpotType,
+      args: {
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        photo: { type: GraphQLString },
+        cityId: { type: GraphQLID },
+        countryId: { type: GraphQLID },
+        divisionId: { type: GraphQLID },
+        perfectTourTime: { type: GraphQLString },
+        howToGoThere: { type: GraphQLString },
+        howToStayThere: { type: GraphQLString },
+        howDoHere: { type: GraphQLString },
+        whereToEat: { type: GraphQLString },
+        tourTipsGuide: { type: GraphQLString },
+      },
+
+      resolve: async (parent, args) => {
+        return await TourSpot.findByIdAndUpdate(
+          args.id,
+          {
+            $set: args,
+            // $set: {
+            //   name: args?.name,
+            //   description: args?.description,
+            //   photo: args?.photo,
+            //   cityId: args?.cityId,
+            //   countryId: args?.countryId,
+            //   divisionId: args?.divisionId,
+            //   perfectTourTime: args?.perfectTourTime,
+            //   howToGoThere: args?.howToGoThere,
+            //   howToStayThere: args?.howToStayThere,
+            //   howDoHere: args?.howDoHere,
+            //   whereToEat: args?.whereToEat,
+            //   tourTipsGuide: args?.tourTipsGuide,
+            // },
+          },
+          { new: true }
+        );
       },
     },
     addCity: {

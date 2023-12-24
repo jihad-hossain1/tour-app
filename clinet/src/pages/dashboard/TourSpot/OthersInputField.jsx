@@ -4,10 +4,11 @@ const OthersInputField = ({ handleChange, formData }) => {
   return (
     <>
       <TextField
+        style={{ marginBottom: "8px" }}
         type="text"
         multiline
         onChange={handleChange}
-        value={formData?.perfectTourTime}
+        defaultValue={formData?.perfectTourTime}
         name="perfectTourTime"
         className="w-full"
         id="outlined-basic4"
@@ -15,10 +16,11 @@ const OthersInputField = ({ handleChange, formData }) => {
         variant="outlined"
       />
       <TextField
+        style={{ marginBottom: "8px" }}
         type="text"
         multiline
         onChange={handleChange}
-        value={formData?.howToGoThere}
+        defaultValue={formData?.howToGoThere}
         name="howToGoThere"
         className="w-full"
         id="outlined-basic4"
@@ -26,10 +28,11 @@ const OthersInputField = ({ handleChange, formData }) => {
         variant="outlined"
       />
       <TextField
+        style={{ marginBottom: "8px" }}
         type="text"
         multiline
         onChange={handleChange}
-        value={formData?.howToStayThere}
+        defaultValue={formData?.howToStayThere}
         name="howToStayThere"
         className="w-full"
         id="outlined-basic4"
@@ -37,10 +40,11 @@ const OthersInputField = ({ handleChange, formData }) => {
         variant="outlined"
       />
       <TextField
+        style={{ marginBottom: "8px" }}
         type="text"
         multiline
         onChange={handleChange}
-        value={formData?.howDoHere}
+        defaultValue={formData?.howDoHere}
         name="howDoHere"
         className="w-full"
         id="outlined-basic4"
@@ -48,10 +52,11 @@ const OthersInputField = ({ handleChange, formData }) => {
         variant="outlined"
       />
       <TextField
+        style={{ marginBottom: "8px" }}
         type="text"
         multiline
         onChange={handleChange}
-        value={formData?.whereToEat}
+        defaultValue={formData?.whereToEat}
         name="whereToEat"
         className="w-full"
         id="outlined-basic4"
@@ -59,10 +64,11 @@ const OthersInputField = ({ handleChange, formData }) => {
         variant="outlined"
       />
       <TextField
+        style={{ marginBottom: "8px" }}
         type="text"
         multiline
         onChange={handleChange}
-        value={formData?.tourTipsGuide}
+        defaultValue={formData?.tourTipsGuide}
         name="tourTipsGuide"
         className="w-full"
         id="outlined-basic4"
@@ -70,10 +76,11 @@ const OthersInputField = ({ handleChange, formData }) => {
         variant="outlined"
       />
       <TextField
+        style={{ marginBottom: "8px" }}
         type="text"
         multiline
         onChange={handleChange}
-        value={formData?.topTourPlace}
+        defaultValue={formData?.topTourPlace}
         name="topTourPlace"
         className="w-full"
         id="outlined-basic4"

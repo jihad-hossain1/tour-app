@@ -13,6 +13,7 @@ import SingleToursportDetails from "../pages/tours/SingleToursportDetails";
 import DashboardLayout from "../layout/DashboardLayout";
 import Dashborad from "../pages/dashboard/Dashborad";
 import ManageTourSpot from "../pages/dashboard/TourSpot/ManageTourSpot";
+import UpdateTourSpot from "../pages/dashboard/TourSpot/UpdateTourSpot";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/tourSpot",
         element: <ManageTourSpot />,
+      },
+      {
+        path: "/dashboard/UpdateTourSpot/:id",
+        element: <UpdateTourSpot />,
       },
     ],
   },
