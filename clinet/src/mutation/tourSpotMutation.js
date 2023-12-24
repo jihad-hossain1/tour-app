@@ -3,37 +3,38 @@ import { gql } from "@apollo/client";
 const ADD_TOURSPOT = gql`
   #graphql
   mutation addTourSpot(
-    $name: String!
-    $description: String!
-    $photo: String!
-    $countryId: String!
-    $divisionId: String!
-    $cityId: String!
-    $perfectTourTime: String
+    $name: String
+    $description: String
+    $photo: String
+    $countryId: ID!
+    $divisionId: ID!
+    $cityId: ID!
+    $tourTipsGuide: String
+    $howDoHere: String
     $howToGoThere: String
     $howToStayThere: String
-    $howDoHere: String
     $whereToEat: String
-    $tourTipsGuide: String
     $topTourPlace: String
+    $perfectTourTime: String
   ) {
     addTourSpot(
       name: $name
-      description: $description
       photo: $photo
+      description: $description
       countryId: $countryId
       divisionId: $divisionId
       cityId: $cityId
-      perfectTourTime: $perfectTourTime
+      tourTipsGuide: $tourTipsGuide
       howDoHere: $howDoHere
       howToGoThere: $howToGoThere
       whereToEat: $whereToEat
-      tourTipsGuide: $tourTipsGuide
-      topTourPlace: $topTourPlace
+      perfectTourTime: $perfectTourTime
       howToStayThere: $howToStayThere
+      topTourPlace: $topTourPlace
     ) {
-      id
+      photo
       name
+      description
     }
   }
 `;

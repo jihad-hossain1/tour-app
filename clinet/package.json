@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.0",
     "@mui/styled-engine-sc": "^6.0.0-alpha.8",
     "@react-spring/web": "^9.7.3",
+    "axios": "^1.6.2",
     "framer-motion": "^10.16.16",
     "graphql": "^16.8.1",
     "gsap": "^3.12.4",
