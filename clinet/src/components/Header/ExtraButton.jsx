@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import LanguageButton from "./LanguageButton";
 import CartButton from "./CartButton";
 import LoginCard from "./LoginCard";
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+
+import BecomeAHost from "./BecomeAHost";
 
 const ExtraButton = () => {
   return (
@@ -11,11 +11,7 @@ const ExtraButton = () => {
       <LanguageButton />
       <LoginCard />
       <CartButton />
-      <Link to={"#"}>
-        <Button color="info" variant="contained">
-          Become a host
-        </Button>
-      </Link>
+      <BecomeAHost />
     </main>
   );
 };

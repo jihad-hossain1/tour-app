@@ -8,6 +8,9 @@ const Continent = require("../models/Continent");
 const Division = require("../models/Division");
 const City = require("../models/City");
 const { continents, countries, languages } = require("countries-list");
+const { addClient,deleteClient,wpClients } = require('../mutation/client');
+const { addProject ,clientProjects,updateProject,deleteProject} = require('../mutation/project');
+const { projects,project } = require('../query/projects');
 
 const {
   GraphQLObjectType,
@@ -270,39 +273,10 @@ const ContinentType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    projects: {
-      type: new GraphQLList(ProjectType),
-      resolve: async (parent, args) => {
-        return await Project.find();
-      },
-    },
-    project: {
-      type: ProjectType,
-      args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return Project.findById(args.id);
-      },
-    },
-    clientProjects: {
-      type: new GraphQLList(ProjectType),
-      args: { id: { type: GraphQLID } },
-      resolve: async (parent, args) => {
-        const fetchData = await Project.find();
-        let result = fetchData?.filter((item) => item?.clientId == args?.id);
-        return result;
-      },
-    },
-    wpClients: {
-      type: new GraphQLList(ClientType),
-      resolve: async (parent, args) => {
-        try {
-          let allClients = await Client.find();
-          return allClients;
-        } catch (error) {
-          console.log("failed to fetch: ", error);
-        }
-      },
-    },
+    projects,
+    project,
+    clientProjects,
+    wpClients,
     /* 
     <--- Pagination Client -->
     query{
@@ -490,108 +464,11 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    // add a client
-    addClient: {
-      type: ClientType,
-      args: {
-        name: { type: GraphQLNonNull(GraphQLString) },
-        phone: { type: GraphQLNonNull(GraphQLString) },
-      },
-      resolve(parent, args) {
-        const client = new Client({
-          name: args.name,
-          phone: args.phone,
-        });
-        return client.save();
-        // Client.create();
-      },
-    },
-    // delete a client
-    deleteClient: {
-      type: ClientType,
-      args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
-      },
-      resolve(parent, args) {
-        return Client.findByIdAndDelete(args.id);
-      },
-    },
-    // add project
-    addProject: {
-      type: ProjectType,
-      args: {
-        name: { type: GraphQLNonNull(GraphQLString) },
-        details: { type: GraphQLNonNull(GraphQLString) },
-        status: {
-          type: new GraphQLEnumType({
-            name: "ProjectStatus",
-            values: {
-              new: { value: "not started" },
-              progress: { value: "in progress" },
-              completed: { value: "complete" },
-            },
-          }),
-        },
-        clientId: { type: GraphQLNonNull(GraphQLID) },
-      },
-      resolve(parent, args) {
-        const project = new Project({
-          name: args.name,
-          details: args.details,
-          status: args.status,
-          clientId: args.clientId,
-        });
-        return project.save();
-      },
-    },
-    // delete a project
-    deleteProject: {
-      type: ProjectType,
-      args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
-      },
-      resolve(parent, args) {
-        Project.find({ clientId: args.id }).then((projects) => {
-          projects.forEach((project) => {
-            project.remove();
-          });
-        });
-        return Project.findByIdAndDelete(args.id);
-      },
-    },
-    // update project
-    updateProject: {
-      type: ProjectType,
-      args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
-        name: { type: GraphQLString },
-        details: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: "ProjectStatusUpdate",
-            values: {
-              new: { value: "not started" },
-              progress: { value: "in progress" },
-              completed: { value: "complete" },
-            },
-          }),
-        },
-      },
-
-      resolve(parent, args) {
-        return Project.findByIdAndUpdate(
-          args.id,
-          {
-            $set: {
-              name: args.name,
-              details: args.details,
-              status: args.status,
-            },
-          },
-          { new: true }
-        );
-      },
-    },
+    addClient,
+    deleteClient,
+    addProject,
+    deleteProject,
+    updateProject,
     // add user
     addUser: {
       type: UserType,
