@@ -26,7 +26,7 @@ const SingleContinent = ({ continent, index }) => {
     <Link to={`/continent/${continent?.id}`}>
       <motion.div
         whileHover={{
-          scale: 1.1,
+          scale: 1.03,
           transition: { duration: 0.35 },
         }}
         variants={fadeInAnimationVariants}

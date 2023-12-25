@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_COUNTRY_TOURSPOT_LIST } from "../../queries/toursQuery";
 import { Container } from "@mui/material";
+import Loading from "../../components/Loading/Loading";
 
 const CountryListByTour = () => {
   const { id } = useParams();
@@ -10,7 +11,11 @@ const CountryListByTour = () => {
   });
 
   if (loading) {
-    return <div>Loading....</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   if (error) {
     return <div>{error.message}</div>;

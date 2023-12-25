@@ -3,6 +3,7 @@ import { GET_CONTINET } from "../../queries/continentQuery";
 import { useQuery } from "@apollo/client";
 import SingleCountry from "../../components/countries/SingleCountry/SingleCountry";
 import { Container } from "@mui/material";
+import Loading from "../../components/Loading/Loading";
 
 const Continent = () => {
   const { id } = useParams();
@@ -11,7 +12,11 @@ const Continent = () => {
   });
 
   if (loading) {
-    return <div>Loading....</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   if (error) {
     return <div>{error.message}</div>;

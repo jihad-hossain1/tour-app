@@ -3,19 +3,24 @@ import { GET_CONTINETS } from "../../queries/continentQuery";
 import SingleContinent from "./SingleContinent/SingleContinent";
 import { Container } from "@mui/material";
 import { useState } from "react";
+import Loading from "../Loading/Loading";
 
 const HomeContinent = () => {
   const [isToggle, setIsToggle] = useState(false);
   const { loading, error, data } = useQuery(GET_CONTINETS);
 
   if (loading) {
-    return <div>Loadnig......</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   if (error) {
     return <div>{error.message}</div>;
   }
   return (
-    <div className="mt-6 md:mt-10 max-w-screen-lg mx-auto px-2" maxWidth="xl">
+    <div className="mt-6 md:mt-10 max-w-screen-lg mx-auto px-2">
       <h4 className="text-center my-3 md:my-16 font-bold text-3xl md:text-5xl ">
         Top Destinations
       </h4>
