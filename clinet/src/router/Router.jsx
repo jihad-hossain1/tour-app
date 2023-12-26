@@ -14,6 +14,8 @@ import DashboardLayout from "../layout/DashboardLayout";
 import Dashborad from "../pages/dashboard/Dashborad";
 import ManageTourSpot from "../pages/dashboard/TourSpot/ManageTourSpot";
 import UpdateTourSpot from "../pages/dashboard/TourSpot/UpdateTourSpot";
+import Test from "../components/test/Test";
+import ManageContinents from "../pages/dashboard/Continents/ManageContinents";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "/clients",
         element: <Clients />,
+      },
+      {
+        path: "/test",
+        element: <Test />,
       },
       {
         path: "/addClient",
@@ -73,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/UpdateTourSpot/:id",
         element: <UpdateTourSpot />,
+      },
+      {
+        path: "/dashboard/ManageContinents",
+        element: <ManageContinents />,
       },
     ],
   },
