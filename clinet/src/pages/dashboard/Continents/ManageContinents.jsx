@@ -5,6 +5,8 @@ import Loading from "../../../components/Loading/Loading";
 import { TbWorld, TbWorldCog } from "react-icons/tb";
 import { MdTour } from "react-icons/md";
 import { MdAccountBalance } from "react-icons/md";
+import ManageNav from "../../../components/dashboard/Navbar/ManageNav";
+import AddContinent from "./AddContinent";
 
 const ManageContinents = () => {
   const { data, loading, error } = useQuery(GET_CONTINETS_MANAGEMENTS);
@@ -21,6 +23,7 @@ const ManageContinents = () => {
 
   return (
     <div>
+      <AddContinent />
       <h5 className="text-center py-4">ManageContinents</h5>
       <div>
         <div className="">
