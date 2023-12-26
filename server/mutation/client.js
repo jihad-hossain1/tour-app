@@ -1,16 +1,12 @@
 
 const {
-  GraphQLObjectType,
   GraphQLID,
   GraphQLString,
-  GraphQLSchema,
-  GraphQLList,
   GraphQLNonNull,
-  GraphQLEnumType,
 } = require("graphql");
 
 const Client = require("../models/Client");
-const { ClientType, ProjectType } = require('../typeDef/typeDef');
+const { ClientType } = require('../typeDef/typeDef');
 
 
 
@@ -47,23 +43,6 @@ const deleteClient = {
 
 
 
-    
 
+module.exports = { deleteClient, addClient };
 
-
- let  wpClients = {
-      type: new GraphQLList(ClientType),
-      resolve: async (parent, args) => {
-        try {
-          let allClients = await Client.find();
-          return allClients;
-        } catch (error) {
-          console.log("failed to fetch: ", error);
-        }
-      },
-    }
-
-
-
-
-module.exports = { deleteClient, addClient,wpClients };
