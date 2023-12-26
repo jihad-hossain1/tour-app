@@ -44,15 +44,7 @@ const addProject = {
 
 
 
-let clientProjects = {
-    type: new GraphQLList(ProjectType),
-    args: { id: { type: GraphQLID } },
-    resolve: async (parent, args) => {
-        const fetchData = await Project.find();
-        let result = fetchData?.filter((item) => item?.clientId == args?.id);
-        return result;
-    },
-};
+
 
 
 let deleteProject = {
@@ -110,4 +102,4 @@ let updateProject = {
 
 
 
-module.exports = { addProject,clientProjects ,updateProject,deleteProject};
+module.exports = { addProject ,updateProject,deleteProject};

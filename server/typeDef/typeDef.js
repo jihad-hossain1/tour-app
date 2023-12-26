@@ -1,6 +1,5 @@
 const { GraphQLObjectType, GraphQLString,GraphQLID,GraphQLList, } = require("graphql");
 const Country = require("../models/Country");
-// const { TourSpotType } = require("./schema");
 const Division = require("../models/Division");
 const City = require("../models/City");
 const TourSpot = require("../models/TourSpot");
@@ -248,4 +247,4 @@ const ContinentType = new GraphQLObjectType({
   }),
 });
 
-module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType };
+module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType ,CityForAdd};
