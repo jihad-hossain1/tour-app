@@ -16,6 +16,33 @@ const GET_CONTINETS = gql`
   }
 `;
 
+const GET_CONTINETS_MANAGEMENTS = gql`
+  #graphql
+  query getContinents {
+    continents {
+    id
+    name
+    countries{
+      id
+      name
+      division{
+        id
+        name
+        cities{
+          id
+          name
+          touristSpots{
+            id
+            name
+          }
+        }
+        
+      }
+    }
+  }
+  }
+`;
+
 const GET_CONTINET = gql`
   #graphql
   query getContinent($id: ID!) {
@@ -27,4 +54,4 @@ const GET_CONTINET = gql`
   }
 `;
 
-export { GET_CONTINETS, GET_CONTINET };
+export { GET_CONTINETS, GET_CONTINET,GET_CONTINETS_MANAGEMENTS };

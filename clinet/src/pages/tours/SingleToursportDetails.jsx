@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_TOURSPOT_DETAILS } from "../../queries/toursQuery";
+import Loading from "../../components/Loading/Loading";
 
 const SingleToursportDetails = () => {
   const { id } = useParams();
@@ -9,7 +10,11 @@ const SingleToursportDetails = () => {
   });
 
   if (loading) {
-    return <div>Loading....</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   if (error) {
     return <div>{error.message}</div>;
