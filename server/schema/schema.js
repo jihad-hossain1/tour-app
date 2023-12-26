@@ -58,7 +58,8 @@ const RootQuery = new GraphQLObjectType({
     cityByDivision,
     // divisions
     divisionByCountry,
-    divisions
+    divisions,
+   
   },
 });
 
