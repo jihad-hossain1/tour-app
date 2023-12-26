@@ -1,6 +1,7 @@
 import HomeContinent from "../../components/continents/HomeContinent";
 import TextAnimation from "./TextAnimation";
 import SearchContent from "../../components/SearchCompo/SearchContent";
+import OfferSection from "../../components/OfferSection/OfferSection";
 
 const Home = () => {
   return (
@@ -18,7 +19,7 @@ const Home = () => {
       <SearchContent />
       <div maxWidth={"lg"} className="max-w-screen-xl mx-auto ">
         {/* offers section  */}
-
+        <OfferSection />
         {/* top destinations section  */}
         <HomeContinent />
       </div>
