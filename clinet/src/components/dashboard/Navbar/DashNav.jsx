@@ -24,6 +24,14 @@ const DashNav = () => {
               TourSpot
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to={`/dashboard/manageContinents`}
+              className={({ isActive }) => (isActive ? "text-blue-200" : "")}
+            >
+              ManageContinents
+            </NavLink>
+          </li>
         </ul>
       </div>
     </div>
