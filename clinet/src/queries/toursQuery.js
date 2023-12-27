@@ -25,6 +25,18 @@ const GET_SINGLE_TOURSPOT_DETAILS = gql`
       id
       name
       description
+      photo
+      perfectTourTime
+      howToGoThere
+      howToStayThere
+      howDoHere
+      whereToEat
+      tourTipsGuide
+      topTourPlace
+      city{
+      id
+      name
+    }
     }
   }
 `;
