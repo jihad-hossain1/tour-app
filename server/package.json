@@ -1,6 +1,6 @@
 {
   "name": "tour-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tour and tour guide app with hotel and car booking",
   "main": "index.js",
   "scripts": {
