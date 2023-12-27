@@ -13,6 +13,7 @@ const { countries } = require('../query/countries');
 const { cities,cityByDivision } = require('../query/cities');
 const {  divisionByCountry, divisions } = require('../query/divisions');
 const { singleCountryTourspotList, singleTourspot, singleTourspotDetails, tourSpots } = require('../query/tourspots');
+const { reviesByTourSpot } = require('../query/reviews');
 
 
 const { addClient,deleteClient } = require('../mutation/client');
@@ -23,6 +24,7 @@ const { addCountry } = require('../mutation/country');
 const { addTourSpot,updateTourspot,deleteTourspot } = require('../mutation/tourSpot');
 const { addDivision } = require('../mutation/division');
 const { addCity } = require('../mutation/city');
+const { addReview } = require('../mutation/review');
 
 
 //main query
@@ -59,6 +61,8 @@ const RootQuery = new GraphQLObjectType({
     // divisions
     divisionByCountry,
     divisions,
+    // reviews
+    reviesByTourSpot
    
   },
 });
@@ -92,6 +96,8 @@ const mutation = new GraphQLObjectType({
     addCity,
     // division
     addDivision,
+    // review
+    addReview
   },
 });
 

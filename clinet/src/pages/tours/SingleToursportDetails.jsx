@@ -2,6 +2,10 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_TOURSPOT_DETAILS } from "../../queries/toursQuery";
 import Loading from "../../components/Loading/Loading";
+import { SiGooglemaps } from "react-icons/si";
+import TourSpotReviewsSection from "./TourSpotReviewsSection";
+import TourSpotDetails from "./TourSpotDetails";
+import NewToursPlace from "./NewToursPlace";
 
 const SingleToursportDetails = () => {
   const { id } = useParams();
@@ -21,11 +25,22 @@ const SingleToursportDetails = () => {
   }
 
   return (
-    <div>
-      <h4 className="text-center font-semibold text-2xl">
-        {data?.singleTourspotDetails?.name}
-      </h4>
-    </div>
+    <main className="min-h-screen max-w-screen-xl mx-auto px-2">
+      <div className="pt-20">
+        <section className="grid grid-cols-1 lg:flex gap-5 lg:gap-10">
+          <main className="relative">
+            {/* tour details section */}
+            <TourSpotDetails data={data} />
+            {/* review section  */}
+            <TourSpotReviewsSection dId={data?.id} />
+          </main>
+          <aside className="sticky  bg-zinc-100/30 rounded-md shadow-[2px_5px_7px_rgba(0,0,0,0.25)] min-w-[392px] h-fit mx-auto ">
+            {/* new tour place section  */}
+            <NewToursPlace />
+          </aside>
+        </section>
+      </div>
+    </main>
   );
 };
 
