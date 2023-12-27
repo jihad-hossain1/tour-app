@@ -1,14 +1,14 @@
 {
   "name": "tour-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tour and tour guide app with hotel and car booking",
   "main": "index.js",
   "scripts": {
     "vercel-build": "echo hello",
-"start": "nodemon index.js"
+     "start": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "jihad hossain",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
