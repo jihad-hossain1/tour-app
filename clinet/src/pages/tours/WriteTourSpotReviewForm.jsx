@@ -1,19 +1,35 @@
-import { Button, Slide, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { Button, TextField } from "@mui/material";
+import { useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { IoChevronUpSharp } from "react-icons/io5";
 import RatingReviewRadio from "./RatingReviewRadio";
+import { useMutation } from "@apollo/client";
+import { ADD_REVIEW } from "../../mutation/reviewMutation";
+import { GET_REVIEWS } from "../../queries/reviewsQuery";
+import toast, { Toaster } from "react-hot-toast";
 
-const WriteTourSpotReviewForm = ({ dId }) => {
+const WriteTourSpotReviewForm = ({ id }) => {
   const [toggle, setToggle] = useState(false);
+  const [value, setValue] = useState(0);
+
   const scafolding = {
     name: "",
     email: "",
     title: "",
     content: "",
-    rating: 4,
+    img: "pic",
   };
+
   const [formData, setFormData] = useState(scafolding);
+
+  const [addReview] = useMutation(ADD_REVIEW, {
+    variables: {
+      ...formData,
+      rating: value,
+      tourSpotId: id,
+    },
+    refetchQueries: [{ query: GET_REVIEWS }],
+  });
 
   const handleChnage = (e) => {
     const name = e.target.name;
@@ -23,20 +39,28 @@ const WriteTourSpotReviewForm = ({ dId }) => {
       [name]: value,
     }));
   };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const { name, email, title, content, rating } = formData;
-    if (
-      name === "" ||
-      email === "" ||
-      title === "" ||
-      content === "" ||
-      rating === 0
-    ) {
-      return alert("All field are required!");
+
+    const { name, email, title, content, img } = formData;
+    let rating = value;
+    let tourSpotId = id;
+
+    if (name === "" || email === "" || title === "" || content === "") {
+      return alert("All field are required !");
     }
-    console.log({ ...formData });
+
+    const info = {
+      ...formData,
+      rating: value,
+      tourSpotId: id,
+    };
+    addReview(name, email, title, content, img, rating, tourSpotId);
+    toast.success(`😊 ${name} your review added ❤`);
+    console.log(info);
   };
+
   return (
     <section>
       <Button
@@ -82,10 +106,7 @@ const WriteTourSpotReviewForm = ({ dId }) => {
               style={{ width: "100%" }}
             />
             <div className="flex gap-3 flex-col lg:flex-row">
-              <RatingReviewRadio
-                handleChnage={handleChnage}
-                formData={formData}
-              />
+              <RatingReviewRadio value={value} setValue={setValue} />
               <TextField
                 onChange={handleChnage}
                 defaultValue={formData?.content}

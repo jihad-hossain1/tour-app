@@ -1,6 +1,8 @@
 const {
   GraphQLID,
-  GraphQLString, 
+    GraphQLString, 
+  GraphQLFloat,
+  GraphQLInt
 } = require("graphql");
 
 const { ReviewType } = require("../typeDef/typeDef");
@@ -18,6 +20,7 @@ const addReview = {
     content: { type: GraphQLString },
     email: { type: GraphQLString },
     img: { type: GraphQLString },
+    rating: { type: GraphQLInt },
     tourSpotId: { type: GraphQLID },
     },
     resolve: async (parent, args) => {
