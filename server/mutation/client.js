@@ -12,20 +12,20 @@ const { ClientType } = require('../typeDef/typeDef');
 
 
 const addClient = {
-      type: ClientType,
-      args: {
-        name: { type: GraphQLNonNull(GraphQLString) },
-        phone: { type: GraphQLNonNull(GraphQLString) },
-      },
-      resolve(parent, args) {
-        const client = new Client({
-          name: args.name,
-          phone: args.phone,
-        });
-        return client.save();
-        // Client.create();
-      },
-    };
+  type: ClientType,
+  args: {
+    name: { type: GraphQLNonNull(GraphQLString) },
+    phone: { type: GraphQLNonNull(GraphQLString) },
+  },
+  resolve(parent, args) {
+    const client = new Client({
+      name: args.name,
+      phone: args.phone,
+    });
+    return client.save();
+    // Client.create();
+  },
+};
 
 
 

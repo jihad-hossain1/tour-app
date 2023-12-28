@@ -247,4 +247,20 @@ const ContinentType = new GraphQLObjectType({
   }),
 });
 
-module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType ,CityForAdd};
+
+const ReviewType = new GraphQLObjectType({
+  name: "Reviews",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString },
+    email: { type: GraphQLString },
+    img: { type: GraphQLString },
+    tourSpotId: { type: GraphQLID },
+   
+  }),
+});
+
+
+module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType ,CityForAdd,ReviewType};
