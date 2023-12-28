@@ -3,7 +3,7 @@ import TourReviwBox from "./TourReviwBox";
 import WriteTourSpotReviewForm from "./WriteTourSpotReviewForm";
 
 const TourSpotReviewsSection = ({ id }) => {
-  console.log(id);
+  
   return (
     <>
       <div className="my-10">

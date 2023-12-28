@@ -17,7 +17,7 @@ const Home = () => {
         </div>
       </div>
       <SearchContent />
-      <div maxWidth={"lg"} className="max-w-screen-xl mx-auto ">
+      <div className="max-w-screen-xl mx-auto ">
         {/* offers section  */}
         <OfferSection />
         {/* top destinations section  */}
