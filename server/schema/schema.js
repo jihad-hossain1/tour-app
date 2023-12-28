@@ -1,37 +1,48 @@
-
+const { GraphQLObjectType, GraphQLSchema } = require("graphql");
+const { wpClients, client, clients } = require("../query/clients");
+const { projects, project, clientProjects } = require("../query/projects");
+const { user, users } = require("../query/users");
+const { destination, destinations } = require("../query/destinations");
+const { singleContinent, continents } = require("../query/continents");
+const { countries } = require("../query/countries");
+const { cities, cityByDivision } = require("../query/cities");
+const { divisionByCountry, divisions } = require("../query/divisions");
 const {
-  GraphQLObjectType,
-  GraphQLSchema,
-} = require("graphql");
+  singleCountryTourspotList,
+  singleTourspot,
+  singleTourspotDetails,
+  tourSpots,
+  relatedTourSpots,
+} = require("../query/tourspots");
+const { reviesByTourSpot } = require("../query/reviews");
 
-const { wpClients,client,clients } = require('../query/clients');
-const { projects, project, clientProjects } = require('../query/projects');
-const { user, users } = require('../query/users');
-const { destination,destinations } = require('../query/destinations');
-const { singleContinent, continents } = require('../query/continents');
-const { countries } = require('../query/countries');
-const { cities,cityByDivision } = require('../query/cities');
-const {  divisionByCountry, divisions } = require('../query/divisions');
-const { singleCountryTourspotList, singleTourspot, singleTourspotDetails, tourSpots } = require('../query/tourspots');
-const { reviesByTourSpot } = require('../query/reviews');
-
-
-const { addClient,deleteClient } = require('../mutation/client');
-const { addProject,updateProject,deleteProject} = require('../mutation/project');
-const { addUser, updateUser, deleteUser } = require('../mutation/user');
-const { addDestination, updateDestination, deleteDestination } = require('../mutation/destination');
-const { addCountry } = require('../mutation/country');
-const { addTourSpot,updateTourspot,deleteTourspot } = require('../mutation/tourSpot');
-const { addDivision } = require('../mutation/division');
-const { addCity } = require('../mutation/city');
-const { addReview } = require('../mutation/review');
-
+const { addClient, deleteClient } = require("../mutation/client");
+const {
+  addProject,
+  updateProject,
+  deleteProject,
+} = require("../mutation/project");
+const { addUser, updateUser, deleteUser } = require("../mutation/user");
+const {
+  addDestination,
+  updateDestination,
+  deleteDestination,
+} = require("../mutation/destination");
+const { addCountry } = require("../mutation/country");
+const {
+  addTourSpot,
+  updateTourspot,
+  deleteTourspot,
+} = require("../mutation/tourSpot");
+const { addDivision } = require("../mutation/division");
+const { addCity } = require("../mutation/city");
+const { addReview } = require("../mutation/review");
 
 //main query
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    // projects 
+    // projects
     projects,
     project,
     clientProjects,
@@ -55,6 +66,7 @@ const RootQuery = new GraphQLObjectType({
     singleTourspot,
     singleTourspotDetails,
     tourSpots,
+    relatedTourSpots,
     // cities
     cities,
     cityByDivision,
@@ -62,8 +74,7 @@ const RootQuery = new GraphQLObjectType({
     divisionByCountry,
     divisions,
     // reviews
-    reviesByTourSpot
-   
+    reviesByTourSpot,
   },
 });
 
@@ -97,7 +108,7 @@ const mutation = new GraphQLObjectType({
     // division
     addDivision,
     // review
-    addReview
+    addReview,
   },
 });
 
