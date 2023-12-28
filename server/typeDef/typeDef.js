@@ -1,8 +1,9 @@
-const { GraphQLObjectType, GraphQLString,GraphQLID,GraphQLList, } = require("graphql");
+const { GraphQLObjectType, GraphQLString,GraphQLID,GraphQLList,GraphQLInt } = require("graphql");
 const Country = require("../models/Country");
 const Division = require("../models/Division");
 const City = require("../models/City");
 const TourSpot = require("../models/TourSpot");
+const Review = require("../models/Review");
 
 const ProjectType = new GraphQLObjectType({
   name: "Projects",
@@ -258,9 +259,31 @@ const ReviewType = new GraphQLObjectType({
     email: { type: GraphQLString },
     img: { type: GraphQLString },
     tourSpotId: { type: GraphQLID },
+    rating: { type: GraphQLInt },
+    createdAt: {type: GraphQLString}
+    // replies: {
+    //   type: new GraphQLList(ReviewReplyType),
+    //   resolve: async (parent, args) => {
+    //     let _i = await Review.find();
+    //     let _result = _i?.filter 
+    //   }
+    // }
    
+  }),
+});
+const ReviewReplyType = new GraphQLObjectType({
+  name: "Reply",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString },
+    email: { type: GraphQLString },
+    img: { type: GraphQLString },
+    tourSpotId: { type: GraphQLID },
+    reviewId: { type: GraphQLID }
   }),
 });
 
 
-module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType ,CityForAdd,ReviewType};
+module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType ,CityForAdd,ReviewType,ReviewReplyType};

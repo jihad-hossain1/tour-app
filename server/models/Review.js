@@ -10,6 +10,8 @@ const ReviewSchema = new mongoose.Schema({
   },
   email: String,
   content: String,
+  rating: Number,
+  
 },{ timestamps: true });
 
 module.exports = mongoose.model("Review", ReviewSchema);
