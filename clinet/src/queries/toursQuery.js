@@ -9,15 +9,22 @@ const GET_TOURSPOTS = gql`
     }
   }
 `;
+
 const GET_SINGLE_COUNTRY_TOURSPOT_LIST = gql`
   #graphql
   query getSingleCountryTourspotList($id: ID!) {
     singleCountryTourspotList(id: $id) {
       id
       name
+      photo
+      description
+      city {
+        name
+      }
     }
   }
 `;
+
 const GET_SINGLE_TOURSPOT_DETAILS = gql`
   #graphql
   query getSingleTourspotDetails($id: ID!) {
@@ -33,13 +40,15 @@ const GET_SINGLE_TOURSPOT_DETAILS = gql`
       whereToEat
       tourTipsGuide
       topTourPlace
-      city{
-      id
-      name
-    }
+      cityId
+      city {
+        id
+        name
+      }
     }
   }
 `;
+
 const GET_SINGLE_TOURSPOT = gql`
   #graphql
   query getSingleTourspot($id: ID!) {
@@ -62,9 +71,22 @@ const GET_SINGLE_TOURSPOT = gql`
   }
 `;
 
+const GET_RELATED_TOURSPOTS = gql`
+  #graphql
+  query getRelatedTourSpot($cityId: ID!) {
+    relatedTourSpots(cityId: $cityId) {
+      id
+      name
+      photo
+      description
+    }
+  }
+`;
+
 export {
   GET_SINGLE_COUNTRY_TOURSPOT_LIST,
   GET_SINGLE_TOURSPOT_DETAILS,
   GET_TOURSPOTS,
   GET_SINGLE_TOURSPOT,
+  GET_RELATED_TOURSPOTS,
 };

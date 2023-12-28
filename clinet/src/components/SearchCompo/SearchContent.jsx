@@ -8,7 +8,7 @@ const SearchContent = () => {
   const [isToggle, setIsToggle] = useState(false);
   return (
     <>
-      <div className="md:hidden mt-3 pl-4">
+      <div className="md:hidden my-3 pl-4">
         {isToggle ? (
           <button
             whileHover={{ scale: 1.05, rotate: "-1deg" }}
