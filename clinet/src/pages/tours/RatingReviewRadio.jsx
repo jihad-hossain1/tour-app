@@ -1,17 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
-const RatingReviewRadio = ({ handleChange, formData }) => {
-  const [value, setValue] = useState(2);
+const RatingReviewRadio = ({ value, setValue }) => {
+  console.log(value);
   return (
     <div className="flex flex-col gap-6">
-      <label htmlFor="">review range 5</label>
-      <input
-        name="rating"
-        defaultValue={formData?.rating}
-        onChange={handleChange}
-        type="range"
-        maxLength={5}
+      Share your rating
+      <Rating
+        rating={value}
+        onClick={(i) => setValue(i + 1)}
+        style={{ cursor: "pointer" }}
       />
+    </div>
+  );
+};
+
+const Rating = ({ rating, onClick, style }) => {
+  return (
+    <div className="flex gap-2">
+      {[...Array(5)].map((_, index) => (
+        <span key={index} onClick={() => onClick(index)} style={style}>
+          {rating > index ? (
+            <AiFillStar className="text-yellow-500" />
+          ) : (
+            <AiOutlineStar />
+          )}
+        </span>
+      ))}
     </div>
   );
 };

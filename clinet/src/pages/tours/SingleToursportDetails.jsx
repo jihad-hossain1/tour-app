@@ -23,7 +23,7 @@ const SingleToursportDetails = () => {
   if (error) {
     return <div>{error.message}</div>;
   }
-
+  console.log(data);
   return (
     <main className="min-h-screen max-w-screen-xl mx-auto px-2">
       <div className="pt-20">
@@ -32,7 +32,7 @@ const SingleToursportDetails = () => {
             {/* tour details section */}
             <TourSpotDetails data={data} />
             {/* review section  */}
-            <TourSpotReviewsSection dId={data?.id} />
+            <TourSpotReviewsSection id={data?.singleTourspotDetails?.id} />
           </main>
           <aside className="sticky  bg-zinc-100/30 rounded-md shadow-[2px_5px_7px_rgba(0,0,0,0.25)] min-w-[392px] h-fit mx-auto ">
             {/* new tour place section  */}
