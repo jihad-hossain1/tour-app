@@ -8,15 +8,14 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { GET_CONTINETS } from "../../../queries/continentQuery";
+import { GET_COUNTIRES } from "../../../queries/countriesQuery";
 import { useMutation, useQuery } from "@apollo/client";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import FileUploader from "../TourSpot/FileUploader";
-import { GET_COUNTIRES } from "../../../queries/countriesQuery";
-import { ADD_COUNTRY } from "../../../mutation/countryMutaion";
+import { ADD_DIVISION } from "../../../mutation/countryMutaion";
 
-const AddCountry = () => {
+const AddDivision = () => {
   const [_photo, setPhoto] = useState("");
   const [image, setimage] = useState(null);
   const [open, setOpen] = useState(false);
@@ -24,21 +23,21 @@ const AddCountry = () => {
   const {
     loading: cload,
     error: cError,
-    data: continents,
-  } = useQuery(GET_CONTINETS);
+    data: countries,
+  } = useQuery(GET_COUNTIRES);
 
   const scafolding = {
     name: "",
     description: "",
-    continentId: "",
+    countryId: "",
   };
   const [formData, setFormData] = useState(scafolding);
 
-  const [addCountry] = useMutation(ADD_COUNTRY, {
+  const [addDivision] = useMutation(ADD_DIVISION, {
     variables: {
       name: formData?.name,
       photo: _photo,
-      continentId: formData?.continentId,
+      countryId: formData?.countryId,
       description: formData?.description,
     },
     refetchQueries: [{ query: GET_COUNTIRES }],
@@ -70,21 +69,21 @@ const AddCountry = () => {
   };
 
   let photo = { photo: _photo };
-  const { name, continentId, description } = formData;
+  const { name, countryId, description } = formData;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addCountry(name, continentId, photo, description);
+    addDivision(name, countryId, photo, description);
 
-    toast.success("country added");
+    toast.success("division added");
   };
 
   return (
     <>
       <Toaster />
-      <button onClick={() => setOpen(!open)}>Add Country</button>
+      <button onClick={() => setOpen(!open)}>Add division</button>
 
-      <ModalAll title={"Add Your Country"} open={open} setOpen={setOpen}>
+      <ModalAll title={"Add Your division"} open={open} setOpen={setOpen}>
         <div className="">
           <form
             onSubmit={handleSubmit}
@@ -114,23 +113,23 @@ const AddCountry = () => {
             {/* select country  */}
             <FormControl variant="outlined">
               <InputLabel id="demo-simple-select-standard-label">
-                Select Continent
+                Select Country
               </InputLabel>
               <Select
                 sx={{ width: "100%" }}
                 className="w-full"
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
-                name="continentId"
-                defaultValue={formData?.continentId}
+                name="countryId"
+                defaultValue={formData?.countryId}
                 onChange={handleChange}
-                label="Select Continent"
+                label="Select Country"
               >
                 {!cload &&
                   !cError &&
-                  continents?.continents?.map((continent) => (
-                    <MenuItem key={continent?.id} value={continent?.id}>
-                      {continent?.name}
+                  countries?.countries?.map((country) => (
+                    <MenuItem key={country?.id} value={country?.id}>
+                      {country?.name}
                     </MenuItem>
                   ))}
               </Select>
@@ -161,4 +160,4 @@ const AddCountry = () => {
   );
 };
 
-export default AddCountry;
+export default AddDivision;
