@@ -1,11 +1,6 @@
 const {
-  GraphQLObjectType,
   GraphQLID,
   GraphQLString,
-  GraphQLSchema,
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLEnumType,
 } = require("graphql");
 const Country = require("../models/Country");
 const { CountryType } = require("../typeDef/typeDef");
