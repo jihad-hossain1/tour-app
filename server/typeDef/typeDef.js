@@ -201,12 +201,13 @@ const CountryType = new GraphQLObjectType({
     description: { type: GraphQLString },
     photo: { type: GraphQLString },
     continentId: { type: GraphQLID },
+    
     touristSpots: {
       type: new GraphQLList(TourSpotType),
       resolve: async (parent, args) => {
         let tourt = await TourSpot.find();
         let result = tourt?.filter(
-          (item) => item?.countryCode === parent.countryCode
+          (item) => item?.countryId === parent.id
         );
         return result;
       },

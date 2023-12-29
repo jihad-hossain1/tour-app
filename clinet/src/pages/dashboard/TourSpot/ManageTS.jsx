@@ -4,7 +4,7 @@ import ManageSingleTourSpot from "./ManageSingleTourSpot";
 
 const ManageTS = () => {
   const { data, loading, error } = useQuery(GET_TOURSPOTS);
-  console.log(data);
+
   return (
     <main>
       <h4 className="text-center py-3">Manage your TourSpot</h4>
