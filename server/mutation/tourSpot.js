@@ -8,7 +8,8 @@ const {
   GraphQLEnumType,
 } = require("graphql");
 const TourSpot = require("../models/TourSpot")
-const { TourSpotType } = require("../typeDef/typeDef")
+const { TourSpotType } = require("../typeDef/typeDef");
+const Review = require("../models/Review");
 
 
 
@@ -103,4 +104,29 @@ const updateTourspot = {
 };
 
 
-module.exports = { updateTourspot,addTourSpot,deleteTourspot };
+const deleteTourSpotWithCommentReply = {
+    type: GraphQLID,
+    args: {
+        id: { type: GraphQLID },
+    },
+    async resolve(parent, { id }) {
+        // Find the post by ID and remove it
+        await TourSpot.findByIdAndDelete(id);
+
+        // Remove comments associated with the post
+        await Review.deleteMany({ tourSpot: id });
+
+        // Remove replies associated with the comments
+        const reviews = await Review.find({ tourSpot: id });
+        const reviewIds = reviews.map(review => review._id);
+        await Review.deleteMany({ review: { $in: reviewIds } });
+
+        // Remove comments associated with the tourSpot
+        await Review.deleteMany({ tourSpot: id });
+
+        return id;
+    },
+};
+
+
+module.exports = { updateTourspot,addTourSpot,deleteTourspot,deleteTourSpotWithCommentReply };
