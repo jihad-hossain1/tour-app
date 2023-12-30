@@ -11,6 +11,7 @@ const ReviewSchema = new mongoose.Schema({
   email: String,
   content: String,
   rating: Number,
+  replies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   
 },{ timestamps: true });
 

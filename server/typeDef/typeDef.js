@@ -5,6 +5,9 @@ const City = require("../models/City");
 const TourSpot = require("../models/TourSpot");
 const Review = require("../models/Review");
 
+
+
+
 const ProjectType = new GraphQLObjectType({
   name: "Projects",
   fields: () => ({
@@ -21,6 +24,8 @@ const ProjectType = new GraphQLObjectType({
     },
   }),
 });
+
+
 
 const ClientType = new GraphQLObjectType({
   name: "Clients",
@@ -49,6 +54,9 @@ const ClientType = new GraphQLObjectType({
     },
   }),
 });
+
+
+
 const UserType = new GraphQLObjectType({
   name: "User",
   fields: () => ({
@@ -60,6 +68,9 @@ const UserType = new GraphQLObjectType({
     photo: { type: GraphQLString },
   }),
 });
+
+
+
 // destination type
 const DestinationType = new GraphQLObjectType({
   name: "Destination",
@@ -72,6 +83,8 @@ const DestinationType = new GraphQLObjectType({
     description: { type: GraphQLString },
   }),
 });
+
+
 
 const TourSpotType = new GraphQLObjectType({
   name: "TourSpot",
@@ -103,6 +116,8 @@ const TourSpotType = new GraphQLObjectType({
     tourTipsGuide: { type: GraphQLString },
 
     topTourPlace: { type: GraphQLString },
+
+
     city: {
       type: CityForAdd,
       resolve: async (parent, args) => {
@@ -130,8 +145,17 @@ const TourSpotType = new GraphQLObjectType({
         }
       },
     },
+
+    reviews: {
+      type: new GraphQLList(ReviewType),
+      resolve(parent, args) {
+        return Review.find({ _id: { $in: parent?.reviews } });
+      },
+    },
   }),
 });
+
+
 
 const CityType = new GraphQLObjectType({
   name: "City",
@@ -151,6 +175,9 @@ const CityType = new GraphQLObjectType({
     photo: { type: new GraphQLList(GraphQLString) },
   }),
 });
+
+
+
 const CityForAdd = new GraphQLObjectType({
   name: "AddCity",
   fields: () => ({
@@ -168,6 +195,9 @@ const CityForAdd = new GraphQLObjectType({
     },
   }),
 });
+
+
+
 const DivisionType = new GraphQLObjectType({
   name: "Division",
   fields: () => ({
@@ -192,6 +222,8 @@ const DivisionType = new GraphQLObjectType({
     },
   }),
 });
+
+
 
 const CountryType = new GraphQLObjectType({
   name: "Country",
@@ -231,6 +263,8 @@ const CountryType = new GraphQLObjectType({
   }),
 });
 
+
+
 const ContinentType = new GraphQLObjectType({
   name: "Continent",
   fields: () => ({
@@ -250,6 +284,7 @@ const ContinentType = new GraphQLObjectType({
 });
 
 
+
 const ReviewType = new GraphQLObjectType({
   name: "Reviews",
   fields: () => ({
@@ -261,7 +296,13 @@ const ReviewType = new GraphQLObjectType({
     img: { type: GraphQLString },
     tourSpotId: { type: GraphQLID },
     rating: { type: GraphQLInt },
-    createdAt: {type: GraphQLString}
+    createdAt: { type: GraphQLString },
+    replies: {              
+      type: new GraphQLList(ReviewType),
+      resolve(parent, args) {
+        return Review.find({ _id: { $in: parent.replies } });
+      },
+    },
     // replies: {
     //   type: new GraphQLList(ReviewReplyType),
     //   resolve: async (parent, args) => {
@@ -272,6 +313,9 @@ const ReviewType = new GraphQLObjectType({
    
   }),
 });
+
+
+
 const ReviewReplyType = new GraphQLObjectType({
   name: "Reply",
   fields: () => ({
@@ -285,6 +329,9 @@ const ReviewReplyType = new GraphQLObjectType({
     reviewId: { type: GraphQLID }
   }),
 });
+
+
+
 
 
 module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType ,CityForAdd,ReviewType,ReviewReplyType};

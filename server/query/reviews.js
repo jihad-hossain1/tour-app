@@ -17,7 +17,23 @@ let reviesByTourSpot = {
         return result;
     },
 };
-    
 
 
-module.exports = {  reviesByTourSpot };
+let newReviews = {
+  type: new GraphQLList(ReviewType),
+  args: { id: { type: GraphQLID } },
+  resolve: async(parent, args) =>{
+    try {
+      return await Review.findById(args.id);
+    } catch (error) {
+      return error;
+    }
+  },
+};
+
+
+
+
+
+
+module.exports = {  reviesByTourSpot,newReviews };
