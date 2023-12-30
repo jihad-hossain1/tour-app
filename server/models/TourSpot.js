@@ -38,6 +38,8 @@ const TourSpotSchema = new mongoose.Schema(
     tourTipsGuide: { type: String },
 
     topTourPlace: { type: String },
+    
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   },
   {
     timestamps: true,
