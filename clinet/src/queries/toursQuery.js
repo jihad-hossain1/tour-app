@@ -45,6 +45,25 @@ const GET_SINGLE_TOURSPOT_DETAILS = gql`
         id
         name
       }
+      reviews {
+      id
+      name
+      title
+      email
+      img
+      rating
+      createdAt
+      content
+      replies {
+        id
+        name
+        title
+        email
+        img
+        createdAt
+        content
+      }
+    }
     }
   }
 `;

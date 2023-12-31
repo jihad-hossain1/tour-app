@@ -71,7 +71,6 @@ const addReply = {
     type: ReviewType,
     args: {
     name: { type: GraphQLString },
-    title: { type: GraphQLString },
     content: { type: GraphQLString },
     email: { type: GraphQLString },
     img: { type: GraphQLString },
