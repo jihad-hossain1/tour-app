@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 const ADD_REVIEW = gql`
   #graphql
-  mutation AddReview(
+  mutation addReviewReply(
     $name: String!
     $content: String!
     $tourSpotId: ID!
@@ -11,7 +11,7 @@ const ADD_REVIEW = gql`
     $img: String!
     $rating: Int!
   ) {
-    addReview(
+    addReviewReply(
       name: $name
       content: $content
       tourSpotId: $tourSpotId
@@ -27,6 +27,40 @@ const ADD_REVIEW = gql`
     }
   }
 `;
+const ADD_REPLY = gql`
+  #graphql
+  mutation addReply(
+    $name: String!
+    $content: String!
+    $reviewId: ID!
+    $email: String!
+    $img: String!
+    
+  ) {
+    addReply(
+      name: $name
+      content: $content
+      reviewId: $reviewId
+      email: $email
+      img: $img
+    ) {
+      id
+      name
+      
+    }
+  }
+`;
 
 
-export { ADD_REVIEW };
+const DELETE_REVIEW_WITH_REPLY = gql`
+  #graphql
+  mutation deleteReviewWithReply($reviewId: ID!) {
+    deleteReviewWithReply(reviewId: $reviewId) {
+      id
+    }
+  }
+`;
+
+// deleteReviewWithReply
+
+export { ADD_REVIEW,ADD_REPLY,DELETE_REVIEW_WITH_REPLY };

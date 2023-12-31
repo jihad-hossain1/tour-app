@@ -22,7 +22,7 @@ const WriteTourSpotReviewForm = ({ id }) => {
 
   const [formData, setFormData] = useState(scafolding);
 
-  const [addReview] = useMutation(ADD_REVIEW, {
+  const [addReviewReply] = useMutation(ADD_REVIEW, {
     variables: {
       ...formData,
       rating: value,
@@ -56,7 +56,7 @@ const WriteTourSpotReviewForm = ({ id }) => {
       rating: value,
       tourSpotId: id,
     };
-    addReview(name, email, title, content, img, rating, tourSpotId);
+    addReviewReply(name, email, title, content, img, rating, tourSpotId);
     toast.success(`😊 ${name} your review added ❤`);
     console.log(info);
   };
