@@ -6,8 +6,9 @@ import toast from "react-hot-toast";
 import { useMutation } from "@apollo/client";
 import { DELETE_REVIEW_WITH_REPLY } from "../../mutation/reviewMutation";
 import { GET_REVIEWS } from "../../queries/reviewsQuery";
+import UpdateReview from "./UpdateReview";
 
-const DeleteReview = ({ id }) => {
+const ManageReview = ({ id, review }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -80,9 +81,11 @@ const DeleteReview = ({ id }) => {
           <span className="text-xs">Delete Review</span>
           <FaRegTrashAlt className="text-red-600 " />
         </MenuItem>
+
+        <UpdateReview IsOpen={open} setAnchorEl={setAnchorEl} review={review} />
       </Menu>
     </div>
   );
 };
 
-export default DeleteReview;
+export default ManageReview;
