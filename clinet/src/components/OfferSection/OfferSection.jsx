@@ -26,7 +26,11 @@ const OfferSection = () => {
   return (
     <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-5">
       {cardData.map((data, index) => (
-        <Card key={index} className="w-[450px] h-auto relative overflow-hidden">
+        <div
+          // style={{ border: "0px" }}
+          key={index}
+          className="w-full px-1 h-auto relative overflow-hidden rounded-md shadow-sm "
+        >
           <CardActionArea
             style={{
               backgroundImage: `url(${data?.img})`,
@@ -58,7 +62,7 @@ const OfferSection = () => {
               </Button>
             </CardContent>
           </CardActionArea>
-        </Card>
+        </div>
       ))}
     </div>
   );
