@@ -54,13 +54,40 @@ const ADD_REPLY = gql`
 
 const DELETE_REVIEW_WITH_REPLY = gql`
   #graphql
-  mutation deleteReviewWithReply($reviewId: ID!) {
+  mutation deleteReply($reviewId: ID!) {
     deleteReviewWithReply(reviewId: $reviewId) {
       id
     }
   }
 `;
-
 // deleteReviewWithReply
 
-export { ADD_REVIEW,ADD_REPLY,DELETE_REVIEW_WITH_REPLY };
+
+
+const DELETE_REPLY = gql`
+  #graphql
+  mutation deleteReply($replyId: ID!) {
+    deleteReply(replyId: $replyId) 
+  }
+`;
+// deleteReply(replyId: "")
+
+
+
+const UPDATE_REVIEW = gql`
+  #graphql
+  mutation updateReview(
+    $reviewId: ID!
+    $newContent: String!
+    
+  ) {
+    updateReview(reviewId: $reviewId, newContent: $newContent) {
+      id
+      content
+    }
+  }
+`;
+
+// updateReview
+
+export { ADD_REVIEW,ADD_REPLY,DELETE_REVIEW_WITH_REPLY,DELETE_REPLY,UPDATE_REVIEW };
