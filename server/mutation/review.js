@@ -151,26 +151,7 @@ const deleteReviewWithReply = {
       },
   
 };
-// const deleteReviewReply = {
- 
-//       type: ReviewType,
-//       args: {
-//         reviewId: { type: GraphQLID },
-//       },
-//       async resolve(parent, { reviewId }) {
-//         // Find the comment by ID
-//         const review = await Review.findById(reviewId);
 
-//         // Remove the review and its replies
-//         await Review.deleteMany({ _id: { $in: [reviewId, ...review.replies] } });
-
-//         // Remove the review from the post
-//         await TourSpot.updateOne({ 'reviews._id': reviewId }, { $pull: { reviews: { _id: reviewId } } });
-
-//         return review;
-//       },
-  
-// };
 
 
 const deleteReply = {
