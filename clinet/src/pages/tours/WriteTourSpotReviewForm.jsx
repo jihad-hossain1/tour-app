@@ -5,7 +5,7 @@ import { IoChevronUpSharp } from "react-icons/io5";
 import RatingReviewRadio from "./RatingReviewRadio";
 import { useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../../mutation/reviewMutation";
-import { GET_REVIEWS } from "../../queries/reviewsQuery";
+import { GET_SINGLE_TOURSPOT_DETAILS } from "../../queries/toursQuery";
 import toast, { Toaster } from "react-hot-toast";
 
 const WriteTourSpotReviewForm = ({ id }) => {
@@ -28,8 +28,12 @@ const WriteTourSpotReviewForm = ({ id }) => {
       rating: value,
       tourSpotId: id,
     },
-    refetchQueries: [{ query: GET_REVIEWS }],
+    refetchQueries: [{ query: GET_SINGLE_TOURSPOT_DETAILS, variables: { id } }],
   });
+
+  // refetchQueries: [
+  //        { query: GET_REVIEWS, variables: { reviewId: id } },
+  //      ],
 
   const handleChnage = (e) => {
     const name = e.target.name;
@@ -56,9 +60,13 @@ const WriteTourSpotReviewForm = ({ id }) => {
       rating: value,
       tourSpotId: id,
     };
+
     addReviewReply(name, email, title, content, img, rating, tourSpotId);
     toast.success(`😊 ${name} your review added ❤`);
-    console.log(info);
+    // console.log(info);
+    setTimeout(() => {
+      setToggle(false);
+    }, 1500);
   };
 
   return (

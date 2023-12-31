@@ -6,7 +6,8 @@ import { useMutation } from "@apollo/client";
 import { ADD_REPLY } from "../../mutation/reviewMutation";
 import { GET_REVIEWS } from "../../queries/reviewsQuery";
 import toast, { Toaster } from "react-hot-toast";
-import DeleteReview from "./DeleteReview";
+import ManageReview from "./ManageReview";
+import DeleteReply from "./DeleteReply";
 
 const SingleTourSpotReview = ({ review }) => {
   const [replyOpen, setReplyOpen] = useState(false);
@@ -49,7 +50,7 @@ const SingleTourSpotReview = ({ review }) => {
     // console.log(formData);
     toast.success("reply added");
   };
-  console.log(review?.id);
+  // console.log(review?.id);
   return (
     <main className="pb-4 ">
       <Toaster />
@@ -65,7 +66,7 @@ const SingleTourSpotReview = ({ review }) => {
           </div>
           <div className="relative">
             {/* review delete section start */}
-            <DeleteReview id={review?.id} />
+            <ManageReview id={review?.id} review={review} />
             {/* review delete section end */}
             <Button
               color="info"
@@ -122,7 +123,10 @@ const SingleTourSpotReview = ({ review }) => {
                 ?.slice()
                 .reverse()
                 .map((reply) => (
-                  <div className="p-2 flex flex-col gap-5 shadow-md bg-slate-50 ">
+                  <div
+                    key={reply?.id}
+                    className="p-2 flex flex-col gap-5 shadow-md bg-slate-50 "
+                  >
                     <div className="flex justify-between">
                       <div className="flex gap-2 items-center">
                         <Avatar src={reply?.img} alt="user image" />
@@ -133,7 +137,10 @@ const SingleTourSpotReview = ({ review }) => {
                           <h4 className="text-sm">02/03/2023</h4>
                         </div>
                       </div>
-                      <div>
+                      <div className="relative">
+                        {/* review delete section start */}
+                        <DeleteReply id={reply?.id} />
+                        {/* review delete section end */}
                         <Button
                           color="info"
                           variant="text"
