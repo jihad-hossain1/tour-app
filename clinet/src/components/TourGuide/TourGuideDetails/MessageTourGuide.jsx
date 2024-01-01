@@ -24,7 +24,7 @@ const MessageTourGuide = () => {
           </Typography>
           <div className="flex gap-1 items-center text-xs">
             <div className="w-fit flex items-center gap-1">
-              <Rating value={5} />
+              <Rating readOnly value={5} />
               <span className="font-semibold"> {`${5.0}/5`}</span>
             </div>
             <div className="w-fit font-bold">{`(${1} reviews)`}</div>
