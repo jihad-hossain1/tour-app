@@ -16,6 +16,8 @@ import ManageTourSpot from "../pages/dashboard/TourSpot/ManageTourSpot";
 import UpdateTourSpot from "../pages/dashboard/TourSpot/UpdateTourSpot";
 import Test from "../components/test/Test";
 import ManageContinents from "../pages/dashboard/Continents/ManageContinents";
+import TourGuide from "../pages/tourGuide/TourGuide";
+import TourGuideDetails from "../components/TourGuide/TourGuideDetails";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +63,14 @@ export const router = createBrowserRouter([
       {
         path: "/singleToursportDetails/:id",
         element: <SingleToursportDetails />,
+      },
+      {
+        path: "/tourGuide",
+        element: <TourGuide />,
+      },
+      {
+        path: "/tourGuide/tourGuideDetails/:id",
+        element: <TourGuideDetails />,
       },
     ],
   },

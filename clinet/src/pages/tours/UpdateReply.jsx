@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { UPDATE_REVIEW } from "../../mutation/reviewMutation";
+import { UPDATE_REPLY } from "../../mutation/reviewMutation";
 import { GET_REVIEWS } from "../../queries/reviewsQuery";
 import toast, { Toaster } from "react-hot-toast";
 import { MenuItem, TextField } from "@mui/material";
@@ -8,57 +8,53 @@ import { PiNotePencilThin } from "react-icons/pi";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiAlertCircle } from "react-icons/fi";
 
-const UpdateReview = ({ review }) => {
-  const content = review?.content;
-  const id = review?.id;
+const UpdateReply = ({ reply }) => {
+  const content = reply?.content;
+  const id = reply?.id;
 
   const [isOpen, setIsOpen] = useState(false);
-   const scafolding = {
-     newContent: "",
-   };
+  const scafolding = {
+    newContent: "",
+  };
 
-   const [formData, setFormData] = useState(scafolding);
+  const [formData, setFormData] = useState(scafolding);
 
-   const [updateReview] = useMutation(UPDATE_REVIEW, {
-     variables: { reviewId: id, newContent: formData?.newContent },
-     refetchQueries: [
-       { query: GET_REVIEWS, variables: { reviewId: id } },
-     ],
-   });
+  const [updateReply] = useMutation(UPDATE_REPLY, {
+    variables: { replyId: id, newContent: formData?.newContent },
+    refetchQueries: [{ query: GET_REVIEWS, variables: { reviewId: id } }],
+  });
 
-   const handleChnage = (e) => {
-     const name = e.target.name;
-     const value = e.target.value;
-     setFormData((prev) => ({
-       ...prev,
-       [name]: value,
-     }));
-   };
+  const handleChnage = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-   const handleSubmit = (e) => {
-     e.preventDefault();
-     const form = e.target;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
     //  const newContent = e.target.value;
-     let reviewId = id;
-     const { newContent } = formData;
-     if (newContent) {
-       updateReview(reviewId, newContent);
-        // console.log(review);
-       toast.success("your review update successfull 🤞✌");
-       setTimeout(() => {
-       setIsOpen(false)
-       }, 1500);
-     }
-
-   };
-  
+    let replyId = id;
+    const { newContent } = formData;
+    if (newContent) {
+      updateReply(replyId, newContent);
+      // console.log(review);
+      toast.success("your review update successfull 🤞✌");
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 1500);
+    }
+  };
   return (
-    <>
+    <div>
       <MenuItem
         onClick={() => setIsOpen(!isOpen)}
         sx={{ display: "flex", gap: "8px", alignItems: "center" }}
       >
-        <span className="text-xs">Edit Review</span>
+        <span className="text-xs">Edit Reply</span>
         <PiNotePencilThin className="text-green-600 " />
       </MenuItem>
 
@@ -83,7 +79,7 @@ const UpdateReview = ({ review }) => {
                   <FiAlertCircle />
                 </div>
                 <h3 className="text-3xl font-bold text-center mb-2">
-                  Update Your Review
+                  Update Your Reply
                 </h3>
                 <div
                   action=""
@@ -103,7 +99,7 @@ const UpdateReview = ({ review }) => {
                       type="submit"
                       className="bg-blue-600 text-zinc-50 hover:bg-blue-600/80 transition-colors  font-semibold w-full py-2 rounded-md shadow-md "
                     >
-                      Submit Review
+                      Submit Reply
                     </button>
                   </div>
                 </div>
@@ -120,10 +116,8 @@ const UpdateReview = ({ review }) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 
-
-export default UpdateReview;
-
+export default UpdateReply;

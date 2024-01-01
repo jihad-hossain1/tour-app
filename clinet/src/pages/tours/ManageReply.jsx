@@ -6,8 +6,11 @@ import toast from "react-hot-toast";
 import { useMutation } from "@apollo/client";
 import { DELETE_REPLY } from "../../mutation/reviewMutation";
 import { GET_REVIEWS } from "../../queries/reviewsQuery";
+import { GET_SINGLE_TOURSPOT_DETAILS } from "../../queries/toursQuery";
+import UpdateReply from "./UpdateReply";
 
-const DeleteReply = ({ id }) => {
+const ManageReply = ({ reply, id }) => {
+  const rid = reply?.id;
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -19,17 +22,17 @@ const DeleteReply = ({ id }) => {
     setAnchorEl(null);
   };
 
-  const handleHideReply = (rid) => {
+  const handleHideReply = (_rid) => {
     toast.success("we are working on it. comming..");
-    console.log(rid);
+    console.log(_rid);
   };
 
   const [deleteReply] = useMutation(DELETE_REPLY, {
-    variables: { replyId: id },
+    variables: { replyId: rid },
     onCompleted: () => {
       toast.success("reply has deleted");
     },
-    refetchQueries: [{ query: GET_REVIEWS }],
+    refetchQueries: [{ query: GET_SINGLE_TOURSPOT_DETAILS, variables: { id } }],
   });
 
   return (
@@ -53,10 +56,10 @@ const DeleteReply = ({ id }) => {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={() => handleHideReply(id)}>
+        <MenuItem onClick={() => handleHideReply(rid)}>
           <span className="text-xs">Hide Review</span>
         </MenuItem>
-
+        <UpdateReply id={id} reply={reply} />
         <MenuItem
           onClick={deleteReply}
           sx={{ display: "flex", gap: "8px", alignItems: "center" }}
@@ -69,4 +72,4 @@ const DeleteReply = ({ id }) => {
   );
 };
 
-export default DeleteReply;
+export default ManageReply;

@@ -5,10 +5,13 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import toast from "react-hot-toast";
 import { useMutation } from "@apollo/client";
 import { DELETE_REVIEW_WITH_REPLY } from "../../mutation/reviewMutation";
-import { GET_REVIEWS } from "../../queries/reviewsQuery";
 import UpdateReview from "./UpdateReview";
+import { GET_REVIEWS } from "../../queries/reviewsQuery";
+import { GET_SINGLE_TOURSPOT_DETAILS } from "../../queries/toursQuery";
 
-const ManageReview = ({ id, review }) => {
+const ManageReview = ({ rid, review, id }) => {
+  // const id = review?.id;
+  // console.log();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -25,11 +28,11 @@ const ManageReview = ({ id, review }) => {
   };
 
   const [deleteReviewWithReply] = useMutation(DELETE_REVIEW_WITH_REPLY, {
-    variables: { reviewId: id },
+    variables: { reviewId: rid },
     onCompleted: () => {
       toast.success("review has deleted");
     },
-    refetchQueries: [{ query: GET_REVIEWS }],
+    refetchQueries: [{ query: GET_SINGLE_TOURSPOT_DETAILS, variables: { id } }],
   });
 
   const handleDelete = (rid) => {
@@ -70,7 +73,7 @@ const ManageReview = ({ id, review }) => {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={() => handleHideReview(id)}>
+        <MenuItem onClick={() => handleHideReview(rid)}>
           <span className="text-xs">Hide Review</span>
         </MenuItem>
 
