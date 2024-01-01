@@ -57,7 +57,6 @@ const GET_SINGLE_TOURSPOT_DETAILS = gql`
       replies {
         id
         name
-        title
         email
         img
         createdAt

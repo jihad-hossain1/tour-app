@@ -4,7 +4,7 @@ import { GET_REVIEWS } from "../../queries/reviewsQuery";
 import Loading from "../../components/Loading/Loading";
 import SingleTourSpotReview from "./SingleTourSpotReview";
 
-const FetchAllReviews = ({ reviews }) => {
+const FetchAllReviews = ({ reviews, tid }) => {
   // const { loading, error, data } = useQuery(GET_REVIEWS, {
   //   variables: { id },
   // });
@@ -25,7 +25,7 @@ const FetchAllReviews = ({ reviews }) => {
         ?.slice()
         .reverse()
         .map((review) => (
-          <SingleTourSpotReview key={review?.id} review={review} />
+          <SingleTourSpotReview key={review?.id} review={review} id={tid} />
         ))}
     </section>
   );

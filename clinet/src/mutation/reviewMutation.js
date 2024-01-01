@@ -88,6 +88,21 @@ const UPDATE_REVIEW = gql`
   }
 `;
 
-// updateReview
 
-export { ADD_REVIEW,ADD_REPLY,DELETE_REVIEW_WITH_REPLY,DELETE_REPLY,UPDATE_REVIEW };
+const UPDATE_REPLY = gql`
+  #graphql
+  mutation updateReply(
+    $replyId: ID!
+    $newContent: String!
+    
+  ) {
+    updateReply(replyId: $replyId, newContent: $newContent) {
+      id
+      content
+    }
+  }
+`;
+
+// updateReply
+
+export { ADD_REVIEW,ADD_REPLY,DELETE_REVIEW_WITH_REPLY,DELETE_REPLY,UPDATE_REVIEW,UPDATE_REPLY };

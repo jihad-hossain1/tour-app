@@ -7,9 +7,10 @@ import { ADD_REPLY } from "../../mutation/reviewMutation";
 import { GET_REVIEWS } from "../../queries/reviewsQuery";
 import toast, { Toaster } from "react-hot-toast";
 import ManageReview from "./ManageReview";
-import DeleteReply from "./DeleteReply";
+import ManageReply from "./ManageReply";
+import { GET_SINGLE_TOURSPOT_DETAILS } from "../../queries/toursQuery";
 
-const SingleTourSpotReview = ({ review }) => {
+const SingleTourSpotReview = ({ review, id }) => {
   const [replyOpen, setReplyOpen] = useState(false);
   const [showReply, setshowReply] = useState(false);
 
@@ -30,7 +31,7 @@ const SingleTourSpotReview = ({ review }) => {
       reviewId: review?.id,
       img: formData?.content,
     },
-    refetchQueries: [{ query: GET_REVIEWS }],
+    refetchQueries: [{ query: GET_SINGLE_TOURSPOT_DETAILS, variables: { id } }],
   });
 
   const handleChnage = (e) => {
@@ -54,20 +55,24 @@ const SingleTourSpotReview = ({ review }) => {
   return (
     <main className="pb-4 ">
       <Toaster />
-      <div className="relative shadow-md flex flex-col gap-5 border-b border-zinc-300 bg-blue-50/60 p-2 lg:p-5">
+      <div className="relative shadow-md flex flex-col gap-2 border-b border-zinc-300 bg-blue-50/60 p-2 lg:p-5">
         {/* review section  */}
         <div className="flex justify-between">
           <div className="flex gap-2 items-center">
             <Avatar src={review?.img} alt="user image" />
             <div>
-              <h4 className="font-semibold text-lg">{review?.name}</h4>
-              <h4 className="text-sm">02/03/2023</h4>
+              <h4 className="font-semibold text-sm">{review?.name}</h4>
+              <h4 className="text-xs">{review?.createdAt}</h4>
+              <Rating
+                size="small"
+                name="half-rating-read"
+                value={review?.rating}
+                // precision={0.5}
+                readOnly
+              />
             </div>
           </div>
-          <div className="relative">
-            {/* review delete section start */}
-            <ManageReview id={review?.id} review={review} />
-            {/* review delete section end */}
+          <div className="relative flex items-center ">
             <Button
               color="info"
               variant="text"
@@ -76,17 +81,13 @@ const SingleTourSpotReview = ({ review }) => {
               <SlLike />
               <span>{2}</span>
             </Button>
+            {/* review delete section start */}
+            <ManageReview rid={review?.id} review={review} id={id} />
+            {/* review delete section end */}
           </div>
         </div>
-        <div>
-          <Rating
-            name="half-rating-read"
-            value={review?.rating}
-            // precision={0.5}
-            readOnly
-          />
-        </div>
-        <div className="flex flex-col gap-3 pb-3">
+
+        <div className="flex flex-col gap-1">
           <h4 className="font-semibold text-xl">{review?.title}</h4>
           <p>{review?.content}</p>
         </div>
@@ -125,7 +126,7 @@ const SingleTourSpotReview = ({ review }) => {
                 .map((reply) => (
                   <div
                     key={reply?.id}
-                    className="p-2 flex flex-col gap-5 shadow-md bg-slate-50 "
+                    className="p-2 flex flex-col gap-2 shadow-md bg-slate-50 "
                   >
                     <div className="flex justify-between">
                       <div className="flex gap-2 items-center">
@@ -134,26 +135,26 @@ const SingleTourSpotReview = ({ review }) => {
                           <h4 className="font-semibold text-lg">
                             {reply?.name}
                           </h4>
-                          <h4 className="text-sm">02/03/2023</h4>
+                          <h4 className="text-sm">{reply?.createdAt}</h4>
                         </div>
                       </div>
-                      <div className="relative">
-                        {/* review delete section start */}
-                        <DeleteReply id={reply?.id} />
-                        {/* review delete section end */}
+                      <div className="relative flex items-center">
                         <Button
                           color="info"
                           variant="text"
                           className="flex items-center gap-1"
                         >
                           <SlLike />
-                          <span>{2}</span>
+                          <span>{0}</span>
                         </Button>
+                        {/* review delete section start */}
+                        <ManageReply reply={reply} id={id} />
+                        {/* review delete section end */}
                       </div>
                     </div>
 
-                    <div className="flex flex-col gap-3 pb-3">
-                      <h4 className="font-semibold text-xl">{reply?.title}</h4>
+                    <div className="flex flex-col gap-1 pb-3">
+                      {/* <h4 className="font-semibold text-xl">{reply?.title}</h4> */}
                       <p>{reply?.content}</p>
                     </div>
                   </div>
