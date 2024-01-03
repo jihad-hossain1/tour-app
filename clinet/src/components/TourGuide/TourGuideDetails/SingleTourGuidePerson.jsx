@@ -3,8 +3,12 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Card, CardMedia } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 const SingleTourGuidePerson = ({ personAllTour }) => {
+  const location = useLocation();
+  const path = "/tourGuide/guide/review/0";
+  console.log(location);
   const options = {
     items: 1,
     loop: false,
@@ -32,9 +36,26 @@ const SingleTourGuidePerson = ({ personAllTour }) => {
   };
   return (
     <div>
+      {/* {location.pathname == path ? (
+        <div className="my-6 lg:my-10">
+          <h4 className="text-3xl ">
+            <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
+              More
+            </span>{" "}
+            tours by Rababe E.
+          </h4>
+        </div>
+      ) : (
+        <h4 className="text-3xl">
+          <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
+            Tours
+          </span>
+        </h4>
+      )} */}
       <h4 className="text-3xl">
         <span className="border-b-[3px] pb-1 border-blue-600 w-fit">Tours</span>
       </h4>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 lg:mt-10">
         {[1, 2, 3, 4, 5].map((it, _i) => (
           <Link to={`/tourGuide/guide/review/${_i}`} className="">

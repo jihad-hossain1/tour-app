@@ -6,6 +6,8 @@ import { IoPeopleCircleOutline } from "react-icons/io5";
 import { CiClock2, CiCalendarDate, CiLocationOn, CiLock } from "react-icons/ci";
 import { LuMessagesSquare } from "react-icons/lu";
 import { Avatar, Rating, Typography } from "@mui/material";
+import TourMaintainHistry from "./TourMaintainHistry";
+import PersonalizedTour from "./PersonalizedTour";
 const images = [
   { img: "https://i.ibb.co/3Mvr2cx/141344.jpg" },
   { img: "https://i.ibb.co/LrtBvtD/141347.jpg" },
@@ -16,7 +18,66 @@ const images = [
   { img: "https://i.ibb.co/y8b22cj/141341.jpg" },
   { img: "https://i.ibb.co/1K2M2Sr/141349.jpg" },
 ];
-
+const scheduleReview = [
+  {
+    time: "09.00 AM",
+    title: "Meeting Point",
+    details: "At your hotel or Tangier port/airport",
+  },
+  {
+    time: "09.00 AM",
+    title: "Pick up from your hotel, or Tangier's port/airport",
+    details:
+      "Get picked up by Rabab, a female licensed local tour guide, and a driver from your hotel, or from the port/airport if you are coming by ferry or by flight. Have a brief introduction of how your day will be spent and start your tour immediately.",
+  },
+  {
+    time: "09:30 AM",
+    title: "Boulevard Mohammed 5th, French & Spanish districts",
+    details:
+      "Have a nice drive through the main avenues of Tangier including Mohammed the 5th Boulevard, Louis Pasteur Boulevard, in addition to the French and Spanish districts, and learn about Tangier when it was an International Zone.",
+  },
+  {
+    time: "10:30 AM",
+    title: "Cap Spartel",
+    details:
+      "Arrive to Cap Spartel, the place where the Mediterranean Sea meets the Atlantic Ocean. Learn about the history of the lighthouse that was built in 1864.Optional stop for mint tea and Moroccan pastries.",
+  },
+  {
+    time: "11:00 AM",
+    title: "Caves of Hercules",
+    details:
+      "Visit the Caves of Hercules that date from the Neolithic Era and learn about its history and how the place is related to the Greek mythology.",
+  },
+  {
+    time: "12:00 PM",
+    title: "Kasbah",
+    details:
+      "Arriving to the Kasbah, have a walk in its narrow alleyways and enjoy its architecture while learning about the endless events and stories that took place here since the 15th century.",
+  },
+  {
+    time: "12:50 PM",
+    title: "Kasbah museum",
+    details:
+      "Visit the Kasbah museum that served as a Palace for Moroccan Sultans since the 17th century. The palace was built by Soultan Moulay Ismail and is now a museum with Punic and Roman remains. The architecture of the place is just breathtaking.",
+  },
+  {
+    time: "01:20 PM",
+    title: "Lunch time (Optional)",
+    details:
+      "It is recommended to have a stop for lunch and try typical Moroccan food in one of the local restaurants. Vegetarian, vegan, gluten free and nuts free options are available.",
+  },
+  {
+    time: "02:00 PM",
+    title: "Medina (Grand Socco, Mendoubia gardens, food market)",
+    details:
+      "After lunch, start discovering the vibrant Medina. Walk through its busy streets following the route of Matisse the French painter, and discover its markets including the food and fish market. Have a stop in the Grand Socco, discover the Mendoubia gardens.",
+  },
+  {
+    time: "03:30 PM",
+    title: "End of the tour",
+    details: "hotel / airport drop off",
+  },
+];
 const GuidePersonReview = () => {
   return (
     <main className="min-h-screen max-w-screen-xl mx-auto pt-16 px-2">
@@ -24,7 +85,7 @@ const GuidePersonReview = () => {
       <ImageGellary images={images} />
       <div>
         <section className="lg:relative my-12 ">
-          <main className="flex flex-col gap-6 lg:gap-10 lg:w-[60%]">
+          <main className="flex flex-col gap-6 lg:gap-10 lg:w-[60%] ">
             <div className="flex flex-col gap-3">
               <h4 className="text-3xl font-semibold">
                 Cultural day tour of Tangier
@@ -88,6 +149,8 @@ const GuidePersonReview = () => {
                 </div>
               </div>
             </div>
+            <TourMaintainHistry scheduleReview={scheduleReview} />
+            <PersonalizedTour />
           </main>
           <aside className="lg:absolute top-0 right-0">
             <GuideReserve />
