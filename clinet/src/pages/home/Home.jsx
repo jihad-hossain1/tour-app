@@ -2,10 +2,14 @@ import HomeContinent from "../../components/continents/HomeContinent";
 import TextAnimation from "./TextAnimation";
 import SearchContent from "../../components/SearchCompo/SearchContent";
 import OfferSection from "../../components/OfferSection/OfferSection";
+import PopularDestination from "../../components/PopularDestination/PopularDestination";
+
+import BannerTAg from "./BannerTAg";
+import PopularGuide from "../../components/PopularGuide/PopularGuide";
 
 const Home = () => {
   return (
-    <div className="">
+    <div className="pb-10">
       <div className="relative">
         <img
           className="absolute object-cover w-full h-full"
@@ -16,12 +20,17 @@ const Home = () => {
           <TextAnimation />
         </div>
       </div>
-      <SearchContent />
+      <BannerTAg />
+      {/* <SearchContent /> */}
       <div className="max-w-screen-xl mx-auto ">
-        {/* offers section  */}
-        <OfferSection />
         {/* top destinations section  */}
+        <PopularDestination />
+        {/* continent section  */}
         <HomeContinent />
+
+        <PopularGuide />
+        {/* offers section  */}
+        {/* <OfferSection /> */}
       </div>
     </div>
   );
