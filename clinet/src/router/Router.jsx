@@ -18,6 +18,7 @@ import Test from "../components/test/Test";
 import ManageContinents from "../pages/dashboard/Continents/ManageContinents";
 import TourGuide from "../pages/tourGuide/TourGuide";
 import TourGuideDetails from "../components/TourGuide/TourGuideDetails";
+import GuidePersonReview from "../components/TourGuide/GuidePerson/GuidePersonReview";
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
       {
         path: "/tourGuide/tourGuideDetails/:id",
         element: <TourGuideDetails />,
+      },
+      {
+        path: "/tourGuide/guide/review/:id",
+        element: <GuidePersonReview />,
       },
     ],
   },

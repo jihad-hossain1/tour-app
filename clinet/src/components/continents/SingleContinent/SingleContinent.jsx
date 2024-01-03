@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { framer_card } from "../../../utils/animation";
+import { Box, Card } from "@mui/material";
 
 export const fadeInAnimationVariants = {
   initial: {
@@ -38,21 +39,23 @@ const SingleContinent = ({ continent, index }) => {
         custom={index}
         className="relative"
       >
-        <div className="transition-all duration-300 relative shadow-[2px_3px_10px_rgba(0,0,0,0.25)] hover:shadow-[2px_5px_25px_rgba(0,0,0,0.25)] rounded-lg">
-          <img
-            className=" object-cover rounded-lg h-80 md:h-96"
+        <Card sx={{ maxWidth: 345 }}>
+          <Box
+            component="img"
+            sx={{
+              height: 233,
+              width: "100%",
+              maxHeight: { xs: 130, md: 160 },
+              // maxWidth: { xs: "100%", md: 250 },
+            }}
+            alt="Continet photo"
             src={continent?.img}
-            alt=""
           />
-        </div>
-        <div className="absolute md:top-[50%] md:right-[50%]">
-          <h4 className="-mt-10 md:mt-0 ml-10 font-semibold text-xl md:text-3xl lg:text-4xl text-white  flex  items-center gap-2 ">
-            <span className="break-all md:break-after-auto">
-              {continent?.name}
-            </span>
-            <span className="text-orange-500">{continent?.code}</span>
-          </h4>
-        </div>
+          {/* <img className=" object-cover " src={continent?.img} alt="" /> */}
+          <div className="py-2">
+            <h4 className="text-center font-semibold">{continent?.name}</h4>
+          </div>
+        </Card>
       </motion.div>
     </Link>
   );
