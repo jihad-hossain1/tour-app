@@ -19,7 +19,7 @@ const { reviesByTourSpot, newReviews } = require("../query/reviews");
 
 
 
-const { addClient, deleteClient } = require("../mutation/client");
+const { addClient, deleteClient,loginClient,updateClientPassword,clientPasswordReset } = require("../mutation/client");
 const {
   addProject,
   updateProject,
@@ -99,6 +99,9 @@ const mutation = new GraphQLObjectType({
     //client
     addClient,
     deleteClient,
+    loginClient,
+    updateClientPassword,
+    clientPasswordReset,
     //project
     addProject,
     deleteProject,
