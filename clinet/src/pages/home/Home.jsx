@@ -6,6 +6,7 @@ import PopularDestination from "../../components/PopularDestination/PopularDesti
 
 import BannerTAg from "./BannerTAg";
 import PopularGuide from "../../components/PopularGuide/PopularGuide";
+import HomePageSearchSection from "./HomePageSearchSection/HomePageSearchSection";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         />
         <div className="pt-36 relative z-10 text-zinc-50 py-6 ">
           <TextAnimation />
+          <HomePageSearchSection />
         </div>
       </div>
       <BannerTAg />
