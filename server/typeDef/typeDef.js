@@ -4,6 +4,7 @@ const Division = require("../models/Division");
 const City = require("../models/City");
 const TourSpot = require("../models/TourSpot");
 const Review = require("../models/Review");
+const GuideReview = require("../models/GuideReview");
 
 
 
@@ -34,6 +35,9 @@ const ClientType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     phone: { type: GraphQLString },
+    password: { type: GraphQLString },
+    image: { type: GraphQLString },
+    role: {type: GraphQLString},
     projects: {
       type: new GraphQLList(ProjectType),
       resolve: async (parent, args) => {
@@ -302,15 +306,7 @@ const ReviewType = new GraphQLObjectType({
       resolve(parent, args) {
         return Review.find({ _id: { $in: parent.replies } });
       },
-    },
-    // replies: {
-    //   type: new GraphQLList(ReviewReplyType),
-    //   resolve: async (parent, args) => {
-    //     let _i = await Review.find();
-    //     let _result = _i?.filter 
-    //   }
-    // }
-   
+    }, 
   }),
 });
 
@@ -330,8 +326,68 @@ const ReviewReplyType = new GraphQLObjectType({
   }),
 });
 
+const GuideReviewType = new GraphQLObjectType({
+  name: "GuideReview",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString },
+    email: { type: GraphQLString },
+    img: { type: GraphQLString },
+    guideId: { type: GraphQLID },
+    rating: { type: GraphQLInt },
+    createdAt: { type: GraphQLString },
+    replies: {              
+      type: new GraphQLList(GuideReviewType),
+      resolve(parent, args) {
+        return GuideReview.find({ _id: { $in: parent.replies } });
+      },
+    }, 
+  }),
+});
+
+
+const TourGuideType = new GraphQLObjectType({
+  name: "TourGuide",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString },
+    email: { type: GraphQLString },
+    profileImage: { type: GraphQLString },
+    languages: { type: GraphQLList(GraphQLString) },
+    importantNote: { type: GraphQLString },
+    profileImage:{ type: GraphQLString },
+    images: { type: GraphQLList(GraphQLString) },
+    email: { type: GraphQLString },
+    about: { type: GraphQLString },
+    rating:  { type: GraphQLInt },
+    responseTime: { type: GraphQLList(GraphQLString) },
+    // availableAreas: Number,
+    tourCategory: { type: GraphQLString },
+    cityId: { type: GraphQLID },
+    // availableAreas: ,
+    // tourSpots: {              
+    //   type: new GraphQLList(ReviewType),
+    //   resolve(parent, args) {
+    //     return GuideReview.find({ _id: { $in: parent.replies } });
+    //   },
+    // },
+
+    replies: {              
+      type: new GraphQLList(),
+      resolve(parent, args) {
+        return GuideReview.find({ _id: { $in: parent.replies } });
+      },
+    }, 
+    
+  }),
+});
 
 
 
 
-module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType ,CityForAdd,ReviewType,ReviewReplyType};
+
+module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType ,CityForAdd,ReviewType,ReviewReplyType,TourGuideType,GuideReviewType};
