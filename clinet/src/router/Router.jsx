@@ -19,6 +19,9 @@ import ManageContinents from "../pages/dashboard/Continents/ManageContinents";
 import TourGuide from "../pages/tourGuide/TourGuide";
 import TourGuideDetails from "../components/TourGuide/TourGuideDetails";
 import GuidePersonReview from "../components/TourGuide/GuidePerson/GuidePersonReview";
+import SignIn from "../pages/authentication/SignIn";
+import SignUp from "../pages/authentication/SignUp";
+import ClientPrivateRoute from "./ClientRoute";
 
 export const router = createBrowserRouter([
   {
@@ -81,7 +84,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <ClientPrivateRoute>
+        <DashboardLayout />
+      </ClientPrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",
@@ -100,5 +107,13 @@ export const router = createBrowserRouter([
         element: <ManageContinents />,
       },
     ],
+  },
+  {
+    path: "/signin",
+    element: <SignIn />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
 ]);

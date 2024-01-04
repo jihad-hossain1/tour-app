@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import DashNav from "../components/dashboard/Navbar/DashNav";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
@@ -6,6 +6,9 @@ import { useState } from "react";
 import { FaHome } from "react-icons/fa";
 import { TbWorld, TbWorldCog } from "react-icons/tb";
 import { MdTour } from "react-icons/md";
+import { Button } from "@mui/material";
+import { GoSignOut } from "react-icons/go";
+import { getClient } from "../router/ClientRoute";
 
 const DashboardLayout = () => {
   return (
@@ -45,6 +48,18 @@ const DashboardLayout = () => {
 
 const SideNav = () => {
   const [selected, setSelected] = useState(0);
+  const [isClient, setClient] = useState(getClient());
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("client");
+    setClient(null);
+
+    setTimeout(() => {
+      navigate("/signin");
+    }, 1000);
+  };
   return (
     <nav className="md:min-h-screen md:w-fit bg-slate-500/20 p-4 flex flex-row md:flex-col items-center gap-2 shadow-[2px_4px_15px_rgba(0,0,0,0.25)]">
       <div>logo</div>
@@ -63,6 +78,11 @@ const SideNav = () => {
           <TbWorld />
         </NavItem>
       </Link>
+      <NavItem>
+        <button onClick={handleLogout}>
+          <GoSignOut />
+        </button>
+      </NavItem>
     </nav>
   );
 };
