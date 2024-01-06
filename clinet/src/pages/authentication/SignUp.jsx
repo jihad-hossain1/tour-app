@@ -26,6 +26,7 @@ const SignUp = () => {
     email: "",
     password: "",
     image: "",
+    clientType: "",
   };
 
   const [formData, setFormData] = useState(scafolding);
@@ -36,6 +37,7 @@ const SignUp = () => {
       phone: formData?.phone,
       image: formData?.image,
       name: formData?.name,
+      clientType: formData?.clientType,
     },
     // refetchQueries: [{ query: GET_CLIENTS }],
   });
@@ -51,16 +53,16 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    const { email, password, phone, image, name } = formData;
-    addClient(email, password, phone, image, name);
+    // console.log(formData);
+    const { email, password, phone, image, name, clientType } = formData;
+    addClient(email, password, phone, image, name, clientType);
 
     const client = data?.addClient;
     console.log(client);
 
     if (client) {
       toast.success("account create successfull");
-      localStorage.setItem("client", JSON.stringify(data?.addClient));
+      localStorage.setItem("client", JSON.stringify(data?.addClient?.id));
       setFormData("");
       setTimeout(() => {
         navigate("/");
@@ -111,7 +113,7 @@ const SignUp = () => {
             placeholder="email"
             id="3"
           />
-          {error && <p className="text-sm text-red-500">{error?.message}</p>}
+
           <label htmlFor="">photo url</label>
           <input
             className="text-zinc-800"
@@ -135,7 +137,21 @@ const SignUp = () => {
             placeholder="password"
             id="2"
           />
-
+          <label htmlFor="clientType">User Type </label>
+          <select
+            onChange={handleChange}
+            name="clientType"
+            defaultValue={formData?.clientType}
+            id=""
+            className="bg-zinc-500 border border-orange-400 focus:outline-none p-2 w-full"
+          >
+            <option value="TourGuide">Tour Guide</option>
+            <option value="CarRent">Car Rent</option>
+            <option value="ParkingShare">Parking Share</option>
+            <option value="ReturantManagement">Returant Management</option>
+            <option value="HotelManagement">Hotel Management</option>
+            <option value="Blogger">Blogger</option>
+          </select>
           <div>
             <button type="submit">
               {loading ? (
@@ -148,6 +164,7 @@ const SignUp = () => {
             </button>
           </div>
         </form>
+        {error && <p className="text-sm text-red-500">{error?.message}</p>}
         <div className="flex justify-end">
           <Link to={"/signup"} className="hover:text-blue-600 hover:underline">
             create a new account

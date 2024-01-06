@@ -43,11 +43,15 @@ const clients = {
 
 
 const client = {
-    type: ClientType,
-    args: { id: { type: GraphQLID } },
-    resolve(parent, args) {
-        return Client.findById(args.id);
-    },
+  type: ClientType,
+  args: { id: { type: GraphQLID } },
+  resolve: async (parent, args) => {
+    try {
+      return await Client.findById(args.id);
+    } catch (error) {
+      return error;
+    }
+  },
 };
 
 
