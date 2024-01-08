@@ -22,6 +22,8 @@ import GuidePersonReview from "../components/TourGuide/GuidePerson/GuidePersonRe
 import SignIn from "../pages/authentication/SignIn";
 import SignUp from "../pages/authentication/SignUp";
 import ClientPrivateRoute from "./ClientRoute";
+import AdminRoute from "./AdminRoute";
+import DeniedPage from "../pages/DeniedPage";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +82,10 @@ export const router = createBrowserRouter([
         path: "/tourGuide/guide/review/:id",
         element: <GuidePersonReview />,
       },
+      {
+        path: "/denied",
+        element: <DeniedPage />,
+      },
     ],
   },
   {
@@ -96,15 +102,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/tourSpot",
-        element: <ManageTourSpot />,
+        element: (
+          <AdminRoute>
+            <ManageTourSpot />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/UpdateTourSpot/:id",
-        element: <UpdateTourSpot />,
+        element: (
+          <AdminRoute>
+            <UpdateTourSpot />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/ManageContinents",
-        element: <ManageContinents />,
+        element: (
+          <AdminRoute>
+            <ManageContinents />
+          </AdminRoute>
+        ),
       },
     ],
   },

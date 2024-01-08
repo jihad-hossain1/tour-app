@@ -6,11 +6,11 @@ const ClientSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   phone: {
     type: String,
-    required: true
+    required: true,
   },
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -19,37 +19,48 @@ const ClientSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-     unique: true,
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
     type: String,
-    required: true
+    required: true,
   },
   role: {
     type: String,
-    enum: ['client', 'admin'],
-    default: 'client'
+    enum: ["client", "admin"],
+    default: "client",
+  },
+  clientType: {
+    type: String,
+    // enum: [
+    //   "Tour Guide",
+    //   "Car Rent",
+    //   "Parking Share",
+    //   "Returant Management",
+    //   "Hotel Management",
+    // ],
+    required: true,
   },
   resetToken: String,
   resetTokenExpiration: Date,
 });
 
-// ClientSchema.pre('save', async function (next) {
-//   const user = this;
-//   if (user.isModified('password') || user.isNew) {
-//     try {
-//       const hashedPassword = await bcrypt.hash(user.password, 10);
-//       user.password = hashedPassword;
-//     } catch (err) {
-//       return next(err);
-//     }
-//   }
-//   next();
-// });
+ClientSchema.pre("save", async function (next) {
+  const user = this;
+  if (user.isModified("password") || user.isNew) {
+    try {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      user.password = hashedPassword;
+    } catch (err) {
+      return next(err);
+    }
+  }
+  next();
+});
 
 
 // ClientSchema.methods.matchPassword = async function (enteredPassword) {

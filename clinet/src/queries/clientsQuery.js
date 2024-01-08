@@ -10,5 +10,19 @@ const GET_CLIENTS = gql`
     }
   }
 `;
+const GET_CLIENT = gql`
+  #graphql
+  query getClient($id: ID!) {
+    client(id: $id) {
+      id
+      name
+      email
+      phone
+      image
+      role
+      clientType
+    }
+  }
+`;
 
-export { GET_CLIENTS };
+export { GET_CLIENTS, GET_CLIENT };
