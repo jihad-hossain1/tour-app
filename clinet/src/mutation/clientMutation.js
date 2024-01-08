@@ -8,6 +8,7 @@ const ADD_CLIENT = gql`
     $image: String!
     $name: String!
     $phone: String!
+    $clientType: String!
   ) {
     addClient(
       email: $email
@@ -15,12 +16,15 @@ const ADD_CLIENT = gql`
       image: $image
       name: $name
       phone: $phone
+      clientType: $clientType
     ) {
+      id
       phone
       email
       name
       image
       role
+      clientType
     }
   }
 `;
@@ -28,6 +32,7 @@ const LOGIN_CLIENT = gql`
   #graphql
   mutation loginClient($email: String!, $password: String!) {
     loginClient(email: $email, password: $password) {
+      id
       phone
       email
       name

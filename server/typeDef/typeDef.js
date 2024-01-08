@@ -37,7 +37,8 @@ const ClientType = new GraphQLObjectType({
     phone: { type: GraphQLString },
     password: { type: GraphQLString },
     image: { type: GraphQLString },
-    role: {type: GraphQLString},
+    role: { type: GraphQLString },
+    clientType: { type: GraphQLString },
     projects: {
       type: new GraphQLList(ProjectType),
       resolve: async (parent, args) => {
