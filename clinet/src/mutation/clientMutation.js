@@ -32,6 +32,7 @@ const LOGIN_CLIENT = gql`
   #graphql
   mutation loginClient($email: String!, $password: String!) {
     loginClient(email: $email, password: $password) {
+      id
       phone
       email
       name

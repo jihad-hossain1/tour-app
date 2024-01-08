@@ -1,23 +1,16 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_CLIENT } from "../../mutation/clientMutation";
-// import { GET_CLIENTS } from "../../queries/clientsQuery";
 import toast, { Toaster } from "react-hot-toast";
-import { Link, useNavigate, useNavigation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getClient } from "../../router/ClientRoute";
+import AlertAlreadySignIn from "../../components/AlertAlreadySignIn";
 
 const SignUp = () => {
   const [isClient, setClient] = useState(getClient());
   const navigate = useNavigate();
   if (isClient) {
-    return (
-      <div className="flex items-center text-center mt-5">
-        you are already SignIn{" "}
-        <Link to={"/"} className="underline hover:text-blue-600">
-          Go home
-        </Link>
-      </div>
-    );
+    return <AlertAlreadySignIn />;
   }
 
   const scafolding = {
@@ -58,11 +51,11 @@ const SignUp = () => {
     addClient(email, password, phone, image, name, clientType);
 
     const client = data?.addClient;
-    console.log(client);
+    // console.log(client);
 
     if (client) {
       toast.success("account create successfull");
-      localStorage.setItem("client", JSON.stringify(data?.addClient?.id));
+      localStorage.setItem("client", JSON.stringify(client));
       setFormData("");
       setTimeout(() => {
         navigate("/");

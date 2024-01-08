@@ -5,19 +5,13 @@ import { LOGIN_CLIENT } from "../../mutation/clientMutation";
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
 import { getClient } from "../../router/ClientRoute";
+import AlertAlreadySignIn from "../../components/AlertAlreadySignIn";
 
 const SignIn = () => {
   const [isClient, setClient] = useState(getClient());
   const navigate = useNavigate();
   if (isClient) {
-    return (
-      <div className="flex items-center text-center mt-5">
-        you are already SignIn{" "}
-        <Link to={"/"} className="underline hover:text-blue-600">
-          Go home
-        </Link>
-      </div>
-    );
+    return <AlertAlreadySignIn />;
   }
 
   const scafolding = {
@@ -58,7 +52,7 @@ const SignIn = () => {
     }
   };
 
-  //   console.log(data);
+  console.log(isClient);
 
   return (
     <div className="bg-zinc-800 min-h-screen text-zinc-100">

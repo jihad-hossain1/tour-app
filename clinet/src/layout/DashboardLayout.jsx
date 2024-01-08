@@ -1,28 +1,19 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import DashNav from "../components/dashboard/Navbar/DashNav";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-
 import { FaHome } from "react-icons/fa";
-import { TbWorld, TbWorldCog } from "react-icons/tb";
+import { TbWorld } from "react-icons/tb";
 import { MdTour } from "react-icons/md";
-import { Button } from "@mui/material";
 import { GoSignOut } from "react-icons/go";
 import { getClient } from "../router/ClientRoute";
 
 const DashboardLayout = () => {
   return (
     <>
-      {/* <DashNav />
-      <div className="max-w-screen-xl mx-auto px-2 py-3">
-        <Outlet />
-      </div> */}
-
       <div className="bg-slate-100 text-slate-900 hidden md:flex">
         <SideNav />
 
         <div className="w-full">
-          {/* <div className="h-[35px] m-4 rounded border border-slate-200/70 bg-slate-100 shadow-[2px_4px_10px_rgba(0,0,0,0.25)]"></div> */}
           <div className=" m-4 rounded border border-slate-50   bg-slate-100 ">
             <div className="min-h-screen max-w-screen-2xl mx-auto px-1">
               <Outlet />
@@ -34,7 +25,6 @@ const DashboardLayout = () => {
         <SideNav />
 
         <div className="w-full">
-          {/* <div className="h-[35px] m-4 rounded border border-slate-200/70 bg-slate-100 shadow-[2px_4px_10px_rgba(0,0,0,0.25)]"></div> */}
           <div className="min-h-screen m-4 rounded border border-slate-50   bg-slate-100 ">
             <div className=" px-1">
               <Outlet />
@@ -60,6 +50,8 @@ const SideNav = () => {
       navigate("/signin");
     }, 1000);
   };
+
+  const adminRole = isClient?.role == "admin";
   return (
     <nav className="md:min-h-screen md:w-fit bg-slate-500/20 p-4 flex flex-row md:flex-col items-center gap-2 shadow-[2px_4px_15px_rgba(0,0,0,0.25)]">
       <div>logo</div>
@@ -68,16 +60,20 @@ const SideNav = () => {
           <FaHome />
         </NavItem>
       </Link>
-      <Link to={`/dashboard/tourSpot`}>
-        <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
-          <MdTour />
-        </NavItem>
-      </Link>
-      <Link to={`/dashboard/manageContinents`}>
-        <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
-          <TbWorld />
-        </NavItem>
-      </Link>
+      {adminRole && (
+        <>
+          <Link to={`/dashboard/tourSpot`}>
+            <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
+              <MdTour />
+            </NavItem>
+          </Link>
+          <Link to={`/dashboard/manageContinents`}>
+            <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
+              <TbWorld />
+            </NavItem>
+          </Link>
+        </>
+      )}
       <NavItem>
         <button onClick={handleLogout}>
           <GoSignOut />
