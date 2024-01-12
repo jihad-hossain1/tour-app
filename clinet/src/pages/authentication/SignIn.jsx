@@ -7,6 +7,22 @@ import { Link, useNavigate, useNavigation } from "react-router-dom";
 import { getClient } from "../../router/ClientRoute";
 import AlertAlreadySignIn from "../../components/AlertAlreadySignIn";
 
+// from my design
+
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+
+
 const SignIn = () => {
   const [isClient, setClient] = useState(getClient());
   const navigate = useNavigate();
@@ -55,53 +71,72 @@ const SignIn = () => {
   console.log(isClient);
 
   return (
-    <div className="bg-zinc-800 min-h-screen text-zinc-100">
+    <div className="min-h-screen">
       <Toaster />
-      <div className="max-w-screen-md mx-auto px-4  pt-10 lg:pt-20">
-        <h4>SignIn</h4>
-        <form action="" onSubmit={handleSubmit} className="flex flex-col gap-2">
-          <label htmlFor="">email</label>
-          <input
-            className="text-zinc-800"
-            required
-            type="email"
-            name="email"
-            defaultValue={formData?.email}
-            onChange={handleChange}
-            placeholder="email"
-            id="3"
-          />
-          {error && <p className="text-sm text-red-500">{error?.message}</p>}
-          <label htmlFor="">password</label>
-          <input
-            className="text-zinc-800"
-            required
-            type="password"
-            name="password"
-            defaultValue={formData?.password}
-            onChange={handleChange}
-            placeholder="password"
-            id="2"
-          />
-          {error && <p className="text-sm text-red-500">{error?.message}</p>}
-          <div>
-            <button type="submit">
-              {loading ? (
-                <span>Loading....</span>
-              ) : (
-                <span className="border bg-violet-600 text-white px-3">
-                  submit
-                </span>
-              )}
-            </button>
-          </div>
-        </form>
-        <div className="flex justify-end">
-          <Link to={"/signup"} className="hover:text-blue-600 hover:underline">
-            create a new account
-          </Link>
-        </div>
-      </div>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to="/signup" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
     </div>
   );
 };
