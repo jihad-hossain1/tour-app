@@ -20,6 +20,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 
 
@@ -103,27 +104,20 @@ const SignUp = () => {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="name"
+                  label="Name"
+                  defaultValue={formData?.name}
+                  onChange={handleChange}
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -131,7 +125,21 @@ const SignUp = () => {
                   id="email"
                   label="Email Address"
                   name="email"
+                  defaultValue={formData?.email}
+                  onChange={handleChange}
                   autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="phone"
+                  label="Phone Number"
+                  name="phone"
+                  defaultValue={formData?.phone}
+                  onChange={handleChange}
+                  autoComplete="phone"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -142,18 +150,43 @@ const SignUp = () => {
                   label="Password"
                   type="password"
                   id="password"
+                  defaultValue={formData?.password}
+                  onChange={handleChange}
                   autoComplete="new-password"
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl sx={{ m: 0, minWidth: 120 }} fullWidth>
+                  <InputLabel id="demo-simple-select-label">Client Type</InputLabel>
+                  <Select
+                    item xs={12}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    defaultValue={formData?.clientType}
+                    label="Client Type"
+                    onChange={handleChange}
+                    name="clientType"
+                  >
+                    <MenuItem value="TourGuide">Tour Guide</MenuItem>
+                    <MenuItem value="CarRent">Car Rent</MenuItem>
+                    <MenuItem value="ParkingShare">Parking Share</MenuItem>
+                    <MenuItem value="ReturantManagement">Returant Management</MenuItem>
+                    <MenuItem value="HotelManagement">Hotel Management</MenuItem>
+                    <MenuItem value="Blogger">Blogger</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="photoUrl"
-                  label="PhotoUrl"
-                  type="photoUrl"
-                  id="photoUrl"
-                  autoComplete="new-photoUrl"
+                  name="image"
+                  label="Image Url"
+                  type="text"
+                  id="image"
+                  defaultValue={formData?.image}
+                  onChange={handleChange}
+                  autoComplete="new-image"
                 />
               </Grid>
               <Grid item xs={12}>
