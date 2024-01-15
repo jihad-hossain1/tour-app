@@ -87,7 +87,7 @@ const SignIn = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign in for client
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -98,6 +98,8 @@ const SignIn = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
+              defaultValue={formData?.email}
+              onChange={handleChange}
               autoFocus
             />
             <TextField
@@ -107,6 +109,8 @@ const SignIn = () => {
               name="password"
               label="Password"
               type="password"
+              defaultValue={formData?.password}
+              onChange={handleChange}
               id="password"
               autoComplete="current-password"
             />
