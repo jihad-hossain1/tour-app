@@ -81,7 +81,7 @@ const SignUp = () => {
     }
   };
 
-  console.log(data);
+  console.log(error);
   // console.log(error);
 
   return (
