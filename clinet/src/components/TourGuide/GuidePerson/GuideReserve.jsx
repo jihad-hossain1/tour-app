@@ -15,7 +15,7 @@ const GuideReserve = () => {
   };
 
   return (
-    <div className="border border-zinc-200 p-4 min-w-[390px] rounded-lg shadow-md">
+    <div className="sticky top-20 block border border-zinc-200 p-4 min-w-[390px] rounded-lg shadow-md">
       <div className="flex gap-3 items-center">
         <h4 className="font-semibold">{`${"Cultural day tour of Tangier".slice(
           0,
@@ -61,7 +61,7 @@ const GuideReserve = () => {
               // value={people}
               placeholder="Start Time"
               label="Start Time"
-              // onChange={handleChange}
+            // onChange={handleChange}
             >
               <MenuItem value="">
                 <em>None</em>
