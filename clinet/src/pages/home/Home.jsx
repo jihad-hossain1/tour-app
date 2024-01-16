@@ -9,9 +9,11 @@ import PopularGuide from "../../components/PopularGuide/PopularGuide";
 import HomePageSearchSection from "./HomePageSearchSection/HomePageSearchSection";
 
 import "./Styles.css"
+import NewTourGuides from "../../components/NewTourGuides/NewTourGuides";
+import PopularPrivateTours from "../../components/PopularPrivateTours/PopularPrivateTours";
 
 const Home = () => {
-  
+
   return (
     <div className="pb-10">
       <div className="relative">
@@ -34,6 +36,8 @@ const Home = () => {
         <HomeContinent />
 
         <PopularGuide />
+        <NewTourGuides />
+        <PopularPrivateTours />
         {/* offers section  */}
         {/* <OfferSection /> */}
       </div>
