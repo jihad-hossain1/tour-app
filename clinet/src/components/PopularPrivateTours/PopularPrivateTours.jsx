@@ -3,8 +3,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-
+import { Avatar, CardActionArea, CardActions } from '@mui/material';
+import Divider from '@mui/material/Divider';
 const popularPrivateTours = [
     {
         title: "City Bike Tour",
@@ -92,7 +92,7 @@ const PopularPrivateTours = () => {
                 Private Tours
             </h4>
             <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
-                {popularPrivateTours.map((trourSpot, index) => (<Card sx={{ maxWidth: 345 }}>
+                {popularPrivateTours.map((tourSpot, index) => (<Card key={index} sx={{ maxWidth: 345 }}>
                     <CardActionArea>
                         <CardMedia
                             component="img"
@@ -102,24 +102,34 @@ const PopularPrivateTours = () => {
                         />
                         <CardContent>
                             <Typography gutterBottom variant='h6' component="div" className='text-xl font-medium mb-2 '>
-                                {trourSpot?.title}
+                                {tourSpot?.title}
                             </Typography>
                             <div className='space-x-5'>
                                 <Typography gutterBottom variant="small" component="span" className='inline-block bg-gray-200 bg-opacity-70 text-gray-600 rounded px-3 py-1 text-xs mr-2' >
-                                    {trourSpot?.city}
+                                    {tourSpot?.city}
                                 </Typography>
                                 <Typography gutterBottom variant="small" component="span" className='inline-block bg-gray-200 bg-opacity-70 text-gray-600 rounded px-3 py-1 text-xs mr-2' >
-                                    {trourSpot?.duration}
+                                    {tourSpot?.duration}
                                 </Typography>
                             </div>
-                            <Typography variant="body2" color="text.secondary">
-                                {trourSpot?.description}
+                            <Typography variant="body2" color="text.secondary" className='my-10'>
+                                {tourSpot?.description}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                From ${trourSpot?.price} /per group
+                            <Typography variant="body2" color="text.secondary" className='my-10'>
+                                From <span className='text-xl font-bold text-black'>${tourSpot?.price}</span> /per group
                             </Typography>
-                        </CardContent>
 
+
+                        </CardContent>
+                        <Divider light />
+                        <CardActions>
+                            <Avatar alt="Travis Howard" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                            <div className='grid gap-1'>
+                                <span className='text-blue-500 text-lg font-medium'>Travis Howard</span>
+                                <span className='text-black'>⭐⭐⭐⭐ {tourSpot?.stars} / 5</span>
+                                <span className='underline text-blue-500 font-bold'>({tourSpot?.reviews} reviews)</span>
+                            </div>
+                        </CardActions>
                     </CardActionArea>
                 </Card>))}
             </div>
