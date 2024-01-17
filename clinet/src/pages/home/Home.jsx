@@ -11,6 +11,9 @@ import HomePageSearchSection from "./HomePageSearchSection/HomePageSearchSection
 import "./Styles.css"
 import NewTourGuides from "../../components/NewTourGuides/NewTourGuides";
 import PopularPrivateTours from "../../components/PopularPrivateTours/PopularPrivateTours";
+import NewPrivateTours from "../../components/NewPrivateTours/NewPrivateTours";
+import PopularPrivateCars from "../../components/PopularPrivateCars/PopularPrivateCars";
+import PopularVirtualTours from "../../components/PopularVirtualTours/PopularVirtualTours";
 
 const Home = () => {
 
@@ -38,6 +41,9 @@ const Home = () => {
         <PopularGuide />
         <NewTourGuides />
         <PopularPrivateTours />
+        <NewPrivateTours />
+        <PopularPrivateCars />
+        <PopularVirtualTours />
         {/* offers section  */}
         {/* <OfferSection /> */}
       </div>
