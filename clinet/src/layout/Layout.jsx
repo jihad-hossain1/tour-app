@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <div className="text-zinc-950 bg-zinc-50 w-full min-h-screen ">
       <div className="fixed z-50 w-full">
-        <Header />
+        {/* <Header /> */}
         <Header2 />
       </div>
       <div className="">

@@ -60,7 +60,7 @@ const NewTourGuides = () => {
                 Tour Guides
             </h4>
             <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
-                {newTourGuides.map((guides, index) => (<Card sx={{ maxWidth: 345 }}>
+                {newTourGuides.map((guides, index) => (<Card key={index} sx={{ maxWidth: 345 }}>
                     <CardActionArea>
                         <CardMedia
                             component="img"
