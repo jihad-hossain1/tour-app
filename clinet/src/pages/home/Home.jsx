@@ -14,6 +14,7 @@ import PopularPrivateTours from "../../components/PopularPrivateTours/PopularPri
 import NewPrivateTours from "../../components/NewPrivateTours/NewPrivateTours";
 import PopularPrivateCars from "../../components/PopularPrivateCars/PopularPrivateCars";
 import PopularVirtualTours from "../../components/PopularVirtualTours/PopularVirtualTours";
+import LatestArticles from "../../components/LatestArticles/LatestArticles";
 
 const Home = () => {
 
@@ -44,6 +45,7 @@ const Home = () => {
         <NewPrivateTours />
         <PopularPrivateCars />
         <PopularVirtualTours />
+        <LatestArticles />
         {/* offers section  */}
         {/* <OfferSection /> */}
       </div>

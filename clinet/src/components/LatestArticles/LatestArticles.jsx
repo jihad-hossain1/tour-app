@@ -45,15 +45,14 @@ const popularPrivateTours = [
     }
 ];
 
-
-const PopularVirtualTours = () => {
+const LatestArticles = () => {
     return (
         <div className="container mx-auto my-10">
             <h4 className="text-3xl ">
                 <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
-                    Popular
+                    Latest
                 </span>{" "}
-                Virtual Tours
+                Articles
             </h4>
             <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
                 {popularPrivateTours.map((tourSpot, index) => (<Card key={index} sx={{ maxWidth: 345 }}>
@@ -61,7 +60,7 @@ const PopularVirtualTours = () => {
                         <CardMedia
                             component="img"
                             height="140"
-                            image="https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            image="https://img.freepik.com/free-vector/portugal-tourism-concept-with-cuisine-people-sights-symbols-flat_1284-31948.jpg?w=826&t=st=1705567550~exp=1705568150~hmac=dc9d3a1b70289efb2b2b9b81650b6c7e85c2448c18a926e12e80a521b51fa1af"
                             alt="green iguana"
                         />
                         <CardContent>
@@ -72,37 +71,27 @@ const PopularVirtualTours = () => {
                                 <Typography gutterBottom variant="small" component="span" className='inline-block bg-gray-200 bg-opacity-70 text-gray-600 rounded px-3 py-1 text-xs mr-2' >
                                     {tourSpot?.city}
                                 </Typography>
-                                <Typography gutterBottom variant="small" component="span" className='inline-block bg-gray-200 bg-opacity-70 text-gray-600 rounded px-3 py-1 text-xs mr-2' >
-                                    {tourSpot?.duration}
-                                </Typography>
                             </div>
                             <Typography variant="body2" color="text.secondary" className='my-10'>
                                 {tourSpot?.description}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary" className='my-10'>
-                                From <span className='text-xl font-bold text-black'>${tourSpot?.price}</span> /per group
-                            </Typography>
-
-
                         </CardContent>
                         <Divider light />
-                        <CardActions>
-                            <Avatar alt="Travis Howard" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-                            <div className='grid gap-1'>
-                                <span className='text-blue-500 text-lg font-medium'>Travis Howard</span>
-                                <span className='text-black'>⭐⭐⭐⭐ {tourSpot?.stars} / 5</span>
-                                <span className='underline text-blue-500 font-bold'>({tourSpot?.reviews} reviews)</span>
+                        <CardActions className='flex items-center justify-between'>
+                            <div className='flex items-center gap-2'>
+                                <Avatar alt="Travis Howard" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                                <span className='text-blue-500 text-lg font-base'>Travis Howard</span>
                             </div>
+                            <span className='text-gray-700 text-xs font-semibold opacity-70'>Dec 27, 2023</span>
                         </CardActions>
                     </CardActionArea>
                 </Card>))}
             </div>
             <div className='text-center my-10'>
-                <button className='text-gray-500 border border-gray-500 p-3 text-sm hover:text-gray-900 font-semibold rounded inherit'>See All Popular Virtual Tours</button>
+                <button className='text-gray-500 border border-gray-500 p-3 text-sm hover:text-gray-900 font-semibold rounded inherit'>View More New Articles</button>
             </div>
         </div>
-
     );
 };
 
-export default PopularVirtualTours;
+export default LatestArticles;
