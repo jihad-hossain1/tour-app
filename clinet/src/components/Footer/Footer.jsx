@@ -44,28 +44,51 @@ const footerData = [
 ];
 
 
-
+const paymentMethod = [
+    "PayPal",
+    "MasterCard",
+    "VISA",
+    "Discover",
+    "AmericanExpress"
+]
 
 const Footer = () => {
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center border-t bg-gray-100 pb-4 py-8'>
-            {footerData.map(section => (
-                <div className='max-w-6xl mx-auto print:hidden mb-10 md:mb-0 ' key={section.title}>
-                    <Typography variant='h5' className='font-medium text-lg mb-6 border-b md:border-0 border-gray-300 pb-2'>{section.title}</Typography>
-                    {section.content.map(item => (
-                        <div className='mb-2' key={item.label}>
-                            <Typography>{item.label}</Typography>
-                            {/* You can add a link here using the item.path */}
-                        </div>
-                    ))}
-                </div>
-            ))}
-            <hr className='border border-red-900 container mx-auto px-5 text-center' />
-            <div className='mt-5'>
-                <Typography>hello</Typography>
+        <>
+            <div className='grid grid-cols-2 gap-5 lg:flex justify-between border-t bg-gray-100 pb-4 py-8'>
+                {footerData.map(section => (
+                    <div className='max-w-6xl mx-auto print:hidden mb-10 md:mb-0 ' key={section.title}>
+                        <Typography variant='h5' className='font-medium text-lg mb-10 border-b md:border-0 border-gray-300 pb-2'>{section.title}</Typography>
+                        {section.content.map(item => (
+                            <div className='my-2 hover:underline cursor-pointer' key={item.label}>
+                                <Typography>{item.label}</Typography>
+                                {/* You can add a link here using the item.path */}
+                            </div>
+                        ))}
+                    </div>
+                ))}
+
             </div>
-        </div>
+            <div className='flex flex-wrap md:justify-center lg:justify-end gap-5 mx-5 lg:mr-10'>
+                {paymentMethod.map((methods, index) => (<Typography key={index}>{methods}</Typography>))}
+            </div>
+            <hr className='border border-blue-400 container mx-auto my-5' />
+            <div className='p-3 text-center '>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    sx={{
+                        fontFamily: 'monospace',
+                        fontWeight: 700,
+                        letterSpacing: '.3rem',
+                        color: 'inherit',
+                    }}
+                >
+                    Traveler - {new Date().getFullYear()}
+                </Typography>
+            </div>
+        </>
     );
 };
 
