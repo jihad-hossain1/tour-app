@@ -13,7 +13,7 @@ const LanguageButton = () => {
     setLangToggle(null);
   };
   return (
-    <main>
+    <>
       <Button
         style={{ color: "#fff" }}
         id={"btn-6"}
@@ -38,7 +38,7 @@ const LanguageButton = () => {
         <MenuItem onClick={handleLangClose}>Hindi</MenuItem>
         <MenuItem onClick={handleLangClose}>English</MenuItem>
       </Menu>
-    </main>
+    </>
   );
 };
 

@@ -118,7 +118,9 @@ const SingleTourSpotReview = ({ review, id }) => {
 
         {/* reply section  */}
         {showReply && (
-          <section className="ml-10 md:ml-20 bg-slate-100  rounded-md flex flex-col gap-3">
+          <section
+            className={`ml-10 md:ml-20 bg-slate-100  rounded-md flex flex-col gap-3 transition-all duration-500`}
+          >
             {review &&
               review?.replies
                 ?.slice()

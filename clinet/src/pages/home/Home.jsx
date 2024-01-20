@@ -9,9 +9,16 @@ import PopularGuide from "../../components/PopularGuide/PopularGuide";
 import HomePageSearchSection from "./HomePageSearchSection/HomePageSearchSection";
 
 import "./Styles.css"
+import NewTourGuides from "../../components/NewTourGuides/NewTourGuides";
+import PopularPrivateTours from "../../components/PopularPrivateTours/PopularPrivateTours";
+import NewPrivateTours from "../../components/NewPrivateTours/NewPrivateTours";
+import PopularPrivateCars from "../../components/PopularPrivateCars/PopularPrivateCars";
+import PopularVirtualTours from "../../components/PopularVirtualTours/PopularVirtualTours";
+import LatestArticles from "../../components/LatestArticles/LatestArticles";
+import PopularArticles from "../../components/PopularArticles/PopularArticles";
 
 const Home = () => {
-  
+
   return (
     <div className="pb-10">
       <div className="relative">
@@ -34,6 +41,13 @@ const Home = () => {
         <HomeContinent />
 
         <PopularGuide />
+        <NewTourGuides />
+        <PopularPrivateTours />
+        <NewPrivateTours />
+        <PopularPrivateCars />
+        <PopularVirtualTours />
+        <LatestArticles />
+        <PopularArticles />
         {/* offers section  */}
         {/* <OfferSection /> */}
       </div>
