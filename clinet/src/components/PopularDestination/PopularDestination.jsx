@@ -48,21 +48,30 @@ const PopularDestination = () => {
       </div>
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {countryData?.map((item, _i) => (
-          <Link to={"#"}>
-            <Card sx={{ maxWidth: 345 }}>
+          <Link to="#">
+            <Card
+              sx={{
+                maxWidth: 345,
+                position: "relative",
+                overflow: "hidden",
+                "&:hover": {
+                  ".name-div": {
+                    transform: "translateY(0)", // Show the div by moving it to its original position
+                  },
+                },
+              }}
+            >
               <Box
                 component="img"
                 sx={{
                   height: 233,
                   width: "100%",
                   maxHeight: { xs: 130, md: 160 },
-                  // maxWidth: { xs: "100%", md: 250 },
                 }}
-                alt="Continet photo"
+                alt="Continent photo"
                 src={item?.img}
               />
-              {/* <img className=" object-cover " src={continent?.img} alt="" /> */}
-              <div className="py-2">
+              <div className="py-2 name-div hover:text-2xl transition-transform duration-300 absolute inset-0 flex items-start hover:items-center justify-center hover:duration-300 bg-white hover:bg-opacity-50 transform translate-y-32">
                 <h4 className="text-center font-semibold">{item?.name}</h4>
               </div>
             </Card>
