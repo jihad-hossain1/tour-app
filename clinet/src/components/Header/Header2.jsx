@@ -16,7 +16,7 @@ import ExtraButton from './ExtraButton';
 import { Link } from 'react-router-dom';
 
 
-const pages = ['Home', 'Tour Guide', 'Blog'];
+const pages = [{ labal: 'Home', path: '/' }, { labal: 'Tour Guide', path: '/tourGuide' }, { labal: 'About', path: '/about' }];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header2 = () => {
@@ -89,9 +89,9 @@ const Header2 = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                            {pages.map(({ labal, path, }) => (
+                                <MenuItem key={labal} onClick={handleCloseNavMenu}>
+                                    <Link to={path}><Typography textAlign="center">{labal}</Typography></Link>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -116,13 +116,13 @@ const Header2 = () => {
                         Traveler
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
+                        {pages.map(({ labal, path }) => (
                             <Button
-                                key={page}
+                                key={path}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <Link to={page}>{page}</Link>
+                                <Link to={path}>{labal}</Link>
                             </Button>
                         ))}
                     </Box>
