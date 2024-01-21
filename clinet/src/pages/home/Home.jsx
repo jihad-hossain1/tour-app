@@ -9,6 +9,7 @@ import PopularGuide from "../../components/PopularGuide/PopularGuide";
 import HomePageSearchSection from "./HomePageSearchSection/HomePageSearchSection";
 
 import "./Styles.css"
+import Slider from "./SliderSection/Slider";
 import NewTourGuides from "../../components/NewTourGuides/NewTourGuides";
 import PopularPrivateTours from "../../components/PopularPrivateTours/PopularPrivateTours";
 import NewPrivateTours from "../../components/NewPrivateTours/NewPrivateTours";
@@ -21,7 +22,7 @@ const Home = () => {
 
   return (
     <div className="pb-10">
-      <div className="relative">
+      {/* <div className="relative">
         <img
           className="absolute object-cover w-full h-full"
           src="https://res.cloudinary.com/dqfi9zw3e/image/upload/v1702948003/images/ya1b7b2wmtv6fmoi0fyl.webp"
@@ -32,7 +33,9 @@ const Home = () => {
           <HomePageSearchSection />
         </div>
       </div>
-      <BannerTAg />
+      <BannerTAg /> */}
+      {/* new banner */}
+      <Slider></Slider>
       {/* <SearchContent /> */}
       <div className="max-w-screen-xl mx-auto ">
         {/* top destinations section  */}
