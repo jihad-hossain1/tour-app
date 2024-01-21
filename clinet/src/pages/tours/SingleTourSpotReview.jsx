@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import ManageReview from "./ManageReview";
 import ManageReply from "./ManageReply";
 import { GET_SINGLE_TOURSPOT_DETAILS } from "../../queries/toursQuery";
+import { timeFormate } from "../../utils/timeFormate";
 
 const SingleTourSpotReview = ({ review, id }) => {
   const [replyOpen, setReplyOpen] = useState(false);
@@ -52,22 +53,22 @@ const SingleTourSpotReview = ({ review, id }) => {
     toast.success("reply added");
   };
   // console.log(review?.id);
+
   return (
     <main className="pb-4 ">
       <Toaster />
-      <div className="relative shadow-md flex flex-col gap-2 border-b border-zinc-300 bg-blue-50/60 p-2 lg:p-5">
+      <div className="relative shadow-sm flex flex-col gap-2 border-b border-zinc-300 bg-black/5 p-2 lg:p-5 rounded">
         {/* review section  */}
         <div className="flex justify-between">
           <div className="flex gap-2 items-center">
             <Avatar src={review?.img} alt="user image" />
             <div>
               <h4 className="font-semibold text-sm">{review?.name}</h4>
-              <h4 className="text-xs">{review?.createdAt}</h4>
+              <span className="text-xs">{timeFormate(review?.createdAt)}</span>
               <Rating
                 size="small"
                 name="half-rating-read"
                 value={review?.rating}
-                // precision={0.5}
                 readOnly
               />
             </div>
@@ -119,7 +120,7 @@ const SingleTourSpotReview = ({ review, id }) => {
         {/* reply section  */}
         {showReply && (
           <section
-            className={`ml-10 md:ml-20 bg-slate-100  rounded-md flex flex-col gap-3 transition-all duration-500`}
+            className={`ml-10 md:ml-20   rounded-md flex flex-col gap-3 transition-all duration-500`}
           >
             {review &&
               review?.replies
@@ -128,7 +129,7 @@ const SingleTourSpotReview = ({ review, id }) => {
                 .map((reply) => (
                   <div
                     key={reply?.id}
-                    className="p-2 flex flex-col gap-2 shadow-md bg-slate-50 "
+                    className="p-2 flex flex-col gap-2 shadow-sm  "
                   >
                     <div className="flex justify-between">
                       <div className="flex gap-2 items-center">
@@ -137,7 +138,10 @@ const SingleTourSpotReview = ({ review, id }) => {
                           <h4 className="font-semibold text-lg">
                             {reply?.name}
                           </h4>
-                          <h4 className="text-sm">{reply?.createdAt}</h4>
+                          <span className="text-sm">
+                            {timeFormate(reply?.createdAt)}
+                            {/* {console.log(reply?.createdAt)} */}
+                          </span>
                         </div>
                       </div>
                       <div className="relative flex items-center">
@@ -167,7 +171,10 @@ const SingleTourSpotReview = ({ review, id }) => {
         {/* add review reply  */}
 
         {replyOpen && (
-          <form onSubmit={handleSubmitReply} className={"flex flex-col gap-1"}>
+          <form
+            onSubmit={handleSubmitReply}
+            className={"flex flex-col gap-1 w-full"}
+          >
             <textarea
               required
               name="content"
