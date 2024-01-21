@@ -3,6 +3,7 @@ import ExtraButton from "./ExtraButton";
 import HotelNav from "./Nav/HotelNav";
 import ActivityNav from "./Nav/ActivityNav";
 
+
 const Header = () => {
   return (
     <main className="flex justify-between items-center px-5 py-3 bg-zinc-800 ">

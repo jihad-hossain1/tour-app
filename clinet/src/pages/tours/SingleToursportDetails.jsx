@@ -37,7 +37,7 @@ const SingleToursportDetails = () => {
               id={data?.singleTourspotDetails?.id}
             />
           </main>
-          <aside className="sticky  bg-zinc-100/30 rounded-md shadow-[2px_5px_7px_rgba(0,0,0,0.25)] min-w-[392px] h-fit mx-auto ">
+          <aside className="sticky top-20  bg-zinc-100/30 rounded-md shadow-[2px_5px_7px_rgba(0,0,0,0.25)] min-w-[392px] h-fit mx-auto ">
             {/* new tour place section  */}
             <NewToursPlace />
           </aside>
