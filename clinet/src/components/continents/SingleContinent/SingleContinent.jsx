@@ -40,21 +40,26 @@ const SingleContinent = ({ continent, index }) => {
         className="relative"
       >
         <Card sx={{ maxWidth: 345 }}>
-          <Box
-            component="img"
-            sx={{
-              height: 233,
-              width: "100%",
-              maxHeight: { xs: 130, md: 160 },
-              // maxWidth: { xs: "100%", md: 250 },
-            }}
-            alt="Continet photo"
-            src={continent?.img}
-          />
-          {/* <img className=" object-cover " src={continent?.img} alt="" /> */}
-          <div className="py-2">
-            <h4 className="text-center font-semibold">{continent?.name}</h4>
-          </div>
+        <div className="relative rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-500 ease-in-out">
+                <div
+                  className="w-full h-[160px] bg-cover bg-center pt-4 relative group"
+                  style={{ backgroundImage: `url(${continent?.img})` }}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 transition-opacity opacity-0 group-hover:opacity-100">
+                    <div className="text-center w-full scale-0 translate-y-4 transition-transform duration-500 ease-in-out group-hover:scale-100 group-hover:translate-y-0">
+                      <button className="text-white text-xs bg-yellow-500 rounded-md w-[30%] mx-auto mb-2 h-[20px] transition-opacity duration-500 ease-in-out">
+                        Click to view
+                      </button>
+                      <h1 className="text-white text-3xl mx-auto">
+                        {continent?.name}
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+                <div className="py-2 border-2">
+                  <h4 className="text-center font-semibold">{continent?.name}</h4>
+                </div>
+              </div>
         </Card>
       </motion.div>
     </Link>
