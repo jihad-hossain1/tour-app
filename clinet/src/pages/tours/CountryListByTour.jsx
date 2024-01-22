@@ -25,7 +25,7 @@ const CountryListByTour = () => {
   }
 
   return (
-    <Container maxWidth={"xl"} className="pt-28">
+    <Container maxWidth={"xl"} className="pt-28 min-h-[70vh]">
       <section className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {!loading &&
           !error &&
