@@ -98,7 +98,6 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
-// destination type
 const DestinationType = new GraphQLObjectType({
   name: "Destination",
   fields: () => ({
@@ -403,4 +402,5 @@ module.exports = {
   ReviewReplyType,
   TourGuideType,
   GuideReviewType,
+  TimestampType,
 };
