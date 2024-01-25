@@ -23,7 +23,7 @@ const Continent = () => {
   }
 
   return (
-    <Container maxWidth={"xl"} className="pt-16">
+    <Container maxWidth={"xl"} className="pt-16 min-h-[70vh]">
       <div className="text-center py-4">
         Total-country: {data?.singleContinent?.length}
       </div>

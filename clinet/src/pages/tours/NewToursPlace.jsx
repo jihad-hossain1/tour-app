@@ -2,7 +2,7 @@ import React from "react";
 
 const NewToursPlace = () => {
   return (
-    <main className="">
+    < >
       <div className="pb-16 ">
         <h4 className="text-center font-semibold bg-slate-100 text-xl py-4">
           New Tour Place
@@ -13,7 +13,7 @@ const NewToursPlace = () => {
           New Blogs
         </h4>
       </div>
-    </main>
+    </>
   );
 };
 

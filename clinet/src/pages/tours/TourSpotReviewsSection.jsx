@@ -13,10 +13,10 @@ const TourSpotReviewsSection = ({ id, reviews }) => {
         <div className="my-8">
           <h4 className="text-sm text-center text-gray-600">{`${3} reviews on this Tour - Showing ${1} to ${4}`}</h4>
         </div>
-        <div>
+        <WriteTourSpotReviewForm id={id} />
+        <div className="mt-4">
           <FetchAllReviews reviews={reviews} tid={id} />
         </div>
-        <WriteTourSpotReviewForm id={id} />
       </div>
     </>
   );
