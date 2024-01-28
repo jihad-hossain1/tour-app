@@ -1,5 +1,11 @@
 import { Typography } from '@mui/material';
-import React from 'react';
+
+import img1 from "./logo/americanExpress.png"
+import img2 from "./logo/discover.png"
+import img3 from "./logo/masterCard.png"
+import img4 from "./logo/paypal.png"
+import img5 from "./logo/visa.png"
+
 const footerData = [
     {
         title: "Travel",
@@ -45,11 +51,7 @@ const footerData = [
 
 
 const paymentMethod = [
-    "PayPal",
-    "MasterCard",
-    "VISA",
-    "Discover",
-    "AmericanExpress"
+    img1, img2, img3, img4, img5
 ]
 
 const Footer = () => {
@@ -70,9 +72,10 @@ const Footer = () => {
                 ))}
 
             </div>
-            <div className='flex flex-wrap md:justify-center lg:justify-end gap-5 mx-5 lg:mr-10'>
-                {paymentMethod.map((methods, index) => (<Typography key={index}>{methods}</Typography>))}
+            <div className='flex flex-wrap md:justify-center lg:justify-end gap-5 mx-5 lg:mr-10 h-10'>
+                {paymentMethod.map((methods, index) => (<img key={index} className='h-16 w-16' src={methods} alt="" />))}
             </div>
+
             <hr className='border border-blue-400 container mx-auto my-5' />
             <div className='p-3 text-center '>
                 <Typography
