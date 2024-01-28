@@ -4,20 +4,22 @@ const {
   GraphQLInt,
   GraphQLList,
   GraphQLNonNull,
+  GraphQLBoolean,
 } = require("graphql");
 const { TourGuideType } = require("../../typeDef/tourGuideType/tourGuideType");
-
 const TourGuide = require("../../models/tourGuide/TourGuide");
 
 const addTourGuideProfile = {
   type: TourGuideType,
   args: {
-    description: { type: GraphQLNonNull(GraphQLString) },
-    uptoPeople: { type: GraphQLNonNull(GraphQLInt) },
-    cityId: { type: GraphQLNonNull(GraphQLID) },
-    responseTime: { type: GraphQLNonNull(GraphQLString) },
+    description: { type: GraphQLString },
+    uptoPeople: { type: GraphQLInt },
+    clientId: { type: GraphQLID },
+    cityId: { type: GraphQLID },
+    responseTime: { type: GraphQLString },
     languages: { type: GraphQLList(GraphQLString) },
-    profileImage: { type: GraphQLNonNull(GraphQLString) },
+    profileImage: { type: GraphQLString },
+    tourGuideInstructionType: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     try {

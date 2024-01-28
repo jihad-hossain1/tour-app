@@ -49,8 +49,13 @@ const TourGuideType = new GraphQLObjectType({
   name: "TourGuide",
   fields: () => ({
     id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    description: { type: TourGuideDescriptionType },
+    description: { type: GraphQLString },
+    uptoPeople: { type: GraphQLInt },
+    cityId: { type: GraphQLID },
+    responseTime: { type: GraphQLString },
+    languages: { type: GraphQLList(GraphQLString) },
+    profileImage: { type: GraphQLString },
+    tourGuideInstructionType: { type: GraphQLString },
     client: { type: ClientType },
     rating: { type: GraphQLInt },
     guideReview: {
@@ -80,7 +85,7 @@ const TourGuideType2 = new GraphQLObjectType({
     tourCategory: { type: GraphQLString },
     uptoPeople: { type: GraphQLInt },
     cityId: { type: GraphQLID },
-    toutGuideInstructionType: { type: GraphQLBoolean },
+    tourGuideInstructionType: { type: GraphQLBoolean },
     replies: {
       type: new GraphQLList(),
       resolve(parent, args) {
