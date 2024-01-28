@@ -5,6 +5,7 @@ const {
   GraphQLList,
   GraphQLInt,
   GraphQLScalarType,
+  GraphQLNonNull,
 } = require("graphql");
 const { Kind } = require("graphql/language");
 const Country = require("../models/Country");
@@ -350,42 +351,7 @@ const GuideReviewType = new GraphQLObjectType({
   }),
 });
 
-const TourGuideType = new GraphQLObjectType({
-  name: "TourGuide",
-  fields: () => ({
-    id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    title: { type: GraphQLString },
-    content: { type: GraphQLString },
-    email: { type: GraphQLString },
-    profileImage: { type: GraphQLString },
-    languages: { type: GraphQLList(GraphQLString) },
-    importantNote: { type: GraphQLString },
-    profileImage: { type: GraphQLString },
-    images: { type: GraphQLList(GraphQLString) },
-    email: { type: GraphQLString },
-    about: { type: GraphQLString },
-    rating: { type: GraphQLInt },
-    responseTime: { type: GraphQLList(GraphQLString) },
-    // availableAreas: Number,
-    tourCategory: { type: GraphQLString },
-    cityId: { type: GraphQLID },
-    // availableAreas: ,
-    // tourSpots: {
-    //   type: new GraphQLList(ReviewType),
-    //   resolve(parent, args) {
-    //     return GuideReview.find({ _id: { $in: parent.replies } });
-    //   },
-    // },
 
-    replies: {
-      type: new GraphQLList(),
-      resolve(parent, args) {
-        return GuideReview.find({ _id: { $in: parent.replies } });
-      },
-    },
-  }),
-});
 
 module.exports = {
   TourSpotType,
@@ -400,7 +366,7 @@ module.exports = {
   CityForAdd,
   ReviewType,
   ReviewReplyType,
-  TourGuideType,
+
   GuideReviewType,
   TimestampType,
 };

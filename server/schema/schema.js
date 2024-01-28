@@ -41,14 +41,9 @@ const {
 const { addDivision } = require("../mutation/division");
 const { addCity } = require("../mutation/city");
 const { addReview,addReviewReply,addReply,deleteReviewWithReply,updateReview,updateReply,deleteReply } = require("../mutation/review");
-
-
-
-
-
-
-
-
+const {
+  addTourGuideProfile,
+} = require("../mutation/tourGuide/tourGuideMutation");
 
 //main query
 const RootQuery = new GraphQLObjectType({
@@ -88,7 +83,6 @@ const RootQuery = new GraphQLObjectType({
     // reviews
     reviesByTourSpot,
     newReviews,
-    
   },
 });
 
@@ -132,7 +126,9 @@ const mutation = new GraphQLObjectType({
     deleteReviewWithReply,
     updateReview,
     updateReply,
-    deleteReply
+    deleteReply,
+    // tourGuide
+    addTourGuideProfile,
   },
 });
 
