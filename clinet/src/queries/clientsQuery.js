@@ -21,6 +21,19 @@ const GET_CLIENT = gql`
       image
       role
       clientType
+      clientProfile {
+        id
+        description
+        uptoPeople
+        cityId
+        responseTime
+        languages
+        profileImage
+        tourGuideInstructionType
+        city {
+          name
+        }
+      }
     }
   }
 `;

@@ -39,7 +39,6 @@ const UPDATE_TOURGUIDEPROFILE = gql`
     $description: String
     $uptoPeople: String
     $profileImage: String
-    $languages: [String]
     $tourGuideInstructionType: String
     $clientId: ID
     $cityId: ID
@@ -49,14 +48,12 @@ const UPDATE_TOURGUIDEPROFILE = gql`
       description: $description
       uptoPeople: $uptoPeople
       profileImage: $profileImage
-      languages: $languages
       tourGuideInstructionType: $tourGuideInstructionType
       responseTime: $responseTime
       cityId: $cityId
       clientId: $clientId
     ) {
       id
-      
     }
   }
 `;
