@@ -7,8 +7,31 @@ const {
   GraphQLScalarType,
   GraphQLBoolean,
 } = require("graphql");
-const { TimestampType, ClientType } = require("../typeDef");
+
 const GuideReview = require("../../models/GuideReview");
+
+const TimestampType = new GraphQLScalarType({
+  name: "Timestamp2",
+  serialize(date) {
+    return date instanceof Date ? date.getTime() : null;
+  },
+  parseValue(date) {
+    try {
+      return new Date(value);
+    } catch (error) {
+      return null;
+    }
+  },
+  parseLiteral(ast) {
+    if (ast.kind === Kind.INT) {
+      return new Date(parseInt(ast.value, 10));
+    } else if (ast.kind === Kind.STRING) {
+      return this.parseValue(ast.value);
+    } else {
+      return null;
+    }
+  },
+});
 
 const TourGuideReviewType = new GraphQLObjectType({
   name: "TourGuideReview",
@@ -50,13 +73,13 @@ const TourGuideType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     description: { type: GraphQLString },
-    uptoPeople: { type: GraphQLInt },
+    uptoPeople: { type: GraphQLString },
     cityId: { type: GraphQLID },
     responseTime: { type: GraphQLString },
     languages: { type: GraphQLList(GraphQLString) },
     profileImage: { type: GraphQLString },
     tourGuideInstructionType: { type: GraphQLString },
-    client: { type: ClientType },
+    // client: { type: ClientType },
     rating: { type: GraphQLInt },
     guideReview: {
       type: new GraphQLList(TourGuideReviewType),

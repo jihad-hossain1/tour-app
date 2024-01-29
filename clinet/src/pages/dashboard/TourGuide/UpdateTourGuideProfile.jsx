@@ -23,7 +23,7 @@ const UpdateTourGuideProfile = ({ cid }) => {
 
   const scafolding = {
     description: "",
-    uptoPeople: 0,
+    uptoPeople: "",
     responseTime: "",
     languages: ["English", "Bangla", "Arabic"],
     tourGuideInstructionType: "",
@@ -87,9 +87,20 @@ const UpdateTourGuideProfile = ({ cid }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(Object.values(formData).length);
-    console.log(formData);
+    // console.log(Object.values(formData).length);
+    // console.log(formData);
     updateTourGuideProfile(
+      description,
+      uptoPeople,
+      cityId,
+      responseTime,
+      clientId,
+      languages,
+      tourGuideInstructionType,
+      profileImage
+    );
+
+    console.log(
       description,
       uptoPeople,
       cityId,
