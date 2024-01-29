@@ -14,6 +14,8 @@ const City = require("../models/City");
 const TourSpot = require("../models/TourSpot");
 const Review = require("../models/Review");
 const GuideReview = require("../models/GuideReview");
+const { TourGuideType } = require("./tourGuideType/tourGuideType");
+const TourGuide = require("../models/TourGuide");
 
 const TimestampType = new GraphQLScalarType({
   name: "Timestamp",
@@ -66,22 +68,16 @@ const ClientType = new GraphQLObjectType({
     image: { type: GraphQLString },
     role: { type: GraphQLString },
     clientType: { type: GraphQLString },
-    projects: {
-      type: new GraphQLList(ProjectType),
+    clientProfile: {
+      type: TourGuideType,
       resolve: async (parent, args) => {
-        let _i = await Project.find();
-        let result = _i?.filter((item) => item?.clientId == parent?.id);
-        return result;
-      },
-    },
-    clientProject: {
-      type: new GraphQLList(ProjectType),
-      args: {
-        userId: { type: GraphQLID },
-      },
-      resolve: async (_p, args) => {
-        let p = await Project.find();
-        let result = p?.filter((item) => item?.clientId == args?.userId);
+        try {
+          const result = await TourGuide.findOne({ clientId: parent.id });
+          return result;
+        } catch (error) {
+          console.log(error);
+          throw new Error(error);
+        }
       },
     },
   }),
@@ -209,7 +205,7 @@ const CityForAdd = new GraphQLObjectType({
     division: {
       type: DivisionType,
       resolve: async (parent, args) => {
-        let _i = await Division?.findById(parent.divisionId);
+        let _i = await Division.findById(parent.divisionId);
         return _i;
       },
     },
@@ -351,8 +347,6 @@ const GuideReviewType = new GraphQLObjectType({
   }),
 });
 
-
-
 module.exports = {
   TourSpotType,
   CityType,
@@ -366,7 +360,6 @@ module.exports = {
   CityForAdd,
   ReviewType,
   ReviewReplyType,
-
   GuideReviewType,
   TimestampType,
 };

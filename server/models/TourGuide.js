@@ -7,24 +7,28 @@ const TourGuideSchema = new mongoose.Schema(
       required: true,
     },
     uptoPeople: {
-      type: Number,
+      type: String,
       required: true,
     },
     responseTime: {
       type: String,
     },
-    languages: { type: Array },
-    profileImage: { type: String },
-    tourGuideInstructionType: { type: String },
+    languages: {
+      type: Array,
+    },
+    profileImage: {
+      type: String,
+    },
+    tourGuideInstructionType: {
+      type: String,
+    },
     cityId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "City",
-      required: true,
     },
     clientId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Client",
-      required: true,
     },
     availableAreas: [
       {
@@ -33,7 +37,12 @@ const TourGuideSchema = new mongoose.Schema(
       },
     ],
 
-    replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+    replies: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   { timestamps: true }
 );

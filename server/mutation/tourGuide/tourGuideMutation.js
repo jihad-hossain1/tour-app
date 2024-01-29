@@ -7,13 +7,13 @@ const {
   GraphQLBoolean,
 } = require("graphql");
 const { TourGuideType } = require("../../typeDef/tourGuideType/tourGuideType");
-const TourGuide = require("../../models/tourGuide/TourGuide");
+const TourGuide = require("../../models/TourGuide");
 
 const addTourGuideProfile = {
   type: TourGuideType,
   args: {
     description: { type: GraphQLString },
-    uptoPeople: { type: GraphQLInt },
+    uptoPeople: { type: GraphQLString },
     clientId: { type: GraphQLID },
     cityId: { type: GraphQLID },
     responseTime: { type: GraphQLString },
