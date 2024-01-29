@@ -14,7 +14,6 @@ const City = require("../models/City");
 const TourSpot = require("../models/TourSpot");
 const Review = require("../models/Review");
 const GuideReview = require("../models/GuideReview");
-const { TourGuideType } = require("./tourGuideType/tourGuideType");
 const TourGuide = require("../models/TourGuide");
 
 const TimestampType = new GraphQLScalarType({
@@ -347,6 +346,71 @@ const GuideReviewType = new GraphQLObjectType({
   }),
 });
 
+const TourGuideReviewType = new GraphQLObjectType({
+  name: "TourGuideReview",
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString },
+    rating: { type: GraphQLInt },
+    createdAt: { type: TimestampType },
+    userId: { type: GraphQLID },
+    replies: {
+      type: new GraphQLList(TourGuideReviewType),
+      resolve(parent, args) {
+        return Review.find({ _id: { $in: parent.replies } });
+      },
+    },
+  }),
+});
+
+const TourGuideDescriptionType = new GraphQLObjectType({
+  name: "TourGuideDescription",
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString },
+    rating: { type: GraphQLInt },
+    createdAt: { type: TimestampType },
+    replies: {
+      type: new GraphQLList(TourGuideReviewType),
+      resolve(parent, args) {
+        return Review.find({ _id: { $in: parent.replies } });
+      },
+    },
+  }),
+});
+
+const TourGuideType = new GraphQLObjectType({
+  name: "TourGuide",
+  fields: () => ({
+    id: { type: GraphQLID },
+    description: { type: GraphQLString },
+    uptoPeople: { type: GraphQLString },
+    cityId: { type: GraphQLID },
+    responseTime: { type: GraphQLString },
+    languages: { type: GraphQLList(GraphQLString) },
+    profileImage: { type: GraphQLString },
+    tourGuideInstructionType: { type: GraphQLString },
+    client: { type: ClientType },
+
+    rating: { type: GraphQLInt },
+    guideReview: {
+      type: new GraphQLList(TourGuideReviewType),
+      resolve: async (parent, args) => {
+        // TODO
+        return await GuideReview.findById(parent.id);
+      },
+    },
+    city: {
+      type: CityForAdd,
+      resolve: async (parent, args) => {
+        return await City.findOne({ _id: parent.cityId });
+      },
+    },
+  }),
+});
+
 module.exports = {
   TourSpotType,
   CityType,
@@ -362,4 +426,7 @@ module.exports = {
   ReviewReplyType,
   GuideReviewType,
   TimestampType,
+  TourGuideType,
+  TourGuideReviewType,
+  TourGuideDescriptionType,
 };

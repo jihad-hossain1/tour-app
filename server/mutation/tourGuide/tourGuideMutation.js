@@ -6,8 +6,9 @@ const {
   GraphQLNonNull,
   GraphQLBoolean,
 } = require("graphql");
-const { TourGuideType } = require("../../typeDef/tourGuideType/tourGuideType");
+
 const TourGuide = require("../../models/TourGuide");
+const { TourGuideType } = require("../../typeDef/typeDef");
 
 const addTourGuideProfile = {
   type: TourGuideType,
@@ -23,6 +24,7 @@ const addTourGuideProfile = {
   },
   resolve: async (parent, args) => {
     try {
+      console.log(args);
       const tourGuideProfile = new TourGuide(args);
       const saved = await tourGuideProfile.save();
       return saved;

@@ -12,8 +12,9 @@ import { useMutation, useQuery } from "@apollo/client";
 import FileUploader from "../TourSpot/FileUploader";
 import axios from "axios";
 import { UPDATE_TOURGUIDEPROFILE } from "../../../mutation/tourGuideMutation";
+import { GET_CLIENTS } from "../../../queries/clientsQuery";
 
-const UpdateTourGuideProfile = ({ cid }) => {
+const AddTourGuideProfile = ({ cid, userData }) => {
   const [_photo, setPhoto] = useState("");
   const [image, setimage] = useState(null);
 
@@ -32,6 +33,20 @@ const UpdateTourGuideProfile = ({ cid }) => {
   };
 
   const [formData, setFormData] = useState(scafolding);
+
+  const [addTourGuideProfile] = useMutation(UPDATE_TOURGUIDEPROFILE, {
+    variables: {
+      description: formData?.description,
+      uptoPeople: formData?.uptoPeople,
+      cityId: formData?.cityId,
+      responseTime: formData?.responseTime,
+      clientId: formData?.clientId,
+      languages: formData?.languages,
+      tourGuideInstructionType: formData?.tourGuideInstructionType,
+      profileImage: _photo,
+    },
+    refetchQueries: [{ query: GET_CLIENTS }],
+  });
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -57,39 +72,10 @@ const UpdateTourGuideProfile = ({ cid }) => {
     }
   };
 
-  let profileImage = { profileImage: _photo };
-
-  const {
-    description,
-    uptoPeople,
-    cityId,
-    responseTime,
-    clientId,
-    languages,
-    tourGuideInstructionType,
-  } = formData;
-
-  const [updateTourGuideProfile, { data, error }] = useMutation(
-    UPDATE_TOURGUIDEPROFILE,
-    {
-      variables: {
-        description,
-        uptoPeople,
-        cityId,
-        responseTime,
-        clientId,
-        languages,
-        tourGuideInstructionType,
-        profileImage,
-      },
-    }
-  );
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // console.log(Object.values(formData).length);
-    // console.log(formData);
-    updateTourGuideProfile(
+    let profileImage = { profileImage: _photo };
+    const {
       description,
       uptoPeople,
       cityId,
@@ -97,10 +83,9 @@ const UpdateTourGuideProfile = ({ cid }) => {
       clientId,
       languages,
       tourGuideInstructionType,
-      profileImage
-    );
+    } = formData;
 
-    console.log(
+    addTourGuideProfile(
       description,
       uptoPeople,
       cityId,
@@ -112,15 +97,19 @@ const UpdateTourGuideProfile = ({ cid }) => {
     );
   };
 
-  console.log(data, error);
   return (
     <>
       <Button
         color="info"
         variant="contained"
         onClick={() => setToggle(!toggel)}
+        sx={
+          userData?.client?.clientProfile
+            ? { display: "none" }
+            : { display: "block" }
+        }
       >
-        Manage Profile
+        add Profile
       </Button>
       <div className="mt-5 lg:mt-10">
         {toggel && (
@@ -138,7 +127,7 @@ const UpdateTourGuideProfile = ({ cid }) => {
                 fullWidth
                 variant="outlined"
                 type="text"
-                defaultValue={formData?.description}
+                defaultValue={userData?.client?.clientProfile?.description}
                 onChange={handleChange}
               />
               <TextField
@@ -149,7 +138,9 @@ const UpdateTourGuideProfile = ({ cid }) => {
                 fullWidth
                 variant="outlined"
                 type="text"
-                defaultValue={formData?.tourGuideInstructionType}
+                defaultValue={
+                  userData?.client?.clientProfile?.tourGuideInstructionType
+                }
                 onChange={handleChange}
               />
               <TextField
@@ -160,7 +151,7 @@ const UpdateTourGuideProfile = ({ cid }) => {
                 fullWidth
                 variant="outlined"
                 type="number"
-                defaultValue={formData?.uptoPeople}
+                defaultValue={userData?.client?.clientProfile?.uptoPeople}
                 onChange={handleChange}
               />
               <TextField
@@ -171,7 +162,7 @@ const UpdateTourGuideProfile = ({ cid }) => {
                 fullWidth
                 variant="outlined"
                 type="number"
-                defaultValue={formData?.responseTime}
+                defaultValue={userData?.client?.clientProfile?.responseTime}
                 onChange={handleChange}
               />
 
@@ -185,6 +176,7 @@ const UpdateTourGuideProfile = ({ cid }) => {
                   className="w-full"
                   label="Choice City"
                   placeholder="Choice City"
+                  defaultValue={userData?.client?.clientProfile?.cityId}
                 >
                   {cities?.cities?.map((city, index) => (
                     <MenuItem key={index} value={city?.id}>
@@ -219,4 +211,4 @@ const UpdateTourGuideProfile = ({ cid }) => {
   );
 };
 
-export default UpdateTourGuideProfile;
+export default AddTourGuideProfile;

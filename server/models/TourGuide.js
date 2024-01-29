@@ -4,11 +4,9 @@ const TourGuideSchema = new mongoose.Schema(
   {
     description: {
       type: String,
-      required: true,
     },
     uptoPeople: {
       type: String,
-      required: true,
     },
     responseTime: {
       type: String,
