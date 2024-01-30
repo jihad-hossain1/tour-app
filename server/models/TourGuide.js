@@ -2,28 +2,45 @@ const mongoose = require("mongoose");
 
 const TourGuideSchema = new mongoose.Schema(
   {
-    name: String,
-    languages: Object,
-    importantNote: String,
-    profileImage: String,
-    images: Object,
-    
-    email: String,
-    about: String,
-    rating: Number,
-    responseTime: Object,
-    tourCategory: String,
+    description: {
+      type: String,
+    },
+    uptoPeople: {
+      type: String,
+    },
+    responseTime: {
+      type: String,
+    },
+    languages: {
+      type: Array,
+    },
+    profileImage: {
+      type: String,
+    },
+    tourGuideInstructionType: {
+      type: String,
+    },
     cityId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "City",
     },
-    availableAreas: [{
+    clientId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "City",
-    }],
-    tourSpots: [{ type: mongoose.Schema.Types.ObjectId, ref: "TourSpot" }],
+      ref: "Client",
+    },
+    availableAreas: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "City",
+      },
+    ],
 
-    replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+    replies: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   { timestamps: true }
 );

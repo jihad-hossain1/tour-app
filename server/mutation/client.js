@@ -24,32 +24,9 @@ const addClient = {
     password: { type: GraphQLNonNull(GraphQLString) },
     image: { type: GraphQLNonNull(GraphQLString) },
     clientType: { type: GraphQLNonNull(GraphQLString) },
-    // clientType: {
-    //   type: new GraphQLEnumType({
-    //     name: "ClientStatus",
-    //     values: {
-    //       TourGuide: { value: "Tour Guide" },
-    //       CarRent: { value: "Car Rent" },
-    //       ParkingShare: { value: "Parking Share" },
-    //       ReturantManagement: { value: "Returant Management" },
-    //       HotelManagement: { value: "Hotel Management" },
-    //     },
-    //   }),
-    // },
   },
 
   resolve: async (parent, args) => {
-    // const hashedPassword = await bcrypt.hash(password, 10);
-
-    // const client = new Client({
-    //   image,
-    //   phone,
-    //   name,
-    //   email,
-    //   password: hashedPassword,
-    //   clientType,
-    // });
-
     try {
       const client = await Client(args);
       return await client.save();

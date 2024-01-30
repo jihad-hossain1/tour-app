@@ -1,76 +1,45 @@
-import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { getClient } from "../../../router/ClientRoute";
 import { useQuery } from "@apollo/client";
 import { GET_CLIENT } from "../../../queries/clientsQuery";
+import AddTourGuideProfile from "./AddTourGuideProfile";
 
 const TourGuide = () => {
   const [isClient, setClient] = useState(getClient());
-  const [toggel, setToggle] = useState(false);
 
-  const cid = isClient?.id;
   const { loading, error, data } = useQuery(GET_CLIENT, {
-    variables: { id: cid },
+    variables: { id: isClient?.id },
   });
-  console.log(data?.client);
 
-  const scafolding = {
-    any: "",
-  };
-  const [formData, setFormData] = useState(scafolding);
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log(Object.values(formData).length);
-  };
+  const clientProfile = data?.client?.clientProfile;
   return (
     <>
-      <Button
-        color="info"
-        variant="contained"
-        onClick={() => setToggle(!toggel)}
-      >
-        Manage Profile
-      </Button>
-      <div className="mt-5 lg:mt-10">
-        {toggel && (
-          <div className="max-w-screen-md mx-auto px-2">
-            <form action="" onSubmit={handleSubmit}>
-              <TextField
-                placeholder="any"
-                label="any"
-                name="any"
-                // required
-                fullWidth
-                variant="outlined"
-                type="text"
-                defaultValue={formData?.any}
-                onChange={handleChange}
-              />
-              <div className="flex justify-end">
-                <Button
-                  sx={{ marginTop: { sm: "10px", md: "20px" } }}
-                  type="submit"
-                  variant="contained"
-                  color="success"
-                >
-                  Submit
-                </Button>
-              </div>
-            </form>
-          </div>
-        )}
-      </div>
+      <AddTourGuideProfile userData={data} cid={isClient?.id} />
+
+      {loading ? (
+        <>
+          <p>Loading...</p>
+        </>
+      ) : (
+        <div className="flex flex-col gap-3">
+          <img
+            src={clientProfile?.profileImage}
+            alt=""
+            className="rounded-md object-cover max-h-96 w-full"
+          />
+          <h4>Full Name: {data?.client?.name}</h4>
+          <h4>Phone: {data?.client?.phone}</h4>
+          <h4>email: {data?.client?.email}</h4>
+          <h4>User Type: {data?.client?.clientType}</h4>
+          <h4>User Role: {data?.client?.role}</h4>
+          <p>Tour Type: {clientProfile?.tourGuideInstructionType}</p>
+          <p>Tour Member: Up to {clientProfile?.uptoPeople} people</p>
+          <p>Language: {clientProfile?.languages}</p>
+          <p>Response Time: {clientProfile?.responseTime} hours 30 min</p>
+          <p>Provide Location: {clientProfile?.city?.name}</p>
+          <p>About: {clientProfile?.description}</p>
+        </div>
+      )}
     </>
   );
 };

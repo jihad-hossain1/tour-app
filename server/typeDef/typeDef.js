@@ -1,13 +1,43 @@
-const { GraphQLObjectType, GraphQLString,GraphQLID,GraphQLList,GraphQLInt } = require("graphql");
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLID,
+  GraphQLList,
+  GraphQLInt,
+  GraphQLScalarType,
+  GraphQLNonNull,
+} = require("graphql");
+const { Kind } = require("graphql/language");
 const Country = require("../models/Country");
 const Division = require("../models/Division");
 const City = require("../models/City");
 const TourSpot = require("../models/TourSpot");
 const Review = require("../models/Review");
 const GuideReview = require("../models/GuideReview");
+const TourGuide = require("../models/TourGuide");
 
-
-
+const TimestampType = new GraphQLScalarType({
+  name: "Timestamp",
+  serialize(date) {
+    return date instanceof Date ? date.getTime() : null;
+  },
+  parseValue(date) {
+    try {
+      return new Date(value);
+    } catch (error) {
+      return null;
+    }
+  },
+  parseLiteral(ast) {
+    if (ast.kind === Kind.INT) {
+      return new Date(parseInt(ast.value, 10));
+    } else if (ast.kind === Kind.STRING) {
+      return this.parseValue(ast.value);
+    } else {
+      return null;
+    }
+  },
+});
 
 const ProjectType = new GraphQLObjectType({
   name: "Projects",
@@ -26,8 +56,6 @@ const ProjectType = new GraphQLObjectType({
   }),
 });
 
-
-
 const ClientType = new GraphQLObjectType({
   name: "Clients",
   fields: () => ({
@@ -39,28 +67,20 @@ const ClientType = new GraphQLObjectType({
     image: { type: GraphQLString },
     role: { type: GraphQLString },
     clientType: { type: GraphQLString },
-    projects: {
-      type: new GraphQLList(ProjectType),
+    clientProfile: {
+      type: TourGuideType,
       resolve: async (parent, args) => {
-        let _i = await Project.find();
-        let result = _i?.filter((item) => item?.clientId == parent?.id);
-        return result;
-      },
-    },
-    clientProject: {
-      type: new GraphQLList(ProjectType),
-      args: {
-        userId: { type: GraphQLID },
-      },
-      resolve: async (_p, args) => {
-        let p = await Project.find();
-        let result = p?.filter((item) => item?.clientId == args?.userId);
+        try {
+          const result = await TourGuide.findOne({ clientId: parent.id });
+          return result;
+        } catch (error) {
+          console.log(error);
+          throw new Error(error);
+        }
       },
     },
   }),
 });
-
-
 
 const UserType = new GraphQLObjectType({
   name: "User",
@@ -74,9 +94,6 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
-
-
-// destination type
 const DestinationType = new GraphQLObjectType({
   name: "Destination",
   fields: () => ({
@@ -88,8 +105,6 @@ const DestinationType = new GraphQLObjectType({
     description: { type: GraphQLString },
   }),
 });
-
-
 
 const TourSpotType = new GraphQLObjectType({
   name: "TourSpot",
@@ -121,7 +136,6 @@ const TourSpotType = new GraphQLObjectType({
     tourTipsGuide: { type: GraphQLString },
 
     topTourPlace: { type: GraphQLString },
-
 
     city: {
       type: CityForAdd,
@@ -160,8 +174,6 @@ const TourSpotType = new GraphQLObjectType({
   }),
 });
 
-
-
 const CityType = new GraphQLObjectType({
   name: "City",
   fields: () => ({
@@ -181,8 +193,6 @@ const CityType = new GraphQLObjectType({
   }),
 });
 
-
-
 const CityForAdd = new GraphQLObjectType({
   name: "AddCity",
   fields: () => ({
@@ -194,14 +204,12 @@ const CityForAdd = new GraphQLObjectType({
     division: {
       type: DivisionType,
       resolve: async (parent, args) => {
-        let _i = await Division?.findById(parent.divisionId);
+        let _i = await Division.findById(parent.divisionId);
         return _i;
       },
     },
   }),
 });
-
-
 
 const DivisionType = new GraphQLObjectType({
   name: "Division",
@@ -228,8 +236,6 @@ const DivisionType = new GraphQLObjectType({
   }),
 });
 
-
-
 const CountryType = new GraphQLObjectType({
   name: "Country",
   fields: () => ({
@@ -238,14 +244,12 @@ const CountryType = new GraphQLObjectType({
     description: { type: GraphQLString },
     photo: { type: GraphQLString },
     continentId: { type: GraphQLID },
-    
+
     touristSpots: {
       type: new GraphQLList(TourSpotType),
       resolve: async (parent, args) => {
         let tourt = await TourSpot.find();
-        let result = tourt?.filter(
-          (item) => item?.countryId === parent.id
-        );
+        let result = tourt?.filter((item) => item?.countryId === parent.id);
         return result;
       },
     },
@@ -268,8 +272,6 @@ const CountryType = new GraphQLObjectType({
   }),
 });
 
-
-
 const ContinentType = new GraphQLObjectType({
   name: "Continent",
   fields: () => ({
@@ -288,8 +290,6 @@ const ContinentType = new GraphQLObjectType({
   }),
 });
 
-
-
 const ReviewType = new GraphQLObjectType({
   name: "Reviews",
   fields: () => ({
@@ -301,17 +301,15 @@ const ReviewType = new GraphQLObjectType({
     img: { type: GraphQLString },
     tourSpotId: { type: GraphQLID },
     rating: { type: GraphQLInt },
-    createdAt: { type: GraphQLString },
-    replies: {              
+    createdAt: { type: TimestampType },
+    replies: {
       type: new GraphQLList(ReviewType),
       resolve(parent, args) {
         return Review.find({ _id: { $in: parent.replies } });
       },
-    }, 
+    },
   }),
 });
-
-
 
 const ReviewReplyType = new GraphQLObjectType({
   name: "Reply",
@@ -323,7 +321,7 @@ const ReviewReplyType = new GraphQLObjectType({
     email: { type: GraphQLString },
     img: { type: GraphQLString },
     tourSpotId: { type: GraphQLID },
-    reviewId: { type: GraphQLID }
+    reviewId: { type: GraphQLID },
   }),
 });
 
@@ -339,56 +337,96 @@ const GuideReviewType = new GraphQLObjectType({
     guideId: { type: GraphQLID },
     rating: { type: GraphQLInt },
     createdAt: { type: GraphQLString },
-    replies: {              
+    replies: {
       type: new GraphQLList(GuideReviewType),
       resolve(parent, args) {
         return GuideReview.find({ _id: { $in: parent.replies } });
       },
-    }, 
+    },
   }),
 });
 
+const TourGuideReviewType = new GraphQLObjectType({
+  name: "TourGuideReview",
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString },
+    rating: { type: GraphQLInt },
+    createdAt: { type: TimestampType },
+    userId: { type: GraphQLID },
+    replies: {
+      type: new GraphQLList(TourGuideReviewType),
+      resolve(parent, args) {
+        return Review.find({ _id: { $in: parent.replies } });
+      },
+    },
+  }),
+});
+
+const TourGuideDescriptionType = new GraphQLObjectType({
+  name: "TourGuideDescription",
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString },
+    rating: { type: GraphQLInt },
+    createdAt: { type: TimestampType },
+    replies: {
+      type: new GraphQLList(TourGuideReviewType),
+      resolve(parent, args) {
+        return Review.find({ _id: { $in: parent.replies } });
+      },
+    },
+  }),
+});
 
 const TourGuideType = new GraphQLObjectType({
   name: "TourGuide",
   fields: () => ({
     id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    title: { type: GraphQLString },
-    content: { type: GraphQLString },
-    email: { type: GraphQLString },
-    profileImage: { type: GraphQLString },
-    languages: { type: GraphQLList(GraphQLString) },
-    importantNote: { type: GraphQLString },
-    profileImage:{ type: GraphQLString },
-    images: { type: GraphQLList(GraphQLString) },
-    email: { type: GraphQLString },
-    about: { type: GraphQLString },
-    rating:  { type: GraphQLInt },
-    responseTime: { type: GraphQLList(GraphQLString) },
-    // availableAreas: Number,
-    tourCategory: { type: GraphQLString },
+    description: { type: GraphQLString },
+    uptoPeople: { type: GraphQLString },
     cityId: { type: GraphQLID },
-    // availableAreas: ,
-    // tourSpots: {              
-    //   type: new GraphQLList(ReviewType),
-    //   resolve(parent, args) {
-    //     return GuideReview.find({ _id: { $in: parent.replies } });
-    //   },
-    // },
+    responseTime: { type: GraphQLString },
+    languages: { type: GraphQLList(GraphQLString) },
+    profileImage: { type: GraphQLString },
+    tourGuideInstructionType: { type: GraphQLString },
+    client: { type: ClientType },
 
-    replies: {              
-      type: new GraphQLList(),
-      resolve(parent, args) {
-        return GuideReview.find({ _id: { $in: parent.replies } });
+    rating: { type: GraphQLInt },
+    guideReview: {
+      type: new GraphQLList(TourGuideReviewType),
+      resolve: async (parent, args) => {
+        // TODO
+        return await GuideReview.findById(parent.id);
       },
-    }, 
-    
+    },
+    city: {
+      type: CityForAdd,
+      resolve: async (parent, args) => {
+        return await City.findOne({ _id: parent.cityId });
+      },
+    },
   }),
 });
 
-
-
-
-
-module.exports = { TourSpotType, CityType, DivisionType, CountryType, ContinentType,DestinationType,UserType,ClientType,ProjectType ,CityForAdd,ReviewType,ReviewReplyType,TourGuideType,GuideReviewType};
+module.exports = {
+  TourSpotType,
+  CityType,
+  DivisionType,
+  CountryType,
+  ContinentType,
+  DestinationType,
+  UserType,
+  ClientType,
+  ProjectType,
+  CityForAdd,
+  ReviewType,
+  ReviewReplyType,
+  GuideReviewType,
+  TimestampType,
+  TourGuideType,
+  TourGuideReviewType,
+  TourGuideDescriptionType,
+};

@@ -1,5 +1,15 @@
-import { Avatar, Button, Rating, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { Avatar, Button, Rating, Typography, TextField } from "@mui/material";
+
+// /x-date-pickers/internals/demo
+
+import dayjs from 'dayjs';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -9,9 +19,11 @@ import { LuMessagesSquare } from "react-icons/lu";
 
 const MessageTourGuide = () => {
   const [people, setpeople] = useState("");
+  const [value, setValue] = React.useState(dayjs('2022-04-17'));
 
   const handleChange = (event) => {
     setpeople(event.target.value);
+    console.log(event.target.value);
   };
 
   return (
@@ -34,6 +46,23 @@ const MessageTourGuide = () => {
       <hr className="h-[1px] bg-slate-200 w-full my-4" />
       <div className="flex flex-col gap-4">
         <TextField type="date" name="data" fullWidth />
+
+
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={['DatePicker', 'DatePicker']}>
+            <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} />
+            <DatePicker
+              label="Controlled picker"
+              value={value}
+              onChange={(newValue) => setValue(newValue)}
+            />
+          </DemoContainer>
+        </LocalizationProvider>
+
+
+
+
+
         <div>
           <FormControl sx={{ m: 0, minWidth: 120 }} fullWidth>
             <InputLabel id="demo-controlled-open-select-label">
