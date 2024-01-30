@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-// import SerachForm from "./SerachForm";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
@@ -14,6 +13,7 @@ const SearchTab = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <div className="pt-4 ">
       <Box sx={{ width: "100%", typography: "body1" }}>
