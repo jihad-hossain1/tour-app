@@ -71,7 +71,7 @@ const PopularDestination = () => {
                 alt="Continent photo"
                 src={item?.img}
               />
-              <div className="py-2 name-div hover:text-2xl transition-transform duration-300 absolute inset-0 flex items-start hover:items-center justify-center hover:duration-300 bg-white hover:bg-opacity-50 transform translate-y-32">
+              <div className="py-2 name-div hover:text-2xl transition-transform  absolute inset-0 flex items-start hover:items-center justify-center transition-bg duration-500 bg-white hover:bg-opacity-50 transform translate-y-32">
                 <h4 className="text-center font-semibold">{item?.name}</h4>
               </div>
             </Card>
