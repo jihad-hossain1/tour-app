@@ -1,36 +1,56 @@
 import { gql } from "@apollo/client";
 
-const UPDATE_TOURGUIDEPROFILE = gql`
+const UPDATE_TOURGUIDE_PROFILE = gql`
+  #graphql
+  mutation UpdateTourGuideProfile(
+    $id: ID!
+    $description: String
+    $uptoPeople: String
+    $tourGuideInstructionType: String
+    $cityId: ID
+    $responseTime: String
+    $languages: [String]
+  ) {
+    updateTourGuideProfile(
+      id: $id
+      description: $description
+      uptoPeople: $uptoPeople
+      tourGuideInstructionType: $tourGuideInstructionType
+      responseTime: $responseTime
+      cityId: $cityId
+      languages: $languages
+    ) {
+      id
+      description
+    }
+  }
+`;
+
+const ADD_TOURGUIDE_PROFILE = gql`
   #graphql
   mutation addTourGuideProfile(
     $description: String
-    $uptoPeople: Number
+    $uptoPeople: String
     $profileImage: String
-    $languages: Array
     $tourGuideInstructionType: String
-    $clientId: ID!
-    $cityId: ID!
-    $responseTime: Number
+    $clientId: ID
+    $cityId: ID
+    $responseTime: String
+    $languages: [String]
   ) {
     addTourGuideProfile(
       description: $description
       uptoPeople: $uptoPeople
       profileImage: $profileImage
-      languages: $languages
       tourGuideInstructionType: $tourGuideInstructionType
       responseTime: $responseTime
       cityId: $cityId
       clientId: $clientId
+      languages: $languages
     ) {
       id
-      phone
-      email
-      name
-      image
-      role
-      clientType
     }
   }
 `;
 
-export { UPDATE_TOURGUIDEPROFILE };
+export { ADD_TOURGUIDE_PROFILE, UPDATE_TOURGUIDE_PROFILE };

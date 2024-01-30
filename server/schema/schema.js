@@ -15,11 +15,15 @@ const {
   relatedTourSpots,
 } = require("../query/tourspots");
 const { reviesByTourSpot, newReviews } = require("../query/reviews");
+const { getTourGuide } = require("../query/tourGuideQuery");
 
-
-
-
-const { addClient, deleteClient,loginClient,updateClientPassword,clientPasswordReset } = require("../mutation/client");
+const {
+  addClient,
+  deleteClient,
+  loginClient,
+  updateClientPassword,
+  clientPasswordReset,
+} = require("../mutation/client");
 const {
   addProject,
   updateProject,
@@ -36,13 +40,22 @@ const {
   addTourSpot,
   updateTourspot,
   deleteTourspot,
-  deleteTourSpotWithCommentReply
+  deleteTourSpotWithCommentReply,
 } = require("../mutation/tourSpot");
 const { addDivision } = require("../mutation/division");
 const { addCity } = require("../mutation/city");
-const { addReview,addReviewReply,addReply,deleteReviewWithReply,updateReview,updateReply,deleteReply } = require("../mutation/review");
+const {
+  addReview,
+  addReviewReply,
+  addReply,
+  deleteReviewWithReply,
+  updateReview,
+  updateReply,
+  deleteReply,
+} = require("../mutation/review");
 const {
   addTourGuideProfile,
+  updateTourGuideProfile,
 } = require("../mutation/tourGuide/tourGuideMutation");
 
 //main query
@@ -83,6 +96,8 @@ const RootQuery = new GraphQLObjectType({
     // reviews
     reviesByTourSpot,
     newReviews,
+    // tour guide
+    getTourGuide,
   },
 });
 
@@ -129,6 +144,7 @@ const mutation = new GraphQLObjectType({
     deleteReply,
     // tourGuide
     addTourGuideProfile,
+    updateTourGuideProfile,
   },
 });
 
