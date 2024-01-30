@@ -25,7 +25,10 @@ const TourGuide = () => {
         </>
       ) : (
         <div className="flex flex-col gap-3">
-          <Link to={`/dashboard/tourguide/profile-update/${data?.client?.id}`}>
+          <Link
+            to={`/dashboard/tourguide/profile-update/${data?.client?.id}`}
+            className={data?.client?.clientProfile ? "block w-fit" : "hidden"}
+          >
             <Button variant="outlined" color="success">
               Profile Update
             </Button>
@@ -53,34 +56,38 @@ const TourGuide = () => {
             <span className="font-semibold">User Role:</span>{" "}
             {data?.client?.role}
           </h4>
-          <p>
-            <span className="font-semibold">Tour Type:</span>{" "}
-            {clientProfile?.tourGuideInstructionType}
-          </p>
-          <p>
-            <span className="font-semibold">Tour Member:</span> Up to{" "}
-            {clientProfile?.uptoPeople} people
-          </p>
-          <div className="flex gap-2 items-center">
-            <span className="font-semibold">Language:</span>{" "}
-            <div className="flex gap-3">
-              {clientProfile?.languages?.map((ite, index) => (
-                <p key={index}>{ite},</p>
-              ))}
+          {data?.client?.clientProfile && (
+            <div className="flex flex-col gap-3">
+              <p>
+                <span className="font-semibold">Tour Type:</span>{" "}
+                {clientProfile?.tourGuideInstructionType}
+              </p>
+              <p>
+                <span className="font-semibold">Tour Member:</span> Up to{" "}
+                {clientProfile?.uptoPeople} people
+              </p>
+              <div className="flex gap-2 items-center">
+                <span className="font-semibold">Language:</span>{" "}
+                <div className="flex gap-3">
+                  {clientProfile?.languages?.map((ite, index) => (
+                    <p key={index}>{ite},</p>
+                  ))}
+                </div>
+              </div>
+              <p>
+                <span className="font-semibold">Response Time:</span>{" "}
+                {clientProfile?.responseTime} hours 30 min
+              </p>
+              <p>
+                <span className="font-semibold">Provide Location:</span>{" "}
+                {clientProfile?.city?.name}
+              </p>
+              <p>
+                <span className="font-semibold">About:</span>{" "}
+                {clientProfile?.description}
+              </p>
             </div>
-          </div>
-          <p>
-            <span className="font-semibold">Response Time:</span>{" "}
-            {clientProfile?.responseTime} hours 30 min
-          </p>
-          <p>
-            <span className="font-semibold">Provide Location:</span>{" "}
-            {clientProfile?.city?.name}
-          </p>
-          <p>
-            <span className="font-semibold">About:</span>{" "}
-            {clientProfile?.description}
-          </p>
+          )}
         </div>
       )}
     </>
