@@ -93,16 +93,17 @@ body{
 .arrows button{
    
     border-radius: 50%;
-    background-color: #eee4;
+    
     border: none;
-    color: #fff;
+    
     font-family: monospace;
     font-weight: bold;
-    transition: .4s;
+    transition: .5s;
 }
 .arrows button:hover{
     background-color: #fff;
     color: #000;
+    font-weight: bolder;
 }
 
 /* animation */

@@ -79,7 +79,7 @@ const PopularDestination = () => {
             {/* <img className=" object-cover " src={continent?.img} alt="" /> */}
             {/* <div className="py-2">
               />
-              <div className="py-2 name-div hover:text-2xl transition-transform duration-300 absolute inset-0 flex items-start hover:items-center justify-center hover:duration-300 bg-white hover:bg-opacity-50 transform translate-y-32">
+              <div className="py-2 name-div hover:text-2xl transition-transform  absolute inset-0 flex items-start hover:items-center justify-center transition-bg duration-500 bg-white hover:bg-opacity-50 transform translate-y-32">
                 <h4 className="text-center font-semibold">{item?.name}</h4>
               </div>
             </Card> */}
@@ -87,7 +87,7 @@ const PopularDestination = () => {
             <Card>
               <div className="relative rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-500 ease-in-out">
                 <div
-                  className="w-full h-[160px] bg-cover bg-center pt-4 relative group"
+                  className="w-full h-[170px] bg-cover bg-center pt-4 relative group"
                   style={{ backgroundImage: `url(${item.img})` }}
                 >
                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 transition-opacity opacity-0 group-hover:opacity-100">
@@ -100,9 +100,6 @@ const PopularDestination = () => {
                       </h1>
                     </div>
                   </div>
-                </div>
-                <div className="py-2 border-2">
-                  <h4 className="text-center font-semibold">{item.name}</h4>
                 </div>
               </div>
             </Card>

@@ -8,6 +8,7 @@ import FlightTakeoffOutlinedIcon from "@mui/icons-material/FlightTakeoffOutlined
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import "./Header3.css";
 import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Header3() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,7 +43,43 @@ export default function Header3() {
     //   </div>
     // </div>
   ];
+  const countries = [
+    { name: "United States" },
+    { name: "China" },
+    { name: "India" },
+    { name: "Brazil" },
+    { name: "Russia" },
+    { name: "United Kingdom" },
+    { name: "Japan" },
+    { name: "Germany" },
+    { name: "Brazil" },
+    { name: "Russia" },
+    { name: "United Kingdom" },
+    { name: "Japan" },
+    { name: "Germany" },
+    { name: "France" },
+    { name: "South Korea" },
+  ];
+  const [searchTerm, setSearchTerm] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
 
+  const handleInputChange = (e) => {
+    const inputText = e.target.value;
+    setSearchTerm(inputText);
+    const filteredSuggestions =
+      inputText !== ""
+        ? countries.filter((country) =>
+            country.name.toLowerCase().startsWith(inputText.toLowerCase())
+          )
+        : [];
+
+    setSuggestions(filteredSuggestions);
+  };
+
+  const handleSuggestionClick = (selectedCountry) => {
+    setSearchTerm(selectedCountry.name);
+    setSuggestions([]); // Clear suggestions when a suggestion is selected
+  };
   return (
     <div>
       {/* <div className="bg-black bg-opacity-60 lg:h-3 text-white p-4 flex pt-7">
@@ -80,8 +117,19 @@ export default function Header3() {
           </Link>
           
         </div>
-      </div> */}
-      <div className="bg-black bg-opacity-60 lg:h-24 text-white p-4">
+      </div> 
+      
+
+      <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+      
+      
+      */}
+      <div className="bg-black bg-opacity-60 lg:h-[85px] text-white p-4">
         <div className="flex items-center justify-between pt-3">
           <div className="flex items-center space-x-4">
             <div className="group relative">
@@ -89,23 +137,10 @@ export default function Header3() {
                 onClick={toggleMenu}
                 className="lg:hidden focus:outline-none"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 mt-3"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
+                <MenuIcon></MenuIcon>
               </button>
               {isMenuOpen && (
-                <ul className="mt-[17px] z-10 p-2 shadow bg-black bg-opacity-90 rounded w-52 absolute">
+                <ul className="mt-[28px] z-10 p-2 shadow bg-black bg-opacity-80 rounded w-52 absolute">
                   <li className="mt-5">
                     <Link className="Button" to="/">
                       Home
@@ -126,11 +161,8 @@ export default function Header3() {
                 </ul>
               )}
             </div>
-            <Link to={"/"} className="text-3xl flex items-center">
-              <FlightTakeoffOutlinedIcon
-                fontSize="large"
-                className="mr-3 "
-              ></FlightTakeoffOutlinedIcon>
+            <Link to={"/"} className="lg:text-3xl text-lg flex items-center">
+              <FlightTakeoffOutlinedIcon className="mr-3"></FlightTakeoffOutlinedIcon>
               {/* <LocalAirportOutlinedIcon fontSize="large" className="mr-3 "></LocalAirportOutlinedIcon> */}
               <span className="text-[#3081D0] mr-2">Travel</span>Master
             </Link>
@@ -140,28 +172,84 @@ export default function Header3() {
             <ul className="flex gap-6">{menuItems}</ul>
           </div>
 
-          <div className="text-xl pr-5 lg:pr-12 flex items-center">
-          <div className="input-wrapper">
-  <button className="icon"> 
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="25px" width="25px">
-      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff" d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"></path>
-      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff" d="M22 22L20 20"></path>
-    </svg>
-  </button>
-  <input placeholder="search.." className="input" name="text" type="text" />
-</div>
-            {/* {isSearchVisible && (
-              <div className="search-input-container flex-grow w-[200px] overflow-hidden transition-width duration-500 ease-in-out">
+          <div className="text-xl lg:pr-2 flex items-center">
+            {/* input */}
+            <div className="container border-b-2">
+              <div className="mainbox lg:w-[230px]">
+                <div className="iconContainer">
+                  <button onClick={toggleSearch}>
+                    <SearchOutlinedIcon fontSize="large" />
+                  </button>
+                </div>
                 <input
+                  className="search_input w-[120px] lg:w-[185px]"
+                  placeholder="search"
+                  name="search"
                   type="text"
-                  placeholder="Search"
-                  className="w-full p-2 border border-gray-300 rounded outline-none focus:border-blue-500"
+                  value={searchTerm}
+                  onChange={handleInputChange}
                 />
               </div>
-            )}
-            <button onClick={toggleSearch}>
-              <SearchOutlinedIcon fontSize="large" />
-            </button> */}
+              {suggestions.length > 0 && (
+                <ul className="lg:w-[230px] w-[160px] mt-[1px] lg:mt-3 text-sm mr-10 p-3 shadow bg-black bg-opacity-60 rounded-b-xl absolute">
+                  {suggestions.map((country, index) => (
+                    <li
+                      key={index}
+                      onClick={() => handleSuggestionClick(country)}
+                    >
+                      <button className="pb-2">{country.name}</button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            {/* <div className="input-wrapper lg:w-[250px] md:w-[250px]">
+              <button className="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  height="25px"
+                  width="25px"
+                >
+                  <path
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="1.5"
+                    stroke="#fff"
+                    d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+                  ></path>
+                  <path
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="1.5"
+                    stroke="#fff"
+                    d="M22 22L20 20"
+                  ></path>
+                </svg>
+              </button>
+              <input
+                placeholder="search.."
+                className="input bg-black bg-opacity-0"
+                name="text"
+                type="search"
+                value={searchTerm}
+                onChange={handleInputChange}
+              />
+
+              {suggestions.length > 0 && (
+                <ul className="lg:w-[250px] text-sm mr-10 ml-10 p-3 shadow bg-black bg-opacity-60 rounded-b-xl absolute mt-28">
+                  {suggestions.map((country, index) => (
+                    <h1
+                      key={index}
+                      onClick={() => handleSuggestionClick(country)}
+                    >
+                      <button className="mt-2">{country.name}</button>
+                    </h1>
+                  ))}
+                </ul>
+              )}
+            </div> */}
           </div>
         </div>
       </div>
