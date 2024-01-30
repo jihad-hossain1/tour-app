@@ -26,7 +26,9 @@ const TourGuide = () => {
       ) : (
         <div className="flex flex-col gap-3">
           <Link to={`/dashboard/tourguide/profile-update/${data?.client?.id}`}>
-            Profile Update
+            <Button variant="outlined" color="success">
+              Profile Update
+            </Button>
           </Link>
           <img
             src={clientProfile?.profileImage}

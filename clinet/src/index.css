@@ -29,3 +29,6 @@
 .c_underline {
   @apply border-l-[14px] border-blue-400 pl-4 bg-blue-100/40 py-2 font-semibold text-2xl mb-3;
 }
+.inpt {
+  @apply border border-zinc-400 focus:outline-none p-3 rounded;
+}

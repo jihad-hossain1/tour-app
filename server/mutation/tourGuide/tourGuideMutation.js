@@ -34,4 +34,34 @@ const addTourGuideProfile = {
   },
 };
 
-module.exports = { addTourGuideProfile };
+const updateTourGuideProfile = {
+  type: TourGuideType,
+  args: {
+    id: { type: GraphQLID },
+    description: { type: GraphQLString },
+    uptoPeople: { type: GraphQLString },
+    cityId: { type: GraphQLID },
+    responseTime: { type: GraphQLString },
+    languages: { type: GraphQLList(GraphQLString) },
+    profileImage: { type: GraphQLString },
+    tourGuideInstructionType: { type: GraphQLString },
+  },
+  resolve: async (parent, args) => {
+    try {
+      // console.log(args);
+      return await TourGuide.findByIdAndUpdate(
+        args.id,
+        {
+          $set: args,
+        },
+        {
+          new: true,
+        }
+      );
+    } catch (error) {
+      throw new Error("Error adding tourGuideProfile");
+    }
+  },
+};
+
+module.exports = { addTourGuideProfile, updateTourGuideProfile };

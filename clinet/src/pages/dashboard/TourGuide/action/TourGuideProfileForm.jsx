@@ -11,7 +11,7 @@ import { GET_CITIE } from "../../../../queries/countriesQuery";
 import { useMutation, useQuery } from "@apollo/client";
 import FileUploader from "../../TourSpot/FileUploader";
 import axios from "axios";
-import { UPDATE_TOURGUIDEPROFILE } from "../../../../mutation/tourGuideMutation";
+import { ADD_TOURGUIDE_PROFILE } from "../../../../mutation/tourGuideMutation";
 import { GET_CLIENTS } from "../../../../queries/clientsQuery";
 
 const TourGuideProfileForm = ({ cid, userData, updt }) => {
@@ -34,7 +34,7 @@ const TourGuideProfileForm = ({ cid, userData, updt }) => {
 
   const [formData, setFormData] = useState(scafolding);
 
-  const [addTourGuideProfile] = useMutation(UPDATE_TOURGUIDEPROFILE, {
+  const [addTourGuideProfile] = useMutation(ADD_TOURGUIDE_PROFILE, {
     variables: {
       description: formData?.description,
       uptoPeople: formData?.uptoPeople,

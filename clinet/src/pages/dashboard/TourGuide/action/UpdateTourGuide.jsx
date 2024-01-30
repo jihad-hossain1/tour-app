@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import { GET_CLIENT, GET_CLIENTS } from "../../../../queries/clientsQuery";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import TourGuideProfileForm from "./TourGuideProfileForm";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import { UPDATE_TOURGUIDEPROFILE } from "../../../../mutation/tourGuideMutation";
 import FileUploader from "../../TourSpot/FileUploader";
 import { GET_CITIE } from "../../../../queries/countriesQuery";
@@ -44,8 +36,9 @@ const UpdateTourGuide = () => {
 
   const [formData, setFormData] = useState(scafolding);
 
-  const [addTourGuideProfile] = useMutation(UPDATE_TOURGUIDEPROFILE, {
+  const [updateTourGuideProfile] = useMutation(UPDATE_TOURGUIDEPROFILE, {
     variables: {
+      id: clientProfile?.id,
       description: formData?.description,
       uptoPeople: formData?.uptoPeople,
       responseTime: formData?.responseTime,
@@ -54,7 +47,9 @@ const UpdateTourGuide = () => {
       tourGuideInstructionType: formData?.tourGuideInstructionType,
       profileImage: _photo,
     },
-    refetchQueries: [{ query: GET_CLIENTS }],
+    refetchQueries: [
+      { query: GET_CLIENTS, variables: { id: clientProfile?.id } },
+    ],
   });
 
   const handleChange = (e) => {
@@ -93,7 +88,7 @@ const UpdateTourGuide = () => {
       tourGuideInstructionType,
     } = formData;
 
-    addTourGuideProfile(
+    updateTourGuideProfile(
       description,
       uptoPeople,
       cityId,
@@ -111,10 +106,7 @@ const UpdateTourGuide = () => {
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-3">
           <textarea
             placeholder="description"
-            label="description"
             name="description"
-            // required
-            fullWidth
             variant="outlined"
             className="inpt"
             type="text"
@@ -126,57 +118,46 @@ const UpdateTourGuide = () => {
 
           <input
             placeholder="tourGuideInstructionType"
-            label="tourGuideInstructionType"
             name="tourGuideInstructionType"
-            // required
-            fullWidth
-            variant="outlined"
             type="text"
+            className="inpt"
             defaultValue={clientProfile?.tourGuideInstructionType}
             onChange={handleChange}
           />
           <input
             placeholder="uptoPeople"
-            label="uptoPeople"
             name="uptoPeople"
-            // required
-            fullWidth
-            variant="outlined"
             type="number"
+            className="inpt"
             defaultValue={clientProfile?.uptoPeople}
             onChange={handleChange}
           />
           <input
             placeholder="responseTime"
-            label="responseTime"
             name="responseTime"
-            // required
-            fullWidth
-            variant="outlined"
             type="number"
+            className="inpt"
             defaultValue={clientProfile?.responseTime}
             onChange={handleChange}
           />
 
-          <FormControl>
-            {/* <InputLabel id="cid">Choice City</InputLabel> */}
-            <select
-              labelId="cid"
-              variant="outlined"
-              onChange={handleChange}
-              name="cityId"
-              className="w-full"
-              label="Choice City"
-              placeholder="Choice City"
-              defaultValue={clientProfile?.cityId}
-            >
-              {cities?.cities?.map((city, index) => (
-                <option key={index} value={city?.id}>
-                  {city?.name}
-                </option>
-              ))}
-            </select>
-          </FormControl>
+          <select
+            labelId="cid"
+            variant="outlined"
+            onChange={handleChange}
+            name="cityId"
+            className="w-full inpt"
+            label="Choice City"
+            placeholder="Choice City"
+            defaultValue={clientProfile?.cityId}
+          >
+            {cities?.cities?.map((city, index) => (
+              <option key={index} value={city?.id}>
+                {city?.name}
+              </option>
+            ))}
+          </select>
+
           <div>
             <img
               src={clientProfile?.profileImage}
