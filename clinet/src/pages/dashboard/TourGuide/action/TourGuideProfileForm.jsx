@@ -7,14 +7,14 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import { GET_CITIE } from "../../../queries/countriesQuery";
+import { GET_CITIE } from "../../../../queries/countriesQuery";
 import { useMutation, useQuery } from "@apollo/client";
-import FileUploader from "../TourSpot/FileUploader";
+import FileUploader from "../../TourSpot/FileUploader";
 import axios from "axios";
-import { UPDATE_TOURGUIDEPROFILE } from "../../../mutation/tourGuideMutation";
-import { GET_CLIENTS } from "../../../queries/clientsQuery";
+import { UPDATE_TOURGUIDEPROFILE } from "../../../../mutation/tourGuideMutation";
+import { GET_CLIENTS } from "../../../../queries/clientsQuery";
 
-const AddTourGuideProfile = ({ cid, userData }) => {
+const TourGuideProfileForm = ({ cid, userData, updt }) => {
   const [_photo, setPhoto] = useState("");
   const [image, setimage] = useState(null);
 
@@ -111,6 +111,7 @@ const AddTourGuideProfile = ({ cid, userData }) => {
       >
         add Profile
       </Button>
+
       <div className="mt-5 lg:mt-10">
         {toggel && (
           <div className="max-w-screen-md mx-auto px-2">
@@ -211,4 +212,4 @@ const AddTourGuideProfile = ({ cid, userData }) => {
   );
 };
 
-export default AddTourGuideProfile;
+export default TourGuideProfileForm;

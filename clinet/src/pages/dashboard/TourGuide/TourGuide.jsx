@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { getClient } from "../../../router/ClientRoute";
 import { useQuery } from "@apollo/client";
 import { GET_CLIENT } from "../../../queries/clientsQuery";
-import AddTourGuideProfile from "./AddTourGuideProfile";
+import TourGuideProfileForm from "./action/TourGuideProfileForm";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const TourGuide = () => {
   const [isClient, setClient] = useState(getClient());
@@ -14,7 +16,8 @@ const TourGuide = () => {
   const clientProfile = data?.client?.clientProfile;
   return (
     <>
-      <AddTourGuideProfile userData={data} cid={isClient?.id} />
+      {/* add tour guide profile  */}
+      <TourGuideProfileForm userData={data} cid={isClient?.id} />
 
       {loading ? (
         <>
@@ -22,22 +25,56 @@ const TourGuide = () => {
         </>
       ) : (
         <div className="flex flex-col gap-3">
+          <Link to={`/dashboard/tourguide/profile-update/${data?.client?.id}`}>
+            Profile Update
+          </Link>
           <img
             src={clientProfile?.profileImage}
             alt=""
             className="rounded-md object-cover max-h-96 w-full"
           />
-          <h4>Full Name: {data?.client?.name}</h4>
-          <h4>Phone: {data?.client?.phone}</h4>
-          <h4>email: {data?.client?.email}</h4>
-          <h4>User Type: {data?.client?.clientType}</h4>
-          <h4>User Role: {data?.client?.role}</h4>
-          <p>Tour Type: {clientProfile?.tourGuideInstructionType}</p>
-          <p>Tour Member: Up to {clientProfile?.uptoPeople} people</p>
-          <p>Language: {clientProfile?.languages}</p>
-          <p>Response Time: {clientProfile?.responseTime} hours 30 min</p>
-          <p>Provide Location: {clientProfile?.city?.name}</p>
-          <p>About: {clientProfile?.description}</p>
+          <h4>
+            <span className="font-semibold">Full Name:</span>{" "}
+            {data?.client?.name}
+          </h4>
+          <h4>
+            <span className="font-semibold">Phone:</span> {data?.client?.phone}
+          </h4>
+          <h4>
+            <span className="font-semibold">Email:</span> {data?.client?.email}
+          </h4>
+          <h4>
+            <span className="font-semibold">User Type:</span>{" "}
+            {data?.client?.clientType}
+          </h4>
+          <h4>
+            <span className="font-semibold">User Role:</span>{" "}
+            {data?.client?.role}
+          </h4>
+          <p>
+            <span className="font-semibold">Tour Type:</span>{" "}
+            {clientProfile?.tourGuideInstructionType}
+          </p>
+          <p>
+            <span className="font-semibold">Tour Member:</span> Up to{" "}
+            {clientProfile?.uptoPeople} people
+          </p>
+          <p>
+            <span className="font-semibold">Language:</span>{" "}
+            {clientProfile?.languages}
+          </p>
+          <p>
+            <span className="font-semibold">Response Time:</span>{" "}
+            {clientProfile?.responseTime} hours 30 min
+          </p>
+          <p>
+            <span className="font-semibold">Provide Location:</span>{" "}
+            {clientProfile?.city?.name}
+          </p>
+          <p>
+            <span className="font-semibold">About:</span>{" "}
+            {clientProfile?.description}
+          </p>
         </div>
       )}
     </>
