@@ -24,7 +24,7 @@ const addTourGuideProfile = {
   },
   resolve: async (parent, args) => {
     try {
-      console.log(args);
+      // console.log(args);
       const tourGuideProfile = new TourGuide(args);
       const saved = await tourGuideProfile.save();
       return saved;

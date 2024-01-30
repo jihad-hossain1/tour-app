@@ -3,9 +3,9 @@ import { GET_CLIENT, GET_CLIENTS } from "../../../../queries/clientsQuery";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { Button } from "@mui/material";
-import { UPDATE_TOURGUIDEPROFILE } from "../../../../mutation/tourGuideMutation";
 import FileUploader from "../../TourSpot/FileUploader";
 import { GET_CITIE } from "../../../../queries/countriesQuery";
+import { UPDATE_TOURGUIDE_PROFILE } from "../../../../mutation/tourGuideMutation";
 
 const UpdateTourGuide = () => {
   const { id } = useParams();
@@ -20,23 +20,20 @@ const UpdateTourGuide = () => {
 
   const clientProfile = userData?.client?.clientProfile;
 
-  const [_photo, setPhoto] = useState("");
-  const [image, setimage] = useState(null);
-
   const { loading: isCityLoading, data: cities } = useQuery(GET_CITIE);
 
   const scafolding = {
-    description: "",
-    uptoPeople: "",
-    responseTime: "",
-    languages: ["English", "Bangla", "Arabic"],
-    tourGuideInstructionType: "",
-    cityId: "",
+    description: clientProfile?.description,
+    uptoPeople: clientProfile?.uptoPeople,
+    responseTime: clientProfile?.responseTime,
+    languages: clientProfile?.languages,
+    tourGuideInstructionType: clientProfile?.tourGuideInstructionType,
+    cityId: clientProfile?.cityId,
   };
 
   const [formData, setFormData] = useState(scafolding);
 
-  const [updateTourGuideProfile] = useMutation(UPDATE_TOURGUIDEPROFILE, {
+  const [updateTourGuideProfile] = useMutation(UPDATE_TOURGUIDE_PROFILE, {
     variables: {
       id: clientProfile?.id,
       description: formData?.description,
@@ -45,7 +42,6 @@ const UpdateTourGuide = () => {
       clientId: formData?.clientId,
       languages: formData?.languages,
       tourGuideInstructionType: formData?.tourGuideInstructionType,
-      profileImage: _photo,
     },
     refetchQueries: [
       { query: GET_CLIENTS, variables: { id: clientProfile?.id } },
@@ -61,41 +57,27 @@ const UpdateTourGuide = () => {
     }));
   };
 
-  const handleOnFileUpload = async (e) => {
-    e.preventDefault();
-    try {
-      let data = new FormData();
-      data.append("file", image);
-      data.append("upload_preset", "images_preset");
-      let api = `https://api.cloudinary.com/v1_1/dqfi9zw3e/image/upload`;
-      const res = await axios.post(api, data);
-      let _up = await res?.data?.secure_url;
-      setPhoto(_up);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {
+    description,
+    uptoPeople,
+    cityId,
+    responseTime,
+    languages,
+    tourGuideInstructionType,
+  } = formData;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let profileImage = { profileImage: _photo };
-    const {
+
+    console.log(formData);
+
+    await updateTourGuideProfile(
       description,
       uptoPeople,
       cityId,
       responseTime,
       languages,
-      tourGuideInstructionType,
-    } = formData;
-
-    updateTourGuideProfile(
-      description,
-      uptoPeople,
-      cityId,
-      responseTime,
-      languages,
-      tourGuideInstructionType,
-      profileImage
+      tourGuideInstructionType
     );
   };
 
@@ -110,7 +92,7 @@ const UpdateTourGuide = () => {
             variant="outlined"
             className="inpt"
             type="text"
-            defaultValue={clientProfile?.description}
+            defaultValue={formData.description}
             onChange={handleChange}
             cols="30"
             rows="10"
@@ -121,7 +103,7 @@ const UpdateTourGuide = () => {
             name="tourGuideInstructionType"
             type="text"
             className="inpt"
-            defaultValue={clientProfile?.tourGuideInstructionType}
+            defaultValue={formData.tourGuideInstructionType}
             onChange={handleChange}
           />
           <input
@@ -129,7 +111,7 @@ const UpdateTourGuide = () => {
             name="uptoPeople"
             type="number"
             className="inpt"
-            defaultValue={clientProfile?.uptoPeople}
+            defaultValue={formData.uptoPeople}
             onChange={handleChange}
           />
           <input
@@ -137,7 +119,7 @@ const UpdateTourGuide = () => {
             name="responseTime"
             type="number"
             className="inpt"
-            defaultValue={clientProfile?.responseTime}
+            defaultValue={formData.responseTime}
             onChange={handleChange}
           />
 
@@ -149,7 +131,7 @@ const UpdateTourGuide = () => {
             className="w-full inpt"
             label="Choice City"
             placeholder="Choice City"
-            defaultValue={clientProfile?.cityId}
+            defaultValue={formData.cityId}
           >
             {cities?.cities?.map((city, index) => (
               <option key={index} value={city?.id}>
@@ -157,20 +139,6 @@ const UpdateTourGuide = () => {
               </option>
             ))}
           </select>
-
-          <div>
-            <img
-              src={clientProfile?.profileImage}
-              className="h-[300px] w-full"
-              alt=""
-            />
-          </div>
-          <FileUploader
-            image={image}
-            setimage={setimage}
-            handleOnFileUpload={handleOnFileUpload}
-            photo={_photo}
-          />
 
           <div className="flex justify-end">
             <Button

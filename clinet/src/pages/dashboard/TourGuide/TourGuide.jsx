@@ -61,10 +61,14 @@ const TourGuide = () => {
             <span className="font-semibold">Tour Member:</span> Up to{" "}
             {clientProfile?.uptoPeople} people
           </p>
-          <p>
+          <div className="flex gap-2 items-center">
             <span className="font-semibold">Language:</span>{" "}
-            {clientProfile?.languages}
-          </p>
+            <div className="flex gap-3">
+              {clientProfile?.languages?.map((ite, index) => (
+                <p key={index}>{ite},</p>
+              ))}
+            </div>
+          </div>
           <p>
             <span className="font-semibold">Response Time:</span>{" "}
             {clientProfile?.responseTime} hours 30 min

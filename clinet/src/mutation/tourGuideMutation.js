@@ -1,26 +1,27 @@
 import { gql } from "@apollo/client";
 
-const UPDATE_TOURGUIDEPROFILE = gql`
+const UPDATE_TOURGUIDE_PROFILE = gql`
   #graphql
-  mutation updateTourGuideProfile(
+  mutation UpdateTourGuideProfile(
+    $id: ID!
     $description: String
     $uptoPeople: String
-    $profileImage: String
     $tourGuideInstructionType: String
-    $clientId: ID
-    $id: ID
+    $cityId: ID
     $responseTime: String
+    $languages: [String]
   ) {
     updateTourGuideProfile(
+      id: $id
       description: $description
       uptoPeople: $uptoPeople
-      profileImage: $profileImage
       tourGuideInstructionType: $tourGuideInstructionType
       responseTime: $responseTime
-      id: $id
-      clientId: $clientId
+      cityId: $cityId
+      languages: $languages
     ) {
       id
+      description
     }
   }
 `;
@@ -35,6 +36,7 @@ const ADD_TOURGUIDE_PROFILE = gql`
     $clientId: ID
     $cityId: ID
     $responseTime: String
+    $languages: [String]
   ) {
     addTourGuideProfile(
       description: $description
@@ -44,10 +46,11 @@ const ADD_TOURGUIDE_PROFILE = gql`
       responseTime: $responseTime
       cityId: $cityId
       clientId: $clientId
+      languages: $languages
     ) {
       id
     }
   }
 `;
 
-export { ADD_TOURGUIDE_PROFILE, UPDATE_TOURGUIDEPROFILE };
+export { ADD_TOURGUIDE_PROFILE, UPDATE_TOURGUIDE_PROFILE };
