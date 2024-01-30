@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import "./Slider.css";
 const Slider = () => {
-  const [timeRunning] = useState(3000);
-  const [timeAutoNext] = useState(7000);
+  const [timeRunning] = useState(2000);
+  const [timeAutoNext] = useState(9000);
 
   let runTimeOut;
   let runNextAuto;
@@ -54,17 +54,12 @@ const Slider = () => {
       <div className="list">
         <div className="item">
           <img src="https://i.ibb.co/3SDRgg5/img-1.webp" alt="" />
-          <div className="content max-w-[70%] md:max-w-[80%] lg:max-w-[80%]">
-            <div className="author">LUNDEV</div>
-            <div className="title">DESIGN SLIDER</div>
-            <div className="topic">ANIMAL</div>
+          <div className="content max-w-[70%] md:max-w-[80%] lg:max-w-[70%]">
+          
+            <div className="title">OUR POPULAR DESTINATIONS</div>
+            <div className="topic">INDEA</div>
             <div className="des">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-              sequi, rem magnam nesciunt minima placeat, itaque eum neque
-              officiis unde, eaque optio ratione aliquid assumenda facere ab et
-              quasi ducimus aut doloribus non numquam. Explicabo, laboriosam
-              nisi reprehenderit tempora at laborum natus unde. Ut,
-              exercitationem eum aperiam illo illum laudantium?
+            India, a South Asian nation, is known for its rich history, diverse culture, and vibrant traditions. With a population of over 1.3 billion people, it's the world's second-most populous country. India boasts a parliamentary democratic system, and its economy has witnessed significant growth. Renowned for landmarks like the Taj Mahal and diverse landscapes, from the Himalayas to coastal areas, India is a mosaic of languages, religions, and traditions.
             </div>
             <div className="buttons">
               <button>SEE MORE</button>
@@ -74,17 +69,12 @@ const Slider = () => {
         </div>
         <div className="item">
           <img src="https://i.ibb.co/wrmwNH3/img-2.webp" alt="" />
-          <div className="content max-w-[70%] md:max-w-[80%] lg:max-w-[80%] w">
-            <div className="author">LUNDEV</div>
-            <div className="title">DESIGN SLIDER</div>
-            <div className="topic">ANIMAL</div>
+          <div className="content max-w-[70%] md:max-w-[80%] lg:max-w-[70%] w">
+          
+            <div className="title">OUR POPULAR DESTINATIONS</div>
+            <div className="topic">EGYPT</div>
             <div className="des">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-              sequi, rem magnam nesciunt minima placeat, itaque eum neque
-              officiis unde, eaque optio ratione aliquid assumenda facere ab et
-              quasi ducimus aut doloribus non numquam. Explicabo, laboriosam
-              nisi reprehenderit tempora at laborum natus unde. Ut,
-              exercitationem eum aperiam illo illum laudantium?
+            Egypt, situated in northeastern Africa, is renowned for its ancient civilization, particularly the pyramids and Sphinx in Giza. The country has a rich history spanning thousands of years, with significant contributions to art, science, and culture. The Nile River, the longest in Africa, has been a lifeline for Egyptian civilization. Modern Egypt is a mix of ancient wonders and a growing urban landscape, making it a fascinating blend of tradition and progress.
             </div>
             <div className="buttons">
               <button>SEE MORE</button>
@@ -94,17 +84,12 @@ const Slider = () => {
         </div>
         <div className="item">
           <img src="https://i.ibb.co/gjrZJv1/img-3.webp" alt="" />
-          <div className="content max-w-[70%] md:max-w-[80%] lg:max-w-[80%] w">
-            <div className="author">LUNDEV</div>
-            <div className="title">DESIGN SLIDER</div>
-            <div className="topic">ANIMAL</div>
+          <div className="content max-w-[70%] md:max-w-[80%] lg:max-w-[70%] w">
+          
+            <div className="title">OUR POPULAR DESTINATIONS</div>
+            <div className="topic">NEPAL</div>
             <div className="des">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-              sequi, rem magnam nesciunt minima placeat, itaque eum neque
-              officiis unde, eaque optio ratione aliquid assumenda facere ab et
-              quasi ducimus aut doloribus non numquam. Explicabo, laboriosam
-              nisi reprehenderit tempora at laborum natus unde. Ut,
-              exercitationem eum aperiam illo illum laudantium?
+            Nepal, a landlocked country in South Asia, is nestled between China and India, home to the majestic Himalayas, including the world's highest peak, Mount Everest. Known for its diverse landscapes, from the plains of the Terai to the towering mountains, Nepal is culturally rich with a blend of Hindu and Buddhist traditions. Kathmandu, the capital, holds ancient temples and palaces, reflecting the country's deep historical and spiritual significance.
             </div>
             <div className="buttons">
               <button>SEE MORE</button>
@@ -114,17 +99,12 @@ const Slider = () => {
         </div>
         <div className="item">
           <img src="https://i.ibb.co/HHPfq62/img-4.webp" alt="" />
-          <div className="content max-w-[70%] md:max-w-[80%] lg:max-w-[80%] w">
-            <div className="author">LUNDEV</div>
-            <div className="title">DESIGN SLIDER</div>
-            <div className="topic">ANIMAL</div>
+          <div className="content max-w-[70%] md:max-w-[80%] lg:max-w-[70%] w">
+          
+            <div className="title">OUR POPULAR DESTINATIONS</div>
+            <div className="topic">ITALI</div>
             <div className="des">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-              sequi, rem magnam nesciunt minima placeat, itaque eum neque
-              officiis unde, eaque optio ratione aliquid assumenda facere ab et
-              quasi ducimus aut doloribus non numquam. Explicabo, laboriosam
-              nisi reprehenderit tempora at laborum natus unde. Ut,
-              exercitationem eum aperiam illo illum laudantium?
+            Italy, located in Southern Europe, is renowned for its rich cultural heritage, historical landmarks, and culinary excellence. The country, with a diverse landscape ranging from the Alps to the Mediterranean, is famous for iconic cities like Rome, Florence, and Venice. Italy played a pivotal role in shaping Western art, architecture, and literature. Its cuisine, celebrated globally, includes pasta, pizza, and a variety of regional dishes. Italy is a hub of art, history, and gastronomy.
             </div>
             <div className="buttons">
               <button>SEE MORE</button>
@@ -165,16 +145,16 @@ const Slider = () => {
         </div>
       </div>
 
-      <div className="arrows ml-[6%] lg:ml-[10%]">
+      <div className="arrows ml-[5%] lg:ml-[10%]">
       <button
-          className="icon w-14 h-14"
+          className=" w-14 h-14"
           onClick={() => showSlider("prev")}
           id="prev"
         >
           {"<"}
         </button>
         <button
-          className="icon w-14 h-14"
+          className="w-14 h-14"
           onClick={() => showSlider("next")}
           id="next"
         >

@@ -87,7 +87,7 @@ const PopularDestination = () => {
             <Card>
               <div className="relative rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-500 ease-in-out">
                 <div
-                  className="w-full h-[160px] bg-cover bg-center pt-4 relative group"
+                  className="w-full h-[170px] bg-cover bg-center pt-4 relative group"
                   style={{ backgroundImage: `url(${item.img})` }}
                 >
                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 transition-opacity opacity-0 group-hover:opacity-100">
@@ -100,9 +100,6 @@ const PopularDestination = () => {
                       </h1>
                     </div>
                   </div>
-                </div>
-                <div className="py-2 border-2">
-                  <h4 className="text-center font-semibold">{item.name}</h4>
                 </div>
               </div>
             </Card>
