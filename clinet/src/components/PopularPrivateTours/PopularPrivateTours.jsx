@@ -112,12 +112,7 @@ const PopularPrivateTours = () => {
         {popularPrivateTours.map((tourSpot, index) => (
           <Card key={index} sx={{ maxWidth: 345 }}>
             <CardActionArea>
-              {/* <CardMedia
-                component="img"
-                height="140"
-                image="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="green iguana"
-              /> */}
+              
               <Swiper
                 slidesPerView={1}
                 spaceBetween={30}
@@ -131,19 +126,19 @@ const PopularPrivateTours = () => {
               >
                 <SwiperSlide>
                   <img
-                    src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src="https://plus.unsplash.com/premium_photo-1679865372673-8d1655a73b50?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt=""
                   />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img
-                    src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src="https://images.unsplash.com/photo-1491555103944-7c647fd857e6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt=""
                   />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img
-                    src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src="https://images.unsplash.com/photo-1619120238346-978e07731e77?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt=""
                   />
                 </SwiperSlide>
