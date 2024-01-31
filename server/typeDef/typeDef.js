@@ -15,6 +15,7 @@ const TourSpot = require("../models/TourSpot");
 const Review = require("../models/Review");
 const GuideReview = require("../models/GuideReview");
 const TourGuide = require("../models/TourGuide");
+const Images = require("../models/Images");
 
 const TimestampType = new GraphQLScalarType({
   name: "Timestamp",
@@ -393,7 +394,6 @@ const TourGuideType = new GraphQLObjectType({
     profileImage: { type: GraphQLString },
     tourGuideInstructionType: { type: GraphQLString },
     client: { type: ClientType },
-
     rating: { type: GraphQLInt },
     guideReview: {
       type: new GraphQLList(TourGuideReviewType),
@@ -408,6 +408,31 @@ const TourGuideType = new GraphQLObjectType({
         return await City.findOne({ _id: parent.cityId });
       },
     },
+    images: {
+      type: new GraphQLList(ImageType),
+      resolve: async (parent, args) => {
+        try {
+          return await Images.find({
+            clientProfileID: parent.id,
+          });
+        } catch (error) {
+          console.log(error);
+          throw new Error(error);
+        }
+      },
+    },
+  }),
+});
+
+
+const ImageType = new GraphQLObjectType({
+  name: "Image",
+  fields: () => ({
+    id: { type: GraphQLID },
+    clientId: { type: GraphQLID },
+    clientProfileID: { type: GraphQLID },
+    urls: { type: GraphQLList(GraphQLString) },
+    title: { type: GraphQLString },
   }),
 });
 
@@ -429,4 +454,5 @@ module.exports = {
   TourGuideType,
   TourGuideReviewType,
   TourGuideDescriptionType,
+  ImageType,
 };
