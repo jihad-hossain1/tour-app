@@ -8,86 +8,84 @@ import PopularPrivateTours from "../../components/PopularPrivateTours/PopularPri
 import PopularPrivateCars from "../../components/PopularPrivateCars/PopularPrivateCars";
 import NewPrivateTours from "../../components/NewPrivateTours/NewPrivateTours";
 import PopularVirtualTours from "../../components/PopularVirtualTours/PopularVirtualTours";
-import ReviewGuideNav from "../../components/TourGuide/GuidePerson/ReviewGuideNav";
-import ImageGellary from "../../components/TourGuide/ImageGellary";
-import { CiClock2, CiLocationOn, CiLock } from "react-icons/ci";
-import { LuMessagesSquare } from "react-icons/lu";
-import { IoPeopleCircleOutline } from "react-icons/io5";
-import { Avatar, Card, Rating, Typography } from "@mui/material";
-import TourMaintainHistry from "../../components/TourGuide/GuidePerson/TourMaintainHistry";
-import PersonalizedTour from "../../components/TourGuide/GuidePerson/PersonalizedTour";
-import GuideReserve from "../../components/TourGuide/GuidePerson/GuideReserve";
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Button from '@mui/material/Button';
+import { Avatar, Card, Rating } from "@mui/material";
 export default function Destination() {
-    const images = [
-        { img: "https://i.ibb.co/3Mvr2cx/141344.jpg" },
-        { img: "https://i.ibb.co/LrtBvtD/141347.jpg" },
-        { img: "https://i.ibb.co/C2LnVJ7/141343.jpg" },
-        { img: "https://i.ibb.co/0FHwFPv/141348.jpg" },
-        { img: "https://i.ibb.co/PCLcQVt/141345.jpg" },
-        { img: "https://i.ibb.co/mFYrB32/141346.jpg" },
-        { img: "https://i.ibb.co/y8b22cj/141341.jpg" },
-        { img: "https://i.ibb.co/1K2M2Sr/141349.jpg" },
-      ];
-      const scheduleReview = [
-        {
-          time: "09.00 AM",
-          title: "Meeting Point",
-          details: "At your hotel or Tangier port/airport",
-        },
-        {
-          time: "09.00 AM",
-          title: "Pick up from your hotel, or Tangier's port/airport",
-          details:
-            "Get picked up by Rabab, a female licensed local tour guide, and a driver from your hotel, or from the port/airport if you are coming by ferry or by flight. Have a brief introduction of how your day will be spent and start your tour immediately.",
-        },
-        {
-          time: "09:30 AM",
-          title: "Boulevard Mohammed 5th, French & Spanish districts",
-          details:
-            "Have a nice drive through the main avenues of Tangier including Mohammed the 5th Boulevard, Louis Pasteur Boulevard, in addition to the French and Spanish districts, and learn about Tangier when it was an International Zone.",
-        },
-        {
-          time: "10:30 AM",
-          title: "Cap Spartel",
-          details:
-            "Arrive to Cap Spartel, the place where the Mediterranean Sea meets the Atlantic Ocean. Learn about the history of the lighthouse that was built in 1864.Optional stop for mint tea and Moroccan pastries.",
-        },
-        {
-          time: "11:00 AM",
-          title: "Caves of Hercules",
-          details:
-            "Visit the Caves of Hercules that date from the Neolithic Era and learn about its history and how the place is related to the Greek mythology.",
-        },
-        {
-          time: "12:00 PM",
-          title: "Kasbah",
-          details:
-            "Arriving to the Kasbah, have a walk in its narrow alleyways and enjoy its architecture while learning about the endless events and stories that took place here since the 15th century.",
-        },
-        {
-          time: "12:50 PM",
-          title: "Kasbah museum",
-          details:
-            "Visit the Kasbah museum that served as a Palace for Moroccan Sultans since the 17th century. The palace was built by Soultan Moulay Ismail and is now a museum with Punic and Roman remains. The architecture of the place is just breathtaking.",
-        },
-        {
-          time: "01:20 PM",
-          title: "Lunch time (Optional)",
-          details:
-            "It is recommended to have a stop for lunch and try typical Moroccan food in one of the local restaurants. Vegetarian, vegan, gluten free and nuts free options are available.",
-        },
-        {
-          time: "02:00 PM",
-          title: "Medina (Grand Socco, Mendoubia gardens, food market)",
-          details:
-            "After lunch, start discovering the vibrant Medina. Walk through its busy streets following the route of Matisse the French painter, and discover its markets including the food and fish market. Have a stop in the Grand Socco, discover the Mendoubia gardens.",
-        },
-        {
-          time: "03:30 PM",
-          title: "End of the tour",
-          details: "hotel / airport drop off",
-        },
-      ];
+  const images = [
+    { img: "https://i.ibb.co/3Mvr2cx/141344.jpg" },
+    { img: "https://i.ibb.co/LrtBvtD/141347.jpg" },
+    { img: "https://i.ibb.co/C2LnVJ7/141343.jpg" },
+    { img: "https://i.ibb.co/0FHwFPv/141348.jpg" },
+    { img: "https://i.ibb.co/PCLcQVt/141345.jpg" },
+    { img: "https://i.ibb.co/mFYrB32/141346.jpg" },
+    { img: "https://i.ibb.co/y8b22cj/141341.jpg" },
+    { img: "https://i.ibb.co/1K2M2Sr/141349.jpg" },
+  ];
+  const scheduleReview = [
+    {
+      time: "09.00 AM",
+      title: "Meeting Point",
+      details: "At your hotel or Tangier port/airport",
+    },
+    {
+      time: "09.00 AM",
+      title: "Pick up from your hotel, or Tangier's port/airport",
+      details:
+        "Get picked up by Rabab, a female licensed local tour guide, and a driver from your hotel, or from the port/airport if you are coming by ferry or by flight. Have a brief introduction of how your day will be spent and start your tour immediately.",
+    },
+    {
+      time: "09:30 AM",
+      title: "Boulevard Mohammed 5th, French & Spanish districts",
+      details:
+        "Have a nice drive through the main avenues of Tangier including Mohammed the 5th Boulevard, Louis Pasteur Boulevard, in addition to the French and Spanish districts, and learn about Tangier when it was an International Zone.",
+    },
+    {
+      time: "10:30 AM",
+      title: "Cap Spartel",
+      details:
+        "Arrive to Cap Spartel, the place where the Mediterranean Sea meets the Atlantic Ocean. Learn about the history of the lighthouse that was built in 1864.Optional stop for mint tea and Moroccan pastries.",
+    },
+    {
+      time: "11:00 AM",
+      title: "Caves of Hercules",
+      details:
+        "Visit the Caves of Hercules that date from the Neolithic Era and learn about its history and how the place is related to the Greek mythology.",
+    },
+    {
+      time: "12:00 PM",
+      title: "Kasbah",
+      details:
+        "Arriving to the Kasbah, have a walk in its narrow alleyways and enjoy its architecture while learning about the endless events and stories that took place here since the 15th century.",
+    },
+    {
+      time: "12:50 PM",
+      title: "Kasbah museum",
+      details:
+        "Visit the Kasbah museum that served as a Palace for Moroccan Sultans since the 17th century. The palace was built by Soultan Moulay Ismail and is now a museum with Punic and Roman remains. The architecture of the place is just breathtaking.",
+    },
+    {
+      time: "01:20 PM",
+      title: "Lunch time (Optional)",
+      details:
+        "It is recommended to have a stop for lunch and try typical Moroccan food in one of the local restaurants. Vegetarian, vegan, gluten free and nuts free options are available.",
+    },
+    {
+      time: "02:00 PM",
+      title: "Medina (Grand Socco, Mendoubia gardens, food market)",
+      details:
+        "After lunch, start discovering the vibrant Medina. Walk through its busy streets following the route of Matisse the French painter, and discover its markets including the food and fish market. Have a stop in the Grand Socco, discover the Mendoubia gardens.",
+    },
+    {
+      time: "03:30 PM",
+      title: "End of the tour",
+      details: "hotel / airport drop off",
+    },
+  ];
   return (
     <div className=" relative">
       <div className="relative">
@@ -144,38 +142,134 @@ export default function Destination() {
           <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
             Japan
           </span>{" "}
-            Tour Reviews
+          Tour Reviews
         </h4>
         <div>
-      <div className="mt-16 flex flex-col gap-6 lg:gap-10">
-        {[1, 2, 3].map((review, _i) => (
-          <div key={_i} className="">
-            <Card style={{ padding: "14px", borderRadius: "12px" }}>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                  <Avatar src="" alt="review user" />
-                  <h4 className="text-blue-800 ">{`Matjaz K`}</h4>
-                  <Rating size="small" value={4} />
-                  <span className="text-sm font-semibold">{`${5}/${5} `}</span>
-                </div>
-                <div className="text-sm">Jan 31, 2024</div>
+          <div className="mt-16 flex flex-col gap-6 lg:gap-10">
+            {[1, 2, 3].map((review, _i) => (
+              <div key={_i} className="">
+                <Card style={{ padding: "14px", borderRadius: "12px" }}>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Avatar src="" alt="review user" />
+                      <h4 className="text-blue-800 ">{`Matjaz K`}</h4>
+                      <Rating size="small" value={4} />
+                      <span className="text-sm font-semibold">{`${5}/${5} `}</span>
+                    </div>
+                    <div className="text-sm">Jan 31, 2024</div>
+                  </div>
+                  <hr className="h-[1px] bg-zinc-700 my-5" />
+                  <h4 className="font-semibold text-xl">{`“ Great Experience! ”`}</h4>
+                  <p className="text-sm my-3">
+                    Our sightseeing trip in and around the outskirts of Tangier
+                    was truly made memorable by Rababe. She is an outstanding
+                    private guide with an impressive grasp of local culture and
+                    history. She added depth to every destination without
+                    overwhelming us. It is important to note that her warmth and
+                    friendliness created a personal touch, making each moment
+                    feel special. We felt comfortable and welcome. Overall,
+                  </p>
+                </Card>
               </div>
-              <hr className="h-[1px] bg-zinc-700 my-5" />
-              <h4 className="font-semibold text-xl">{`“ Great Experience! ”`}</h4>
-              <p className="text-sm my-3">
-                Our sightseeing trip in and around the outskirts of Tangier was
-                truly made memorable by Rababe. She is an outstanding private
-                guide with an impressive grasp of local culture and history. She
-                added depth to every destination without overwhelming us. It is
-                important to note that her warmth and friendliness created a
-                personal touch, making each moment feel special. We felt
-                comfortable and welcome. Overall,
-              </p>
-            </Card>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    </div>
+      {/* Asked Questions Section */}
+      <div>
+      <h4 className="text-3xl ">
+          <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
+            Japan
+          </span>{" "}
+          Frequently Asked Questions
+        </h4>
+        <div>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
+              Accordion 1
+            </AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2-content"
+              id="panel2-header"
+            >
+              Accordion 2
+            </AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2-content"
+              id="panel3-header"
+            >
+              Accordion 2
+            </AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2-content"
+              id="panel4-header"
+            >
+              Accordion 2
+            </AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2-content"
+              id="panel5-header"
+            >
+              Accordion 2
+            </AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2-content"
+              id="panel6-header"
+            >
+              Accordion 2
+            </AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </AccordionDetails>
+          </Accordion>
+          
+        </div>
       </div>
       <div className="mx-10">
         <h4 className="text-3xl ">
