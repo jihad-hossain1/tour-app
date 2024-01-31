@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { GET_CLIENT, GET_CLIENTS } from "../../../../queries/clientsQuery";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { Button } from "@mui/material";
-import FileUploader from "../../TourSpot/FileUploader";
+import toast, { Toaster } from "react-hot-toast";
 import { GET_CITIE } from "../../../../queries/countriesQuery";
 import { UPDATE_TOURGUIDE_PROFILE } from "../../../../mutation/tourGuideMutation";
 
 const UpdateTourGuide = () => {
+  const navaigate = useNavigate();
   const { id } = useParams();
 
   const {
@@ -33,7 +34,10 @@ const UpdateTourGuide = () => {
 
   const [formData, setFormData] = useState(scafolding);
 
-  const [updateTourGuideProfile] = useMutation(UPDATE_TOURGUIDE_PROFILE, {
+  const [
+    updateTourGuideProfile,
+    { data: updateData, loading: updateDataLoading, error: updateDataError },
+  ] = useMutation(UPDATE_TOURGUIDE_PROFILE, {
     variables: {
       id: clientProfile?.id,
       description: formData?.description,
@@ -44,7 +48,7 @@ const UpdateTourGuide = () => {
       tourGuideInstructionType: formData?.tourGuideInstructionType,
     },
     refetchQueries: [
-      { query: GET_CLIENTS, variables: { id: clientProfile?.id } },
+      { query: GET_CLIENT, variables: { id: userData?.client?.id } },
     ],
   });
 
@@ -66,12 +70,12 @@ const UpdateTourGuide = () => {
     tourGuideInstructionType,
   } = formData;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    // console.log(formData);
 
-    await updateTourGuideProfile(
+    updateTourGuideProfile(
       description,
       uptoPeople,
       cityId,
@@ -79,10 +83,15 @@ const UpdateTourGuide = () => {
       languages,
       tourGuideInstructionType
     );
+    toast.success("Update successfull");
+    setTimeout(() => {
+      navaigate("/dashboard");
+    }, 1000);
   };
-
+  // console.log(updateData);
   return (
     <div>
+      <Toaster />
       <h4>Update TourGuide Profile</h4>
       <div className="max-w-screen-md mx-auto px-2">
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-3">

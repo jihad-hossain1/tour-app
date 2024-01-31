@@ -33,6 +33,13 @@ const GET_CLIENT = gql`
         city {
           name
         }
+        images {
+          id
+          title
+          clientId
+          clientProfileID
+          urls
+        }
       }
     }
   }

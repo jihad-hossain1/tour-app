@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./router/Router.jsx";
 import Layout from "./layout/Layout.jsx";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { Toaster } from "react-hot-toast";
 
 const client = new ApolloClient({
   uri: `${import.meta.env.VITE_BASE_URL}`,
@@ -16,5 +17,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router}>
       <Layout />
     </RouterProvider>
+    <Toaster />
   </ApolloProvider>
 );
