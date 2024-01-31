@@ -209,6 +209,18 @@ const CityForAdd = new GraphQLObjectType({
         return _i;
       },
     },
+    totalTourSpots: {
+      type: new GraphQLList(TourSpotType),
+      resolve: async (parent, args) => {
+        try {
+          const _i = await TourSpot.find({ cityId: parent.id });
+          // console.log(_i);
+          return _i;
+        } catch (error) {
+          throw new Error(error);
+        }
+      },
+    },
   }),
 });
 

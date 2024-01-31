@@ -20,6 +20,8 @@ const UpdateTourGuide = () => {
   });
 
   const clientProfile = userData?.client?.clientProfile;
+  const tourSpotByCity = userData?.client?.clientProfile?.city?.totalTourSpots;
+  // console.log(tourSpotByCity);
 
   const { loading: isCityLoading, data: cities } = useQuery(GET_CITIE);
 
@@ -30,14 +32,12 @@ const UpdateTourGuide = () => {
     languages: clientProfile?.languages,
     tourGuideInstructionType: clientProfile?.tourGuideInstructionType,
     cityId: clientProfile?.cityId,
+    tourPlaceId: "",
   };
 
   const [formData, setFormData] = useState(scafolding);
 
-  const [
-    updateTourGuideProfile,
-    { data: updateData, loading: updateDataLoading, error: updateDataError },
-  ] = useMutation(UPDATE_TOURGUIDE_PROFILE, {
+  const [updateTourGuideProfile] = useMutation(UPDATE_TOURGUIDE_PROFILE, {
     variables: {
       id: clientProfile?.id,
       description: formData?.description,
@@ -46,6 +46,7 @@ const UpdateTourGuide = () => {
       clientId: formData?.clientId,
       languages: formData?.languages,
       tourGuideInstructionType: formData?.tourGuideInstructionType,
+      tourPlaceId: formData?.tourPlaceId,
     },
     refetchQueries: [
       { query: GET_CLIENT, variables: { id: userData?.client?.id } },
@@ -68,6 +69,7 @@ const UpdateTourGuide = () => {
     responseTime,
     languages,
     tourGuideInstructionType,
+    tourPlaceId,
   } = formData;
 
   const handleSubmit = (e) => {
@@ -81,7 +83,8 @@ const UpdateTourGuide = () => {
       cityId,
       responseTime,
       languages,
-      tourGuideInstructionType
+      tourGuideInstructionType,
+      tourPlaceId
     );
     toast.success("Update successfull");
     setTimeout(() => {
@@ -145,6 +148,22 @@ const UpdateTourGuide = () => {
             {cities?.cities?.map((city, index) => (
               <option key={index} value={city?.id}>
                 {city?.name}
+              </option>
+            ))}
+          </select>
+          <select
+            labelId="cid"
+            variant="outlined"
+            onChange={handleChange}
+            name="tourPlaceId"
+            className="w-full inpt"
+            label="Choice tour place"
+            placeholder="Choice tour place"
+            defaultValue={formData.tourPlaceId}
+          >
+            {tourSpotByCity?.map((tourPlace, index) => (
+              <option key={index} value={tourPlace?.id}>
+                {tourPlace?.name}
               </option>
             ))}
           </select>
