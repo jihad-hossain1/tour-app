@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import { Outlet } from "react-router-dom";
-import Header2 from "../components/Header/Header2";
 import Footer from "../components/Footer/Footer";
 import Loader from "./Loader/Loader";
-import Header3 from "../components/Header/Nav/Header/Header3";
+import Header from "../components/Header/Nav/Header/Header"
 
 const Layout = () => {
   const [loading, setLoading] = useState(true)
@@ -20,8 +18,7 @@ const Layout = () => {
     <>
       {loading ? (<Loader />) : (<div className="text-zinc-950 bg-zinc-50 w-full min-h-screen ">
         <div className="fixed z-50 w-full">
-          {/* <Header /> */}
-          <Header3 />
+          <Header />
         </div >
         <div className="">
           <Outlet />
@@ -29,17 +26,6 @@ const Layout = () => {
         <Footer />
       </div >)}
     </>
-    // <div className="text-zinc-950 bg-zinc-50 w-full min-h-screen ">
-    //   <div className="fixed z-50 w-full">
-    //     {/* <Header /> */}
-    //     {/* <Header2 /> */}
-    //     <Header3></Header3>
-    //   </div>
-    //   <div className="">
-    //     <Outlet />
-    //   </div>
-    //   <Footer />
-    // </div>
   );
 };
 

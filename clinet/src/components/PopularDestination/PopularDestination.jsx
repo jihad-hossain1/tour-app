@@ -43,7 +43,7 @@ const PopularDestination = () => {
       <Title firstText="Popular" secondText="Tour Destinations" />
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {countryData?.map((item, _i) => (
-          <Link to={"#"}>
+          <Link to={"#"} key={_i}>
             <Card>
               <div className="relative rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-500 ease-in-out">
                 <div

@@ -4,7 +4,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Title from '../Title/Title';
-import newTourGuides from '../AllDemoDataImporter/AllDemoDataImporter';
+import { newTourGuides } from '../AllDemoDataImporter/AllDemoDataImporter';
 
 const NewTourGuides = () => {
     return (
