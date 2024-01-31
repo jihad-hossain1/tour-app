@@ -411,6 +411,18 @@ const TourGuideType = new GraphQLObjectType({
   }),
 });
 
+
+const ImageType = new GraphQLObjectType({
+  name: "Image",
+  fields: () => ({
+    id: { type: GraphQLID },
+    clientId: { type: GraphQLID },
+    clientProfileID: { type: GraphQLID },
+    urls: { type: GraphQLList(GraphQLString) },
+    title: { type: GraphQLString },
+  }),
+});
+
 module.exports = {
   TourSpotType,
   CityType,
@@ -429,4 +441,5 @@ module.exports = {
   TourGuideType,
   TourGuideReviewType,
   TourGuideDescriptionType,
+  ImageType,
 };

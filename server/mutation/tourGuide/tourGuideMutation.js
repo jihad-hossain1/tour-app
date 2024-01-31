@@ -8,7 +8,8 @@ const {
 } = require("graphql");
 
 const TourGuide = require("../../models/TourGuide");
-const { TourGuideType } = require("../../typeDef/typeDef");
+const { TourGuideType, ImageType } = require("../../typeDef/typeDef");
+const Images = require("../../models/Images");
 
 const addTourGuideProfile = {
   type: TourGuideType,
@@ -33,6 +34,25 @@ const addTourGuideProfile = {
     }
   },
 };
+const uploadTourImages = {
+  type: ImageType,
+  args: {
+    clientId: { type: GraphQLID },
+    clientProfileID: { type: GraphQLID },
+    urls: { type: GraphQLList(GraphQLString) },
+    title: { type: GraphQLString },
+  },
+  resolve: async (parent, args) => {
+    try {
+      // console.log(args);
+      const upImage = new Images(args);
+      const saved = await upImage.save();
+      return saved;
+    } catch (error) {
+      throw new Error("Error adding tour up images");
+    }
+  },
+};
 
 const updateTourGuideProfile = {
   type: TourGuideType,
@@ -48,7 +68,7 @@ const updateTourGuideProfile = {
   },
   resolve: async (parent, args) => {
     try {
-      // console.log(args);
+      console.log(args);
       return await TourGuide.findByIdAndUpdate(
         args.id,
         {
@@ -64,4 +84,8 @@ const updateTourGuideProfile = {
   },
 };
 
-module.exports = { addTourGuideProfile, updateTourGuideProfile };
+module.exports = {
+  addTourGuideProfile,
+  updateTourGuideProfile,
+  uploadTourImages,
+};

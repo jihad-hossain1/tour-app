@@ -48,7 +48,7 @@ const UpdateTourGuide = () => {
       tourGuideInstructionType: formData?.tourGuideInstructionType,
     },
     refetchQueries: [
-      { query: GET_CLIENTS, variables: { id: userData?.client?.id } },
+      { query: GET_CLIENT, variables: { id: userData?.client?.id } },
     ],
   });
 

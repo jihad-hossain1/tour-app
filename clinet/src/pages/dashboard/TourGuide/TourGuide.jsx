@@ -5,6 +5,8 @@ import { GET_CLIENT } from "../../../queries/clientsQuery";
 import TourGuideProfileForm from "./action/TourGuideProfileForm";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import UpdateProfilePhoto from "./action/UpdateProfilePhoto";
+import UploadTourImages from "./action/UploadTourImages";
 
 const TourGuide = () => {
   const [isClient, setClient] = useState(getClient());
@@ -25,19 +27,26 @@ const TourGuide = () => {
         </>
       ) : (
         <div className="flex flex-col gap-3">
-          <Link
-            to={`/dashboard/tourguide/profile-update/${data?.client?.id}`}
-            className={data?.client?.clientProfile ? "block w-fit" : "hidden"}
-          >
-            <Button variant="outlined" color="success">
-              Profile Update
-            </Button>
-          </Link>
-          <img
-            src={clientProfile?.profileImage}
-            alt=""
-            className="rounded-md object-cover max-h-96 w-full"
+          <UpdateProfilePhoto
+            profileImage={clientProfile?.profileImage}
+            clientId={data?.client?.id}
+            clientProfileID={clientProfile?.id}
           />
+          <div className="flex gap-4 items-center">
+            <Link
+              to={`/dashboard/tourguide/profile-update/${data?.client?.id}`}
+              className={data?.client?.clientProfile ? "block w-fit" : "hidden"}
+            >
+              <Button variant="outlined" color="success">
+                Profile Update
+              </Button>
+            </Link>
+
+            <UploadTourImages
+              clientId={data?.client?.id}
+              clientProfileID={clientProfile?.id}
+            />
+          </div>
           <h4>
             <span className="font-semibold">Full Name:</span>{" "}
             {data?.client?.name}

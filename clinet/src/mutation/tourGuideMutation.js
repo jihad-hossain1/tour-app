@@ -25,6 +25,14 @@ const UPDATE_TOURGUIDE_PROFILE = gql`
     }
   }
 `;
+const UPDATE_TOURGUIDE_PROFILE_PHOTO = gql`
+  #graphql
+  mutation UpdateTourGuideProfile($id: ID!, $profileImage: String) {
+    updateTourGuideProfile(id: $id, profileImage: $profileImage) {
+      id
+    }
+  }
+`;
 
 const ADD_TOURGUIDE_PROFILE = gql`
   #graphql
@@ -53,4 +61,8 @@ const ADD_TOURGUIDE_PROFILE = gql`
   }
 `;
 
-export { ADD_TOURGUIDE_PROFILE, UPDATE_TOURGUIDE_PROFILE };
+export {
+  ADD_TOURGUIDE_PROFILE,
+  UPDATE_TOURGUIDE_PROFILE,
+  UPDATE_TOURGUIDE_PROFILE_PHOTO,
+};
