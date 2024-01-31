@@ -16,6 +16,8 @@ const TourGuide = () => {
   });
 
   const clientProfile = data?.client?.clientProfile;
+  const totalImages = clientProfile?.images?.flatMap((item) => item?.urls);
+  // console.log(totalImages);
   return (
     <>
       {/* add tour guide profile  */}
@@ -95,6 +97,29 @@ const TourGuide = () => {
                 <span className="font-semibold">About:</span>{" "}
                 {clientProfile?.description}
               </p>
+              <div>
+                <p className="flex items-center gap-2">
+                  <span className="font-semibold">Total Uploaded Images:</span>
+                  <span className="">{totalImages?.length || 0}</span>
+                </p>
+                <div className="flex flex-col gap-2">
+                  {clientProfile?.images?.map((item) => (
+                    <div key={item?.id}>
+                      <h4>{item?.title}</h4>
+                      <div className="flex gap-3">
+                        {item?.urls?.map((ite, index) => (
+                          <img
+                            key={index}
+                            src={ite}
+                            alt="tour photo"
+                            className="w-20 rounded-md"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
         </div>
