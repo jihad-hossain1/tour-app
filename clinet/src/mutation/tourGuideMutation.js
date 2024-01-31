@@ -33,6 +33,24 @@ const UPDATE_TOURGUIDE_PROFILE_PHOTO = gql`
     }
   }
 `;
+const UPLOAD_TOUR_IMAGES = gql`
+  #graphql
+  mutation UploadTourImages(
+    $clientId: ID!
+    $clientProfileID: ID!
+    $title: String
+    $urls: [String]
+  ) {
+    uploadTourImages(
+      clientId: $clientId
+      urls: $urls
+      clientProfileID: $clientProfileID
+      title: $title
+    ) {
+      id
+    }
+  }
+`;
 
 const ADD_TOURGUIDE_PROFILE = gql`
   #graphql
@@ -65,4 +83,5 @@ export {
   ADD_TOURGUIDE_PROFILE,
   UPDATE_TOURGUIDE_PROFILE,
   UPDATE_TOURGUIDE_PROFILE_PHOTO,
+  UPLOAD_TOUR_IMAGES,
 };
