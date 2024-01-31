@@ -25,6 +25,7 @@ import ClientPrivateRoute from "./ClientRoute";
 import AdminRoute from "./AdminRoute";
 import DeniedPage from "../pages/DeniedPage";
 import UpdateTourGuide from "../pages/dashboard/TourGuide/action/UpdateTourGuide";
+import Destination from "../pages/Destination/Destination";
 
 export const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ export const router = createBrowserRouter([
       {
         path: "/denied",
         element: <DeniedPage />,
+      },
+      {
+        path: "/destination",
+        element: <Destination />,
       },
     ],
   },

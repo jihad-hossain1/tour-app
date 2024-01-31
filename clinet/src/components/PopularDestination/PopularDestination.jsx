@@ -40,7 +40,7 @@ const countryData = [
 const PopularDestination = () => {
   return (
     <main className="px-2">
-      <div className="my-6 lg:my-10">
+      <div className="my-6  lg:my-10">
         <h4 className="text-3xl ">
           <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
             Popular
@@ -48,7 +48,7 @@ const PopularDestination = () => {
           Tour Destinations
         </h4>
       </div>
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-3">
         {countryData?.map((item, _i) => (
           <Link to={"#"}>
             {/* <Card sx={{ maxWidth: 345 }}> */}
