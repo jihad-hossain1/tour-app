@@ -1,39 +1,58 @@
 import { gql } from "@apollo/client";
 
-// const UPDATE_TOURGUIDEPROFILE = gql`
-//   #graphql
-//   mutation addTourGuideProfile(
-//     $description: String
-   
-//     $profileImage: String
-   
-//     $tourGuideInstructionType: String
-//     $clientId: ID!
-//     $cityId: ID!
-    
-//   ) {
-//     addTourGuideProfile(
-//       description: $description
-     
-//       profileImage: $profileImage
-     
-//       tourGuideInstructionType: $tourGuideInstructionType
-     
-//       cityId: $cityId
-//       clientId: $clientId
-//     ) {
-//       id
-     
-    
-     
-     
-      
-     
-//     }
-//   }
-// `;
+const UPDATE_TOURGUIDE_PROFILE = gql`
+  #graphql
+  mutation UpdateTourGuideProfile(
+    $id: ID!
+    $description: String
+    $uptoPeople: String
+    $tourGuideInstructionType: String
+    $cityId: ID
+    $responseTime: String
+    $languages: [String]
+  ) {
+    updateTourGuideProfile(
+      id: $id
+      description: $description
+      uptoPeople: $uptoPeople
+      tourGuideInstructionType: $tourGuideInstructionType
+      responseTime: $responseTime
+      cityId: $cityId
+      languages: $languages
+    ) {
+      id
+      description
+    }
+  }
+`;
+const UPDATE_TOURGUIDE_PROFILE_PHOTO = gql`
+  #graphql
+  mutation UpdateTourGuideProfile($id: ID!, $profileImage: String) {
+    updateTourGuideProfile(id: $id, profileImage: $profileImage) {
+      id
+    }
+  }
+`;
+const UPLOAD_TOUR_IMAGES = gql`
+  #graphql
+  mutation UploadTourImages(
+    $clientId: ID!
+    $clientProfileID: ID!
+    $title: String
+    $urls: [String]
+  ) {
+    uploadTourImages(
+      clientId: $clientId
+      urls: $urls
+      clientProfileID: $clientProfileID
+      title: $title
+    ) {
+      id
+    }
+  }
+`;
 
-const UPDATE_TOURGUIDEPROFILE = gql`
+const ADD_TOURGUIDE_PROFILE = gql`
   #graphql
   mutation addTourGuideProfile(
     $description: String
@@ -43,6 +62,7 @@ const UPDATE_TOURGUIDEPROFILE = gql`
     $clientId: ID
     $cityId: ID
     $responseTime: String
+    $languages: [String]
   ) {
     addTourGuideProfile(
       description: $description
@@ -52,10 +72,16 @@ const UPDATE_TOURGUIDEPROFILE = gql`
       responseTime: $responseTime
       cityId: $cityId
       clientId: $clientId
+      languages: $languages
     ) {
       id
     }
   }
 `;
 
-export { UPDATE_TOURGUIDEPROFILE };
+export {
+  ADD_TOURGUIDE_PROFILE,
+  UPDATE_TOURGUIDE_PROFILE,
+  UPDATE_TOURGUIDE_PROFILE_PHOTO,
+  UPLOAD_TOUR_IMAGES,
+};

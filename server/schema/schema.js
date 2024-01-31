@@ -55,6 +55,8 @@ const {
 } = require("../mutation/review");
 const {
   addTourGuideProfile,
+  updateTourGuideProfile,
+  uploadTourImages,
 } = require("../mutation/tourGuide/tourGuideMutation");
 
 //main query
@@ -143,6 +145,8 @@ const mutation = new GraphQLObjectType({
     deleteReply,
     // tourGuide
     addTourGuideProfile,
+    updateTourGuideProfile,
+    uploadTourImages,
   },
 });
 

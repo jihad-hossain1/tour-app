@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { getClient } from "../../../router/ClientRoute";
 import { useQuery } from "@apollo/client";
 import { GET_CLIENT } from "../../../queries/clientsQuery";
-import AddTourGuideProfile from "./AddTourGuideProfile";
+import TourGuideProfileForm from "./action/TourGuideProfileForm";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import UpdateProfilePhoto from "./action/UpdateProfilePhoto";
+import UploadTourImages from "./action/UploadTourImages";
 
 const TourGuide = () => {
   const [isClient, setClient] = useState(getClient());
@@ -12,9 +16,12 @@ const TourGuide = () => {
   });
 
   const clientProfile = data?.client?.clientProfile;
+  const totalImages = clientProfile?.images?.flatMap((item) => item?.urls);
+  // console.log(totalImages);
   return (
     <>
-      <AddTourGuideProfile userData={data} cid={isClient?.id} />
+      {/* add tour guide profile  */}
+      <TourGuideProfileForm userData={data} cid={isClient?.id} />
 
       {loading ? (
         <>
@@ -22,22 +29,99 @@ const TourGuide = () => {
         </>
       ) : (
         <div className="flex flex-col gap-3">
-          <img
-            src={clientProfile?.profileImage}
-            alt=""
-            className="rounded-md object-cover max-h-96 w-full"
+          <UpdateProfilePhoto
+            profileImage={clientProfile?.profileImage}
+            clientId={data?.client?.id}
+            clientProfileID={clientProfile?.id}
           />
-          <h4>Full Name: {data?.client?.name}</h4>
-          <h4>Phone: {data?.client?.phone}</h4>
-          <h4>email: {data?.client?.email}</h4>
-          <h4>User Type: {data?.client?.clientType}</h4>
-          <h4>User Role: {data?.client?.role}</h4>
-          <p>Tour Type: {clientProfile?.tourGuideInstructionType}</p>
-          <p>Tour Member: Up to {clientProfile?.uptoPeople} people</p>
-          <p>Language: {clientProfile?.languages}</p>
-          <p>Response Time: {clientProfile?.responseTime} hours 30 min</p>
-          <p>Provide Location: {clientProfile?.city?.name}</p>
-          <p>About: {clientProfile?.description}</p>
+          <div className="flex gap-4 items-center">
+            <Link
+              to={`/dashboard/tourguide/profile-update/${data?.client?.id}`}
+              className={data?.client?.clientProfile ? "block w-fit" : "hidden"}
+            >
+              <Button variant="outlined" color="success">
+                Profile Update
+              </Button>
+            </Link>
+
+            <UploadTourImages
+              clientId={data?.client?.id}
+              clientProfileID={clientProfile?.id}
+            />
+          </div>
+          <h4>
+            <span className="font-semibold">Full Name:</span>{" "}
+            {data?.client?.name}
+          </h4>
+          <h4>
+            <span className="font-semibold">Phone:</span> {data?.client?.phone}
+          </h4>
+          <h4>
+            <span className="font-semibold">Email:</span> {data?.client?.email}
+          </h4>
+          <h4>
+            <span className="font-semibold">User Type:</span>{" "}
+            {data?.client?.clientType}
+          </h4>
+          <h4>
+            <span className="font-semibold">User Role:</span>{" "}
+            {data?.client?.role}
+          </h4>
+          {data?.client?.clientProfile && (
+            <div className="flex flex-col gap-3">
+              <p>
+                <span className="font-semibold">Tour Type:</span>{" "}
+                {clientProfile?.tourGuideInstructionType}
+              </p>
+              <p>
+                <span className="font-semibold">Tour Member:</span> Up to{" "}
+                {clientProfile?.uptoPeople} people
+              </p>
+              <div className="flex gap-2 items-center">
+                <span className="font-semibold">Language:</span>{" "}
+                <div className="flex gap-3">
+                  {clientProfile?.languages?.map((ite, index) => (
+                    <p key={index}>{ite},</p>
+                  ))}
+                </div>
+              </div>
+              <p>
+                <span className="font-semibold">Response Time:</span>{" "}
+                {clientProfile?.responseTime} hours 30 min
+              </p>
+              <p>
+                <span className="font-semibold">Provide Location:</span>{" "}
+                {clientProfile?.city?.name}
+              </p>
+              <p>
+                <span className="font-semibold">About:</span>{" "}
+                {clientProfile?.description}
+              </p>
+              <div>
+                <p className="flex items-center gap-2">
+                  <span className="font-semibold">Total Uploaded Images:</span>
+                  <span className="">{totalImages?.length || 0}</span>
+                </p>
+                <div className="flex flex-col gap-2">
+                  {clientProfile?.images?.map((item) => (
+                    <div key={item?.id}>
+                      <h4>{item?.title}</h4>
+                      <div className="flex gap-3">
+                        {item?.urls?.map((ite, index) => (
+                          <img
+                            key={index}
+                            src={ite}
+                            alt="tour photo"
+                            className="w-20 rounded-md"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </>

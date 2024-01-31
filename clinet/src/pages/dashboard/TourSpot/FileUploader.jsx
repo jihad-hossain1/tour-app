@@ -28,12 +28,12 @@ const FileUploader = ({
       <div className="flex gap-4 items-center">
         <Button
           component="label"
-          variant="contained"
+          variant="outlined"
           startIcon={<LuUploadCloud />}
           className="w-fit"
           color="warning"
         >
-          Upload photo
+          select a photo
           <VisuallyHiddenInput
             type="file"
             name=""
@@ -42,7 +42,9 @@ const FileUploader = ({
             onChange={(e) => setimage((prev) => e.target.files[0])}
           />
         </Button>
-        <button onClick={handleOnFileUpload}>upLoad</button>
+        <Button color="success" variant="outlined" onClick={handleOnFileUpload}>
+          upLoad
+        </Button>
 
         <div>
           {photo && (
