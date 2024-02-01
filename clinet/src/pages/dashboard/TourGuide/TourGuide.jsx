@@ -18,7 +18,13 @@ const TourGuide = () => {
 
   const clientProfile = data?.client?.clientProfile;
 
+  const tourGuideContribution = clientProfile?.tourGuideContribution;
+
   const totalImages = clientProfile?.images?.flatMap((item) => item?.urls);
+
+  // console.log(tourGuideContribution);
+
+  console.log("user info: ", data);
 
   return (
     <>
@@ -56,6 +62,7 @@ const TourGuide = () => {
             </Link>
 
             <UploadTourImages
+              tourGuideContribution={tourGuideContribution}
               clientId={data?.client?.id}
               clientProfileID={clientProfile?.id}
             />
@@ -79,7 +86,7 @@ const TourGuide = () => {
             {data?.client?.role}
           </h4>
           {data?.client?.clientProfile && (
-            <div className="flex flex-col gap-3">
+            <main className="flex flex-col gap-3">
               <p>
                 <span className="font-semibold">Tour Type:</span>{" "}
                 {clientProfile?.tourGuideInstructionType}
@@ -108,7 +115,7 @@ const TourGuide = () => {
                 <span className="font-semibold">About:</span>{" "}
                 {clientProfile?.description}
               </p>
-              <div>
+              <section>
                 <p className="flex items-center gap-2">
                   <span className="font-semibold">Total Uploaded Images:</span>
                   <span className="">{totalImages?.length || 0}</span>
@@ -118,10 +125,10 @@ const TourGuide = () => {
                     <div key={item?.id}>
                       <h4>{item?.title}</h4>
                       <div className="flex gap-3">
-                        {item?.urls?.map((ite, index) => (
+                        {item?.urls?.map((ite) => (
                           <img
-                            key={index}
-                            src={ite}
+                            key={ite?.id}
+                            src={ite?.image}
                             alt="tour photo"
                             className="w-20 rounded-md"
                           />
@@ -130,8 +137,18 @@ const TourGuide = () => {
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
+              </section>
+                <section>
+                  <h4> Total Tour Contribute Area: {tourGuideContribution?.length || 0} </h4>
+                <div className="flex flex-col gap-3">
+                  {tourGuideContribution?.map((contribute) => (
+                    <div key={contribute?.id}>
+                      <h4>{contribute?.title}</h4>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </main>
           )}
         </div>
       )}

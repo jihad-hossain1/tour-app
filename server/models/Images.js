@@ -1,8 +1,14 @@
 const mongoose = require("mongoose");
 
+const UrlsSchemaType = new mongoose.Schema({
+  image: {
+    type: String,
+  },
+});
+
 const Images = new mongoose.Schema({
   urls: {
-    type: Array,
+    type: [UrlsSchemaType],
     required: true,
   },
   title: {
@@ -18,6 +24,10 @@ const Images = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client",
     required: true,
+  },
+  contributionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "TourGuideContribution",
   },
 });
 

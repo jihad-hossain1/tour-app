@@ -76,11 +76,6 @@ const AddTourSpotPlaceForGuide = () => {
     let contribute = conDatas;
     addGuidePlace(title, price, tourPlaceId, clientProfileID, contribute);
 
-    if (!data?.id) {
-      toast.error(`${error?.message}`);
-      return console.log(error);
-    }
-
     toast.success("Successfully added TourPlace Contribution...");
   };
 

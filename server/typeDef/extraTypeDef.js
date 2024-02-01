@@ -18,6 +18,18 @@ const TourPlaceContributeInput = new GraphQLInputObjectType({
   },
 });
 
+
+
+const TourPlaceContributeType = new GraphQLObjectType({
+  name: "TourContributorType",
+  fields: () => ({
+    id: { type: GraphQLID },
+    picTime: { type: GraphQLString },
+    contributeTitle: { type: GraphQLString },
+    content: { type: GraphQLString },
+  }),
+});
+
 const TourGuideContributionType = new GraphQLObjectType({
   name: "TourGuideContribution",
   fields: () => ({
@@ -26,6 +38,9 @@ const TourGuideContributionType = new GraphQLObjectType({
     clientProfileID: { type: GraphQLID },
     title: { type: GraphQLString },
     price: { type: GraphQLInt },
+    contribute: {
+      type: new GraphQLList(TourPlaceContributeType),
+    },
   }),
 });
 
@@ -33,3 +48,4 @@ module.exports = {
   TourGuideContributionType,
   TourPlaceContributeInput,
 };
+
