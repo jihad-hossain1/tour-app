@@ -29,54 +29,41 @@ const MenuProps = {
 const emptyArray = [];
 const AddTourSpotPlaceForGuide = () => {
   const [conDatas, setConDatas] = useState(emptyArray ?? []);
+  const [title, setTitle] = useState("");
+  const [tourPlaceId, settourplaceid] = useState("");
+  const [price, setprice] = useState(0);
 
   const { id } = useParams();
-  const { loading, error, data } = useQuery(GET_CLIENT, {
+  const { data: userData } = useQuery(GET_CLIENT, {
     variables: { id },
   });
 
-  const clientProfile = data?.client?.clientProfile;
+  const clientProfile = userData?.client?.clientProfile;
   const tourSpotByCity = clientProfile?.city?.totalTourSpots;
 
-  const scafolding = {
-    title: "",
-    tourPlaceId: "",
-    price: 0,
-  };
+  const clientProfileID = clientProfile?.id;
 
-  const [formData, setFormData] = useState(scafolding);
-
-  const [addGuidePlace, { data: guidePlace, error: guidePlaceError }] =
-    useMutation(ADD_TOURGUIDE_PlACE, {
+  const [addGuidePlace, { data, loading, error }] = useMutation(
+    ADD_TOURGUIDE_PlACE,
+    {
       variables: {
         contribute: conDatas,
-        title: formData.title,
-        price: parseFloat(formData.price),
-        tourPlaceId: formData.tourPlaceId,
-        clientProfileID: clientProfile?.id,
+        title,
+        price: parseFloat(price),
+        tourPlaceId,
+        clientProfileID,
       },
-      refetchQueries: {},
-    });
+      refetchQueries: [{ query: GET_CLIENT }],
+    }
+  );
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // let getLocalItem = localStorage.getItem("conDatas");
-  // const parsd = JSON.parse(getLocalItem);
-  // console.log(parsd);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.title == "") {
+    if (title == "") {
       return toast.error("Title are required");
-    } else if (formData.tourPlaceId == "") {
+    } else if (tourPlaceId == "") {
       return toast.error("");
-    } else if (formData.price == "0" || formData.price == 0) {
+    } else if (price == "0" || price == 0) {
       return toast.error("Price are required");
     } else if (conDatas.length < 4) {
       return toast.error(
@@ -84,23 +71,18 @@ const AddTourSpotPlaceForGuide = () => {
       );
     }
 
-    let dataAsSubmit = {
-      contribute: conDatas,
-      title: formData.title,
-      price: parseFloat(formData.price),
-      tourPlaceId: formData.tourPlaceId,
-      clientProfileID: clientProfile?.id,
-    };
     // console.log(dataAsSubmit);
 
-    addGuidePlace(dataAsSubmit);
+    let contribute = conDatas;
+    addGuidePlace(title, price, tourPlaceId, clientProfileID, contribute);
+
+    if (!data?.id) {
+      toast.error(`${error?.message}`);
+      return console.log(error);
+    }
 
     toast.success("Successfully added TourPlace Contribution...");
-
-    // localStorage.removeItem("conDatas");
   };
-
-  console.log(guidePlace);
 
   return (
     <>
@@ -114,8 +96,8 @@ const AddTourSpotPlaceForGuide = () => {
             type="text"
             name="title"
             id="any"
-            onChange={handleChange}
-            defaultValue={formData?.title}
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
           <TextField
             variant="outlined"
@@ -124,8 +106,8 @@ const AddTourSpotPlaceForGuide = () => {
             type="number"
             name="price"
             id="any"
-            onChange={handleChange}
-            defaultValue={formData?.price}
+            onChange={(e) => setprice(e.target.value)}
+            value={price}
           />
           <div>
             <FormControl fullWidth>
@@ -136,8 +118,8 @@ const AddTourSpotPlaceForGuide = () => {
                 input={<OutlinedInput label="TourPlace" />}
                 MenuProps={MenuProps}
                 name="tourPlaceId"
-                defaultValue={formData?.tourPlaceId}
-                onChange={handleChange}
+                value={tourPlaceId}
+                onChange={(e) => settourplaceid(e.target.value)}
               >
                 {tourSpotByCity?.map((tourSpot) => (
                   <MenuItem key={tourSpot?.id} value={tourSpot?.id}>

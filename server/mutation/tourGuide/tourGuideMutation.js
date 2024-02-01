@@ -76,7 +76,7 @@ const updateTourGuideProfile = {
   },
   resolve: async (parent, args) => {
     try {
-      console.log(args);
+      // console.log(args);
       return await TourGuide.findByIdAndUpdate(
         args.id,
         {
@@ -103,7 +103,7 @@ const addGuideTourplace = {
   },
   resolve: async (parent, args) => {
     try {
-      // console.log(args);
+      console.log(args);
       const existPlace = await TourGuideContribution.findOne({
         tourPlaceId: args?.tourPlaceId,
       });

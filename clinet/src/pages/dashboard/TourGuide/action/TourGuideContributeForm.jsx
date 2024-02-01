@@ -41,13 +41,11 @@ const TourGuideContributeForm = ({ conDatas, setConDatas }) => {
     <>
       <div className="flex items-center gap-3 pb-3">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={["TimePicker"]}>
-            <TimePicker
-              label="Time Picker"
-              value={picTime}
-              onChange={(newTime) => setpicTime(newTime)}
-            />
-          </DemoContainer>
+          <TimePicker
+            label="Time Picker"
+            value={picTime}
+            onChange={(newTime) => setpicTime(newTime)}
+          />
         </LocalizationProvider>
 
         <FormControl>
