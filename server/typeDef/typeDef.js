@@ -6,6 +6,7 @@ const {
   GraphQLInt,
   GraphQLScalarType,
   GraphQLNonNull,
+  GraphQLInputObjectType,
 } = require("graphql");
 const { Kind } = require("graphql/language");
 const Country = require("../models/Country");
@@ -207,6 +208,18 @@ const CityForAdd = new GraphQLObjectType({
       resolve: async (parent, args) => {
         let _i = await Division.findById(parent.divisionId);
         return _i;
+      },
+    },
+    totalTourSpots: {
+      type: new GraphQLList(TourSpotType),
+      resolve: async (parent, args) => {
+        try {
+          const _i = await TourSpot.find({ cityId: parent.id });
+          // console.log(_i);
+          return _i;
+        } catch (error) {
+          throw new Error(error);
+        }
       },
     },
   }),
@@ -423,7 +436,6 @@ const TourGuideType = new GraphQLObjectType({
     },
   }),
 });
-
 
 const ImageType = new GraphQLObjectType({
   name: "Image",

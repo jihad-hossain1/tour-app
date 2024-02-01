@@ -25,6 +25,7 @@ import ClientPrivateRoute from "./ClientRoute";
 import AdminRoute from "./AdminRoute";
 import DeniedPage from "../pages/DeniedPage";
 import UpdateTourGuide from "../pages/dashboard/TourGuide/action/UpdateTourGuide";
+import AddTourSpotPlaceForGuide from "../pages/dashboard/TourGuide/action/AddTourSpotPlaceForGuide";
 
 export const router = createBrowserRouter([
   {
@@ -120,6 +121,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/tourguide/profile-update/:id",
         element: <UpdateTourGuide />,
+      },
+      {
+        path: "/dashboard/tourguide/addtourspotplace/:id",
+        element: <AddTourSpotPlaceForGuide />,
       },
       {
         path: "/dashboard/ManageContinents",
