@@ -41,7 +41,7 @@ const PopularDestination = () => {
   return (
     <main className="px-2">
       <Title firstText="Popular" secondText="Tour Destinations" />
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="grid lg:grid-cols-4 gap-4">
         {countryData?.map((item, _i) => (
           <Link to={"#"} key={_i}>
             <Card>
@@ -66,6 +66,7 @@ const PopularDestination = () => {
           </Link>
         ))}
       </section>
+      
     </main>
   );
 };

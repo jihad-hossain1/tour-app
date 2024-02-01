@@ -30,6 +30,10 @@ const GET_CLIENT = gql`
         languages
         profileImage
         tourGuideInstructionType
+        tourGuideContribution {
+          id
+          title
+        }
         city {
           id
           name
@@ -44,7 +48,10 @@ const GET_CLIENT = gql`
           title
           clientId
           clientProfileID
-          urls
+          urls {
+            id
+            image
+          }
         }
       }
     }
