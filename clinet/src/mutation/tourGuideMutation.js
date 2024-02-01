@@ -40,12 +40,14 @@ import { gql } from "@apollo/client";
    mutation UploadTourImages(
      $clientId: ID!
      $clientProfileID: ID!
+     $contributionId: ID
      $title: String
-     $urls: [String]
+     $urls: [ImageInput]
    ) {
      uploadTourImages(
        clientId: $clientId
        urls: $urls
+       contributionId: $contributionId
        clientProfileID: $clientProfileID
        title: $title
      ) {

@@ -17,6 +17,12 @@ const Review = require("../models/Review");
 const GuideReview = require("../models/GuideReview");
 const TourGuide = require("../models/TourGuide");
 const Images = require("../models/Images");
+const {
+  TourGuideContributionType,
+  ImgaeInput,
+  ImagesInput,
+} = require("./extraTypeDef");
+const TourGuideContribution = require("../models/TourGuideContribution");
 
 const TimestampType = new GraphQLScalarType({
   name: "Timestamp",
@@ -434,6 +440,33 @@ const TourGuideType = new GraphQLObjectType({
         }
       },
     },
+    tourGuideContribution: {
+      type: new GraphQLList(TourGuideContributionType),
+      resolve: async (parent, args) => {
+        try {
+          return await TourGuideContribution.find({
+            clientProfileID: parent.id,
+          });
+        } catch (error) {
+          return new Error(`Error From fetch data : ${error}`);
+        }
+      },
+    },
+  }),
+});
+
+const ImageInputType = new GraphQLInputObjectType({
+  name: "ImageInput",
+  fields: {
+    image: { type: GraphQLString },
+  },
+});
+
+const ImageUrlType = new GraphQLObjectType({
+  name: "ImageUrlType",
+  fields: () => ({
+    id: { type: GraphQLID },
+    image: { type: GraphQLString },
   }),
 });
 
@@ -443,7 +476,10 @@ const ImageType = new GraphQLObjectType({
     id: { type: GraphQLID },
     clientId: { type: GraphQLID },
     clientProfileID: { type: GraphQLID },
-    urls: { type: GraphQLList(GraphQLString) },
+    contributionId: { type: GraphQLID },
+    urls: {
+      type: new GraphQLList(ImageUrlType),
+    },
     title: { type: GraphQLString },
   }),
 });
@@ -467,4 +503,5 @@ module.exports = {
   TourGuideReviewType,
   TourGuideDescriptionType,
   ImageType,
+  ImageInputType,
 };

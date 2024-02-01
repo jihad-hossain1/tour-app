@@ -10,7 +10,11 @@ const {
 } = require("graphql");
 
 const TourGuide = require("../../models/TourGuide");
-const { TourGuideType, ImageType } = require("../../typeDef/typeDef");
+const {
+  TourGuideType,
+  ImageType,
+  ImageInputType,
+} = require("../../typeDef/typeDef");
 const {
   TourGuideContributionType,
   TourPlaceContributeInput,
@@ -37,7 +41,7 @@ const addTourGuideProfile = {
       const saved = await tourGuideProfile.save();
       return saved;
     } catch (error) {
-      throw new Error("Error adding tourGuideProfile");
+      return new Error("Error adding tourGuideProfile");
     }
   },
 };
@@ -47,17 +51,18 @@ const uploadTourImages = {
   args: {
     clientId: { type: GraphQLID },
     clientProfileID: { type: GraphQLID },
-    urls: { type: GraphQLList(GraphQLString) },
+    contributionId: { type: GraphQLID },
     title: { type: GraphQLString },
+    urls: { type: GraphQLList(ImageInputType) },
   },
   resolve: async (parent, args) => {
     try {
-      // console.log(args);
+      console.log(args);
       const upImage = new Images(args);
       const saved = await upImage.save();
       return saved;
     } catch (error) {
-      throw new Error("Error adding tour up images");
+      return new Error(`Error adding tour up images: ${error}`);
     }
   },
 };
@@ -103,7 +108,7 @@ const addGuideTourplace = {
   },
   resolve: async (parent, args) => {
     try {
-      console.log(args);
+      // console.log(args);
       const existPlace = await TourGuideContribution.findOne({
         tourPlaceId: args?.tourPlaceId,
       });
