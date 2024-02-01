@@ -79,9 +79,40 @@ const ADD_TOURGUIDE_PROFILE = gql`
   }
 `;
 
+const ADD_TOURGUIDE_PlACE = gql`
+  #graphql
+  mutation AddGuideTourplace(
+    $content: String
+    $title: String
+    $price: Int
+    $clientProfileID: ID
+    $contribute: ContributeInput
+  ) {
+    addGuideTourplace(
+      price: $price
+      title: $title
+      content: $content
+      clientProfileID: $clientProfileID
+      contribute: $contribute
+    ) {
+      id
+    }
+  }
+`;
+
+export const CONTRIBUTE_INPUT = gql`
+  input ContributeInput {
+    content: String
+    picTime: String
+    contributeTitle: String
+  }
+`;
+
 export {
   ADD_TOURGUIDE_PROFILE,
   UPDATE_TOURGUIDE_PROFILE,
   UPDATE_TOURGUIDE_PROFILE_PHOTO,
   UPLOAD_TOUR_IMAGES,
+  ADD_TOURGUIDE_PlACE,
 };
+

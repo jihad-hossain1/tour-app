@@ -6,6 +6,7 @@ const {
   GraphQLInt,
   GraphQLScalarType,
   GraphQLNonNull,
+  GraphQLInputObjectType,
 } = require("graphql");
 const { Kind } = require("graphql/language");
 const Country = require("../models/Country");
@@ -435,7 +436,6 @@ const TourGuideType = new GraphQLObjectType({
     },
   }),
 });
-
 
 const ImageType = new GraphQLObjectType({
   name: "Image",

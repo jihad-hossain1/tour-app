@@ -43,11 +43,7 @@ const UploadTourImages = ({ clientProfileID, clientId }) => {
       </Button>
       <ModalAll open={open} setOpen={setOpen} title={"UploadTourImages"}>
         <div className="flex flex-col gap-3">
-          <form
-            action=""
-            onSubmit={handleImageSubmit}
-            className="flex flex-col gap-3"
-          >
+          <form onSubmit={handleImageSubmit} className="flex flex-col gap-3">
             <div className="w-fit">
               <Button type="submit" color="success" variant="contained">
                 submit

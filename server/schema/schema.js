@@ -57,6 +57,7 @@ const {
   addTourGuideProfile,
   updateTourGuideProfile,
   uploadTourImages,
+  addGuideTourplace,
 } = require("../mutation/tourGuide/tourGuideMutation");
 
 //main query
@@ -103,7 +104,7 @@ const RootQuery = new GraphQLObjectType({
 });
 
 //mutation for create delete update operation
-const mutation = new GraphQLObjectType({
+const RootMutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     //client
@@ -147,10 +148,11 @@ const mutation = new GraphQLObjectType({
     addTourGuideProfile,
     updateTourGuideProfile,
     uploadTourImages,
+    addGuideTourplace,
   },
 });
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
-  mutation,
+  mutation: RootMutation,
 });
