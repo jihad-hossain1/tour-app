@@ -1,4 +1,3 @@
-import "./Styles.css"
 import Slider from "./SliderSection/Slider";
 import components from "../../components/AllImporter/HomeImporter/HomeImporter";
 const Home = () => {
