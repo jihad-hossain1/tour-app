@@ -9,6 +9,15 @@ import UpdateProfilePhoto from "./action/UpdateProfilePhoto";
 import UploadTourImages from "./action/UploadTourImages";
 
 
+function picTimer(dateString) {
+  return new Date(dateString).toLocaleString(undefined, {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true, // Display in 12-hour format with AM/PM
+    timeZone: "UTC", // Adjust the time zone as needed
+  });
+}
+
 const TourGuide = () => {
   const [isClient, setClient] = useState(getClient());
 
@@ -138,12 +147,29 @@ const TourGuide = () => {
                   ))}
                 </div>
               </section>
-                <section>
-                  <h4> Total Tour Contribute Area: {tourGuideContribution?.length || 0} </h4>
+              <section>
+                <h4>
+                  {" "}
+                  Total Tour Contribute Area:{" "}
+                  {tourGuideContribution?.length || 0}{" "}
+                </h4>
                 <div className="flex flex-col gap-3">
                   {tourGuideContribution?.map((contribute) => (
                     <div key={contribute?.id}>
                       <h4>{contribute?.title}</h4>
+                      <section className="flex flex-col gap-5">
+                        {contribute?.contribute?.map((item) => (
+                          <div key={item?.id}>
+                            <div className="w-fit border border-blue-600 rounded-lg p-2">
+                              {picTimer(item?.picTime)}
+                            </div>
+                            <h4 className="font-semibold">
+                              {item?.contributeTitle}
+                            </h4>
+                            <p>{item?.content}</p>
+                          </div>
+                        ))}
+                      </section>
                     </div>
                   ))}
                 </div>
