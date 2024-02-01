@@ -31,7 +31,13 @@ const GET_CLIENT = gql`
         profileImage
         tourGuideInstructionType
         city {
+          id
           name
+          totalTourSpots {
+            id
+            name
+            photo
+          }
         }
         images {
           id

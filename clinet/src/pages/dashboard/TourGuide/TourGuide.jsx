@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import UpdateProfilePhoto from "./action/UpdateProfilePhoto";
 import UploadTourImages from "./action/UploadTourImages";
 
+
 const TourGuide = () => {
   const [isClient, setClient] = useState(getClient());
 
@@ -16,8 +17,9 @@ const TourGuide = () => {
   });
 
   const clientProfile = data?.client?.clientProfile;
+
   const totalImages = clientProfile?.images?.flatMap((item) => item?.urls);
-  // console.log(totalImages);
+
   return (
     <>
       {/* add tour guide profile  */}
@@ -41,6 +43,15 @@ const TourGuide = () => {
             >
               <Button variant="outlined" color="success">
                 Profile Update
+              </Button>
+            </Link>
+
+            <Link
+              to={`/dashboard/tourguide/addtourspotplace/${data?.client?.id}`}
+              className={data?.client?.clientProfile ? "block w-fit" : "hidden"}
+            >
+              <Button variant="outlined" color="success">
+                Add TourPlace
               </Button>
             </Link>
 

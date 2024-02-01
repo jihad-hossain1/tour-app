@@ -5,6 +5,9 @@ const TourGuideSchema = new mongoose.Schema(
     description: {
       type: String,
     },
+    importenNotice: {
+      type: String,
+    },
     uptoPeople: {
       type: String,
     },
@@ -28,10 +31,10 @@ const TourGuideSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Client",
     },
-    availableAreas: [
+    tours: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "City",
+        ref: "TourSpot",
       },
     ],
 
