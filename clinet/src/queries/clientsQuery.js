@@ -32,7 +32,16 @@ const GET_CLIENT = gql`
         tourGuideInstructionType
         tourGuideContribution {
           id
+          tourPlaceId
+          clientProfileID
           title
+          price
+          contribute {
+            id
+            picTime
+            contributeTitle
+            content
+          }
         }
         city {
           id
