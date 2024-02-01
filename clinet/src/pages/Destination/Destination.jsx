@@ -15,6 +15,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { Avatar, Card, Rating } from "@mui/material";
+import Title from "../../components/Title/Title";
 export default function Destination() {
   const images = [
     { img: "https://i.ibb.co/3Mvr2cx/141344.jpg" },
@@ -114,11 +115,11 @@ export default function Destination() {
         </div>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-4  lg:w-[80%] my-8">
-        <Link className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2">
+        <a className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2">
           <AccountCircleIcon fontSize="large" className="text-blue-500" />
           <h1 className="ml-2">Local Guides</h1>
-        </Link>
-        <Link className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px]  duration-200 ease-in-out border-t-2 border-r-2">
+        </a>
+        <Link className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] duration-200 ease-in-out border-t-2 border-r-2">
           <FlagIcon fontSize="large" className="text-blue-500" />
           <h1 className="ml-2">Private Tours</h1>
         </Link>
@@ -176,13 +177,8 @@ export default function Destination() {
         </div>
       </div>
       {/* Asked Questions Section */}
-      <div>
-      <h4 className="text-3xl ">
-          <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
-            Japan
-          </span>{" "}
-          Frequently Asked Questions
-        </h4>
+      <div className="mx-10">
+        <Title firstText="Japan" secondText="Frequently Asked Questions" />
         <div>
           <Accordion>
             <AccordionSummary

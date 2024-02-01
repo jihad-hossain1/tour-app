@@ -6,7 +6,7 @@ import axios from "axios";
 import { UPDATE_TOURGUIDE_PROFILE_PHOTO } from "../../../../mutation/tourGuideMutation";
 import { useMutation } from "@apollo/client";
 import { GET_CLIENT } from "../../../../queries/clientsQuery";
-import toast, { ToastBar, Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const UpdateProfilePhoto = ({ profileImage, clientId, clientProfileID }) => {
   const [_photo, setPhoto] = useState("");
