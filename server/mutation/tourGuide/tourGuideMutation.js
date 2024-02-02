@@ -18,9 +18,16 @@ const {
 const {
   TourGuideContributionType,
   TourPlaceContributeInput,
+  TourGuideContributionDetailType,
+  IncludesInput,
+  NotIncludesInput,
+  AdditionalInfoInput,
 } = require("../../typeDef/extraTypeDef");
 const Images = require("../../models/Images");
 const TourGuideContribution = require("../../models/TourGuideContribution");
+const {
+  TourGuideContributionDetail,
+} = require("../../models/TourGuideContributionDetail");
 
 const addTourGuideProfile = {
   type: TourGuideType,
@@ -124,9 +131,44 @@ const addGuideTourplace = {
     }
   },
 };
+const addTourGuideContributionDetail = {
+  type: TourGuideContributionDetailType,
+  args: {
+    clientProfileID: { type: GraphQLID },
+    notice: { type: GraphQLString },
+    includes: {
+      type: new GraphQLList(IncludesInput),
+    },
+    notIncludes: {
+      type: new GraphQLList(NotIncludesInput),
+    },
+    additionalInfo: {
+      type: new GraphQLList(AdditionalInfoInput),
+    },
+  },
+  resolve: async (parent, args) => {
+    try {
+      const alreadyInfoAdd = await TourGuideContribution.findOne({
+        clientProfileID: args?.clientProfileID,
+      });
+      if (alreadyInfoAdd) {
+        return new Error(
+          `You are already added TourGuideContributionDetail information! if you want to more info added go to TourGuideContributionDetail update section...`
+        );
+      }
+      const tourGuideContributeDetail = new TourGuideContributionDetail(args);
+      const saved = await tourGuideContributeDetail.save();
+      return saved;
+      // console.log(existPlace);
+    } catch (error) {
+      return new Error(`Error adding TourGuideContributionDetails: ${error}`);
+    }
+  },
+};
 module.exports = {
   addTourGuideProfile,
   updateTourGuideProfile,
   uploadTourImages,
   addGuideTourplace,
+  addTourGuideContributionDetail,
 };

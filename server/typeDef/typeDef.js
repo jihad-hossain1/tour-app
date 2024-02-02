@@ -21,8 +21,12 @@ const {
   TourGuideContributionType,
   ImgaeInput,
   ImagesInput,
+  TourGuideContributionDetailType,
 } = require("./extraTypeDef");
 const TourGuideContribution = require("../models/TourGuideContribution");
+const {
+  TourGuideContributionDetail,
+} = require("../models/TourGuideContributionDetail");
 
 const TimestampType = new GraphQLScalarType({
   name: "Timestamp",
@@ -445,6 +449,18 @@ const TourGuideType = new GraphQLObjectType({
       resolve: async (parent, args) => {
         try {
           return await TourGuideContribution.find({
+            clientProfileID: parent.id,
+          });
+        } catch (error) {
+          return new Error(`Error From fetch data : ${error}`);
+        }
+      },
+    },
+    tourGuideContributionDetail: {
+      type: TourGuideContributionDetailType,
+      resolve: async (parent, args) => {
+        try {
+          return await TourGuideContributionDetail.findOne({
             clientProfileID: parent.id,
           });
         } catch (error) {

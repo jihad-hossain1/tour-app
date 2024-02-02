@@ -77,7 +77,7 @@ const TourGuide = () => {
             />
           </div>
           <h4>
-            <span className="font-semibold">Full Name:</span>{" "}
+            <span className="font-semibold">Full Name:</span>
             {data?.client?.name}
           </h4>
           <h4>
@@ -87,25 +87,25 @@ const TourGuide = () => {
             <span className="font-semibold">Email:</span> {data?.client?.email}
           </h4>
           <h4>
-            <span className="font-semibold">User Type:</span>{" "}
+            <span className="font-semibold">User Type:</span>
             {data?.client?.clientType}
           </h4>
           <h4>
-            <span className="font-semibold">User Role:</span>{" "}
+            <span className="font-semibold">User Role:</span>
             {data?.client?.role}
           </h4>
           {data?.client?.clientProfile && (
             <main className="flex flex-col gap-3">
               <p>
-                <span className="font-semibold">Tour Type:</span>{" "}
+                <span className="font-semibold">Tour Type:</span>
                 {clientProfile?.tourGuideInstructionType}
               </p>
               <p>
-                <span className="font-semibold">Tour Member:</span> Up to{" "}
+                <span className="font-semibold">Tour Member:</span> Up to
                 {clientProfile?.uptoPeople} people
               </p>
               <div className="flex gap-2 items-center">
-                <span className="font-semibold">Language:</span>{" "}
+                <span className="font-semibold">Language:</span>
                 <div className="flex gap-3">
                   {clientProfile?.languages?.map((ite, index) => (
                     <p key={index}>{ite},</p>
@@ -113,15 +113,15 @@ const TourGuide = () => {
                 </div>
               </div>
               <p>
-                <span className="font-semibold">Response Time:</span>{" "}
+                <span className="font-semibold">Response Time:</span>
                 {clientProfile?.responseTime} hours 30 min
               </p>
               <p>
-                <span className="font-semibold">Provide Location:</span>{" "}
+                <span className="font-semibold">Provide Location:</span>
                 {clientProfile?.city?.name}
               </p>
               <p>
-                <span className="font-semibold">About:</span>{" "}
+                <span className="font-semibold">About:</span>
                 {clientProfile?.description}
               </p>
               <section>
@@ -147,16 +147,19 @@ const TourGuide = () => {
                   ))}
                 </div>
               </section>
-              <section>
-                <h4>
-                  {" "}
-                  Total Tour Contribute Area:{" "}
-                  {tourGuideContribution?.length || 0}{" "}
+              <section className="mt-14">
+                <h4 className="flex items-center gap-3">
+                  <span className="text-xl">Total Tour Contribute Area:</span>
+                  <span className="text-xl border px-3 border-zinc-400">
+                    {tourGuideContribution?.length || 0}
+                  </span>
                 </h4>
                 <div className="flex flex-col gap-3">
                   {tourGuideContribution?.map((contribute) => (
                     <div key={contribute?.id}>
-                      <h4>{contribute?.title}</h4>
+                      <h4 className="text-2xl font-semibold">
+                        {contribute?.title}
+                      </h4>
                       <section className="flex flex-col gap-5">
                         {contribute?.contribute?.map((item) => (
                           <div key={item?.id}>

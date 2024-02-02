@@ -18,7 +18,24 @@ const TourPlaceContributeInput = new GraphQLInputObjectType({
   },
 });
 
-
+const IncludesInput = new GraphQLInputObjectType({
+  name: "IncludesInputType",
+  fields: {
+    include: { type: GraphQLString },
+  },
+});
+const NotIncludesInput = new GraphQLInputObjectType({
+  name: "NotIncludesInputType",
+  fields: {
+    notInclude: { type: GraphQLString },
+  },
+});
+const AdditionalInfoInput = new GraphQLInputObjectType({
+  name: "AdditionalInfoType",
+  fields: {
+    info: { type: GraphQLString },
+  },
+});
 
 const TourPlaceContributeType = new GraphQLObjectType({
   name: "TourContributorType",
@@ -44,8 +61,54 @@ const TourGuideContributionType = new GraphQLObjectType({
   }),
 });
 
+const TourGuideContributionDetailType = new GraphQLObjectType({
+  name: "TourGuideContributionDetail",
+  fields: () => ({
+    id: { type: GraphQLID },
+    clientProfileID: { type: GraphQLID },
+    notice: { type: GraphQLString },
+    includes: {
+      type: new GraphQLList(
+        new GraphQLObjectType({
+          name: "IncludeInfo",
+          fields: () => ({
+            id: { type: GraphQLID },
+            include: { type: GraphQLString },
+          }),
+        })
+      ),
+    },
+    notIncludes: {
+      type: new GraphQLList(
+        new GraphQLObjectType({
+          name: "NotIncludeInfo",
+          fields: () => ({
+            id: { type: GraphQLID },
+            notInclude: { type: GraphQLString },
+          }),
+        })
+      ),
+    },
+    additionalInfo: {
+      type: new GraphQLList(
+        new GraphQLObjectType({
+          name: "AdditionalInfo",
+          fields: () => ({
+            id: { type: GraphQLID },
+            info: { type: GraphQLString },
+          }),
+        })
+      ),
+    },
+  }),
+});
+
 module.exports = {
   TourGuideContributionType,
   TourPlaceContributeInput,
+  TourGuideContributionDetailType,
+  IncludesInput,
+  NotIncludesInput,
+  AdditionalInfoInput,
 };
 
