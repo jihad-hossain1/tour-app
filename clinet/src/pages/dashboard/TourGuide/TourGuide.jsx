@@ -70,11 +70,16 @@ const TourGuide = () => {
               </Button>
             </Link>
             <Link
-              to={`/dashboard/tourguide/addTourGuideContributionDetail/${data?.client?.id}`}
+              to={`/dashboard/tourguide/addTourGuideContributionDetail/${
+                clientProfile?.tourGuideContributionDetail?.id ||
+                data?.client?.id
+              }`}
               className={data?.client?.clientProfile ? "block w-fit" : "hidden"}
             >
               <Button variant="outlined" color="success">
-                Add ContributionDetail
+                {clientProfile?.tourGuideContributionDetail
+                  ? "update ContributionDetail"
+                  : "Add ContributionDetail"}
               </Button>
             </Link>
 

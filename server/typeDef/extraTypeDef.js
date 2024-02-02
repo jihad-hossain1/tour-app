@@ -103,6 +103,42 @@ const TourGuideContributionDetailType = new GraphQLObjectType({
   }),
 });
 
+
+const TourGuideReserveType = new GraphQLObjectType({
+  name: "TourGuideReserve",
+  fields: () => ({
+    id: { type: GraphQLID },
+
+    clientProfileID: { type: GraphQLID },
+
+    datePic: { type: GraphQLString },
+
+    personPic: {
+      type: new GraphQLObjectType({
+        name: "PersonPicType",
+        fields: () => ({
+          id: { type: GraphQLID },
+          adult: { type: GraphQLInt },
+          children: { type: GraphQLInt },
+          infant: { type: GraphQLInt },
+        }),
+      }),
+    },
+
+    startTime: {
+      type: GraphQLList(
+        new GraphQLObjectType({
+          name: "StartTimeType",
+          fields: () => ({
+            id: { type: GraphQLID },
+            timePic: { type: GraphQLString },
+          }),
+        })
+      ),
+    },
+  }),
+});
+
 module.exports = {
   TourGuideContributionType,
   TourPlaceContributeInput,
@@ -110,5 +146,6 @@ module.exports = {
   IncludesInput,
   NotIncludesInput,
   AdditionalInfoInput,
+  TourGuideReserveType,
 };
 

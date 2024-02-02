@@ -26,7 +26,7 @@ const TourGuideContributeForm = ({ conDatas, setConDatas }) => {
     } else if (content == "") {
       return toast.error("Content are required");
     }
-    console.log(conDatas);
+    // console.log(conDatas);
     setConDatas([...conDatas, newData]);
 
     // localStorage.setItem("conDatas", JSON.stringify(conDatas));
