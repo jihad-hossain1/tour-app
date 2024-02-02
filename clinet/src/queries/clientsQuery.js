@@ -30,9 +30,35 @@ const GET_CLIENT = gql`
         languages
         profileImage
         tourGuideInstructionType
+        tourGuideContributionDetail {
+          id
+          notice
+          clientProfileID
+          includes {
+            id
+            include
+          }
+          additionalInfo {
+            id
+            info
+          }
+          notIncludes {
+            id
+            notInclude
+          }
+        }
         tourGuideContribution {
           id
+          tourPlaceId
+          clientProfileID
           title
+          price
+          contribute {
+            id
+            picTime
+            contributeTitle
+            content
+          }
         }
         city {
           id

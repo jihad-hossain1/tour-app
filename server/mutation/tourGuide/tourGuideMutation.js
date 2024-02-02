@@ -18,9 +18,18 @@ const {
 const {
   TourGuideContributionType,
   TourPlaceContributeInput,
+  TourGuideContributionDetailType,
+  IncludesInput,
+  NotIncludesInput,
+  AdditionalInfoInput,
+  TourGuideReserveType,
 } = require("../../typeDef/extraTypeDef");
 const Images = require("../../models/Images");
 const TourGuideContribution = require("../../models/TourGuideContribution");
+const {
+  TourGuideContributionDetail,
+} = require("../../models/TourGuideContributionDetail");
+const TourGuideReserve = require("../../models/TourGuideReserve");
 
 const addTourGuideProfile = {
   type: TourGuideType,
@@ -124,9 +133,97 @@ const addGuideTourplace = {
     }
   },
 };
+
+const addTourGuideContributionDetail = {
+  type: TourGuideContributionDetailType,
+  args: {
+    clientProfileID: { type: GraphQLID },
+    notice: { type: GraphQLString },
+    includes: {
+      type: new GraphQLList(IncludesInput),
+    },
+    notIncludes: {
+      type: new GraphQLList(NotIncludesInput),
+    },
+    additionalInfo: {
+      type: new GraphQLList(AdditionalInfoInput),
+    },
+  },
+  resolve: async (parent, args) => {
+    try {
+      const alreadyInfoAdd = await TourGuideContributionDetail.findOne({
+        clientProfileID: args?.clientProfileID,
+      });
+      if (alreadyInfoAdd) {
+        return new Error(
+          `You are already added TourGuideContributionDetail information! if you want to more info added go to TourGuideContributionDetail update section...`
+        );
+      }
+      const tourGuideContributeDetail = new TourGuideContributionDetail(args);
+      const saved = await tourGuideContributeDetail.save();
+      return saved;
+      // console.log(existPlace);
+    } catch (error) {
+      return new Error(`Error adding TourGuideContributionDetails: ${error}`);
+    }
+  },
+};
+
+const addTourGuideReserve = {
+  type: TourGuideReserveType,
+
+  args: {
+    clientProfileID: { type: GraphQLID },
+
+    datePic: { type: GraphQLString },
+
+    personPic: {
+      type: new GraphQLInputObjectType({
+        name: "PersonPicInputType",
+        fields: {
+          adult: { type: GraphQLInt },
+          children: { type: GraphQLInt },
+          infant: { type: GraphQLInt },
+        },
+      }),
+    },
+
+    startTime: {
+      type: GraphQLList(
+        new GraphQLInputObjectType({
+          name: "StartTimeInputType",
+          fields: {
+            timePic: { type: GraphQLString },
+          },
+        })
+      ),
+    },
+  },
+
+  resolve: async (parent, args) => {
+    try {
+      const alreadyInfoAdd = await TourGuideReserve.findOne({
+        clientProfileID: args?.clientProfileID,
+      });
+      if (alreadyInfoAdd) {
+        return new Error(
+          `You are already added TourGuideReserve information! if you want to more info added go to TourGuideReserve update section...`
+        );
+      }
+      const tourGuideReserveSaved = new TourGuideReserve(args);
+      const saved = await tourGuideReserveSaved.save();
+      return saved;
+      // console.log(existPlace);
+    } catch (error) {
+      return new Error(`Error adding TourGuideContributionDetails: ${error}`);
+    }
+  },
+};
 module.exports = {
   addTourGuideProfile,
   updateTourGuideProfile,
   uploadTourImages,
   addGuideTourplace,
+  addTourGuideContributionDetail,
+  addTourGuideReserve,
 };
