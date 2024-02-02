@@ -136,6 +136,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/tourguide/addTourGuideContributionDetail/:id",
         element: <AddTourGuideContributionDetail />,
       },
+
       {
         path: "/dashboard/ManageContinents",
         element: (

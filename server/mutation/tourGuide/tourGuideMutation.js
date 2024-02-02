@@ -148,7 +148,7 @@ const addTourGuideContributionDetail = {
   },
   resolve: async (parent, args) => {
     try {
-      const alreadyInfoAdd = await TourGuideContribution.findOne({
+      const alreadyInfoAdd = await TourGuideContributionDetail.findOne({
         clientProfileID: args?.clientProfileID,
       });
       if (alreadyInfoAdd) {
