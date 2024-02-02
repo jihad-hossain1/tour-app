@@ -69,6 +69,14 @@ const TourGuide = () => {
                 Add TourPlace
               </Button>
             </Link>
+            <Link
+              to={`/dashboard/tourguide/addTourGuideContributionDetail/${data?.client?.id}`}
+              className={data?.client?.clientProfile ? "block w-fit" : "hidden"}
+            >
+              <Button variant="outlined" color="success">
+                Add ContributionDetail
+              </Button>
+            </Link>
 
             <UploadTourImages
               tourGuideContribution={tourGuideContribution}
