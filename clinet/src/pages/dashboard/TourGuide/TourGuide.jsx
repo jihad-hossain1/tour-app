@@ -25,7 +25,7 @@ const TourGuide = () => {
 
   // console.log(tourGuideContribution);
 
-  console.log("user info: ", data);
+  console.log("clientProfile info: ", clientProfile);
 
   return (
     <>
@@ -78,6 +78,7 @@ const TourGuide = () => {
             <TourGuideReserveForm
               clientId={data?.client?.id}
               clientProfileID={clientProfile?.id}
+              uptoPeople={clientProfile?.uptoPeople}
             />
 
             <UploadTourImages

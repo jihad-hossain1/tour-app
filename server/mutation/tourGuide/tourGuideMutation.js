@@ -175,7 +175,7 @@ const addTourGuideReserve = {
   args: {
     clientProfileID: { type: GraphQLID },
 
-    datePic: { type: GraphQLString },
+    // datePic: { type: GraphQLString },
 
     personPic: {
       type: new GraphQLInputObjectType({

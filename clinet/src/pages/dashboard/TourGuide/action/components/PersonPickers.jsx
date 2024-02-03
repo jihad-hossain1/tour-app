@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { CiSquarePlus, CiSquareMinus } from "react-icons/ci";
 
-const PersonPickers = ({ personPic, setpersonPic }) => {
-  const [adults, setAdults] = useState(0);
-  const [children, setChildren] = useState(0);
-  const [infants, setInfants] = useState(0);
+const PersonPickers = ({
+  adults,
+  setAdults,
+  children,
+  setChildren,
+  infants,
+  setInfants,
+  uptoPeople,
+}) => {
   const [totalPeople, setTotalPeople] = useState(0);
-  const maxAdults = 14;
 
-  let objData = {
-    adult: adults,
-    children: children,
-    infant: infants,
-  };
   //   setpersonPic(objData);
   const incrementCount = (type) => {
-    if (type === "adults" && adults < maxAdults) {
+    if (type === "adults" && adults < uptoPeople) {
       setAdults(adults + 1);
       updateTotalPeople(adults + 1, children, infants);
     } else if (type === "children") {
@@ -44,7 +43,7 @@ const PersonPickers = ({ personPic, setpersonPic }) => {
     const total = newAdults + newChildren + newInfants;
 
     // Check if the total exceeds the maximum capacity for adults
-    if (total <= maxAdults) {
+    if (total <= uptoPeople) {
       setTotalPeople(total);
     } else {
       // Optionally, provide feedback or handle the case when the limit is exceeded
@@ -52,7 +51,7 @@ const PersonPickers = ({ personPic, setpersonPic }) => {
     }
   };
 
-  const isAdultsFull = totalPeople >= maxAdults;
+  const isAdultsFull = totalPeople >= uptoPeople;
 
   return (
     <div>
