@@ -8,14 +8,16 @@ import PopularPrivateTours from "../../components/PopularPrivateTours/PopularPri
 import PopularPrivateCars from "../../components/PopularPrivateCars/PopularPrivateCars";
 import NewPrivateTours from "../../components/NewPrivateTours/NewPrivateTours";
 import PopularVirtualTours from "../../components/PopularVirtualTours/PopularVirtualTours";
-import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
+import Accordion from "@mui/material/Accordion";
+import AccordionActions from "@mui/material/AccordionActions";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Button from "@mui/material/Button";
 import { Avatar, Card, Rating } from "@mui/material";
 import Title from "../../components/Title/Title";
+import LatestArticles from "../../components/LatestArticles/LatestArticles";
+import PopularArticles from "../../components/PopularArticles/PopularArticles";
 export default function Destination() {
   const images = [
     { img: "https://i.ibb.co/3Mvr2cx/141344.jpg" },
@@ -86,6 +88,14 @@ export default function Destination() {
       title: "End of the tour",
       details: "hotel / airport drop off",
     },
+  ];
+  const accordionData = [
+    { id: 1, label: "Accordion 1" },
+    { id: 2, label: "Accordion 2" },
+    { id: 3, label: "Accordion 3" },
+    { id: 4, label: "Accordion 4" },
+    { id: 5, label: "Accordion 5" },
+    { id: 6, label: "Accordion 6" },
   ];
   return (
     <div className=" relative">
@@ -174,100 +184,36 @@ export default function Destination() {
               </div>
             ))}
           </div>
+          <div className="w-full">
+            <button className="mt-10 border-none bg-slate-200 font-semibold text-[14px] p-4 rounded-md justify-center items-center text-center">
+              Learn more
+            </button>
+          </div>
         </div>
       </div>
       {/* Asked Questions Section */}
       <div className="mx-10">
         <Title firstText="Japan" secondText="Frequently Asked Questions" />
         <div>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              Accordion 1
-            </AccordionSummary>
-            <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2-content"
-              id="panel2-header"
-            >
-              Accordion 2
-            </AccordionSummary>
-            <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2-content"
-              id="panel3-header"
-            >
-              Accordion 2
-            </AccordionSummary>
-            <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2-content"
-              id="panel4-header"
-            >
-              Accordion 2
-            </AccordionSummary>
-            <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2-content"
-              id="panel5-header"
-            >
-              Accordion 2
-            </AccordionSummary>
-            <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2-content"
-              id="panel6-header"
-            >
-              Accordion 2
-            </AccordionSummary>
-            <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </AccordionDetails>
-          </Accordion>
-          
+          {accordionData.map((item) => (
+            <Accordion key={item.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`panel${item.id}-content`}
+                id={`panel${item.id}-header`}
+              >
+                {item.label}
+              </AccordionSummary>
+              <AccordionDetails>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                eget.
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
       </div>
-      <div className="mx-10">
+      <div className="mx-10 mt-10">
         <h4 className="text-3xl ">
           <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
             Japan
@@ -299,6 +245,8 @@ export default function Destination() {
           </p>
         </div>
       </div>
+      <LatestArticles />
+      <PopularArticles />
     </div>
   );
 }
