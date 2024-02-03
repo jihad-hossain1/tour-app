@@ -17,7 +17,7 @@ import "./styles.css";
 
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
-import { popularVirtualTours } from "../AllDemoDataImporter/AllDemoDataImporter";
+import { popularVirtualTours, swiperImage } from "../AllDemoDataImporter/AllDemoDataImporter";
 import Title from "../Title/Title";
 
 
@@ -41,24 +41,16 @@ const PopularVirtualTours = () => {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
               >
-                <SwiperSlide>
-                  <img
-                    src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    src="https://images.unsplash.com/photo-1519564337578-2598cfe4dc80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    src="https://images.unsplash.com/photo-1513759338966-5de23c844b3a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </SwiperSlide>
+                {
+                  swiperImage.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={image}
+                        alt="Images"
+                      />
+                    </SwiperSlide>))
+                }
+
               </Swiper>
               <CardContent>
                 <Typography
