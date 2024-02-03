@@ -17,61 +17,17 @@ import "./styles.css";
 
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
+import { popularVirtualTours, swiperImage } from "../AllDemoDataImporter/AllDemoDataImporter";
+import Title from "../Title/Title";
 
-const popularPrivateTours = [
-  {
-    title: "Wine Tasting Experience",
-    city: "Barcelona",
-    price: 60,
-    duration: 3,
-    reviews: 110,
-    stars: 4.6,
-    description:
-      "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies.",
-  },
-  {
-    title: "Art Gallery Tour",
-    city: "Paris",
-    price: 45,
-    duration: 2,
-    reviews: 100,
-    stars: 4.7,
-    description:
-      "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents.",
-  },
-  {
-    title: "Scuba Diving Adventure",
-    city: "Bali",
-    price: 100,
-    duration: 5,
-    reviews: 75,
-    stars: 4.9,
-    description:
-      "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life.",
-  },
-  {
-    title: "Concert Under the Stars",
-    city: "New York",
-    price: 75,
-    duration: 4.5,
-    reviews: 130,
-    stars: 4.8,
-    description:
-      "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting.",
-  },
-];
+
 
 const PopularVirtualTours = () => {
   return (
     <div className="container mx-auto my-10">
-      <h4 className="text-3xl ">
-        <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
-          Popular
-        </span>{" "}
-        Virtual Tours
-      </h4>
+      <Title firstText="Popular" secondText="Virtual Tours" />
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        {popularPrivateTours.map((tourSpot, index) => (
+        {popularVirtualTours.map((tourSpot, index) => (
           <Card key={index} sx={{ maxWidth: 345 }}>
             <CardActionArea>
               <Swiper
@@ -85,24 +41,16 @@ const PopularVirtualTours = () => {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
               >
-                <SwiperSlide>
-                  <img
-                    src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    src="https://images.unsplash.com/photo-1519564337578-2598cfe4dc80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    src="https://images.unsplash.com/photo-1513759338966-5de23c844b3a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </SwiperSlide>
+                {
+                  swiperImage.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={image}
+                        alt="Images"
+                      />
+                    </SwiperSlide>))
+                }
+
               </Swiper>
               <CardContent>
                 <Typography

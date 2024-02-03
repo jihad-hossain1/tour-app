@@ -5,57 +5,17 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Avatar, Button, CardActionArea, CardActions } from '@mui/material';
 import Divider from '@mui/material/Divider';
+import { latestArticles } from '../AllDemoDataImporter/AllDemoDataImporter';
+import Title from '../Title/Title';
 
-const popularPrivateTours = [
-    {
-        title: "Wine Tasting Experience",
-        city: "Barcelona",
-        price: 60,
-        duration: 3,
-        reviews: 110,
-        stars: 4.6,
-        description: "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies."
-    },
-    {
-        title: "Art Gallery Tour",
-        city: "Paris",
-        price: 45,
-        duration: 2,
-        reviews: 100,
-        stars: 4.7,
-        description: "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents."
-    },
-    {
-        title: "Scuba Diving Adventure",
-        city: "Bali",
-        price: 100,
-        duration: 5,
-        reviews: 75,
-        stars: 4.9,
-        description: "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life."
-    },
-    {
-        title: "Concert Under the Stars",
-        city: "New York",
-        price: 75,
-        duration: 4.5,
-        reviews: 130,
-        stars: 4.8,
-        description: "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting."
-    }
-];
+
 
 const LatestArticles = () => {
     return (
         <div className="container mx-auto my-10">
-            <h4 className="text-3xl ">
-                <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
-                    Latest
-                </span>{" "}
-                Articles
-            </h4>
+            <Title firstText="Latest" secondText="Articles" />
             <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
-                {popularPrivateTours.map((tourSpot, index) => (<Card key={index} sx={{ maxWidth: 345 }}>
+                {latestArticles.map((tourSpot, index) => (<Card key={index} sx={{ maxWidth: 345 }}>
                     <CardActionArea>
                         <CardMedia
                             component="img"
