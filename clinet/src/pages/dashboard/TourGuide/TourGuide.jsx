@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { getClient } from "../../../router/ClientRoute";
 import { useQuery } from "@apollo/client";
 import { GET_CLIENT } from "../../../queries/clientsQuery";
@@ -7,16 +7,8 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import UpdateProfilePhoto from "./action/UpdateProfilePhoto";
 import UploadTourImages from "./action/UploadTourImages";
-
-
-function picTimer(dateString) {
-  return new Date(dateString).toLocaleString(undefined, {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true, // Display in 12-hour format with AM/PM
-    timeZone: "UTC", // Adjust the time zone as needed
-  });
-}
+import TourGuideReserveForm from "./action/components/TourGuideReserveForm";
+import picTimer from "../../../utils/timeHourFormate";
 
 const TourGuide = () => {
   const [isClient, setClient] = useState(getClient());
@@ -82,6 +74,11 @@ const TourGuide = () => {
                   : "Add ContributionDetail"}
               </Button>
             </Link>
+
+            <TourGuideReserveForm
+              clientId={data?.client?.id}
+              clientProfileID={clientProfile?.id}
+            />
 
             <UploadTourImages
               tourGuideContribution={tourGuideContribution}
