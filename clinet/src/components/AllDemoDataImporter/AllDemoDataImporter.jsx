@@ -333,6 +333,89 @@ export const swiperImage = [
     "https://images.unsplash.com/photo-1513759338966-5de23c844b3a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 ]
 
+export const popularPrivateCars = [
+    {
+        title: "City Bike Tour",
+        city: "Amsterdam",
+        price: 40,
+        duration: 3,
+        reviews: 120,
+        stars: 4.8,
+        description:
+            "Explore the picturesque streets of Amsterdam on a guided bike tour, discovering hidden gems and iconic landmarks along the way.",
+    },
+    {
+        title: "Historical Walking Tour",
+        city: "Rome",
+        price: 35,
+        duration: 2.5,
+        reviews: 95,
+        stars: 4.7,
+        description:
+            "Immerse yourself in the rich history of Rome as you walk through ancient ruins, charming streets, and iconic monuments with an expert guide.",
+    },
+    {
+        title: "Culinary Adventure",
+        city: "Tokyo",
+        price: 80,
+        duration: 4,
+        reviews: 150,
+        stars: 4.9,
+        description:
+            "Embark on a culinary journey through Tokyo's vibrant food scene, savoring delicious street food, traditional dishes, and modern gastronomic delights.",
+    },
+    {
+        title: "Nature Hike",
+        city: "Vancouver",
+        price: 50,
+        duration: 3.5,
+        reviews: 80,
+        stars: 4.5,
+        description:
+            "Escape the city and reconnect with nature on a guided hike in the breathtaking landscapes surrounding Vancouver, enjoying fresh air and stunning views.",
+    },
+    {
+        title: "Wine Tasting Experience",
+        city: "Barcelona",
+        price: 60,
+        duration: 3,
+        reviews: 110,
+        stars: 4.6,
+        description:
+            "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies.",
+    },
+    {
+        title: "Art Gallery Tour",
+        city: "Paris",
+        price: 45,
+        duration: 2,
+        reviews: 100,
+        stars: 4.7,
+        description:
+            "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents.",
+    },
+    {
+        title: "Scuba Diving Adventure",
+        city: "Bali",
+        price: 100,
+        duration: 5,
+        reviews: 75,
+        stars: 4.9,
+        description:
+            "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life.",
+    },
+    {
+        title: "Concert Under the Stars",
+        city: "New York",
+        price: 75,
+        duration: 4.5,
+        reviews: 130,
+        stars: 4.8,
+        description:
+            "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting.",
+    },
+];
+
 export const countries = [
     { code: "AD", label: "Andorra", phone: "376" },
     {
