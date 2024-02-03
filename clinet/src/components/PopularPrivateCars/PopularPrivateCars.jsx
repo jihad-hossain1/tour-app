@@ -18,8 +18,6 @@ import { Pagination, Navigation } from "swiper/modules";
 import { popularPrivateCars } from "../AllDemoDataImporter/AllDemoDataImporter";
 import Title from "../Title/Title";
 
-
-
 const PopularPrivateCars = () => {
   return (
     <div className="container mx-auto my-10">
