@@ -9,11 +9,12 @@ import PopularPrivateCars from "../../components/PopularPrivateCars/PopularPriva
 import NewPrivateTours from "../../components/NewPrivateTours/NewPrivateTours";
 import PopularVirtualTours from "../../components/PopularVirtualTours/PopularVirtualTours";
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import DescriptionIcon from "@mui/icons-material/Description";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
 import { Avatar, Card, Rating } from "@mui/material";
 import Title from "../../components/Title/Title";
 import LatestArticles from "../../components/LatestArticles/LatestArticles";
@@ -214,12 +215,7 @@ export default function Destination() {
         </div>
       </div>
       <div className="mx-10 mt-10">
-        <h4 className="text-3xl ">
-          <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
-            Japan
-          </span>{" "}
-          Popular Tour Guide
-        </h4>
+        <Title firstText="Japan" secondText=" Popular Tour Guide" />
         <div className="text-lg mt-10">
           <p>
             Uncover Japan’s secrets and gain travel knowledge with a local
@@ -247,6 +243,34 @@ export default function Destination() {
       </div>
       <LatestArticles />
       <PopularArticles />
+
+      <div className="grid lg:grid-cols-3 lg:max-w-6xl mx-auto bg-[#EFECEC] p-10 rounded-md my-10">
+        <div className="flex items-center">
+          <InventoryIcon className="text-red-700" fontSize="large" />
+          <div className="pl-5">
+            <h1 className="text-[16px]">The best tours and activities</h1>
+            <p className="text-[13px]">With a real local of your choice</p>
+          </div>
+        </div>
+        <div className="flex items-center ml-5">
+          <DescriptionIcon className="text-red-700" fontSize="large" />
+          <div className="pl-5">
+            <h1 className="text-[16px]">The option to personalize your tour</h1>
+            <p className="text-[13px]">Just contact your favorite local</p>
+          </div>
+        </div>
+        <div className="flex items-center ml-5">
+          <CheckCircleOutlineIcon className="text-red-700" fontSize="large" />
+          <div className="pl-5">
+            <h1 className="text-[16px]">Only private tours!</h1>
+            <p className="text-[13px]">So no group tours with strangers</p>
+          </div>
+        </div>
+      </div>
+      <Title firstText="Related" secondText="Japan Tour Guide Pages" />
+      <div>
+      
+      </div>
     </div>
   );
 }
