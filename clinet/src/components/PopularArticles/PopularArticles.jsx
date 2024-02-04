@@ -17,9 +17,9 @@ const PopularArticles = () => {
                     <CardActionArea>
                         <CardMedia
                             component="img"
-                            height="140"
-                            image="https://img.freepik.com/free-vector/vector-cartoon-illustration-traditional-set-fast-food-meal_1441-331.jpg?w=740&t=st=1705568110~exp=1705568710~hmac=61473cbbfed026f61696af5eaa4623789baab960c11fe16abe99c6353a45bba0"
-                            alt="green iguana"
+                            className='h-56'
+                            image={tourSpot?.image}
+                            alt={tourSpot?.title}
                         />
                         <CardContent>
                             <Typography gutterBottom variant='h6' component="div" className='text-xl font-medium mb-2 '>
