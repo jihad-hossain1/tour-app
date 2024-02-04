@@ -11,6 +11,10 @@ const TourGuideReserveForm = ({ clientProfileID, uptoPeople }) => {
   const [open, setOpen] = useState(false);
   const [startTime, setstartTime] = useState([]);
 
+  // const startTime = { startTime: startTimes };
+  // const startTimei = [{ timePic: "any time" }, { timePic: "any time 2" }];
+  // console.log(startTimei);
+
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
   const [infants, setInfants] = useState(0);
@@ -43,15 +47,17 @@ const TourGuideReserveForm = ({ clientProfileID, uptoPeople }) => {
     }
 
     await addTourGuideRes(clientProfileID, personPic, startTime);
-    toast.success("Tourguide reserve data added successfull");
+
     setOpen(false);
   };
 
   useEffect(() => {
     if (reserveError) {
       toast.error(reserveError?.message);
+    } else if (reserveData) {
+      toast.success("Tourguide reserve data added successfull");
     }
-  }, [reserveError]);
+  }, [reserveError, reserveData]);
 
   // console.log(addTourGuideRes);
   return (

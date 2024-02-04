@@ -76,6 +76,7 @@ const TourGuide = () => {
             <TourGuideReserveForm
               clientId={data?.client?.id}
               clientProfileID={clientProfile?.id}
+              tourGuideReserve={clientProfile?.id}
               uptoPeople={clientProfile?.uptoPeople}
             />
 
