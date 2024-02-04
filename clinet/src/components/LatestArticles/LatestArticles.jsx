@@ -19,13 +19,13 @@ const LatestArticles = () => {
                     <CardActionArea>
                         <CardMedia
                             component="img"
-                            height="140"
-                            image="https://img.freepik.com/free-vector/portugal-tourism-concept-with-cuisine-people-sights-symbols-flat_1284-31948.jpg?w=826&t=st=1705567550~exp=1705568150~hmac=dc9d3a1b70289efb2b2b9b81650b6c7e85c2448c18a926e12e80a521b51fa1af"
+                            className='h-52'
+                            image={tourSpot?.image}
                             alt="green iguana"
                         />
                         <CardContent>
                             <Typography gutterBottom variant='h6' component="div" className='text-xl font-medium mb-2 '>
-                                {tourSpot?.title}
+                                {tourSpot?.title.length > 20 ? `${tourSpot.title.slice(0, 39)} ...` : tourSpot?.title}
                             </Typography>
                             <div className='space-x-5'>
                                 <Typography gutterBottom variant="small" component="span" className='inline-block bg-gray-200 bg-opacity-70 text-gray-600 rounded px-3 py-1 text-xs mr-2' >
@@ -33,8 +33,9 @@ const LatestArticles = () => {
                                 </Typography>
                             </div>
                             <Typography variant="body2" color="text.secondary" className='my-10'>
-                                {tourSpot?.description}
+                                {tourSpot?.description.length > 100 ? `${tourSpot.description.slice(0, 100)}...` : tourSpot?.description}
                             </Typography>
+
                         </CardContent>
                         <Divider light />
                         <CardActions className='flex items-center justify-between'>
