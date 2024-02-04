@@ -171,12 +171,8 @@ const addTourGuideContributionDetail = {
 
 const addTourGuideReserve = {
   type: TourGuideReserveType,
-
   args: {
     clientProfileID: { type: GraphQLID },
-
-    datePic: { type: GraphQLString },
-
     personPic: {
       type: new GraphQLInputObjectType({
         name: "PersonPicInputType",
@@ -184,12 +180,12 @@ const addTourGuideReserve = {
           adult: { type: GraphQLInt },
           children: { type: GraphQLInt },
           infant: { type: GraphQLInt },
+          totalPerson: { type: GraphQLInt },
         },
       }),
     },
-
     startTime: {
-      type: GraphQLList(
+      type: new GraphQLList(
         new GraphQLInputObjectType({
           name: "StartTimeInputType",
           fields: {
@@ -202,20 +198,37 @@ const addTourGuideReserve = {
 
   resolve: async (parent, args) => {
     try {
+      console.log(args);
+
+      if (args?.startTime?.length == 0) {
+        return new Error("start time are required");
+      }
+
+      const uptoPeople = await TourGuide.findById(args?.clientProfileID);
+      const upP =
+        parseInt(uptoPeople.uptoPeople) === args.personPic?.totalPerson;
+      if (!upP) {
+        return new Error(
+          "uptopeople and total person are not match please fill the uptopeople = totalperson"
+        );
+      }
+      console.log(upP);
+
       const alreadyInfoAdd = await TourGuideReserve.findOne({
         clientProfileID: args?.clientProfileID,
       });
+
       if (alreadyInfoAdd) {
         return new Error(
           `You are already added TourGuideReserve information! if you want to more info added go to TourGuideReserve update section...`
         );
       }
+
       const tourGuideReserveSaved = new TourGuideReserve(args);
       const saved = await tourGuideReserveSaved.save();
       return saved;
-      // console.log(existPlace);
     } catch (error) {
-      return new Error(`Error adding TourGuideContributionDetails: ${error}`);
+      return new Error(error);
     }
   },
 };

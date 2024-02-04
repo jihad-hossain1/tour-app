@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { CiSquarePlus, CiSquareMinus } from "react-icons/ci";
+import toast from "react-hot-toast";
 
-const PersonPickers = ({ personPic, setpersonPic }) => {
-  const [adults, setAdults] = useState(0);
-  const [children, setChildren] = useState(0);
-  const [infants, setInfants] = useState(0);
+const PersonPickers = ({
+  adults,
+  setAdults,
+  children,
+  setChildren,
+  infants,
+  setInfants,
+  uptoPeople,
+}) => {
   const [totalPeople, setTotalPeople] = useState(0);
-  const maxAdults = 14;
 
-  let objData = {
-    adult: adults,
-    children: children,
-    infant: infants,
-  };
-  //   setpersonPic(objData);
   const incrementCount = (type) => {
-    if (type === "adults" && adults < maxAdults) {
+    if (type === "adults" && adults < uptoPeople) {
       setAdults(adults + 1);
       updateTotalPeople(adults + 1, children, infants);
     } else if (type === "children") {
@@ -42,67 +41,80 @@ const PersonPickers = ({ personPic, setpersonPic }) => {
 
   const updateTotalPeople = (newAdults, newChildren, newInfants) => {
     const total = newAdults + newChildren + newInfants;
-
-    // Check if the total exceeds the maximum capacity for adults
-    if (total <= maxAdults) {
+    if (total <= uptoPeople) {
       setTotalPeople(total);
     } else {
-      // Optionally, provide feedback or handle the case when the limit is exceeded
-      alert("Total number of people exceeds the maximum capacity for adults.");
+      toast.error(
+        "Total number of people exceeds the maximum capacity for adults."
+      );
     }
   };
 
-  const isAdultsFull = totalPeople >= maxAdults;
+  const isAdultsFull = totalPeople >= uptoPeople;
 
   return (
     <div>
-      <h2>Tour Reservation</h2>
-      <div>
-        <button
-          onClick={() => incrementCount("adults")}
-          disabled={isAdultsFull}
-        >
-          <CiSquarePlus size={25} />
-        </button>
-        <button
-          onClick={() => decrementCount("adults")}
-          disabled={adults === 0}
-        >
-          <CiSquareMinus size={25} />
-        </button>
-        <p>Adults: {adults}</p>
+      <h2>Person choice</h2>
+      <div className="flex items-center gap-4">
+        <p>Total People: {totalPeople}</p>
+        <p>Max People {uptoPeople} </p>
       </div>
-      <div>
-        <button
-          onClick={() => incrementCount("children")}
-          disabled={isAdultsFull}
-        >
-          <CiSquarePlus size={25} />
-        </button>
-        <button
-          onClick={() => decrementCount("children")}
-          disabled={children === 0}
-        >
-          <CiSquareMinus size={25} />
-        </button>
-        <p>Children: {children}</p>
-      </div>
-      <div>
-        <button
-          onClick={() => incrementCount("infants")}
-          disabled={isAdultsFull}
-        >
-          <CiSquarePlus size={25} />
-        </button>
-        <button
-          onClick={() => decrementCount("infants")}
-          disabled={infants === 0}
-        >
-          <CiSquareMinus size={25} />
-        </button>
-        <p>Infants: {infants}</p>
-      </div>
-      <p>Total People: {totalPeople}</p>
+      <section className="flex items-center gap-4">
+        <h4>Adults: </h4>
+        <div className="flex gap-2 items-center">
+          <button
+            type="button"
+            onClick={() => incrementCount("adults")}
+            disabled={isAdultsFull}
+          >
+            <CiSquarePlus size={25} />
+          </button>
+          <p>{adults}</p>
+          <button
+            type="button"
+            onClick={() => decrementCount("adults")}
+            disabled={adults === 0}
+          >
+            <CiSquareMinus size={25} />
+          </button>
+        </div>
+        <h4>Children: </h4>
+        <div className="flex gap-2 items-center">
+          <button
+            type="button"
+            onClick={() => incrementCount("children")}
+            disabled={isAdultsFull}
+          >
+            <CiSquarePlus size={25} />
+          </button>
+          <p>{children}</p>
+          <button
+            type="button"
+            onClick={() => decrementCount("children")}
+            disabled={children === 0}
+          >
+            <CiSquareMinus size={25} />
+          </button>
+        </div>
+        <h4>Infants: </h4>
+        <div className="flex gap-2 items-center">
+          <button
+            type="button"
+            onClick={() => incrementCount("infants")}
+            disabled={isAdultsFull}
+          >
+            <CiSquarePlus size={25} />
+          </button>
+          <p> {infants}</p>
+          <button
+            type="button"
+            onClick={() => decrementCount("infants")}
+            disabled={infants === 0}
+          >
+            <CiSquareMinus size={25} />
+          </button>
+        </div>
+      </section>
     </div>
   );
 };

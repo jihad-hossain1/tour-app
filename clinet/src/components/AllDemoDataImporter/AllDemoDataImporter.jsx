@@ -205,6 +205,231 @@ export const newPrivateTours = [
             "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting.",
     },
 ];
+
+export const popularArticles = [
+    {
+        title: "Wine Tasting Experience",
+        city: "Barcelona",
+        price: 60,
+        image: "/Images/Popular_Articles/1.avif",
+        duration: 3,
+        reviews: 110,
+        stars: 4.6,
+        description: "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies."
+    },
+    {
+        title: "Art Gallery Tour",
+        city: "Paris",
+        price: 45,
+        image: "/Images/Popular_Articles/2.avif",
+        duration: 2,
+        reviews: 100,
+        stars: 4.7,
+        description: "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents."
+    },
+    {
+        title: "Scuba Diving Adventure",
+        city: "Bali",
+        price: 100,
+        image: "/Images/Popular_Articles/3.avif",
+        duration: 5,
+        reviews: 75,
+        stars: 4.9,
+        description: "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life."
+    },
+    {
+        title: "Concert Under the Stars",
+        city: "New York",
+        price: 75,
+        image: "/Images/Popular_Articles/4.avif",
+        duration: 4.5,
+        reviews: 130,
+        stars: 4.8,
+        description: "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting."
+    }
+];
+
+export const latestArticles = [
+    {
+        title: "Hiring A Guide In Tokyo: Pros & Cons",
+        city: "Tokyo, Japan",
+        price: 60,
+        image: "/Images/Latest_Articles/Hungary.avif",
+        duration: 3,
+        reviews: 110,
+        stars: 4.6,
+        description: "Traveling to Tokyo is a once in a lifetime experience that should be filled with amazing memories, not worrying about the steep language barrier and the complex transportation system. It’s easy to dream of touring the Sky tree, or savoring seafood in Tsukiji Market, but if you’re wondering how to turn that dream into a reality, a Tokyo tour guide can help ease the journey.But should you get a guide in Tokyo? We say yes! Tour guides provide safety, language understanding, enhanced knowledge, and easy planning.But we’re a little biased.If you’re seriously asking yourself this question, though, it’s time to weigh the options.So let’s look at both the pros and cons, so that you and your loved ones can enjoy Shinjuku and Akihabara without worry."
+    },
+    {
+        title: "Tourism In Tokyo Statistics 2024: The Ultimate Tour Guide",
+        city: "Tokyo, Japan",
+        price: 45,
+        image: "/Images/Latest_Articles/Portugal.avif",
+        duration: 2,
+        reviews: 100,
+        stars: 4.7,
+        description: "If you’re planning a trip to Tokyo, and it feels as hectic as solo navigating Shibuya crossing (the busiest intersection in the world), we feel you. The world’s largest metropolis (37 million people, and counting) is a complex symphony. At one end, ancient shrines stand proudly amidst neon-lit skyscrapers, and on the other, traditional tea ceremonies peacefully coexist with the vibrant chaos of Harajuku fashion. It’s a lot. Which is why you need a literary compass to guide you through the greatest, and grandest, of all megacities.From hidden botanical gardens, and where to find them, to historic sites, dos and don’ts, and when to contact a Tokyo tour guide, we’re breaking down the Big Mikan.Ready ? Iki mashoo(let’s go)! "
+    },
+    {
+        title: "Tourism In Hungary Statistics 2024: The Hungary Travel Guide",
+        city: "Hungary",
+        price: 100,
+        image: "/Images/Latest_Articles/Tokyo1.avif",
+        duration: 5,
+        reviews: 75,
+        stars: 4.9,
+        description: "Did you know that the Hungarian Parliament building was awarded the title of top tourist attraction by Stasher tourism? For a political building to take this honor, it goes to show how grand architecture and history are in Hungary.Is Hungary good for tourists ? Right off the bat, the answer is yes, but if you’re wondering “what makes it amazing”, and ‘How many days are enough for Hungary’ or ‘What is the best month to visit Hungary ?’, these are just some of the questions answered in this article to help you with your travel planning.You’ll also get some great tourist tips, know when to hire a Hungary tour guide, and how to navigate the Pearl of the Danube, so let’s get started! "
+    },
+    {
+        title: "Hiring A Guide In Portugal: Pros & Cons",
+        city: "Portugal",
+        price: 75,
+        image: "/Images/Latest_Articles/Tokyo2.avif",
+        duration: 4.5,
+        reviews: 130,
+        stars: 4.8,
+        description: "Portugal is the cork producing capital of the world. Seriously. You can get everything in cork-form, from fancy shoes to fabric and artwork. Now, if you’re wondering, what does that have to do with hiring a guide?” Let me explain.Corks are just the tip of the iceberg when it comes to everything there is to know about Portugal. When you add transportation, cultural etiquette, festival timelines, language and must- see sites, things can get overwhelming.You could get a Portugal tour guide, but is that really the best fit for you ? To ease your burden, we’ve come up with a list of reasons for, and against, hiring a private tour guide in the Land of Explorers.Vamos!"
+    }
+];
+
+export const popularVirtualTours = [
+    {
+        title: "Wine Tasting Experience",
+        city: "Barcelona",
+        price: 60,
+        duration: 3,
+        reviews: 110,
+        stars: 4.6,
+        description:
+            "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies.",
+    },
+    {
+        title: "Art Gallery Tour",
+        city: "Paris",
+        price: 45,
+        duration: 2,
+        reviews: 100,
+        stars: 4.7,
+        description:
+            "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents.",
+    },
+    {
+        title: "Scuba Diving Adventure",
+        city: "Bali",
+        price: 100,
+        duration: 5,
+        reviews: 75,
+        stars: 4.9,
+        description:
+            "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life.",
+    },
+    {
+        title: "Concert Under the Stars",
+        city: "New York",
+        price: 75,
+        duration: 4.5,
+        reviews: 130,
+        stars: 4.8,
+        description:
+            "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting.",
+    },
+];
+
+export const swiperImage = [
+    "https://images.unsplash.com/photo-1519564337578-2598cfe4dc80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1513759338966-5de23c844b3a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+]
+
+export const popularPrivateCars = [
+    {
+        title: "City Bike Tour",
+        city: "Amsterdam",
+        price: 40,
+        duration: 3,
+        reviews: 120,
+        stars: 4.8,
+        description:
+            "Explore the picturesque streets of Amsterdam on a guided bike tour, discovering hidden gems and iconic landmarks along the way.",
+    },
+    {
+        title: "Historical Walking Tour",
+        city: "Rome",
+        price: 35,
+        duration: 2.5,
+        reviews: 95,
+        stars: 4.7,
+        description:
+            "Immerse yourself in the rich history of Rome as you walk through ancient ruins, charming streets, and iconic monuments with an expert guide.",
+    },
+    {
+        title: "Culinary Adventure",
+        city: "Tokyo",
+        price: 80,
+        duration: 4,
+        reviews: 150,
+        stars: 4.9,
+        description:
+            "Embark on a culinary journey through Tokyo's vibrant food scene, savoring delicious street food, traditional dishes, and modern gastronomic delights.",
+    },
+    {
+        title: "Nature Hike",
+        city: "Vancouver",
+        price: 50,
+        duration: 3.5,
+        reviews: 80,
+        stars: 4.5,
+        description:
+            "Escape the city and reconnect with nature on a guided hike in the breathtaking landscapes surrounding Vancouver, enjoying fresh air and stunning views.",
+    },
+    {
+        title: "Wine Tasting Experience",
+        city: "Barcelona",
+        price: 60,
+        duration: 3,
+        reviews: 110,
+        stars: 4.6,
+        description:
+            "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies.",
+    },
+    {
+        title: "Art Gallery Tour",
+        city: "Paris",
+        price: 45,
+        duration: 2,
+        reviews: 100,
+        stars: 4.7,
+        description:
+            "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents.",
+    },
+    {
+        title: "Scuba Diving Adventure",
+        city: "Bali",
+        price: 100,
+        duration: 5,
+        reviews: 75,
+        stars: 4.9,
+        description:
+            "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life.",
+    },
+    {
+        title: "Concert Under the Stars",
+        city: "New York",
+        price: 75,
+        duration: 4.5,
+        reviews: 130,
+        stars: 4.8,
+        description:
+            "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting.",
+    },
+];
+
+export const imageArray = [
+    "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1527305265013-ddd1054521d6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+]
+
 export const countries = [
     { code: "AD", label: "Andorra", phone: "376" },
     {
