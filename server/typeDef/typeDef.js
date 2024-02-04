@@ -244,8 +244,8 @@ const DivisionType = new GraphQLObjectType({
     name: { type: GraphQLString },
     country: {
       type: CountryType,
-      resolve: (parent, args) => {
-        return Country.findById(parent.countryId);
+      resolve: async (parent, args) => {
+        return await Country.findById(parent.countryId);
       },
     },
     countryId: { type: GraphQLID },
