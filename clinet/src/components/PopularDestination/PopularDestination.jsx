@@ -1,6 +1,7 @@
 import { Card } from "@mui/material";
 import { Link } from "react-router-dom";
 import Title from "../Title/Title";
+// import { Button } from "@mui/material";
 
 const countryData = [
   {
@@ -45,16 +46,14 @@ const PopularDestination = () => {
         {countryData?.map((item, _i) => (
           <Link to={"#"} key={_i}>
             <Card>
-              <div className="relative rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-500 ease-in-out">
+              <div className="click">
                 <div
                   className="w-full h-[170px] bg-cover bg-center pt-4 relative group"
                   style={{ backgroundImage: `url(${item.img})` }}
                 >
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 transition-opacity opacity-0 group-hover:opacity-100">
-                    <div className="text-center w-full scale-0 translate-y-4 transition-transform duration-500 ease-in-out group-hover:scale-100 group-hover:translate-y-0">
-                      <button className="text-white text-xs bg-yellow-500 rounded-md w-[30%] mx-auto mb-4 h-[20px] transition-opacity duration-500 ease-in-out">
-                        Click to view
-                      </button>
+                  <div className="click_class_main">
+                    <div className="click_class">
+                      <button className="viewbtn ">Click to view</button>
                       <h1 className="text-white text-3xl mx-auto">
                         {item.name}
                       </h1>
@@ -66,7 +65,6 @@ const PopularDestination = () => {
           </Link>
         ))}
       </section>
-      
     </main>
   );
 };
