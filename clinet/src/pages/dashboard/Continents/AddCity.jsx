@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalAll from "../../../components/ModalAll/ModalAll";
 import {
   FormControl,
@@ -33,15 +33,18 @@ const AddCity = () => {
   };
   const [formData, setFormData] = useState(scafolding);
 
-  const [addCity] = useMutation(ADD_CITY, {
-    variables: {
-      name: formData?.name,
-      photo: _photo,
-      divisionId: formData?.divisionId,
-      description: formData?.description,
-    },
-    refetchQueries: [{ query: GET_CITIE }],
-  });
+  const [addCity, { data: cityData, error: cityError }] = useMutation(
+    ADD_CITY,
+    {
+      variables: {
+        name: formData?.name,
+        photo: _photo,
+        divisionId: formData?.divisionId,
+        description: formData?.description,
+      },
+      refetchQueries: [{ query: GET_CITIE }],
+    }
+  );
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -71,13 +74,20 @@ const AddCity = () => {
   let photo = { photo: _photo };
   const { name, divisionId, description } = formData;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addCity(name, divisionId, photo, description);
-
-    toast.success("city added");
+    await addCity(name, divisionId, photo, description);
+    setOpen(false);
   };
 
+  useEffect(() => {
+    if (cityError) {
+      toast.error(cityError?.message);
+    }
+    if (cityData) {
+      toast.success("city added successfull");
+    }
+  });
   return (
     <>
       <Toaster />

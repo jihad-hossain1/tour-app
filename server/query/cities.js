@@ -12,28 +12,37 @@ const abc = {
 }
 
 const cities = {
-    type: new GraphQLList(CityForAdd),
-    resolve: async () => {
-        try {
-            return await City.find();
-        } catch (error) {
-            throw new Error(`Error fetching City: ${error}`);
-        }
-    },
+  type: new GraphQLList(CityForAdd),
+  resolve: async () => {
+    try {
+      const cit = await City.find();
+      const result = cit?.slice().reverse();
+      return result;
+    } catch (error) {
+      return new Error(`Error fetching City: ${error}`);
+    }
+  },
 };
-
+const getCity = {
+  type: CityForAdd,
+  args: { id: { type: GraphQLID } },
+  resolve: async (parent, args) => {
+    try {
+      return await City.findById(args?.id);
+    } catch (error) {
+      return new Error(`Error fetching City: ${error}`);
+    }
+  },
+};
 
 const cityByDivision = {
-    type: new GraphQLList(CityType),
-    args: { id: { type: GraphQLID } },
-    resolve: async (parent, args) => {
-        const fetchData = await City.find();
-        let result = fetchData?.filter((item) => item?.divisionId == args?.id);
-        return result;
-    },
+  type: new GraphQLList(CityType),
+  args: { id: { type: GraphQLID } },
+  resolve: async (parent, args) => {
+    const fetchData = await City.find();
+    let result = fetchData?.filter((item) => item?.divisionId == args?.id);
+    return result;
+  },
 };
 
-
-
-
-    module.exports = {cities,cityByDivision}
+module.exports = { cities, cityByDivision, getCity };

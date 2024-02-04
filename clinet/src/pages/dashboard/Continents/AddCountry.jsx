@@ -13,7 +13,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import FileUploader from "../TourSpot/FileUploader";
-import { GET_COUNTIRES } from "../../../queries/countriesQuery";
 import { ADD_COUNTRY } from "../../../mutation/countryMutaion";
 
 const AddCountry = () => {
