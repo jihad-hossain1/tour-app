@@ -6,8 +6,15 @@ import PersonPickers from "./PersonPickers";
 import { useMutation } from "@apollo/client";
 import { ADD_TOURGUIDE_RESERVE } from "../../../../../mutation/tourGuideMutation";
 import toast from "react-hot-toast";
+import picTimer from "../../../../../utils/timeHourFormate";
+import { FaTrash } from "react-icons/fa";
+import { BsPencilSquare } from "react-icons/bs";
 
-const TourGuideReserveForm = ({ clientProfileID, uptoPeople }) => {
+const TourGuideReserveForm = ({
+  clientProfileID,
+  uptoPeople,
+  tourGuideReserve,
+}) => {
   const [open, setOpen] = useState(false);
   const [startTime, setstartTime] = useState([]);
 
@@ -62,26 +69,71 @@ const TourGuideReserveForm = ({ clientProfileID, uptoPeople }) => {
   // console.log(addTourGuideRes);
   return (
     <>
-      <Button onClick={() => setOpen(!open)}>Add TourGuide Reserve</Button>
+      <Button onClick={() => setOpen(!open)}>
+        {!tourGuideReserve
+          ? "Add TourGuide Reserve"
+          : "Update TourGuide Reserve"}
+      </Button>
 
-      <ModalAll title={"TourGuide ReserveForm"} open={open} setOpen={setOpen}>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <PersonPickers
-            adults={adults}
-            setAdults={setAdults}
-            children={children}
-            setChildren={setChildren}
-            infants={infants}
-            setInfants={setInfants}
-            uptoPeople={uptoPeople}
-          />
-          <TimePicker startTime={startTime} setstartTime={setstartTime} />
-          <div className="flex justify-start">
-            <Button variant="contained" color="success" type="submit">
-              Submit
-            </Button>
-          </div>
-        </form>
+      <ModalAll
+        title={
+          !tourGuideReserve
+            ? "Add TourGuide Reserve"
+            : "Update TourGuide Reserve"
+        }
+        open={open}
+        setOpen={setOpen}
+      >
+        {!tourGuideReserve ? (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <PersonPickers
+              adults={adults}
+              setAdults={setAdults}
+              children={children}
+              setChildren={setChildren}
+              infants={infants}
+              setInfants={setInfants}
+              uptoPeople={uptoPeople}
+            />
+            <TimePicker startTime={startTime} setstartTime={setstartTime} />
+            <div className="flex justify-start">
+              <Button variant="contained" color="success" type="submit">
+                Submit
+              </Button>
+            </div>
+          </form>
+        ) : (
+          <section className="flex flex-col ">
+            <h4 className="text-lg ">Start Time: </h4>
+            <div className=" flex items-center gap-3 mb-3">
+              {tourGuideReserve?.startTime?.map((item) => (
+                <div className="w-fit relative group ">
+                  <button
+                    className=" border px-6 py-2 rounded-md border-green-500 hover:border-pink-400"
+                    key={item?.id}
+                  >
+                    {picTimer(item?.timePic)}
+                  </button>
+                  <div className=" group-hover:flex items-center group-hover:justify-between gap-3 hidden group-hover:absolute group-hover:bottom-7">
+                    <button>
+                      <FaTrash className="text-sm" />
+                    </button>
+                    <button>
+                      <BsPencilSquare className="text-sm" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <h4 className="text-lg">Person Pic: </h4>
+            <div>
+              <h4>adult: {tourGuideReserve?.personPic?.adult}</h4>
+              <h4>children: {tourGuideReserve?.personPic?.children}</h4>
+              <h4>infant: {tourGuideReserve?.personPic?.infant}</h4>
+              <h4>totalPerson: {tourGuideReserve?.personPic?.totalPerson}</h4>
+            </div>
+          </section>
+        )}
       </ModalAll>
     </>
   );

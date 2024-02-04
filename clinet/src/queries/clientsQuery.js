@@ -30,6 +30,21 @@ const GET_CLIENT = gql`
         languages
         profileImage
         tourGuideInstructionType
+        tourGuideReserve {
+          id
+          clientProfileID
+          personPic {
+            id
+            adult
+            children
+            infant
+            totalPerson
+          }
+          startTime {
+            id
+            timePic
+          }
+        }
         tourGuideContributionDetail {
           id
           notice
