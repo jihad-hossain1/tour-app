@@ -13,7 +13,11 @@ const personPicType = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  totalPerson: {
+    type: Number,
+  },
 });
+
 const startTimeType = new mongoose.Schema({
   timePic: {
     type: String,

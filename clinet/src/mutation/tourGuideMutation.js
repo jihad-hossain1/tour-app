@@ -136,9 +136,13 @@ const ADD_TOURGUIDE_RESERVE = gql`
       clientProfileID: $clientProfileID
       personPic: $personPic
       startTime: $startTime
-    )
+    ) {
+      id
+    }
   }
 `;
+
+
 export {
   ADD_TOURGUIDE_PROFILE,
   UPDATE_TOURGUIDE_PROFILE,
