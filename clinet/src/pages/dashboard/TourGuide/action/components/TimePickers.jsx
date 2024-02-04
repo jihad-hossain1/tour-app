@@ -11,6 +11,9 @@ const TimePickers = ({ startTime, setstartTime }) => {
   const newData = { picTime };
 
   const handleContributeData = () => {
+    if (picTime == "") {
+      return toast.error("selecet a start time");
+    }
     setstartTime([...startTime, newData]);
 
     setpicTime("");
@@ -20,7 +23,7 @@ const TimePickers = ({ startTime, setstartTime }) => {
     <div className="flex flex-col gap-2">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <TimePicker
-          label="Time Picker"
+          label="Start Time"
           value={picTime}
           onChange={(newTime) => setpicTime(newTime)}
         />

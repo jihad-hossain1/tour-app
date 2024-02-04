@@ -23,9 +23,7 @@ const TourGuide = () => {
 
   const totalImages = clientProfile?.images?.flatMap((item) => item?.urls);
 
-  // console.log(tourGuideContribution);
-
-  console.log("clientProfile info: ", clientProfile);
+  // console.log("clientProfile info: ", clientProfile);
 
   return (
     <>

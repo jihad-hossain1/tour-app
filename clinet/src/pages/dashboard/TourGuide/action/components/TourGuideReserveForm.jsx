@@ -14,45 +14,52 @@ const TourGuideReserveForm = ({ clientProfileID, uptoPeople }) => {
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
   const [infants, setInfants] = useState(0);
+
   // const maxAdults = 14;
+  let totalPerson = adults + children + infants;
+
   let personPic = {
     adult: adults,
     children: children,
     infant: infants,
+    totalPerson: totalPerson,
   };
+
   const [
-    addTourGuideReserve,
+    addTourGuideRes,
     { data: reserveData, error: reserveError, loading: reserveLoading },
   ] = useMutation(ADD_TOURGUIDE_RESERVE, {
     variables: {
-      clientProfileID: clientProfileID,
-      personPic: personPic,
-      startTime: startTime,
+      clientProfileID,
+      personPic,
+      startTime,
     },
-    refetchQueries: {},
   });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //
-    console.log(personPic, startTime);
-    await addTourGuideReserve(personPic, startTime, clientProfileID);
+    if (TimePicker.length >= 2) {
+      return toast.error("minimum 2 start time added");
+    }
 
+    await addTourGuideRes(clientProfileID, personPic, startTime);
     toast.success("Tourguide reserve data added successfull");
+    setOpen(false);
   };
 
   useEffect(() => {
     if (reserveError) {
-      toast.error(`${reserveError?.message}`);
+      toast.error(reserveError?.message);
     }
-  }, []);
+  }, [reserveError]);
 
+  // console.log(addTourGuideRes);
   return (
     <>
       <Button onClick={() => setOpen(!open)}>Add TourGuide Reserve</Button>
 
       <ModalAll title={"TourGuide ReserveForm"} open={open} setOpen={setOpen}>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <TimePicker startTime={startTime} setstartTime={setstartTime} />
           <PersonPickers
             adults={adults}
             setAdults={setAdults}
@@ -62,6 +69,7 @@ const TourGuideReserveForm = ({ clientProfileID, uptoPeople }) => {
             setInfants={setInfants}
             uptoPeople={uptoPeople}
           />
+          <TimePicker startTime={startTime} setstartTime={setstartTime} />
           <div className="flex justify-start">
             <Button variant="contained" color="success" type="submit">
               Submit
