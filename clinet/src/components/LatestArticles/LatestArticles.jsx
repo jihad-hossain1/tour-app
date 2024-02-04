@@ -19,8 +19,8 @@ const LatestArticles = () => {
                     <CardActionArea>
                         <CardMedia
                             component="img"
-                            height="140"
-                            image="https://img.freepik.com/free-vector/portugal-tourism-concept-with-cuisine-people-sights-symbols-flat_1284-31948.jpg?w=826&t=st=1705567550~exp=1705568150~hmac=dc9d3a1b70289efb2b2b9b81650b6c7e85c2448c18a926e12e80a521b51fa1af"
+                            className='h-52'
+                            image={tourSpot?.image}
                             alt="green iguana"
                         />
                         <CardContent>
