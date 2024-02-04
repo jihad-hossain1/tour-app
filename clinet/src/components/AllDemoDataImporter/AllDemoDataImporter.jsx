@@ -251,44 +251,44 @@ export const popularArticles = [
 
 export const latestArticles = [
     {
-        title: "Wine Tasting Experience",
-        city: "Barcelona",
+        title: "Hiring A Guide In Tokyo: Pros & Cons",
+        city: "Tokyo, Japan",
         price: 60,
         image: "/Images/Latest_Articles/Hungary.avif",
         duration: 3,
         reviews: 110,
         stars: 4.6,
-        description: "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies."
+        description: "Traveling to Tokyo is a once in a lifetime experience that should be filled with amazing memories, not worrying about the steep language barrier and the complex transportation system. It’s easy to dream of touring the Sky tree, or savoring seafood in Tsukiji Market, but if you’re wondering how to turn that dream into a reality, a Tokyo tour guide can help ease the journey.But should you get a guide in Tokyo? We say yes! Tour guides provide safety, language understanding, enhanced knowledge, and easy planning.But we’re a little biased.If you’re seriously asking yourself this question, though, it’s time to weigh the options.So let’s look at both the pros and cons, so that you and your loved ones can enjoy Shinjuku and Akihabara without worry."
     },
     {
-        title: "Art Gallery Tour",
-        city: "Paris",
+        title: "Tourism In Tokyo Statistics 2024: The Ultimate Tour Guide",
+        city: "Tokyo, Japan",
         price: 45,
         image: "/Images/Latest_Articles/Portugal.avif",
         duration: 2,
         reviews: 100,
         stars: 4.7,
-        description: "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents."
+        description: "If you’re planning a trip to Tokyo, and it feels as hectic as solo navigating Shibuya crossing (the busiest intersection in the world), we feel you. The world’s largest metropolis (37 million people, and counting) is a complex symphony. At one end, ancient shrines stand proudly amidst neon-lit skyscrapers, and on the other, traditional tea ceremonies peacefully coexist with the vibrant chaos of Harajuku fashion. It’s a lot. Which is why you need a literary compass to guide you through the greatest, and grandest, of all megacities.From hidden botanical gardens, and where to find them, to historic sites, dos and don’ts, and when to contact a Tokyo tour guide, we’re breaking down the Big Mikan.Ready ? Iki mashoo(let’s go)! "
     },
     {
-        title: "Scuba Diving Adventure",
-        city: "Bali",
+        title: "Tourism In Hungary Statistics 2024: The Hungary Travel Guide",
+        city: "Hungary",
         price: 100,
         image: "/Images/Latest_Articles/Tokyo1.avif",
         duration: 5,
         reviews: 75,
         stars: 4.9,
-        description: "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life."
+        description: "Did you know that the Hungarian Parliament building was awarded the title of top tourist attraction by Stasher tourism? For a political building to take this honor, it goes to show how grand architecture and history are in Hungary.Is Hungary good for tourists ? Right off the bat, the answer is yes, but if you’re wondering “what makes it amazing”, and ‘How many days are enough for Hungary’ or ‘What is the best month to visit Hungary ?’, these are just some of the questions answered in this article to help you with your travel planning.You’ll also get some great tourist tips, know when to hire a Hungary tour guide, and how to navigate the Pearl of the Danube, so let’s get started! "
     },
     {
-        title: "Concert Under the Stars",
-        city: "New York",
+        title: "Hiring A Guide In Portugal: Pros & Cons",
+        city: "Portugal",
         price: 75,
         image: "/Images/Latest_Articles/Tokyo2.avif",
         duration: 4.5,
         reviews: 130,
         stars: 4.8,
-        description: "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting."
+        description: "Portugal is the cork producing capital of the world. Seriously. You can get everything in cork-form, from fancy shoes to fabric and artwork. Now, if you’re wondering, what does that have to do with hiring a guide?” Let me explain.Corks are just the tip of the iceberg when it comes to everything there is to know about Portugal. When you add transportation, cultural etiquette, festival timelines, language and must- see sites, things can get overwhelming.You could get a Portugal tour guide, but is that really the best fit for you ? To ease your burden, we’ve come up with a list of reasons for, and against, hiring a private tour guide in the Land of Explorers.Vamos!"
     }
 ];
 
