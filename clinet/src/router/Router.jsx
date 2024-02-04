@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
         element: <DeniedPage />,
       },
       {
-        path: "/destination",
+        path: "/destination/:id",
         element: <Destination />,
       },
     ],
