@@ -143,84 +143,92 @@ export const popularPrivateTours = [
 
 export const newPrivateTours = [
     {
-        title: "City Bike Tour",
-        city: "Amsterdam",
+        title: "The Best of Tokyo… New and Old in a day.",
+        city: "Tokyo",
         price: 40,
         duration: 3,
         reviews: 120,
         stars: 4.8,
         description:
-            "Explore the picturesque streets of Amsterdam on a guided bike tour, discovering hidden gems and iconic landmarks along the way.",
+            "A day trip to experience the modern and high end areas of Tokyo… Shibuya. Omotesando, Azabudai Hills…While a short distance away, to explore the beautifully reserved nature in the Meiji Shrine.It is also a great route for Shoppers and Foodies along the way.(Also happy to customize the tour upon request) ",
+        name: "Carol N."
     },
     {
-        title: "Historical Walking Tour",
-        city: "Rome",
+        title: "Prague Bangla town",
+        city: "Prague",
         price: 35,
         duration: 2.5,
         reviews: 95,
         stars: 4.7,
         description:
-            "Immerse yourself in the rich history of Rome as you walk through ancient ruins, charming streets, and iconic monuments with an expert guide.",
+            "Enter the Jewish museum - all the sites - with an expert on Jewish history. Visit synagogues: Maisel, Pinkas, Klausen, Spanish, Old-New, cemetery, and ceremonial hall.",
+        name: "Eva D."
     },
     {
-        title: "Culinary Adventure",
-        city: "Tokyo",
+        title: "First time visit in Prague",
+        city: "Prague",
         price: 80,
         duration: 4,
         reviews: 150,
         stars: 4.9,
         description:
-            "Embark on a culinary journey through Tokyo's vibrant food scene, savoring delicious street food, traditional dishes, and modern gastronomic delights.",
+            "On your first day you can explore Prague city center with a private, local guide. Find the main sites such as Prague castle, Charles bridge, Old Town square, Astronomical clock, and others.",
+        name: "Eva D."
     },
     {
-        title: "Nature Hike",
-        city: "Vancouver",
+        title: "Private Prague castle tour",
+        city: "Prague",
         price: 50,
         duration: 3.5,
         reviews: 80,
         stars: 4.5,
         description:
-            "Escape the city and reconnect with nature on a guided hike in the breathtaking landscapes surrounding Vancouver, enjoying fresh air and stunning views.",
+            "Explore the whole complex of Prague castle with your private guide and visit 4 sites: St. Vitus cathedral, St. George Basilica, Old royal palace and Golden lane.",
+        name: "Eva D."
     },
     {
-        title: "Wine Tasting Experience",
-        city: "Barcelona",
+        title: "Walking Tour in Madrid & Markets",
+        city: "Madrid",
         price: 60,
         duration: 3,
         reviews: 110,
         stars: 4.6,
         description:
-            "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies.",
+            "Madrid is an open city with a lot of life! I offers you this different tour where mix history, gossip tales and historical markets with the possibility of taste food and traditional tapas that you will discover a new Madrid.",
+        name: "Eva D."
     },
     {
-        title: "Art Gallery Tour",
+        title: "Visita guiada a Alcalá de Henares",
         city: "Paris",
         price: 45,
         duration: 2,
         reviews: 100,
         stars: 4.7,
         description:
-            "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents.",
+            "La ciudad complutense, cuna de Miguel de Cervantes, declarada Patrimonio de la Humanidad por la UNESCO en 1998, nos ofrece en un recorrido fácil y accesible, una gran cantidad de historias y patrimonio que nos dan a entender de su importancia, sobre todo en los S.XVI-XVII",
+        name: "Manuel G."
     },
     {
-        title: "Scuba Diving Adventure",
-        city: "Bali",
+        title: "Visita guiada a Sigüenza",
+        city: "Castilla-La Mancha",
         price: 100,
         duration: 5,
         reviews: 75,
         stars: 4.9,
         description:
-            "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life.",
+            "Es un Conjunto Histórico a poco más de una hora de Madrid que es candidato para ser declarado Patrimonio de la Humanidad por la UNESCO. Sigüenza es una ciudad medieval perfecta que conserva la historia y el patrimonio, en este tour disfrutarás y descubrirás una ciudad rica con hermosos monumentos como la gran catedral, una de las diez mejores de España.",
+        name: "Manuel G."
     },
     {
-        title: "Concert Under the Stars",
-        city: "New York",
+        title: "Visita a los campos de lavanda y Brihuega",
+        city: "Castilla-La Mancha",
         price: 75,
         duration: 4.5,
         reviews: 130,
         stars: 4.8,
         description:
-            "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting.",
+            "Quizás conozcas los famosos campos de lavanda de Provenza en Francia. Pero en Brihuega, un pueblecito a no más de 60 kilómetros de Madrid, tenemos los mismos campos.La lavanda florece en julio y es un espectáculo de color y olor.Descubriremos no sólo los campos, haremos un recorrido por este pueblo histórico y visitaremos una destilería de lavanda.",
+        name: "Manuel G."
     },
 ];
 
@@ -399,46 +407,6 @@ export const popularPrivateCars = [
         stars: 4.5,
         description:
             "Escape the city and reconnect with nature on a guided hike in the breathtaking landscapes surrounding Vancouver, enjoying fresh air and stunning views.",
-    },
-    {
-        title: "Wine Tasting Experience",
-        city: "Barcelona",
-        price: 60,
-        duration: 3,
-        reviews: 110,
-        stars: 4.6,
-        description:
-            "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies.",
-    },
-    {
-        title: "Art Gallery Tour",
-        city: "Paris",
-        price: 45,
-        duration: 2,
-        reviews: 100,
-        stars: 4.7,
-        description:
-            "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents.",
-    },
-    {
-        title: "Scuba Diving Adventure",
-        city: "Bali",
-        price: 100,
-        duration: 5,
-        reviews: 75,
-        stars: 4.9,
-        description:
-            "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life.",
-    },
-    {
-        title: "Concert Under the Stars",
-        city: "New York",
-        price: 75,
-        duration: 4.5,
-        reviews: 130,
-        stars: 4.8,
-        description:
-            "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting.",
     },
 ];
 
