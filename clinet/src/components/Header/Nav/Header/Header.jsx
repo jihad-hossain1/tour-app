@@ -33,32 +33,29 @@ const Header = () => {
       </Link>
     </li>,
   ];
-
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   const handleInputChange = (e) => {
     const inputText = e.target.value;
     setSearchTerm(inputText);
-
     const filteredSuggestions =
       inputText !== ""
-        ? countries
-            .filter((country) =>
-              country.label.toLowerCase().startsWith(inputText.toLowerCase())
-            )
-            .slice(0, 8) // Limit the suggestions to a maximum of 8
+        ? countries.filter((country) =>
+            country.label.toLowerCase().startsWith(inputText.toLowerCase())
+          )
         : [];
 
     setSuggestions(filteredSuggestions);
   };
 
   const handleSuggestionClick = (selectedCountry) => {
-    setSearchTerm(selectedCountry.label);
+    setSearchTerm(selectedCountry.name);
     setSuggestions([]);
   };
   return (
-    <div className="fixed z-50 w-full bg-black bg-opacity-60 lg:h-[85px] text-white p-4">
+    <div className="absolute z-50 w-full bg-black bg-opacity-60 lg:h-[85px] text-white p-4">
       <div className="flex items-center justify-between pt-3">
         <div className="flex items-center space-x-4">
           <div className="group relative">
@@ -88,33 +85,33 @@ const Header = () => {
           {/* input */}
           <div className="container border-b-2">
             <div className="mainbox lg:w-[230px]">
-                <div className="iconContainer">
-                    <button onClick={toggleSearch}>
-                        <SearchOutlinedIcon fontSize="large" />
-                    </button>
-                </div>
-                <input
-                    className="search_input w-[120px] lg:w-[185px]"
-                    placeholder="search"
-                    name="search"
-                    type="text"
-                    value={searchTerm}
-                    onChange={handleInputChange}
-                />
+              <div className="iconContainer">
+                <button onClick={toggleSearch}>
+                  <SearchOutlinedIcon fontSize="large" />
+                </button>
+              </div>
+              <input
+                className="search_input w-[120px] lg:w-[185px]"
+                placeholder="search"
+                name="search"
+                type="text"
+                value={searchTerm}
+                onChange={handleInputChange}
+              />
             </div>
             {suggestions.length > 0 && (
-                <ul className="lg:w-[230px] w-[160px] mt-[1px] lg:mt-3 text-sm mr-10 p-3 shadow bg-black bg-opacity-60 rounded-b-xl absolute">
-                    {suggestions.map((country, index) => (
-                        <li
-                            key={index}
-                            onClick={() => handleSuggestionClick(country)}
-                        >
-                            <button className="pb-2">{country.label}</button>
-                        </li>
-                    ))}
-                </ul>
+              <ul className="lg:w-[230px] w-[160px] mt-[1px] lg:mt-3 text-sm mr-10 p-3 shadow bg-black bg-opacity-60 rounded-b-xl absolute">
+                {suggestions.slice(0, 8).map((country, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleSuggestionClick(country)}
+                  >
+                    <button className="pb-2">{country.label}</button>
+                  </li>
+                ))}
+              </ul>
             )}
-        </div>
+          </div>
         </div>
       </div>
     </div>

@@ -242,8 +242,8 @@ export default function Destination() {
               </div>
             ))}
           </div>
-          <div className="w-full">
-            <button className="mt-10 border-none bg-slate-200 font-semibold text-[14px] p-4 rounded-md justify-center items-center text-center">
+          <div className="w-full text-center">
+            <button className="mt-10 border-none bg-slate-200 font-semibold text-[14px] p-4 rounded-md">
               Learn more
             </button>
           </div>

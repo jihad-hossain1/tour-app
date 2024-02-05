@@ -106,11 +106,8 @@ body {
 }
 
 .arrows button {
-
     border-radius: 50%;
-
     border: none;
-
     font-family: monospace;
     font-weight: bold;
     transition: .5s;
