@@ -76,7 +76,7 @@ const AddDivision = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addDivision(name, countryId, photo, description);
-    setOpen(false)
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -87,6 +87,7 @@ const AddDivision = () => {
       toast.success("division added successfull");
     }
   }, [divisionError, divisionData]);
+
   return (
     <>
       <Toaster />
