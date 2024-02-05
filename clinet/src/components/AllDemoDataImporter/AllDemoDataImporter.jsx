@@ -320,44 +320,44 @@ export const latestArticles = [
 
 export const popularVirtualTours = [
     {
-        title: "Wine Tasting Experience",
-        city: "Barcelona",
+        title: "Zoom- Private live virtual experience in Tokyo",
+        city: "Tokyo",
         price: 60,
         duration: 3,
         reviews: 110,
         stars: 4.6,
         description:
-            "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies.",
+            "You can enjoy seeing the real time viewing via Zoom while hearing interesting story, useful information, meanings of each spot from a professional guide. The guide visits popular spots in Asakusa or in Akihabara. I've done Live Zoom tour many times for individual customers and as a company’s event including through other sites since 2020. Let's join this popular virtual experience by your self, with your family and friends!",
     },
     {
-        title: "Art Gallery Tour",
-        city: "Paris",
+        title: "FLOATING TEMPLE - A MUST -SEE IN SAIGON",
+        city: "Ho Chi Minh",
         price: 45,
         duration: 2,
         reviews: 100,
         stars: 4.7,
         description:
-            "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents.",
+            "Floating temple, literally in Vietnamese ( Mieu Noi) located in the middle of Vam Thuan River, a branch of Saigon River in Go Vap District and is only accessible by boat or by Swimming..:) Built over 300 years ago, the temple is rumored to have been used to bless fishermen with peace and good fortune before they set sail for the sea.But another one has it that a heartbroken husband built it as a memorial and a token of love for his wife after she died.Saigon Local Guide Chau",
     },
     {
-        title: "Scuba Diving Adventure",
-        city: "Bali",
+        title: "Live Virtual Tour Machu Picchu Peru, New Wonder of the World",
+        city: "Cusco",
         price: 100,
         duration: 5,
         reviews: 75,
         stars: 4.9,
         description:
-            "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life.",
+            "Explore one of the New 7 Wonders of the World, the famous Machu Picchu, live virtually from its majestic, mountainous setting deep in the high jungle of Peru. Your dedicated, local guide & archaeologist Mike will bring the city of the Incas to life for you as you visit the most important areas of this UNESCO World Heritage Site together to gain a deeper understanding of the ancient Inca civilization’s ingenuity and architecture as well as culture and philosophy.",
     },
     {
-        title: "Concert Under the Stars",
-        city: "New York",
+        title: "Flores-Indonesia Tribal Hand-Woven Fabrics",
+        city: "East Nusa Tenggara",
         price: 75,
         duration: 4.5,
         reviews: 130,
         stars: 4.8,
         description:
-            "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting.",
+            "Flores offers unique woven fabrics for textile lovers. Women not only continue to make traditional clothes on the back of their loom, but also continue to wear them in their daily lives. There is a wide variety of kaleidoscopic designs - each region has a unique & enchanting textile culture, clothing style & motif. We will explore the extraordinary ancestral traditions from the Bliran Sina Cultural Arts Studio where textiles are the main form of artistic expression, which still plays a central",
     },
 ];
 
