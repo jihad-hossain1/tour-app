@@ -19,6 +19,12 @@ import { Avatar, Card, Rating } from "@mui/material";
 import Title from "../../components/Title/Title";
 import LatestArticles from "../../components/LatestArticles/LatestArticles";
 import PopularArticles from "../../components/PopularArticles/PopularArticles";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_CITIY } from "../../queries/countriesQuery";
+import Loader from "../../layout/Loader/Loader";
+import PopularGuide from "../../components/PopularGuide/PopularGuide";
+
 export default function Destination() {
   const images = [
     { img: "https://i.ibb.co/3Mvr2cx/141344.jpg" },
@@ -98,26 +104,47 @@ export default function Destination() {
     { id: 5, label: "Accordion 5" },
     { id: 6, label: "Accordion 6" },
   ];
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const { id } = useParams();
+
+  const { data, loading, error } = useQuery(GET_CITIY, {
+    variables: { id },
+  });
+  // console.log(data);
+  if (error) {
+    return <div>{error?.message}</div>;
+  } else if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div className=" relative">
       <div className="relative">
         <img
           className="w-full h-[430px] object-cover"
-          src="https://gowithguide.com/_next/image?url=https%3A%2F%2Fgowithguide.com%2Fimages%2Ffilters%3Aautojpg()%2Ffilters%3Aquality(80)%2Ffit-in%2F1024x1024%2Fgowithguide%2Fcountries%2FJP%2F128396.jpg&w=1080&q=100"
+          src={data?.getCity?.photo}
           alt=""
         />
         <div className="absolute text-center top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-30 p-4">
-          <Link to="/">
-            <button className="absolute top-24 left-4 bg-black bg-opacity-30 text-white px-4 py-2 rounded-full">
-              Home {">"} <span className="text-gray-400">Japan</span>
-            </button>
+          <Link
+            to="/"
+            className="absolute top-24 left-4 bg-black bg-opacity-30 text-white px-4 py-2 rounded-full"
+          >
+            Home {">"}
+            <span className="text-gray-400">{data?.getCity?.name}</span>
           </Link>
+
           <h1 className="text-2xl sm:text-4xl mt-24 mb-2">
-            Japan Private Tours & Local Tour Guides
+            {data?.getCity?.name} Private Tours & Local Tour Guides
           </h1>
           <p className="text-base sm:text-lg">
-            Plan a Trip to Japan with Local Tour Guides, and Tokyo, Kyoto, Osaka
-            and More.
+            Plan a Trip to {data?.getCity?.name} with Local Tour Guides, and
+            Tokyo, Kyoto, Osaka and More.
           </p>
           <div className="text-sm sm:text-base">
             <p>⭐⭐⭐⭐⭐ 5/5</p>
@@ -126,29 +153,50 @@ export default function Destination() {
         </div>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-4  lg:w-[80%] my-8">
-        <a className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2">
-          <AccountCircleIcon fontSize="large" className="text-blue-500" />
-          <h1 className="ml-2">Local Guides</h1>
-        </a>
-        <Link className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] duration-200 ease-in-out border-t-2 border-r-2">
-          <FlagIcon fontSize="large" className="text-blue-500" />
-          <h1 className="ml-2">Private Tours</h1>
-        </Link>
-        <Link className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2">
-          <DirectionsCarIcon fontSize="large" className="text-blue-500" />
-          <h1 className="ml-2">Private Cars</h1>
-        </Link>
-        <Link className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2">
-          <PublicIcon fontSize="large" className="text-blue-500" />
-          <h1 className="ml-2">Virtual Tours</h1>
-        </Link>
+        <button>
+          <a
+            href="guide"
+            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2 "
+          >
+            <AccountCircleIcon fontSize="large" className="text-blue-500" />
+            <h1 className="ml-2">Local Guides</h1>
+          </a>
+        </button>
+        <button>
+          <a
+            onClick={() => scrollToSection("Tours")}
+            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] duration-200 ease-in-out border-t-2 border-r-2"
+          >
+            <FlagIcon fontSize="large" className="text-blue-500" />
+            <h1 className="ml-2">Private Tours</h1>
+          </a>
+        </button>
+        <button>
+          <a
+            onClick={() => scrollToSection("cars")}
+            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2"
+          >
+            <DirectionsCarIcon fontSize="large" className="text-blue-500" />
+            <h1 className="ml-2">Private Cars</h1>
+          </a>
+        </button>
+        <button>
+          <a
+            onClick={() => scrollToSection("virtual_tours")}
+            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2"
+          >
+            <PublicIcon fontSize="large" className="text-blue-500" />
+            <h1 className="ml-2">Virtual Tours</h1>
+          </a>
+        </button>
       </div>
-      <PopularDestination></PopularDestination>
+      <PopularDestination />
       <PopularPrivateCars />
-      <PopularPrivateTours></PopularPrivateTours>
+      <PopularPrivateTours id="Tours" />
+      <PopularGuide id="guide" />
       <NewPrivateTours />
-      <PopularPrivateCars />
-      <PopularVirtualTours />
+      <PopularPrivateCars id="cars" />
+      <PopularVirtualTours id="virtual_tours" />
       <div className="mx-10 mb-20">
         <h4 className="text-3xl ">
           <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
@@ -268,9 +316,7 @@ export default function Destination() {
         </div>
       </div>
       <Title firstText="Related" secondText="Japan Tour Guide Pages" />
-      <div>
-      
-      </div>
+      <div></div>
     </div>
   );
 }

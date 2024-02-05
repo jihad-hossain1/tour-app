@@ -121,6 +121,7 @@ const TourGuideReserveType = new GraphQLObjectType({
           adult: { type: GraphQLInt },
           children: { type: GraphQLInt },
           infant: { type: GraphQLInt },
+          totalPerson: { type: GraphQLInt },
         }),
       }),
     },

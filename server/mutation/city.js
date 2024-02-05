@@ -17,6 +17,10 @@ const addCity = {
     },
     resolve: async (parent, args) => {
         try {
+            const alreadyName = await City.findOne({ name: args?.name });
+            if (alreadyName?.name == args?.name) {
+              return new Error("city Already Exist , try another one");
+            }
             const city = new City(args);
             return await city.save();
         } catch (error) {

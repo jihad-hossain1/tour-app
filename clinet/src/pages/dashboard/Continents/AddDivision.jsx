@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalAll from "../../../components/ModalAll/ModalAll";
 import {
   FormControl,
@@ -14,6 +14,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import FileUploader from "../TourSpot/FileUploader";
 import { ADD_DIVISION } from "../../../mutation/countryMutaion";
+import { GET_CONTINETS } from "../../../queries/continentQuery";
 
 const AddDivision = () => {
   const [_photo, setPhoto] = useState("");
@@ -33,15 +34,16 @@ const AddDivision = () => {
   };
   const [formData, setFormData] = useState(scafolding);
 
-  const [addDivision] = useMutation(ADD_DIVISION, {
-    variables: {
-      name: formData?.name,
-      photo: _photo,
-      countryId: formData?.countryId,
-      description: formData?.description,
-    },
-    refetchQueries: [{ query: GET_COUNTIRES }],
-  });
+  const [addDivision, { data: divisionData, error: divisionError }] =
+    useMutation(ADD_DIVISION, {
+      variables: {
+        name: formData?.name,
+        photo: _photo,
+        countryId: formData?.countryId,
+        description: formData?.description,
+      },
+      refetchQueries: [{ query: GET_CONTINETS }],
+    });
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -71,12 +73,20 @@ const AddDivision = () => {
   let photo = { photo: _photo };
   const { name, countryId, description } = formData;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addDivision(name, countryId, photo, description);
-
-    toast.success("division added");
+    await addDivision(name, countryId, photo, description);
+    setOpen(false);
   };
+
+  useEffect(() => {
+    if (divisionError) {
+      toast.error(divisionError.message);
+    }
+    if (divisionData) {
+      toast.success("division added successfull");
+    }
+  }, [divisionError, divisionData]);
 
   return (
     <>
