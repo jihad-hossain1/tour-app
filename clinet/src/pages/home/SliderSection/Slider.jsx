@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import "./Slider.css";
 const Slider = () => {
-  const [timeRunning] = useState(2000);
+  const [timeRunning] = useState(500);
   const [timeAutoNext] = useState(9000);
 
   let runTimeOut;

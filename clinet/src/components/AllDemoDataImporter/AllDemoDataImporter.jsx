@@ -17,6 +17,24 @@ import buenos1 from '../../../public/Images/Popular_Private_cars/buenos/buenos1.
 import buenos2 from '../../../public/Images/Popular_Private_cars/buenos/buenos2.avif'
 import buenos3 from '../../../public/Images/Popular_Private_cars/buenos/buenos3.avif'
 import buenos4 from '../../../public/Images/Popular_Private_cars/buenos/buenos4.avif'
+import tokyo1 from '../../../public/Images/Virtual-Tours/tokyo/tokyo1.avif'
+import tokyo2 from '../../../public/Images/Virtual-Tours/tokyo/tokyo2.avif'
+import tokyo3 from '../../../public/Images/Virtual-Tours/tokyo/tokyo3.avif'
+import tokyo4 from '../../../public/Images/Virtual-Tours/tokyo/tokyo4.avif'
+import tokyo5 from '../../../public/Images/Virtual-Tours/tokyo/tokyo5.avif'
+import ho_chi1 from '../../../public/Images/Virtual-Tours/ho-chi-minh/ho-chi-minh1.avif'
+import ho_chi2 from '../../../public/Images/Virtual-Tours/ho-chi-minh/ho-chi-minh2.avif'
+import ho_chi3 from '../../../public/Images/Virtual-Tours/ho-chi-minh/ho-chi-minh3.avif'
+import ho_chi4 from '../../../public/Images/Virtual-Tours/ho-chi-minh/ho-chi-minh4.avif'
+import cushco1 from '../../../public/Images/Virtual-Tours/cusco/cushco1.avif'
+import cushco2 from '../../../public/Images/Virtual-Tours/cusco/cushco2.avif'
+import cushco3 from '../../../public/Images/Virtual-Tours/cusco/cushco3.avif'
+import cushco4 from '../../../public/Images/Virtual-Tours/cusco/cushco4.avif'
+import cushco5 from '../../../public/Images/Virtual-Tours/cusco/cushco5.avif'
+import east_nusa1 from '../../../public/Images/Virtual-Tours/east-nusa/east-nusa1.avif'
+import east_nusa2 from '../../../public/Images/Virtual-Tours/east-nusa/east-nusa2.avif'
+import east_nusa3 from '../../../public/Images/Virtual-Tours/east-nusa/east-nusa3.avif'
+import east_nusa4 from '../../../public/Images/Virtual-Tours/east-nusa/east-nusa4.avif'
 export const newTourGuides = [
     {
         name: "Alice Johnson",
@@ -313,6 +331,7 @@ export const latestArticles = [
 
 export const popularVirtualTours = [
     {
+        images: [tokyo1,tokyo2,tokyo3,tokyo4,tokyo5],
         title: "Wine Tasting Experience",
         city: "Barcelona",
         price: 60,
@@ -323,6 +342,7 @@ export const popularVirtualTours = [
             "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies.",
     },
     {
+        images: [ho_chi1,ho_chi2,ho_chi3,ho_chi4],
         title: "Art Gallery Tour",
         city: "Paris",
         price: 45,
@@ -333,6 +353,7 @@ export const popularVirtualTours = [
             "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents.",
     },
     {
+        images: [cushco1,cushco2,cushco3,cushco4,cushco5],
         title: "Scuba Diving Adventure",
         city: "Bali",
         price: 100,
@@ -343,6 +364,7 @@ export const popularVirtualTours = [
             "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life.",
     },
     {
+        images: [east_nusa1,east_nusa2,east_nusa3,east_nusa4],
         title: "Concert Under the Stars",
         city: "New York",
         price: 75,

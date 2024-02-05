@@ -132,7 +132,7 @@ export default function Destination() {
   }
 
   return (
-    <div className="max-w-screen-xl mx-auto relative">
+    <div className="relative">
       <div className="relative">
         <img
           className="w-full h-[430px] object-cover"
@@ -161,6 +161,7 @@ export default function Destination() {
           </div>
         </div>
       </div>
+      <div className="max-w-screen-xl mx-auto">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-4  lg:w-[80%] my-8">
         <button>
           <a
@@ -338,6 +339,7 @@ export default function Destination() {
             </button>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );
