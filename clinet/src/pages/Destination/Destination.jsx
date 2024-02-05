@@ -104,6 +104,15 @@ export default function Destination() {
     { id: 5, label: "Accordion 5" },
     { id: 6, label: "Accordion 6" },
   ];
+  const RelatedLisbon = [
+    { label: "Lisbon Top" },
+    { label: "Lisbon Private Tours" },
+    { label: "Lisbon Local Guides" },
+    { label: "Lisbon Private Cars" },
+    { label: "Lisbon Virtual Tours" },
+    { label: "Portugal Tours" },
+    { label: "Portugal Tour Destinations" },
+  ];
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -123,7 +132,7 @@ export default function Destination() {
   }
 
   return (
-    <div className=" relative">
+    <div className="max-w-screen-xl mx-auto relative">
       <div className="relative">
         <img
           className="w-full h-[430px] object-cover"
@@ -197,7 +206,7 @@ export default function Destination() {
       <NewPrivateTours />
       <PopularPrivateCars id="cars" />
       <PopularVirtualTours id="virtual_tours" />
-      <div className="mx-10 mb-20">
+      <div className=" mb-20">
         <h4 className="text-3xl ">
           <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
             Japan
@@ -241,28 +250,30 @@ export default function Destination() {
         </div>
       </div>
       {/* Asked Questions Section */}
-      <div className="mx-10">
+      <div className="">
         <Title firstText="Japan" secondText="Frequently Asked Questions" />
         <div>
-          {accordionData.map((item) => (
-            <Accordion key={item.id}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel${item.id}-content`}
-                id={`panel${item.id}-header`}
-              >
-                {item.label}
-              </AccordionSummary>
-              <AccordionDetails>
+        {accordionData.map((item) => (
+          <Accordion key={item.id} className="mb-4 border-none">
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon className="text-gray-600" />}
+              aria-controls={`panel${item.id}-content`}
+              id={`panel${item.id}-header`}
+              className="bg-gray-200 p-4 h-[80px] border-none"
+            >
+              <h3 className="text-lg font-semibold">{item.label}</h3>
+            </AccordionSummary>
+            <AccordionDetails className="bg-gray-100 p-4 border-none">
+              <p className="text-gray-700">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </div>
+                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+              </p>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </div>
-      <div className="mx-10 mt-10">
+      </div>
+      <div className=" mt-10">
         <Title firstText="Japan" secondText=" Popular Tour Guide" />
         <div className="text-lg mt-10">
           <p>
@@ -315,8 +326,20 @@ export default function Destination() {
           </div>
         </div>
       </div>
-      <Title firstText="Related" secondText="Japan Tour Guide Pages" />
-      <div></div>
+      <div className=" mb-32">
+        <Title firstText="Related" secondText="Japan Tour Guide Pages" />
+        <div className="grid grid-cols-5 gap-2 mt-4">
+          {RelatedLisbon.map((item, index) => (
+            <button
+              key={index}
+              className="bg-gray-200 font-medium p-4 rounded-md hover:bg-gray-300 text-[15px]"
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
+
