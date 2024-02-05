@@ -2,41 +2,49 @@ export const newTourGuides = [
     {
         name: "Alice Johnson",
         country: "United States",
+        image: "/Images/New_Tour_Guids/usa.jpg",
         description: "Alice is a software engineer based in Silicon Valley. She is passionate about artificial intelligence and contributes to open-source projects in her free time."
     },
     {
         name: "Carlos Rodriguez",
         country: "Spain",
+        image: "/Images/New_Tour_Guids/spain.jpg",
         description: "Carlos is a professional chef known for his innovative culinary creations. He owns a popular restaurant in Barcelona, where he combines traditional Spanish flavors with modern techniques."
     },
     {
         name: "Mia Suzuki",
         country: "Japan",
+        image: "/Images/New_Tour_Guids/japan.jpg",
         description: "Mia is a talented manga artist from Tokyo. Her work has gained international recognition, and she often explores themes of identity and cultural diversity in her stories."
     },
     {
         name: "Ahmed Khan",
         country: "Pakistan",
+        image: "/Images/New_Tour_Guids/pakistan.jpg",
         description: "Ahmed is an environmental activist based in Lahore. He works tirelessly to raise awareness about climate change and advocates for sustainable practices in his community."
     },
     {
         name: "Elena Petrova",
         country: "Russia",
+        image: "/Images/New_Tour_Guids/russia.jpg",
         description: "Elena is a professional ballet dancer in Moscow. She has performed in renowned theaters worldwide and is celebrated for her graceful and expressive performances."
     },
     {
         name: "Chinwe Onyeama",
         country: "Nigeria",
+        image: "/Images/New_Tour_Guids/nigeria.jpg",
         description: "Chinwe is a social entrepreneur in Lagos, dedicated to empowering women through education and skill development programs. She co-founded a nonprofit organization that has impacted many lives."
     },
     {
         name: "Andres Morales",
         country: "Colombia",
+        image: "/Images/New_Tour_Guids/colombia.jpg",
         description: "Andres is a wildlife photographer from Bogotá. His stunning images capture the beauty of Colombia's diverse ecosystems and raise awareness about the importance of conservation."
     },
     {
         name: "Sophie Dubois",
         country: "France",
+        image: "/Images/New_Tour_Guids/franch.jpg",
         description: "Sophie is a fashion designer based in Paris. Her avant-garde creations have been featured in leading fashion shows, and she is known for pushing the boundaries of conventional design."
     }
 ];
