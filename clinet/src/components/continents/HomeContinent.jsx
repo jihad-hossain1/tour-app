@@ -1,12 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { GET_CONTINETS } from "../../queries/continentQuery";
 import SingleContinent from "./SingleContinent/SingleContinent";
-import { useState } from "react";
 import Loading from "../Loading/Loading";
 import Title from "../Title/Title";
 
 const HomeContinent = () => {
-  const [isToggle, setIsToggle] = useState(false);
   const { loading, error, data } = useQuery(GET_CONTINETS);
 
   if (loading) {

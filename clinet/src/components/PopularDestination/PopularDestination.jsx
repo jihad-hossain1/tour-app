@@ -3,42 +3,7 @@ import { Link } from "react-router-dom";
 import Title from "../Title/Title";
 import { useQuery } from "@apollo/client";
 import { GET_CITIE } from "../../queries/countriesQuery";
-// import { Button } from "@mui/material";
 
-const countryData = [
-  {
-    img: "https://i.ibb.co/KqVM0C2/adf.jpg",
-    name: "Tokyo",
-  },
-  {
-    img: "https://i.ibb.co/KqVM0C2/adf.jpg",
-    name: "Cairo",
-  },
-  {
-    img: "https://i.ibb.co/KqVM0C2/adf.jpg",
-    name: "Seoul",
-  },
-  {
-    img: "https://i.ibb.co/KqVM0C2/adf.jpg",
-    name: "Bangkok",
-  },
-  {
-    img: "https://i.ibb.co/KqVM0C2/adf.jpg",
-    name: "Lisbon",
-  },
-  {
-    img: "https://i.ibb.co/KqVM0C2/adf.jpg",
-    name: "Marrakech",
-  },
-  {
-    img: "https://i.ibb.co/KqVM0C2/adf.jpg",
-    name: "Mexico City",
-  },
-  {
-    img: "https://i.ibb.co/KqVM0C2/adf.jpg",
-    name: "Delhi",
-  },
-];
 
 const PopularDestination = () => {
   const { data, loading, error } = useQuery(GET_CITIE);

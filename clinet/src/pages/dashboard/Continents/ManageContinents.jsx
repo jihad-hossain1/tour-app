@@ -5,7 +5,6 @@ import Loading from "../../../components/Loading/Loading";
 import { TbWorld, TbWorldCog } from "react-icons/tb";
 import { MdTour } from "react-icons/md";
 import { MdAccountBalance } from "react-icons/md";
-import ManageNav from "../../../components/dashboard/Navbar/ManageNav";
 import AddContinent from "./AddContinent";
 
 const ManageContinents = () => {
