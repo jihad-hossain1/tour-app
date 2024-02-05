@@ -1,3 +1,22 @@
+import mount_fuji1 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji1.avif'
+import mount_fuji2 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji2.avif'
+import mount_fuji3 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji3.avif'
+import mount_fuji4 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji4.avif'
+import mount_fuji5 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji5.avif'
+
+import lisbon1 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon1.avif'
+import lisbon2 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon2.avif'
+import lisbon3 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon3.avif'
+import lisbon4 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon4.avif'
+import lisbon5 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon5.avif'
+import luxor1 from '../../../public/Images/Popular_Private_cars/luxor/luxor1.avif'
+import luxor2 from '../../../public/Images/Popular_Private_cars/luxor/luxor2.avif'
+import luxor3 from '../../../public/Images/Popular_Private_cars/luxor/luxor3.avif'
+import luxor4 from '../../../public/Images/Popular_Private_cars/luxor/luxor4.avif'
+import buenos1 from '../../../public/Images/Popular_Private_cars/buenos/buenos1.avif'
+import buenos2 from '../../../public/Images/Popular_Private_cars/buenos/buenos2.avif'
+import buenos3 from '../../../public/Images/Popular_Private_cars/buenos/buenos3.avif'
+import buenos4 from '../../../public/Images/Popular_Private_cars/buenos/buenos4.avif'
 export const newTourGuides = [
     {
         name: "Alice Johnson",
@@ -343,6 +362,7 @@ export const swiperImage = [
 
 export const popularPrivateCars = [
     {
+        images: [mount_fuji1,mount_fuji2,mount_fuji3,mount_fuji4,mount_fuji5],
         title: "City Bike Tour",
         city: "Amsterdam",
         price: 40,
@@ -353,6 +373,7 @@ export const popularPrivateCars = [
             "Explore the picturesque streets of Amsterdam on a guided bike tour, discovering hidden gems and iconic landmarks along the way.",
     },
     {
+        images: [lisbon1,lisbon2,lisbon3,lisbon4,lisbon5],
         title: "Historical Walking Tour",
         city: "Rome",
         price: 35,
@@ -363,6 +384,7 @@ export const popularPrivateCars = [
             "Immerse yourself in the rich history of Rome as you walk through ancient ruins, charming streets, and iconic monuments with an expert guide.",
     },
     {
+        images: [luxor1,luxor2,luxor3,luxor4],
         title: "Culinary Adventure",
         city: "Tokyo",
         price: 80,
@@ -373,6 +395,7 @@ export const popularPrivateCars = [
             "Embark on a culinary journey through Tokyo's vibrant food scene, savoring delicious street food, traditional dishes, and modern gastronomic delights.",
     },
     {
+        images: [buenos1,buenos2,buenos3,buenos4],
         title: "Nature Hike",
         city: "Vancouver",
         price: 50,
