@@ -18,6 +18,11 @@ import "./styles.css";
 import { Pagination, Navigation } from "swiper/modules";
 import Title from "../Title/Title";
 import { popularPrivateTours } from "../AllDemoDataImporter/AllDemoDataImporter";
+
+const images = [
+
+]
+
 const PopularPrivateTours = () => {
   return (
     <div className="container mx-auto my-10">
@@ -59,11 +64,11 @@ const PopularPrivateTours = () => {
               <CardContent>
                 <Typography
                   gutterBottom
-                  variant="h6"
+                  variant="h5"
                   component="div"
                   className="text-xl font-medium mb-2 "
                 >
-                  {tourSpot?.title}
+                  {tourSpot?.title.length > 20 && `${tourSpot?.title.slice(0, 40)} ... `}
                 </Typography>
                 <div className="space-x-5">
                   <Typography
@@ -88,7 +93,7 @@ const PopularPrivateTours = () => {
                   color="text.secondary"
                   className="my-10"
                 >
-                  {tourSpot?.description}
+                  {tourSpot?.description.length > 50 && `${tourSpot?.description.slice(0, 100)}`}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -109,8 +114,8 @@ const PopularPrivateTours = () => {
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 />
                 <div className="grid gap-1">
-                  <span className="text-blue-500 text-lg font-medium">
-                    Travis Howard
+                  <span className="text-blue-500 text-lg font-medium truncate w-44">
+                    {tourSpot?.name}
                   </span>
                   <span className="text-black">
                     ⭐⭐⭐⭐ {tourSpot?.stars} / 5

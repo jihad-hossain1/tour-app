@@ -55,13 +55,13 @@ const PopularVirtualTours = () => {
               <CardContent>
                 <Typography
                   gutterBottom
-                  variant="h6"
+                  variant="h5"
                   component="div"
-                  className="text-xl font-medium mb-2 "
+                  className="text-xl font-medium mb-2 h-16"
                 >
                   {tourSpot?.title}
                 </Typography>
-                <div className="space-x-5">
+                <div className="space-x-5 space-y-8 ">
                   <Typography
                     gutterBottom
                     variant="small"
@@ -84,7 +84,7 @@ const PopularVirtualTours = () => {
                   color="text.secondary"
                   className="my-10"
                 >
-                  {tourSpot?.description}
+                  {tourSpot?.description.length > 50 && `${tourSpot?.description.slice(0, 100)}`}
                 </Typography>
                 <Typography
                   variant="body2"
