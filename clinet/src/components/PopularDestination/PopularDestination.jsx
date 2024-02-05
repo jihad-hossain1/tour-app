@@ -28,7 +28,7 @@ const PopularDestination = () => {
                     >
                       <div className="click_class_main">
                         <div className="click_class">
-                          <button className="viewbtn ">Click to view</button>
+                          <button className="bg-yellow-500 text-white px-[6px] p-[2px] rounded-md">Click to view</button>
                           <h1 className="text-white text-3xl mx-auto">
                             {item.name}
                           </h1>

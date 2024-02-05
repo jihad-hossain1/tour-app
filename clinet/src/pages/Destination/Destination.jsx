@@ -9,6 +9,9 @@ import PopularPrivateCars from "../../components/PopularPrivateCars/PopularPriva
 import NewPrivateTours from "../../components/NewPrivateTours/NewPrivateTours";
 import PopularVirtualTours from "../../components/PopularVirtualTours/PopularVirtualTours";
 import Accordion from "@mui/material/Accordion";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import DescriptionIcon from "@mui/icons-material/Description";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -20,6 +23,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_CITIY } from "../../queries/countriesQuery";
 import Loader from "../../layout/Loader/Loader";
+import PopularGuide from "../../components/PopularGuide/PopularGuide";
 
 export default function Destination() {
   const images = [
@@ -100,7 +104,21 @@ export default function Destination() {
     { id: 5, label: "Accordion 5" },
     { id: 6, label: "Accordion 6" },
   ];
-
+  const RelatedLisbon = [
+    { label: "Lisbon Top" },
+    { label: "Lisbon Private Tours" },
+    { label: "Lisbon Local Guides" },
+    { label: "Lisbon Private Cars" },
+    { label: "Lisbon Virtual Tours" },
+    { label: "Portugal Tours" },
+    { label: "Portugal Tour Destinations" },
+  ];
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   const { id } = useParams();
 
   const { data, loading, error } = useQuery(GET_CITIY, {
@@ -114,7 +132,7 @@ export default function Destination() {
   }
 
   return (
-    <div className=" relative">
+    <div className="relative">
       <div className="relative">
         <img
           className="w-full h-[430px] object-cover"
@@ -122,11 +140,14 @@ export default function Destination() {
           alt=""
         />
         <div className="absolute text-center top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-30 p-4">
-          <Link to="/">
-            <button className="absolute top-24 left-4 bg-black bg-opacity-30 text-white px-4 py-2 rounded-full">
-              Home {">"} <span className="text-gray-400"></span>
-            </button>
+          <Link
+            to="/"
+            className="absolute top-24 left-4 bg-black bg-opacity-30 text-white px-4 py-2 rounded-full"
+          >
+            Home {">"}
+            <span className="text-gray-400">{data?.getCity?.name}</span>
           </Link>
+
           <h1 className="text-2xl sm:text-4xl mt-24 mb-2">
             {data?.getCity?.name} Private Tours & Local Tour Guides
           </h1>
@@ -140,31 +161,53 @@ export default function Destination() {
           </div>
         </div>
       </div>
+      <div className="max-w-screen-xl mx-auto">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-4  lg:w-[80%] my-8">
-        <a className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2">
-          <AccountCircleIcon fontSize="large" className="text-blue-500" />
-          <h1 className="ml-2">Local Guides</h1>
-        </a>
-        <Link className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] duration-200 ease-in-out border-t-2 border-r-2">
-          <FlagIcon fontSize="large" className="text-blue-500" />
-          <h1 className="ml-2">Private Tours</h1>
-        </Link>
-        <Link className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2">
-          <DirectionsCarIcon fontSize="large" className="text-blue-500" />
-          <h1 className="ml-2">Private Cars</h1>
-        </Link>
-        <Link className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2">
-          <PublicIcon fontSize="large" className="text-blue-500" />
-          <h1 className="ml-2">Virtual Tours</h1>
-        </Link>
+        <button>
+          <a
+            href="guide"
+            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2 "
+          >
+            <AccountCircleIcon fontSize="large" className="text-blue-500" />
+            <h1 className="ml-2">Local Guides</h1>
+          </a>
+        </button>
+        <button>
+          <a
+            onClick={() => scrollToSection("Tours")}
+            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] duration-200 ease-in-out border-t-2 border-r-2"
+          >
+            <FlagIcon fontSize="large" className="text-blue-500" />
+            <h1 className="ml-2">Private Tours</h1>
+          </a>
+        </button>
+        <button>
+          <a
+            onClick={() => scrollToSection("cars")}
+            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2"
+          >
+            <DirectionsCarIcon fontSize="large" className="text-blue-500" />
+            <h1 className="ml-2">Private Cars</h1>
+          </a>
+        </button>
+        <button>
+          <a
+            onClick={() => scrollToSection("virtual_tours")}
+            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2"
+          >
+            <PublicIcon fontSize="large" className="text-blue-500" />
+            <h1 className="ml-2">Virtual Tours</h1>
+          </a>
+        </button>
       </div>
-      <PopularDestination></PopularDestination>
+      <PopularDestination />
       <PopularPrivateCars />
-      <PopularPrivateTours></PopularPrivateTours>
+      <PopularPrivateTours id="Tours" />
+      <PopularGuide id="guide" />
       <NewPrivateTours />
-      <PopularPrivateCars />
-      <PopularVirtualTours />
-      <div className="mx-10 mb-20">
+      <PopularPrivateCars id="cars" />
+      <PopularVirtualTours id="virtual_tours" />
+      <div className=" mb-20">
         <h4 className="text-3xl ">
           <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
             Japan
@@ -200,42 +243,39 @@ export default function Destination() {
               </div>
             ))}
           </div>
-          <div className="w-full">
-            <button className="mt-10 border-none bg-slate-200 font-semibold text-[14px] p-4 rounded-md justify-center items-center text-center">
+          <div className="w-full text-center">
+            <button className="mt-10 border-none bg-slate-200 font-semibold text-[14px] p-4 rounded-md">
               Learn more
             </button>
           </div>
         </div>
       </div>
       {/* Asked Questions Section */}
-      <div className="mx-10">
+      <div className="">
         <Title firstText="Japan" secondText="Frequently Asked Questions" />
         <div>
-          {accordionData.map((item) => (
-            <Accordion key={item.id}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel${item.id}-content`}
-                id={`panel${item.id}-header`}
-              >
-                {item.label}
-              </AccordionSummary>
-              <AccordionDetails>
+        {accordionData.map((item) => (
+          <Accordion key={item.id} className="mb-4 border-none">
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon className="text-gray-600" />}
+              aria-controls={`panel${item.id}-content`}
+              id={`panel${item.id}-header`}
+              className="bg-gray-200 p-4 h-[80px] border-none"
+            >
+              <h3 className="text-lg font-semibold">{item.label}</h3>
+            </AccordionSummary>
+            <AccordionDetails className="bg-gray-100 p-4 border-none">
+              <p className="text-gray-700">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </div>
+                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+              </p>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </div>
-      <div className="mx-10 mt-10">
-        <h4 className="text-3xl ">
-          <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
-            Japan
-          </span>{" "}
-          Popular Tour Guide
-        </h4>
+      </div>
+      <div className=" mt-10">
+        <Title firstText="Japan" secondText=" Popular Tour Guide" />
         <div className="text-lg mt-10">
           <p>
             Uncover Japan’s secrets and gain travel knowledge with a local
@@ -263,6 +303,45 @@ export default function Destination() {
       </div>
       <LatestArticles />
       <PopularArticles />
+
+      <div className="grid lg:grid-cols-3 lg:max-w-6xl mx-auto bg-[#EFECEC] p-10 rounded-md my-10">
+        <div className="flex items-center">
+          <InventoryIcon className="text-red-700" fontSize="large" />
+          <div className="pl-5">
+            <h1 className="text-[16px]">The best tours and activities</h1>
+            <p className="text-[13px]">With a real local of your choice</p>
+          </div>
+        </div>
+        <div className="flex items-center ml-5">
+          <DescriptionIcon className="text-red-700" fontSize="large" />
+          <div className="pl-5">
+            <h1 className="text-[16px]">The option to personalize your tour</h1>
+            <p className="text-[13px]">Just contact your favorite local</p>
+          </div>
+        </div>
+        <div className="flex items-center ml-5">
+          <CheckCircleOutlineIcon className="text-red-700" fontSize="large" />
+          <div className="pl-5">
+            <h1 className="text-[16px]">Only private tours!</h1>
+            <p className="text-[13px]">So no group tours with strangers</p>
+          </div>
+        </div>
+      </div>
+      <div className=" mb-32">
+        <Title firstText="Related" secondText="Japan Tour Guide Pages" />
+        <div className="grid grid-cols-5 gap-2 mt-4">
+          {RelatedLisbon.map((item, index) => (
+            <button
+              key={index}
+              className="bg-gray-200 font-medium p-4 rounded-md hover:bg-gray-300 text-[15px]"
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      </div>
     </div>
   );
 }
+

@@ -17,7 +17,7 @@ const Layout = () => {
   return (
     <>
       {loading ? (<Loader />) : (<div className="text-zinc-950 bg-zinc-50 w-full min-h-screen ">
-        <div className="fixed z-50 w-full">
+        <div className="">
           <Header />
         </div >
         <div className="">

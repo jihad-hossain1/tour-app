@@ -1,3 +1,40 @@
+import mount_fuji1 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji1.avif'
+import mount_fuji2 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji2.avif'
+import mount_fuji3 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji3.avif'
+import mount_fuji4 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji4.avif'
+import mount_fuji5 from '../../../public/Images/Popular_Private_cars/mount fuji/mount-fuji5.avif'
+
+import lisbon1 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon1.avif'
+import lisbon2 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon2.avif'
+import lisbon3 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon3.avif'
+import lisbon4 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon4.avif'
+import lisbon5 from '../../../public/Images/Popular_Private_cars/lisbon/lisbon5.avif'
+import luxor1 from '../../../public/Images/Popular_Private_cars/luxor/luxor1.avif'
+import luxor2 from '../../../public/Images/Popular_Private_cars/luxor/luxor2.avif'
+import luxor3 from '../../../public/Images/Popular_Private_cars/luxor/luxor3.avif'
+import luxor4 from '../../../public/Images/Popular_Private_cars/luxor/luxor4.avif'
+import buenos1 from '../../../public/Images/Popular_Private_cars/buenos/buenos1.avif'
+import buenos2 from '../../../public/Images/Popular_Private_cars/buenos/buenos2.avif'
+import buenos3 from '../../../public/Images/Popular_Private_cars/buenos/buenos3.avif'
+import buenos4 from '../../../public/Images/Popular_Private_cars/buenos/buenos4.avif'
+import tokyo1 from '../../../public/Images/Virtual-Tours/tokyo/tokyo1.avif'
+import tokyo2 from '../../../public/Images/Virtual-Tours/tokyo/tokyo2.avif'
+import tokyo3 from '../../../public/Images/Virtual-Tours/tokyo/tokyo3.avif'
+import tokyo4 from '../../../public/Images/Virtual-Tours/tokyo/tokyo4.avif'
+import tokyo5 from '../../../public/Images/Virtual-Tours/tokyo/tokyo5.avif'
+import ho_chi1 from '../../../public/Images/Virtual-Tours/ho-chi-minh/ho-chi-minh1.avif'
+import ho_chi2 from '../../../public/Images/Virtual-Tours/ho-chi-minh/ho-chi-minh2.avif'
+import ho_chi3 from '../../../public/Images/Virtual-Tours/ho-chi-minh/ho-chi-minh3.avif'
+import ho_chi4 from '../../../public/Images/Virtual-Tours/ho-chi-minh/ho-chi-minh4.avif'
+import cushco1 from '../../../public/Images/Virtual-Tours/cusco/cushco1.avif'
+import cushco2 from '../../../public/Images/Virtual-Tours/cusco/cushco2.avif'
+import cushco3 from '../../../public/Images/Virtual-Tours/cusco/cushco3.avif'
+import cushco4 from '../../../public/Images/Virtual-Tours/cusco/cushco4.avif'
+import cushco5 from '../../../public/Images/Virtual-Tours/cusco/cushco5.avif'
+import east_nusa1 from '../../../public/Images/Virtual-Tours/east-nusa/east-nusa1.avif'
+import east_nusa2 from '../../../public/Images/Virtual-Tours/east-nusa/east-nusa2.avif'
+import east_nusa3 from '../../../public/Images/Virtual-Tours/east-nusa/east-nusa3.avif'
+import east_nusa4 from '../../../public/Images/Virtual-Tours/east-nusa/east-nusa4.avif'
 export const newTourGuides = [
     {
         name: "Alice Johnson",
@@ -320,6 +357,9 @@ export const latestArticles = [
 
 export const popularVirtualTours = [
     {
+        images: [tokyo1,tokyo2,tokyo3,tokyo4,tokyo5],
+        title: "Wine Tasting Experience",
+        city: "Barcelona",
         title: "Zoom- Private live virtual experience in Tokyo",
         city: "Tokyo",
         price: 60,
@@ -330,6 +370,9 @@ export const popularVirtualTours = [
             "You can enjoy seeing the real time viewing via Zoom while hearing interesting story, useful information, meanings of each spot from a professional guide. The guide visits popular spots in Asakusa or in Akihabara. I've done Live Zoom tour many times for individual customers and as a company’s event including through other sites since 2020. Let's join this popular virtual experience by your self, with your family and friends!",
     },
     {
+        images: [ho_chi1,ho_chi2,ho_chi3,ho_chi4],
+        title: "Art Gallery Tour",
+        city: "Paris",
         title: "FLOATING TEMPLE - A MUST -SEE IN SAIGON",
         city: "Ho Chi Minh",
         price: 45,
@@ -340,6 +383,9 @@ export const popularVirtualTours = [
             "Floating temple, literally in Vietnamese ( Mieu Noi) located in the middle of Vam Thuan River, a branch of Saigon River in Go Vap District and is only accessible by boat or by Swimming..:) Built over 300 years ago, the temple is rumored to have been used to bless fishermen with peace and good fortune before they set sail for the sea.But another one has it that a heartbroken husband built it as a memorial and a token of love for his wife after she died.Saigon Local Guide Chau",
     },
     {
+        images: [cushco1,cushco2,cushco3,cushco4,cushco5],
+        title: "Scuba Diving Adventure",
+        city: "Bali",
         title: "Live Virtual Tour Machu Picchu Peru, New Wonder of the World",
         city: "Cusco",
         price: 100,
@@ -350,6 +396,9 @@ export const popularVirtualTours = [
             "Explore one of the New 7 Wonders of the World, the famous Machu Picchu, live virtually from its majestic, mountainous setting deep in the high jungle of Peru. Your dedicated, local guide & archaeologist Mike will bring the city of the Incas to life for you as you visit the most important areas of this UNESCO World Heritage Site together to gain a deeper understanding of the ancient Inca civilization’s ingenuity and architecture as well as culture and philosophy.",
     },
     {
+        images: [east_nusa1,east_nusa2,east_nusa3,east_nusa4],
+        title: "Concert Under the Stars",
+        city: "New York",
         title: "Flores-Indonesia Tribal Hand-Woven Fabrics",
         city: "East Nusa Tenggara",
         price: 75,
@@ -369,6 +418,7 @@ export const swiperImage = [
 
 export const popularPrivateCars = [
     {
+        images: [mount_fuji1,mount_fuji2,mount_fuji3,mount_fuji4,mount_fuji5],
         title: "City Bike Tour",
         city: "Amsterdam",
         price: 40,
@@ -379,6 +429,7 @@ export const popularPrivateCars = [
             "Explore the picturesque streets of Amsterdam on a guided bike tour, discovering hidden gems and iconic landmarks along the way.",
     },
     {
+        images: [lisbon1,lisbon2,lisbon3,lisbon4,lisbon5],
         title: "Historical Walking Tour",
         city: "Rome",
         price: 35,
@@ -389,6 +440,7 @@ export const popularPrivateCars = [
             "Immerse yourself in the rich history of Rome as you walk through ancient ruins, charming streets, and iconic monuments with an expert guide.",
     },
     {
+        images: [luxor1,luxor2,luxor3,luxor4],
         title: "Culinary Adventure",
         city: "Tokyo",
         price: 80,
@@ -399,6 +451,7 @@ export const popularPrivateCars = [
             "Embark on a culinary journey through Tokyo's vibrant food scene, savoring delicious street food, traditional dishes, and modern gastronomic delights.",
     },
     {
+        images: [buenos1,buenos2,buenos3,buenos4],
         title: "Nature Hike",
         city: "Vancouver",
         price: 50,
@@ -565,11 +618,6 @@ export const countries = [
     { code: "GP", label: "Guadeloupe", phone: "590" },
     { code: "GQ", label: "Equatorial Guinea", phone: "240" },
     { code: "GR", label: "Greece", phone: "30" },
-    {
-        code: "GS",
-        label: "South Georgia and the South Sandwich Islands",
-        phone: "500",
-    },
     { code: "GT", label: "Guatemala", phone: "502" },
     { code: "GU", label: "Guam", phone: "1-671" },
     { code: "GW", label: "Guinea-Bissau", phone: "245" },
