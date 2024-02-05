@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalAll from "../../../components/ModalAll/ModalAll";
 import {
   FormControl,
@@ -13,7 +13,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import FileUploader from "../TourSpot/FileUploader";
-import { GET_COUNTIRES } from "../../../queries/countriesQuery";
 import { ADD_COUNTRY } from "../../../mutation/countryMutaion";
 
 const AddCountry = () => {
@@ -34,15 +33,16 @@ const AddCountry = () => {
   };
   const [formData, setFormData] = useState(scafolding);
 
-  const [addCountry] = useMutation(ADD_COUNTRY, {
-    variables: {
-      name: formData?.name,
-      photo: _photo,
-      continentId: formData?.continentId,
-      description: formData?.description,
-    },
-    refetchQueries: [{ query: GET_COUNTIRES }],
-  });
+  const [addCountry, { data: countryData, error: countryDataAddedError }] =
+    useMutation(ADD_COUNTRY, {
+      variables: {
+        name: formData?.name,
+        photo: _photo,
+        continentId: formData?.continentId,
+        description: formData?.description,
+      },
+      refetchQueries: [{ query: GET_CONTINETS }],
+    });
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -72,13 +72,20 @@ const AddCountry = () => {
   let photo = { photo: _photo };
   const { name, continentId, description } = formData;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addCountry(name, continentId, photo, description);
-
-    toast.success("country added");
+    await addCountry(name, continentId, photo, description);
+    setOpen(false);
   };
 
+  useEffect(() => {
+    if (countryDataAddedError) {
+      toast.error(countryDataAddedError?.message);
+    }
+    if (countryData) {
+      toast.success("country added successfull");
+    }
+  }, [countryDataAddedError, countryData]);
   return (
     <>
       <Toaster />

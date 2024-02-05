@@ -9,15 +9,18 @@ import PopularPrivateCars from "../../components/PopularPrivateCars/PopularPriva
 import NewPrivateTours from "../../components/NewPrivateTours/NewPrivateTours";
 import PopularVirtualTours from "../../components/PopularVirtualTours/PopularVirtualTours";
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
 import { Avatar, Card, Rating } from "@mui/material";
 import Title from "../../components/Title/Title";
 import LatestArticles from "../../components/LatestArticles/LatestArticles";
 import PopularArticles from "../../components/PopularArticles/PopularArticles";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_CITIY } from "../../queries/countriesQuery";
+import Loader from "../../layout/Loader/Loader";
+
 export default function Destination() {
   const images = [
     { img: "https://i.ibb.co/3Mvr2cx/141344.jpg" },
@@ -97,26 +100,39 @@ export default function Destination() {
     { id: 5, label: "Accordion 5" },
     { id: 6, label: "Accordion 6" },
   ];
+
+  const { id } = useParams();
+
+  const { data, loading, error } = useQuery(GET_CITIY, {
+    variables: { id },
+  });
+  // console.log(data);
+  if (error) {
+    return <div>{error?.message}</div>;
+  } else if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div className=" relative">
       <div className="relative">
         <img
           className="w-full h-[430px] object-cover"
-          src="https://gowithguide.com/_next/image?url=https%3A%2F%2Fgowithguide.com%2Fimages%2Ffilters%3Aautojpg()%2Ffilters%3Aquality(80)%2Ffit-in%2F1024x1024%2Fgowithguide%2Fcountries%2FJP%2F128396.jpg&w=1080&q=100"
+          src={data?.getCity?.photo}
           alt=""
         />
         <div className="absolute text-center top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-30 p-4">
           <Link to="/">
             <button className="absolute top-24 left-4 bg-black bg-opacity-30 text-white px-4 py-2 rounded-full">
-              Home {">"} <span className="text-gray-400">Japan</span>
+              Home {">"} <span className="text-gray-400"></span>
             </button>
           </Link>
           <h1 className="text-2xl sm:text-4xl mt-24 mb-2">
-            Japan Private Tours & Local Tour Guides
+            {data?.getCity?.name} Private Tours & Local Tour Guides
           </h1>
           <p className="text-base sm:text-lg">
-            Plan a Trip to Japan with Local Tour Guides, and Tokyo, Kyoto, Osaka
-            and More.
+            Plan a Trip to {data?.getCity?.name} with Local Tour Guides, and
+            Tokyo, Kyoto, Osaka and More.
           </p>
           <div className="text-sm sm:text-base">
             <p>⭐⭐⭐⭐⭐ 5/5</p>
