@@ -25,6 +25,9 @@ import ClientPrivateRoute from "./ClientRoute";
 import AdminRoute from "./AdminRoute";
 import DeniedPage from "../pages/DeniedPage";
 import UpdateTourGuide from "../pages/dashboard/TourGuide/action/UpdateTourGuide";
+import Destination from "../pages/Destination/Destination";
+import AddTourSpotPlaceForGuide from "../pages/dashboard/TourGuide/action/AddTourSpotPlaceForGuide";
+import AddTourGuideContributionDetail from "../pages/dashboard/TourGuide/action/AddTourGuideContributionDetail";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +90,10 @@ export const router = createBrowserRouter([
         path: "/denied",
         element: <DeniedPage />,
       },
+      {
+        path: "/destination/:id",
+        element: <Destination />,
+      },
     ],
   },
   {
@@ -121,6 +128,15 @@ export const router = createBrowserRouter([
         path: "/dashboard/tourguide/profile-update/:id",
         element: <UpdateTourGuide />,
       },
+      {
+        path: "/dashboard/tourguide/addtourspotplace/:id",
+        element: <AddTourSpotPlaceForGuide />,
+      },
+      {
+        path: "/dashboard/tourguide/addTourGuideContributionDetail/:id",
+        element: <AddTourGuideContributionDetail />,
+      },
+
       {
         path: "/dashboard/ManageContinents",
         element: (

@@ -6,6 +6,7 @@ const {
   GraphQLInt,
   GraphQLScalarType,
   GraphQLNonNull,
+  GraphQLInputObjectType,
 } = require("graphql");
 const { Kind } = require("graphql/language");
 const Country = require("../models/Country");
@@ -16,6 +17,18 @@ const Review = require("../models/Review");
 const GuideReview = require("../models/GuideReview");
 const TourGuide = require("../models/TourGuide");
 const Images = require("../models/Images");
+const {
+  TourGuideContributionType,
+  ImgaeInput,
+  ImagesInput,
+  TourGuideContributionDetailType,
+  TourGuideReserveType,
+} = require("./extraTypeDef");
+const TourGuideContribution = require("../models/TourGuideContribution");
+const {
+  TourGuideContributionDetail,
+} = require("../models/TourGuideContributionDetail");
+const TourGuideReserve = require("../models/TourGuideReserve");
 
 const TimestampType = new GraphQLScalarType({
   name: "Timestamp",
@@ -209,6 +222,18 @@ const CityForAdd = new GraphQLObjectType({
         return _i;
       },
     },
+    totalTourSpots: {
+      type: new GraphQLList(TourSpotType),
+      resolve: async (parent, args) => {
+        try {
+          const _i = await TourSpot.find({ cityId: parent.id });
+          // console.log(_i);
+          return _i;
+        } catch (error) {
+          throw new Error(error);
+        }
+      },
+    },
   }),
 });
 
@@ -219,8 +244,8 @@ const DivisionType = new GraphQLObjectType({
     name: { type: GraphQLString },
     country: {
       type: CountryType,
-      resolve: (parent, args) => {
-        return Country.findById(parent.countryId);
+      resolve: async (parent, args) => {
+        return await Country.findById(parent.countryId);
       },
     },
     countryId: { type: GraphQLID },
@@ -421,9 +446,59 @@ const TourGuideType = new GraphQLObjectType({
         }
       },
     },
+    tourGuideContribution: {
+      type: new GraphQLList(TourGuideContributionType),
+      resolve: async (parent, args) => {
+        try {
+          return await TourGuideContribution.find({
+            clientProfileID: parent.id,
+          });
+        } catch (error) {
+          return new Error(`Error From fetch data : ${error}`);
+        }
+      },
+    },
+    tourGuideContributionDetail: {
+      type: TourGuideContributionDetailType,
+      resolve: async (parent, args) => {
+        try {
+          return await TourGuideContributionDetail.findOne({
+            clientProfileID: parent.id,
+          });
+        } catch (error) {
+          return new Error(`Error From fetch data : ${error}`);
+        }
+      },
+    },
+    tourGuideReserve: {
+      type: TourGuideReserveType,
+      resolve: async (parent, args) => {
+        try {
+          return await TourGuideReserve.findOne({
+            clientProfileID: parent.id,
+          });
+        } catch (error) {
+          return new Error(`Error From fetch data : ${error}`);
+        }
+      },
+    },
   }),
 });
 
+const ImageInputType = new GraphQLInputObjectType({
+  name: "ImageInput",
+  fields: {
+    image: { type: GraphQLString },
+  },
+});
+
+const ImageUrlType = new GraphQLObjectType({
+  name: "ImageUrlType",
+  fields: () => ({
+    id: { type: GraphQLID },
+    image: { type: GraphQLString },
+  }),
+});
 
 const ImageType = new GraphQLObjectType({
   name: "Image",
@@ -431,7 +506,10 @@ const ImageType = new GraphQLObjectType({
     id: { type: GraphQLID },
     clientId: { type: GraphQLID },
     clientProfileID: { type: GraphQLID },
-    urls: { type: GraphQLList(GraphQLString) },
+    contributionId: { type: GraphQLID },
+    urls: {
+      type: new GraphQLList(ImageUrlType),
+    },
     title: { type: GraphQLString },
   }),
 });
@@ -455,4 +533,5 @@ module.exports = {
   TourGuideReviewType,
   TourGuideDescriptionType,
   ImageType,
+  ImageInputType,
 };

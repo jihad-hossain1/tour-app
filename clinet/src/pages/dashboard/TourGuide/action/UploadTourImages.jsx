@@ -7,11 +7,16 @@ import { useMutation } from "@apollo/client";
 import { UPLOAD_TOUR_IMAGES } from "../../../../mutation/tourGuideMutation";
 import { GET_CLIENT } from "../../../../queries/clientsQuery";
 
-const UploadTourImages = ({ clientProfileID, clientId }) => {
+const UploadTourImages = ({
+  clientProfileID,
+  clientId,
+  tourGuideContribution,
+}) => {
   const [open, setOpen] = useState(false);
   const [multiImage, setMultiImage] = useState([]);
   const [multiLink, setmultiLink] = useState([]);
   const [title, setTitle] = useState("");
+  const [contributionId, setcontributionId] = useState("");
 
   const [uploadImages] = useMutation(UPLOAD_TOUR_IMAGES, {
     variables: {
@@ -19,6 +24,7 @@ const UploadTourImages = ({ clientProfileID, clientId }) => {
       clientProfileID,
       title,
       urls: multiLink,
+      contributionId: contributionId,
     },
     refetchQueries: [{ query: GET_CLIENT, variables: { id: clientId } }],
   });
@@ -32,9 +38,10 @@ const UploadTourImages = ({ clientProfileID, clientId }) => {
     } else if (title == "") {
       return toast.error("Please fill title input");
     }
-    uploadImages(clientId, clientProfileID, title, urls);
+    uploadImages(clientId, clientProfileID, title, urls, contributionId);
+    console.log(clientId, clientProfileID, title, urls, contributionId);
     toast.success("Image Upload Successfull");
-    setOpen(false);
+    // setOpen(false);
   };
   return (
     <>
@@ -43,11 +50,7 @@ const UploadTourImages = ({ clientProfileID, clientId }) => {
       </Button>
       <ModalAll open={open} setOpen={setOpen} title={"UploadTourImages"}>
         <div className="flex flex-col gap-3">
-          <form
-            action=""
-            onSubmit={handleImageSubmit}
-            className="flex flex-col gap-3"
-          >
+          <form onSubmit={handleImageSubmit} className="flex flex-col gap-3">
             <div className="w-fit">
               <Button type="submit" color="success" variant="contained">
                 submit
@@ -63,6 +66,19 @@ const UploadTourImages = ({ clientProfileID, clientId }) => {
               onChange={(e) => setTitle(e.target.value)}
               value={title}
             />
+
+            <select
+              className="border p-3 border-zinc-400 rounded-md"
+              placeholder="Choice Contribute Place"
+              value={contributionId}
+              onChange={(e) => setcontributionId(e.target.value)}
+            >
+              {tourGuideContribution?.map((contribute) => (
+                <option key={contribute?.id} value={contribute?.id}>
+                  {contribute?.title}
+                </option>
+              ))}
+            </select>
           </form>
           <MultipleImageUploader
             multiLink={multiLink}

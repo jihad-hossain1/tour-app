@@ -16,9 +16,6 @@ const SingleCountry = ({ country }) => {
         <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-10 duration-300">
           {country?.name}
         </h3>
-        {/* <p className="text-slate-400 group-hover:text-violet-200  z-0 duration-300 text-3xl relative">
-          {"subtitle"}
-        </p> */}
       </Link>
     </>
   );

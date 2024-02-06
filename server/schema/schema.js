@@ -5,7 +5,7 @@ const { user, users } = require("../query/users");
 const { destination, destinations } = require("../query/destinations");
 const { singleContinent, continents } = require("../query/continents");
 const { countries } = require("../query/countries");
-const { cities, cityByDivision } = require("../query/cities");
+const { cities, cityByDivision, getCity } = require("../query/cities");
 const { divisionByCountry, divisions } = require("../query/divisions");
 const {
   singleCountryTourspotList,
@@ -57,6 +57,9 @@ const {
   addTourGuideProfile,
   updateTourGuideProfile,
   uploadTourImages,
+  addGuideTourplace,
+  addTourGuideContributionDetail,
+  addTourGuideReserve,
 } = require("../mutation/tourGuide/tourGuideMutation");
 
 //main query
@@ -91,6 +94,7 @@ const RootQuery = new GraphQLObjectType({
     // cities
     cities,
     cityByDivision,
+    getCity,
     // divisions
     divisionByCountry,
     divisions,
@@ -103,7 +107,7 @@ const RootQuery = new GraphQLObjectType({
 });
 
 //mutation for create delete update operation
-const mutation = new GraphQLObjectType({
+const RootMutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     //client
@@ -147,10 +151,13 @@ const mutation = new GraphQLObjectType({
     addTourGuideProfile,
     updateTourGuideProfile,
     uploadTourImages,
+    addGuideTourplace,
+    addTourGuideContributionDetail,
+    addTourGuideReserve,
   },
 });
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
-  mutation,
+  mutation: RootMutation,
 });

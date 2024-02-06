@@ -5,67 +5,27 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Avatar, Button, CardActionArea, CardActions } from '@mui/material';
 import Divider from '@mui/material/Divider';
+import { latestArticles } from '../AllDemoDataImporter/AllDemoDataImporter';
+import Title from '../Title/Title';
 
-const popularPrivateTours = [
-    {
-        title: "Wine Tasting Experience",
-        city: "Barcelona",
-        price: 60,
-        duration: 3,
-        reviews: 110,
-        stars: 4.6,
-        description: "Indulge in the flavors of Catalonia with a wine tasting experience in Barcelona, sampling exquisite local wines paired with regional delicacies."
-    },
-    {
-        title: "Art Gallery Tour",
-        city: "Paris",
-        price: 45,
-        duration: 2,
-        reviews: 100,
-        stars: 4.7,
-        description: "Immerse yourself in the world of art with a curated tour of Parisian art galleries, featuring masterpieces from renowned artists and emerging talents."
-    },
-    {
-        title: "Scuba Diving Adventure",
-        city: "Bali",
-        price: 100,
-        duration: 5,
-        reviews: 75,
-        stars: 4.9,
-        description: "Dive into the crystal-clear waters of Bali for an unforgettable scuba diving adventure, exploring vibrant coral reefs and encountering diverse marine life."
-    },
-    {
-        title: "Concert Under the Stars",
-        city: "New York",
-        price: 75,
-        duration: 4.5,
-        reviews: 130,
-        stars: 4.8,
-        description: "Experience the magic of live music under the stars in New York, with a concert featuring talented artists performing in an enchanting outdoor setting."
-    }
-];
+
 
 const LatestArticles = () => {
     return (
         <div className="container mx-auto my-10">
-            <h4 className="text-3xl ">
-                <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
-                    Latest
-                </span>{" "}
-                Articles
-            </h4>
+            <Title firstText="Latest" secondText="Articles" />
             <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
-                {popularPrivateTours.map((tourSpot, index) => (<Card key={index} sx={{ maxWidth: 345 }}>
+                {latestArticles.map((tourSpot, index) => (<Card key={index} sx={{ maxWidth: 345 }}>
                     <CardActionArea>
                         <CardMedia
                             component="img"
-                            height="140"
-                            image="https://img.freepik.com/free-vector/portugal-tourism-concept-with-cuisine-people-sights-symbols-flat_1284-31948.jpg?w=826&t=st=1705567550~exp=1705568150~hmac=dc9d3a1b70289efb2b2b9b81650b6c7e85c2448c18a926e12e80a521b51fa1af"
+                            className='h-52'
+                            image={tourSpot?.image}
                             alt="green iguana"
                         />
                         <CardContent>
                             <Typography gutterBottom variant='h6' component="div" className='text-xl font-medium mb-2 '>
-                                {tourSpot?.title}
+                                {tourSpot?.title.length > 20 ? `${tourSpot.title.slice(0, 39)} ...` : tourSpot?.title}
                             </Typography>
                             <div className='space-x-5'>
                                 <Typography gutterBottom variant="small" component="span" className='inline-block bg-gray-200 bg-opacity-70 text-gray-600 rounded px-3 py-1 text-xs mr-2' >
@@ -73,8 +33,9 @@ const LatestArticles = () => {
                                 </Typography>
                             </div>
                             <Typography variant="body2" color="text.secondary" className='my-10'>
-                                {tourSpot?.description}
+                                {tourSpot?.description.length > 100 ? `${tourSpot.description.slice(0, 100)}...` : tourSpot?.description}
                             </Typography>
+
                         </CardContent>
                         <Divider light />
                         <CardActions className='flex items-center justify-between'>

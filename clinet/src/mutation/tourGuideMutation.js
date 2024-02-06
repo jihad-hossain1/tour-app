@@ -38,12 +38,14 @@ const UPLOAD_TOUR_IMAGES = gql`
   mutation UploadTourImages(
     $clientId: ID!
     $clientProfileID: ID!
+    $contributionId: ID
     $title: String
-    $urls: [String]
+    $urls: [ImageInput]
   ) {
     uploadTourImages(
       clientId: $clientId
       urls: $urls
+      contributionId: $contributionId
       clientProfileID: $clientProfileID
       title: $title
     ) {
@@ -79,9 +81,74 @@ const ADD_TOURGUIDE_PROFILE = gql`
   }
 `;
 
+const ADD_TOURGUIDE_PlACE = gql`
+  #graphql
+
+  mutation AddGuideTourplace(
+    $contribute: [TourContributorInput]
+    $title: String
+    $price: Int
+    $clientProfileID: ID
+    $tourPlaceId: ID
+  ) {
+    addGuideTourplace(
+      contribute: $contribute
+      title: $title
+      price: $price
+      clientProfileID: $clientProfileID
+      tourPlaceId: $tourPlaceId
+    ) {
+      id
+    }
+  }
+`;
+const ADD_TOURGUIDE_CONTRIBUTION_DETAIL = gql`
+  #graphql
+
+  mutation addTourGuideContributionDetail(
+    $clientProfileID: ID
+    $notice: String
+    $includes: [IncludesInputType]
+    $notIncludes: [NotIncludesInputType]
+    $additionalInfo: [AdditionalInfoType]
+  ) {
+    addTourGuideContributionDetail(
+      clientProfileID: $clientProfileID
+      notice: $notice
+      includes: $includes
+      notIncludes: $notIncludes
+      additionalInfo: $additionalInfo
+    ) {
+      id
+    }
+  }
+`;
+
+const ADD_TOURGUIDE_RESERVE = gql`
+  #graphql
+
+  mutation AddTourGuideReserve(
+    $clientProfileID: ID
+    $personPic: PersonPicInputType
+    $startTime: [StartTimeInputType]
+  ) {
+    addTourGuideReserve(
+      clientProfileID: $clientProfileID
+      personPic: $personPic
+      startTime: $startTime
+    ) {
+      id
+    }
+  }
+`;
+
+
 export {
   ADD_TOURGUIDE_PROFILE,
   UPDATE_TOURGUIDE_PROFILE,
   UPDATE_TOURGUIDE_PROFILE_PHOTO,
   UPLOAD_TOUR_IMAGES,
+  ADD_TOURGUIDE_PlACE,
+  ADD_TOURGUIDE_CONTRIBUTION_DETAIL,
+  ADD_TOURGUIDE_RESERVE,
 };

@@ -24,10 +24,14 @@ const MultipleImageUploader = ({
       let arr = [];
       for (let i = 0; i < multiImage.length; i++) {
         const data = await uploadMultipleImage(multiImage[i]);
-        console.log(data?.url);
-        arr.push(data?.url);
+        let image = {
+          image: data?.url,
+        };
+        console.log(image);
+        arr.push(image);
       }
       setmultiLink(arr);
+      console.log(arr);
       setloading(false);
       axios.post();
       toast.success("multiple image upload successfull");

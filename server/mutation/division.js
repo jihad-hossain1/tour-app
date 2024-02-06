@@ -20,6 +20,10 @@ const addDivision = {
     },
     resolve: async (parent, args) => {
         try {
+             const alreadyName = await Division.findOne({ name: args?.name });
+             if (alreadyName) {
+               return new Error("Division Already Exist , try another one");
+             }
             const division = new Division(args);
             return await division.save();
         } catch (error) {

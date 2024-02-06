@@ -5,11 +5,31 @@ const {
   GraphQLList,
   GraphQLNonNull,
   GraphQLBoolean,
+  GraphQLObjectType,
+  GraphQLInputObjectType,
 } = require("graphql");
 
 const TourGuide = require("../../models/TourGuide");
-const { TourGuideType, ImageType } = require("../../typeDef/typeDef");
+const {
+  TourGuideType,
+  ImageType,
+  ImageInputType,
+} = require("../../typeDef/typeDef");
+const {
+  TourGuideContributionType,
+  TourPlaceContributeInput,
+  TourGuideContributionDetailType,
+  IncludesInput,
+  NotIncludesInput,
+  AdditionalInfoInput,
+  TourGuideReserveType,
+} = require("../../typeDef/extraTypeDef");
 const Images = require("../../models/Images");
+const TourGuideContribution = require("../../models/TourGuideContribution");
+const {
+  TourGuideContributionDetail,
+} = require("../../models/TourGuideContributionDetail");
+const TourGuideReserve = require("../../models/TourGuideReserve");
 
 const addTourGuideProfile = {
   type: TourGuideType,
@@ -30,26 +50,28 @@ const addTourGuideProfile = {
       const saved = await tourGuideProfile.save();
       return saved;
     } catch (error) {
-      throw new Error("Error adding tourGuideProfile");
+      return new Error("Error adding tourGuideProfile");
     }
   },
 };
+
 const uploadTourImages = {
   type: ImageType,
   args: {
     clientId: { type: GraphQLID },
     clientProfileID: { type: GraphQLID },
-    urls: { type: GraphQLList(GraphQLString) },
+    contributionId: { type: GraphQLID },
     title: { type: GraphQLString },
+    urls: { type: GraphQLList(ImageInputType) },
   },
   resolve: async (parent, args) => {
     try {
-      // console.log(args);
+      console.log(args);
       const upImage = new Images(args);
       const saved = await upImage.save();
       return saved;
     } catch (error) {
-      throw new Error("Error adding tour up images");
+      return new Error(`Error adding tour up images: ${error}`);
     }
   },
 };
@@ -68,7 +90,7 @@ const updateTourGuideProfile = {
   },
   resolve: async (parent, args) => {
     try {
-      console.log(args);
+      // console.log(args);
       return await TourGuide.findByIdAndUpdate(
         args.id,
         {
@@ -84,8 +106,137 @@ const updateTourGuideProfile = {
   },
 };
 
+const addGuideTourplace = {
+  type: TourGuideContributionType,
+  args: {
+    tourPlaceId: { type: GraphQLID },
+    clientProfileID: { type: GraphQLID },
+    title: { type: GraphQLString },
+    price: { type: GraphQLInt },
+    contribute: { type: GraphQLList(TourPlaceContributeInput) },
+  },
+  resolve: async (parent, args) => {
+    try {
+      // console.log(args);
+      const existPlace = await TourGuideContribution.findOne({
+        tourPlaceId: args?.tourPlaceId,
+      });
+      if (existPlace) {
+        return new Error("Tour place are already exist try another tour place");
+      }
+      const tourGuideContribute = new TourGuideContribution(args);
+      const saved = await tourGuideContribute.save();
+      return saved;
+      // console.log(existPlace);
+    } catch (error) {
+      throw new Error("Error adding TourGuideContribution");
+    }
+  },
+};
+
+const addTourGuideContributionDetail = {
+  type: TourGuideContributionDetailType,
+  args: {
+    clientProfileID: { type: GraphQLID },
+    notice: { type: GraphQLString },
+    includes: {
+      type: new GraphQLList(IncludesInput),
+    },
+    notIncludes: {
+      type: new GraphQLList(NotIncludesInput),
+    },
+    additionalInfo: {
+      type: new GraphQLList(AdditionalInfoInput),
+    },
+  },
+  resolve: async (parent, args) => {
+    try {
+      const alreadyInfoAdd = await TourGuideContributionDetail.findOne({
+        clientProfileID: args?.clientProfileID,
+      });
+      if (alreadyInfoAdd) {
+        return new Error(
+          `You are already added TourGuideContributionDetail information! if you want to more info added go to TourGuideContributionDetail update section...`
+        );
+      }
+      const tourGuideContributeDetail = new TourGuideContributionDetail(args);
+      const saved = await tourGuideContributeDetail.save();
+      return saved;
+      // console.log(existPlace);
+    } catch (error) {
+      return new Error(`Error adding TourGuideContributionDetails: ${error}`);
+    }
+  },
+};
+
+const addTourGuideReserve = {
+  type: TourGuideReserveType,
+  args: {
+    clientProfileID: { type: GraphQLID },
+    personPic: {
+      type: new GraphQLInputObjectType({
+        name: "PersonPicInputType",
+        fields: {
+          adult: { type: GraphQLInt },
+          children: { type: GraphQLInt },
+          infant: { type: GraphQLInt },
+          totalPerson: { type: GraphQLInt },
+        },
+      }),
+    },
+    startTime: {
+      type: new GraphQLList(
+        new GraphQLInputObjectType({
+          name: "StartTimeInputType",
+          fields: {
+            timePic: { type: GraphQLString },
+          },
+        })
+      ),
+    },
+  },
+
+  resolve: async (parent, args) => {
+    try {
+      console.log(args);
+
+      if (args?.startTime?.length == 0) {
+        return new Error("start time are required");
+      }
+
+      const uptoPeople = await TourGuide.findById(args?.clientProfileID);
+      const upP =
+        parseInt(uptoPeople.uptoPeople) === args.personPic?.totalPerson;
+      if (!upP) {
+        return new Error(
+          "uptopeople and total person are not match please fill the uptopeople = totalperson"
+        );
+      }
+      console.log(upP);
+
+      const alreadyInfoAdd = await TourGuideReserve.findOne({
+        clientProfileID: args?.clientProfileID,
+      });
+
+      if (alreadyInfoAdd) {
+        return new Error(
+          `You are already added TourGuideReserve information! if you want to more info added go to TourGuideReserve update section...`
+        );
+      }
+
+      const tourGuideReserveSaved = new TourGuideReserve(args);
+      const saved = await tourGuideReserveSaved.save();
+      return saved;
+    } catch (error) {
+      return new Error(error);
+    }
+  },
+};
 module.exports = {
   addTourGuideProfile,
   updateTourGuideProfile,
   uploadTourImages,
+  addGuideTourplace,
+  addTourGuideContributionDetail,
+  addTourGuideReserve,
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { getClient } from "../../../router/ClientRoute";
 import { useQuery } from "@apollo/client";
 import { GET_CLIENT } from "../../../queries/clientsQuery";
@@ -7,6 +7,8 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import UpdateProfilePhoto from "./action/UpdateProfilePhoto";
 import UploadTourImages from "./action/UploadTourImages";
+import TourGuideReserveForm from "./action/components/TourGuideReserveForm";
+import picTimer from "../../../utils/timeHourFormate";
 
 const TourGuide = () => {
   const [isClient, setClient] = useState(getClient());
@@ -16,8 +18,13 @@ const TourGuide = () => {
   });
 
   const clientProfile = data?.client?.clientProfile;
+
+  const tourGuideContribution = clientProfile?.tourGuideContribution;
+
   const totalImages = clientProfile?.images?.flatMap((item) => item?.urls);
-  // console.log(totalImages);
+
+  // console.log("clientProfile info: ", clientProfile);
+
   return (
     <>
       {/* add tour guide profile  */}
@@ -44,13 +51,43 @@ const TourGuide = () => {
               </Button>
             </Link>
 
+            <Link
+              to={`/dashboard/tourguide/addtourspotplace/${data?.client?.id}`}
+              className={data?.client?.clientProfile ? "block w-fit" : "hidden"}
+            >
+              <Button variant="outlined" color="success">
+                Add TourPlace
+              </Button>
+            </Link>
+            <Link
+              to={`/dashboard/tourguide/addTourGuideContributionDetail/${
+                clientProfile?.tourGuideContributionDetail?.id ||
+                data?.client?.id
+              }`}
+              className={data?.client?.clientProfile ? "block w-fit" : "hidden"}
+            >
+              <Button variant="outlined" color="success">
+                {clientProfile?.tourGuideContributionDetail
+                  ? "update ContributionDetail"
+                  : "Add ContributionDetail"}
+              </Button>
+            </Link>
+
+            <TourGuideReserveForm
+              clientId={data?.client?.id}
+              clientProfileID={clientProfile?.id}
+              tourGuideReserve={clientProfile?.tourGuideReserve}
+              uptoPeople={clientProfile?.uptoPeople}
+            />
+
             <UploadTourImages
+              tourGuideContribution={tourGuideContribution}
               clientId={data?.client?.id}
               clientProfileID={clientProfile?.id}
             />
           </div>
           <h4>
-            <span className="font-semibold">Full Name:</span>{" "}
+            <span className="font-semibold">Full Name:</span>
             {data?.client?.name}
           </h4>
           <h4>
@@ -60,25 +97,25 @@ const TourGuide = () => {
             <span className="font-semibold">Email:</span> {data?.client?.email}
           </h4>
           <h4>
-            <span className="font-semibold">User Type:</span>{" "}
+            <span className="font-semibold">User Type:</span>
             {data?.client?.clientType}
           </h4>
           <h4>
-            <span className="font-semibold">User Role:</span>{" "}
+            <span className="font-semibold">User Role:</span>
             {data?.client?.role}
           </h4>
           {data?.client?.clientProfile && (
-            <div className="flex flex-col gap-3">
+            <main className="flex flex-col gap-3">
               <p>
-                <span className="font-semibold">Tour Type:</span>{" "}
+                <span className="font-semibold">Tour Type:</span>
                 {clientProfile?.tourGuideInstructionType}
               </p>
               <p>
-                <span className="font-semibold">Tour Member:</span> Up to{" "}
+                <span className="font-semibold">Tour Member:</span> Up to
                 {clientProfile?.uptoPeople} people
               </p>
               <div className="flex gap-2 items-center">
-                <span className="font-semibold">Language:</span>{" "}
+                <span className="font-semibold">Language:</span>
                 <div className="flex gap-3">
                   {clientProfile?.languages?.map((ite, index) => (
                     <p key={index}>{ite},</p>
@@ -86,18 +123,18 @@ const TourGuide = () => {
                 </div>
               </div>
               <p>
-                <span className="font-semibold">Response Time:</span>{" "}
+                <span className="font-semibold">Response Time:</span>
                 {clientProfile?.responseTime} hours 30 min
               </p>
               <p>
-                <span className="font-semibold">Provide Location:</span>{" "}
+                <span className="font-semibold">Provide Location:</span>
                 {clientProfile?.city?.name}
               </p>
               <p>
-                <span className="font-semibold">About:</span>{" "}
+                <span className="font-semibold">About:</span>
                 {clientProfile?.description}
               </p>
-              <div>
+              <section>
                 <p className="flex items-center gap-2">
                   <span className="font-semibold">Total Uploaded Images:</span>
                   <span className="">{totalImages?.length || 0}</span>
@@ -107,10 +144,10 @@ const TourGuide = () => {
                     <div key={item?.id}>
                       <h4>{item?.title}</h4>
                       <div className="flex gap-3">
-                        {item?.urls?.map((ite, index) => (
+                        {item?.urls?.map((ite) => (
                           <img
-                            key={index}
-                            src={ite}
+                            key={ite?.id}
+                            src={ite?.image}
                             alt="tour photo"
                             className="w-20 rounded-md"
                           />
@@ -119,8 +156,38 @@ const TourGuide = () => {
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
+              </section>
+              <section className="mt-14">
+                <h4 className="flex items-center gap-3">
+                  <span className="text-xl">Total Tour Contribute Area:</span>
+                  <span className="text-xl border px-3 border-zinc-400">
+                    {tourGuideContribution?.length || 0}
+                  </span>
+                </h4>
+                <div className="flex flex-col gap-3">
+                  {tourGuideContribution?.map((contribute) => (
+                    <div key={contribute?.id}>
+                      <h4 className="text-2xl font-semibold">
+                        {contribute?.title}
+                      </h4>
+                      <section className="flex flex-col gap-5">
+                        {contribute?.contribute?.map((item) => (
+                          <div key={item?.id}>
+                            <div className="w-fit border border-blue-600 rounded-lg p-2">
+                              {picTimer(item?.picTime)}
+                            </div>
+                            <h4 className="font-semibold">
+                              {item?.contributeTitle}
+                            </h4>
+                            <p>{item?.content}</p>
+                          </div>
+                        ))}
+                      </section>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </main>
           )}
         </div>
       )}
