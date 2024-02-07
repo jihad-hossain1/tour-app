@@ -33,7 +33,7 @@ const Header = () => {
       </Link>
     </li>,
   ];
-  
+
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -51,7 +51,7 @@ const Header = () => {
   };
 
   const handleSuggestionClick = (selectedCountry) => {
-    setSearchTerm(selectedCountry.name);
+    setSearchTerm(selectedCountry.label);
     setSuggestions([]);
   };
   return (
