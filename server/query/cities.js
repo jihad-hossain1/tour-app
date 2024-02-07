@@ -39,8 +39,8 @@ const getCityByCountry = {
   args: { id: { type: GraphQLID } },
   resolve: async (parent, args) => {
     try {
-      const cities = await City.find({ _id: args.id });
-      console.log(cities);
+      const cities = await City.find({ countryId: args.id });
+      // console.log(cities);
       return cities;
     } catch (error) {
       return new Error(`Error fetching City: ${error}`);

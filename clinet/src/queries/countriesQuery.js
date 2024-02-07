@@ -41,5 +41,22 @@ const GET_CITIY = gql`
     }
   }
 `;
+const GET_CITIES_BY_COUNTRY = gql`
+  #graphql
+  query GetCityByCountry($id: ID!) {
+    getCityByCountry(id: $id) {
+      id
+      name
+      photo
+      description
+    }
+  }
+`;
 
-export { GET_COUNTIRES, GET_DIVISIONS, GET_CITIE, GET_CITIY };
+export {
+  GET_COUNTIRES,
+  GET_DIVISIONS,
+  GET_CITIE,
+  GET_CITIY,
+  GET_CITIES_BY_COUNTRY,
+};

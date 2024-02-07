@@ -2,7 +2,23 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 
 
+const AddressType = new mongoose.Schema({
+  city: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "City",
+  },
+  division: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Division",
+  },
+  country: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Country",
+  },
+});
+
 const ClientSchema = new mongoose.Schema({
+  address: AddressType,
   name: {
     type: String,
     required: true,
@@ -11,10 +27,6 @@ const ClientSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true,
-  },
-  projectId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Project",
   },
   email: {
     type: String,
@@ -36,13 +48,6 @@ const ClientSchema = new mongoose.Schema({
   },
   clientType: {
     type: String,
-    // enum: [
-    //   "Tour Guide",
-    //   "Car Rent",
-    //   "Parking Share",
-    //   "Returant Management",
-    //   "Hotel Management",
-    // ],
     required: true,
   },
   resetToken: String,
@@ -62,18 +67,6 @@ ClientSchema.pre("save", async function (next) {
   next();
 });
 
-
-// ClientSchema.methods.matchPassword = async function (enteredPassword) {
-//   return await bcrypt.compare(enteredPassword,this.password)
-// }
-
-// ClientSchema.pre('save', async function (next) {
-//   if (!this.isModified) {
-//     next()
-//   }
-//   const salt = await bcrypt.genSalt(10);
-//   this.password = await bcrypt.hash(this.password,salt)
-// });
 
 
 module.exports = mongoose.model("Client", ClientSchema);
