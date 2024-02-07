@@ -215,6 +215,7 @@ const CityForAdd = new GraphQLObjectType({
     description: { type: GraphQLString },
     photo: { type: GraphQLString },
     divisionId: { type: GraphQLID },
+    countryId: { type: GraphQLID },
     division: {
       type: DivisionType,
       resolve: async (parent, args) => {
@@ -249,6 +250,7 @@ const DivisionType = new GraphQLObjectType({
       },
     },
     countryId: { type: GraphQLID },
+
     description: { type: GraphQLString },
     photo: { type: GraphQLString },
     cities: {
@@ -288,7 +290,7 @@ const CountryType = new GraphQLObjectType({
       },
     },
     city: {
-      type: CityType,
+      type: new GraphQLList(CityType),
       resolve: async (parent, args) => {
         let _i = await City.find();
         let result = _i?.filter((item) => item.division == parent.divisionId);

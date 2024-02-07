@@ -34,6 +34,19 @@ const getCity = {
     }
   },
 };
+const getCityByCountry = {
+  type: new GraphQLList(CityForAdd),
+  args: { id: { type: GraphQLID } },
+  resolve: async (parent, args) => {
+    try {
+      const cities = await City.find({ _id: args.id });
+      console.log(cities);
+      return cities;
+    } catch (error) {
+      return new Error(`Error fetching City: ${error}`);
+    }
+  },
+};
 
 const cityByDivision = {
   type: new GraphQLList(CityType),
@@ -45,4 +58,4 @@ const cityByDivision = {
   },
 };
 
-module.exports = { cities, cityByDivision, getCity };
+module.exports = { cities, cityByDivision, getCity, getCityByCountry };

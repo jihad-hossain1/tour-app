@@ -8,18 +8,20 @@ import PopularPrivateCars from "../../PopularPrivateCars/PopularPrivateCars";
 import PopularPrivateTours from "../../PopularPrivateTours/PopularPrivateTours";
 import PopularVirtualTours from "../../PopularVirtualTours/PopularVirtualTours";
 import HomeContinent from "../../continents/HomeContinent";
+import PopularCountries from "../../countries/PopularCountries";
 
 const components = [
-    <PopularDestination />,
-    <HomeContinent />,
-    <PopularGuide />,
-    <NewTourGuides />,
-    <PopularPrivateTours />,
-    <NewPrivateTours />,
-    <PopularPrivateCars />,
-    <PopularVirtualTours />,
-    <LatestArticles />,
-    <PopularArticles />
-]
+  <PopularDestination />,
+  <PopularCountries />,
+  <PopularGuide />,
+  <NewTourGuides />,
+  <PopularPrivateTours />,
+  <NewPrivateTours />,
+  <PopularPrivateCars />,
+  <PopularVirtualTours />,
+  <LatestArticles />,
+  <PopularArticles />,
+  <HomeContinent />,
+];
 
 export default components;
