@@ -20,7 +20,7 @@ const images = [
 
 const TourGuideDetails = () => {
   return (
-    <section className="max-w-screen-xl mx-auto px-3 pt-16 ">
+    <section className="max-w-screen-xl mx-auto px-3 ">
       <div className="my-4 py-2 bg-blue-100/25 rounded">
         <ShareTourGuidePerson />
       </div>
@@ -72,12 +72,12 @@ const TourGuideDetails = () => {
 
             <div className="w-fit ">
               <p>
-                Proud of the Moroccan long history and rich culture, my
-                passion is to share my country's heritage with visitors.
-                Holder of a masters degree in hotel operations management, and
-                having accumulated an experience of 8 years as a travel agency
-                manager, I am one of the fewer knowledgeable licensed female
-                tour guides in Morocco.
+                Proud of the Moroccan long history and rich culture, my passion
+                is to share my country's heritage with visitors. Holder of a
+                masters degree in hotel operations management, and having
+                accumulated an experience of 8 years as a travel agency manager,
+                I am one of the fewer knowledgeable licensed female tour guides
+                in Morocco.
               </p>
             </div>
           </div>
@@ -91,9 +91,8 @@ const TourGuideDetails = () => {
 
             <div className="w-fit ">
               <p>
-                For tours on Sundays, it's better to book at least 2 days
-                before so I can have time to rearrange/postpone any family
-                events.
+                For tours on Sundays, it's better to book at least 2 days before
+                so I can have time to rearrange/postpone any family events.
               </p>
             </div>
           </div>

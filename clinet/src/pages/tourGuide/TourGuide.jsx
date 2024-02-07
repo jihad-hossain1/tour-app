@@ -4,7 +4,7 @@ import PopularTourGuides from "../../components/TourGuide/PopularTourGuides";
 
 const TourGuide = () => {
   return (
-    <div className="pt-12 lg:pt-16">
+    <div className="">
       <TourGuideHomeBanner />
       <main className="max-w-screen-xl mx-auto px-1">
         <PopularTourGuides />
