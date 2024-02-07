@@ -44,7 +44,7 @@ const Test = () => {
   };
 
   return (
-    <div className="bg-slate-900 min-h-screen text-slate-50 pt-20 px-4">
+    <div className="bg-slate-900 min-h-screen text-slate-50 px-4">
       <form
         onSubmit={handleSubmit}
         className=" flex justify-center items-center gap-9"

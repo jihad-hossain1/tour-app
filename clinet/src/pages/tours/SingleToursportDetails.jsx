@@ -26,7 +26,7 @@ const SingleToursportDetails = () => {
   // console.log(data);
   return (
     <main className="min-h-screen max-w-screen-xl mx-auto px-2">
-      <div className="pt-20">
+      <div className="">
         <section className="grid grid-cols-1 lg:flex gap-5 lg:gap-10">
           <main className="relative">
             {/* tour details section */}

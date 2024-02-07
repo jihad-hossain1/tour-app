@@ -55,7 +55,7 @@ const Header = () => {
     setSuggestions([]);
   };
   return (
-    <div className="absolute z-50 w-full bg-black bg-opacity-60 lg:h-[85px] text-white p-4">
+    <div className=" w-full bg-black bg-opacity-60 lg:h-[85px] text-white p-4">
       <div className="flex items-center justify-between pt-3">
         <div className="flex items-center space-x-4">
           <div className="group relative">
