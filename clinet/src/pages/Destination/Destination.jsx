@@ -25,7 +25,7 @@ import { GET_CITIY } from "../../queries/countriesQuery";
 import Loader from "../../layout/Loader/Loader";
 import PopularGuide from "../../components/PopularGuide/PopularGuide";
 
-export default function Destination({ countryID }) {
+export default function Destination({ countryID, cityId }) {
   const images = [
     { img: "https://i.ibb.co/3Mvr2cx/141344.jpg" },
     { img: "https://i.ibb.co/LrtBvtD/141347.jpg" },
@@ -200,7 +200,7 @@ export default function Destination({ countryID }) {
             </a>
           </button>
         </div>
-        <PopularDestination />
+        {!cityId && <PopularDestination countryID={countryID} />}
         <PopularPrivateCars />
         <PopularPrivateTours id="Tours" />
         <PopularGuide id="guide" />

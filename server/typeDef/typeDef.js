@@ -297,6 +297,14 @@ const CountryType = new GraphQLObjectType({
         return result;
       },
     },
+    cities: {
+      type: new GraphQLList(CityForAdd),
+      resolve: async (parent, args) => {
+        let _i = await City.find({ countryId: parent.id });
+        console.log(_i);
+        return _i;
+      },
+    },
   }),
 });
 

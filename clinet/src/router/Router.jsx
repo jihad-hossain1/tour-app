@@ -30,6 +30,7 @@ import AddTourSpotPlaceForGuide from "../pages/dashboard/TourGuide/action/AddTou
 import AddTourGuideContributionDetail from "../pages/dashboard/TourGuide/action/AddTourGuideContributionDetail";
 import Country from "../components/countries/Country";
 import About from "../pages/About";
+import City from "../components/countries/City";
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
       {
         path: "/country/:id",
         element: <Country />,
+      },
+      {
+        path: "/country/city/:id",
+        element: <City />,
       },
       {
         path: "/countryListByTour/:id",

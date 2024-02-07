@@ -7,7 +7,7 @@ const Country = () => {
 
   return (
     <div>
-      <Destination />
+      <Destination countryID={paramId?.id} />
     </div>
   );
 };
