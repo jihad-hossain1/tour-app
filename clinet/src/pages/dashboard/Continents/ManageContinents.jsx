@@ -6,6 +6,7 @@ import { TbWorld, TbWorldCog } from "react-icons/tb";
 import { MdTour } from "react-icons/md";
 import { MdAccountBalance } from "react-icons/md";
 import AddContinent from "./AddContinent";
+import Action from "./Action/Action";
 
 const ManageContinents = () => {
   const { data, loading, error } = useQuery(GET_CONTINETS_MANAGEMENTS);
@@ -23,40 +24,35 @@ const ManageContinents = () => {
   return (
     <div>
       <AddContinent />
-      <h5 className="text-center py-4">ManageContinents</h5>
-      <div>
-        <div className="">
-          <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
-            <Card
-              title="Total Continents"
-              subtitle={(!loading && !error && data?.continents?.length) || 0}
-              href="#"
-              Icon={TbWorld}
-            />
-            <Card
-              title="Total Countries"
-              subtitle={(!loading && !error && countries?.length) || 0}
-              href="#"
-              Icon={TbWorldCog}
-            />
+      <h5 className="text-center py-4 text-2xl">ManageContinents</h5>
+      <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
+        <Card
+          title="Total Continents"
+          subtitle={(!loading && !error && data?.continents?.length) || 0}
+          href="#"
+          Icon={TbWorld}
+        />
+        <Card
+          title="Total Countries"
+          subtitle={(!loading && !error && countries?.length) || 0}
+          href="#"
+          Icon={TbWorldCog}
+        />
 
-            <Card
-              title="Total Division"
-              subtitle={(!loading && !error && _div?.length) || 0}
-              href="#"
-              Icon={MdAccountBalance}
-            />
-            <Card
-              title="Total TourSpot"
-              subtitle={
-                (!loading && !error && _finalTotalTourspot?.length) || 0
-              }
-              href="#"
-              Icon={MdTour}
-            />
-          </div>
-        </div>
+        <Card
+          title="Total Division"
+          subtitle={(!loading && !error && _div?.length) || 0}
+          href="#"
+          Icon={MdAccountBalance}
+        />
+        <Card
+          title="Total TourSpot"
+          subtitle={(!loading && !error && _finalTotalTourspot?.length) || 0}
+          href="#"
+          Icon={MdTour}
+        />
       </div>
+      <Action continents={data?.continents} loading={loading} />
     </div>
   );
 };

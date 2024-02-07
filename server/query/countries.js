@@ -20,7 +20,7 @@ const countries = {
 
 const singleCountry = {
   type: CountryType,
-  resolve: async () => {
+  resolve: async (parent, args) => {
     try {
       const countries = await Country.find();
       // console.log(countries.reverse());
