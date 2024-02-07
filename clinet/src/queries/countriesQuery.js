@@ -6,6 +6,7 @@ const GET_COUNTIRES = gql`
     countries {
       id
       name
+      photo
     }
   }
 `;

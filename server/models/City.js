@@ -5,15 +5,21 @@ const CitySchema = new mongoose.Schema({
     type: String,
   },
   tourSpotId: {
-    type: mongoose.Schema.Types.ObjectId, ref: "TourSpot",
-    },
-    divisionId: {
-      type: mongoose.Schema.Types.ObjectId, ref: "Division"
-    },
-    description: {
-        type: String
-    },
-    photo: {type: String}
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "TourSpot",
+  },
+  divisionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Division",
+  },
+  countryId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Country",
+  },
+  description: {
+    type: String,
+  },
+  photo: { type: String },
 });
 
 module.exports = mongoose.model("City", CitySchema);

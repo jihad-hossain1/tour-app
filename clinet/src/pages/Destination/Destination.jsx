@@ -25,7 +25,7 @@ import { GET_CITIY } from "../../queries/countriesQuery";
 import Loader from "../../layout/Loader/Loader";
 import PopularGuide from "../../components/PopularGuide/PopularGuide";
 
-export default function Destination() {
+export default function Destination({ countryID }) {
   const images = [
     { img: "https://i.ibb.co/3Mvr2cx/141344.jpg" },
     { img: "https://i.ibb.co/LrtBvtD/141347.jpg" },
@@ -122,7 +122,7 @@ export default function Destination() {
   const { id } = useParams();
 
   const { data, loading, error } = useQuery(GET_CITIY, {
-    variables: { id },
+    variables: { id: id || countryID },
   });
   // console.log(data);
   if (error) {
@@ -162,184 +162,188 @@ export default function Destination() {
         </div>
       </div>
       <div className="max-w-screen-xl mx-auto">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-4  lg:w-[80%] my-8">
-        <button>
-          <a
-            href="guide"
-            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2 "
-          >
-            <AccountCircleIcon fontSize="large" className="text-blue-500" />
-            <h1 className="ml-2">Local Guides</h1>
-          </a>
-        </button>
-        <button>
-          <a
-            onClick={() => scrollToSection("Tours")}
-            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] duration-200 ease-in-out border-t-2 border-r-2"
-          >
-            <FlagIcon fontSize="large" className="text-blue-500" />
-            <h1 className="ml-2">Private Tours</h1>
-          </a>
-        </button>
-        <button>
-          <a
-            onClick={() => scrollToSection("cars")}
-            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2"
-          >
-            <DirectionsCarIcon fontSize="large" className="text-blue-500" />
-            <h1 className="ml-2">Private Cars</h1>
-          </a>
-        </button>
-        <button>
-          <a
-            onClick={() => scrollToSection("virtual_tours")}
-            className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2"
-          >
-            <PublicIcon fontSize="large" className="text-blue-500" />
-            <h1 className="ml-2">Virtual Tours</h1>
-          </a>
-        </button>
-      </div>
-      <PopularDestination />
-      <PopularPrivateCars />
-      <PopularPrivateTours id="Tours" />
-      <PopularGuide id="guide" />
-      <NewPrivateTours />
-      <PopularPrivateCars id="cars" />
-      <PopularVirtualTours id="virtual_tours" />
-      <div className=" mb-20">
-        <h4 className="text-3xl ">
-          <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
-            Japan
-          </span>{" "}
-          Tour Reviews
-        </h4>
-        <div>
-          <div className="mt-16 flex flex-col gap-6 lg:gap-10">
-            {[1, 2, 3].map((review, _i) => (
-              <div key={_i} className="">
-                <Card style={{ padding: "14px", borderRadius: "12px" }}>
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <Avatar src="" alt="review user" />
-                      <h4 className="text-blue-800 ">{`Matjaz K`}</h4>
-                      <Rating size="small" value={4} />
-                      <span className="text-sm font-semibold">{`${5}/${5} `}</span>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-4  lg:w-[80%] my-8">
+          <button>
+            <a
+              href="guide"
+              className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2 "
+            >
+              <AccountCircleIcon fontSize="large" className="text-blue-500" />
+              <h1 className="ml-2">Local Guides</h1>
+            </a>
+          </button>
+          <button>
+            <a
+              onClick={() => scrollToSection("Tours")}
+              className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] duration-200 ease-in-out border-t-2 border-r-2"
+            >
+              <FlagIcon fontSize="large" className="text-blue-500" />
+              <h1 className="ml-2">Private Tours</h1>
+            </a>
+          </button>
+          <button>
+            <a
+              onClick={() => scrollToSection("cars")}
+              className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2"
+            >
+              <DirectionsCarIcon fontSize="large" className="text-blue-500" />
+              <h1 className="ml-2">Private Cars</h1>
+            </a>
+          </button>
+          <button>
+            <a
+              onClick={() => scrollToSection("virtual_tours")}
+              className="flex text-gray-600 font-medium hover:border-blue-500 hover:border-2 shadow-md h-[60px] lg:w-[250px] text-center justify-center items-center text-lg text rounded-[4px] transition-all duration-300 ease-in-out border-t-2 border-r-2"
+            >
+              <PublicIcon fontSize="large" className="text-blue-500" />
+              <h1 className="ml-2">Virtual Tours</h1>
+            </a>
+          </button>
+        </div>
+        <PopularDestination />
+        <PopularPrivateCars />
+        <PopularPrivateTours id="Tours" />
+        <PopularGuide id="guide" />
+        <NewPrivateTours />
+        <PopularPrivateCars id="cars" />
+        <PopularVirtualTours id="virtual_tours" />
+        <div className=" mb-20">
+          <h4 className="text-3xl ">
+            <span className="border-b-[3px] pb-1 border-blue-600 w-fit">
+              Japan
+            </span>{" "}
+            Tour Reviews
+          </h4>
+          <div>
+            <div className="mt-16 flex flex-col gap-6 lg:gap-10">
+              {[1, 2, 3].map((review, _i) => (
+                <div key={_i} className="">
+                  <Card style={{ padding: "14px", borderRadius: "12px" }}>
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <Avatar src="" alt="review user" />
+                        <h4 className="text-blue-800 ">{`Matjaz K`}</h4>
+                        <Rating size="small" value={4} />
+                        <span className="text-sm font-semibold">{`${5}/${5} `}</span>
+                      </div>
+                      <div className="text-sm">Jan 31, 2024</div>
                     </div>
-                    <div className="text-sm">Jan 31, 2024</div>
-                  </div>
-                  <hr className="h-[1px] bg-zinc-700 my-5" />
-                  <h4 className="font-semibold text-xl">{`“ Great Experience! ”`}</h4>
-                  <p className="text-sm my-3">
-                    Our sightseeing trip in and around the outskirts of Tangier
-                    was truly made memorable by Rababe. She is an outstanding
-                    private guide with an impressive grasp of local culture and
-                    history. She added depth to every destination without
-                    overwhelming us. It is important to note that her warmth and
-                    friendliness created a personal touch, making each moment
-                    feel special. We felt comfortable and welcome. Overall,
+                    <hr className="h-[1px] bg-zinc-700 my-5" />
+                    <h4 className="font-semibold text-xl">{`“ Great Experience! ”`}</h4>
+                    <p className="text-sm my-3">
+                      Our sightseeing trip in and around the outskirts of
+                      Tangier was truly made memorable by Rababe. She is an
+                      outstanding private guide with an impressive grasp of
+                      local culture and history. She added depth to every
+                      destination without overwhelming us. It is important to
+                      note that her warmth and friendliness created a personal
+                      touch, making each moment feel special. We felt
+                      comfortable and welcome. Overall,
+                    </p>
+                  </Card>
+                </div>
+              ))}
+            </div>
+            <div className="w-full text-center">
+              <button className="mt-10 border-none bg-slate-200 font-semibold text-[14px] p-4 rounded-md">
+                Learn more
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* Asked Questions Section */}
+        <div className="">
+          <Title firstText="Japan" secondText="Frequently Asked Questions" />
+          <div>
+            {accordionData.map((item) => (
+              <Accordion key={item.id} className="mb-4 border-none">
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon className="text-gray-600" />}
+                  aria-controls={`panel${item.id}-content`}
+                  id={`panel${item.id}-header`}
+                  className="bg-gray-200 p-4 h-[80px] border-none"
+                >
+                  <h3 className="text-lg font-semibold">{item.label}</h3>
+                </AccordionSummary>
+                <AccordionDetails className="bg-gray-100 p-4 border-none">
+                  <p className="text-gray-700">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse malesuada lacus ex, sit amet blandit leo
+                    lobortis eget.
                   </p>
-                </Card>
-              </div>
+                </AccordionDetails>
+              </Accordion>
             ))}
           </div>
-          <div className="w-full text-center">
-            <button className="mt-10 border-none bg-slate-200 font-semibold text-[14px] p-4 rounded-md">
-              Learn more
-            </button>
+        </div>
+        <div className=" mt-10">
+          <Title firstText="Japan" secondText=" Popular Tour Guide" />
+          <div className="text-lg mt-10">
+            <p>
+              Uncover Japan’s secrets and gain travel knowledge with a local
+              private tour guide. Unlock hidden gems, cultural immersion, and an
+              unforgettable journey.
+            </p>{" "}
+            <br />
+            <p>
+              {" "}
+              With a tour guide, you can get to the good stuff, like the
+              ethereal Tottori Sand Dunes and quaint Kinosaki Onsen. From
+              enjoying bespoke traditional ryokans, to navigating the busy
+              streets of Osaka, a tailored journey through Japan’s wonders only
+              gets better with a local expert leading the way.{" "}
+            </p>
+            <br />
+            <p>
+              Beyond the big ticket destinations like Tokyo, Kyoto and Osaka,
+              getting a personalized itinerary transforms a simple tour into
+              lifelong memories. Customized by a local guide, your itinerary can
+              feature lesser known sites like the Shikisai-no-Oka flower fields,
+              where stunning panoramic views of colorful flowers await.
+            </p>
           </div>
         </div>
-      </div>
-      {/* Asked Questions Section */}
-      <div className="">
-        <Title firstText="Japan" secondText="Frequently Asked Questions" />
-        <div>
-        {accordionData.map((item) => (
-          <Accordion key={item.id} className="mb-4 border-none">
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon className="text-gray-600" />}
-              aria-controls={`panel${item.id}-content`}
-              id={`panel${item.id}-header`}
-              className="bg-gray-200 p-4 h-[80px] border-none"
-            >
-              <h3 className="text-lg font-semibold">{item.label}</h3>
-            </AccordionSummary>
-            <AccordionDetails className="bg-gray-100 p-4 border-none">
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-              </p>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-      </div>
-      </div>
-      <div className=" mt-10">
-        <Title firstText="Japan" secondText=" Popular Tour Guide" />
-        <div className="text-lg mt-10">
-          <p>
-            Uncover Japan’s secrets and gain travel knowledge with a local
-            private tour guide. Unlock hidden gems, cultural immersion, and an
-            unforgettable journey.
-          </p>{" "}
-          <br />
-          <p>
-            {" "}
-            With a tour guide, you can get to the good stuff, like the ethereal
-            Tottori Sand Dunes and quaint Kinosaki Onsen. From enjoying bespoke
-            traditional ryokans, to navigating the busy streets of Osaka, a
-            tailored journey through Japan’s wonders only gets better with a
-            local expert leading the way.{" "}
-          </p>
-          <br />
-          <p>
-            Beyond the big ticket destinations like Tokyo, Kyoto and Osaka,
-            getting a personalized itinerary transforms a simple tour into
-            lifelong memories. Customized by a local guide, your itinerary can
-            feature lesser known sites like the Shikisai-no-Oka flower fields,
-            where stunning panoramic views of colorful flowers await.
-          </p>
-        </div>
-      </div>
-      <LatestArticles />
-      <PopularArticles />
+        <LatestArticles />
+        <PopularArticles />
 
-      <div className="grid lg:grid-cols-3 lg:max-w-6xl mx-auto bg-[#EFECEC] p-10 rounded-md my-10">
-        <div className="flex items-center">
-          <InventoryIcon className="text-red-700" fontSize="large" />
-          <div className="pl-5">
-            <h1 className="text-[16px]">The best tours and activities</h1>
-            <p className="text-[13px]">With a real local of your choice</p>
+        <div className="grid lg:grid-cols-3 lg:max-w-6xl mx-auto bg-[#EFECEC] p-10 rounded-md my-10">
+          <div className="flex items-center">
+            <InventoryIcon className="text-red-700" fontSize="large" />
+            <div className="pl-5">
+              <h1 className="text-[16px]">The best tours and activities</h1>
+              <p className="text-[13px]">With a real local of your choice</p>
+            </div>
+          </div>
+          <div className="flex items-center ml-5">
+            <DescriptionIcon className="text-red-700" fontSize="large" />
+            <div className="pl-5">
+              <h1 className="text-[16px]">
+                The option to personalize your tour
+              </h1>
+              <p className="text-[13px]">Just contact your favorite local</p>
+            </div>
+          </div>
+          <div className="flex items-center ml-5">
+            <CheckCircleOutlineIcon className="text-red-700" fontSize="large" />
+            <div className="pl-5">
+              <h1 className="text-[16px]">Only private tours!</h1>
+              <p className="text-[13px]">So no group tours with strangers</p>
+            </div>
           </div>
         </div>
-        <div className="flex items-center ml-5">
-          <DescriptionIcon className="text-red-700" fontSize="large" />
-          <div className="pl-5">
-            <h1 className="text-[16px]">The option to personalize your tour</h1>
-            <p className="text-[13px]">Just contact your favorite local</p>
+        <div className=" mb-32">
+          <Title firstText="Related" secondText="Japan Tour Guide Pages" />
+          <div className="grid grid-cols-5 gap-2 mt-4">
+            {RelatedLisbon.map((item, index) => (
+              <button
+                key={index}
+                className="bg-gray-200 font-medium p-4 rounded-md hover:bg-gray-300 text-[15px]"
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
         </div>
-        <div className="flex items-center ml-5">
-          <CheckCircleOutlineIcon className="text-red-700" fontSize="large" />
-          <div className="pl-5">
-            <h1 className="text-[16px]">Only private tours!</h1>
-            <p className="text-[13px]">So no group tours with strangers</p>
-          </div>
-        </div>
-      </div>
-      <div className=" mb-32">
-        <Title firstText="Related" secondText="Japan Tour Guide Pages" />
-        <div className="grid grid-cols-5 gap-2 mt-4">
-          {RelatedLisbon.map((item, index) => (
-            <button
-              key={index}
-              className="bg-gray-200 font-medium p-4 rounded-md hover:bg-gray-300 text-[15px]"
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </div>
       </div>
     </div>
   );
