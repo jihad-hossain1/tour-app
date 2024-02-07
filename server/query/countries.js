@@ -6,15 +6,29 @@ const {
 
 
 const countries = {
-    type: new GraphQLList(CountryType),
-    resolve: async () => {
-        try {
-            return await Country.find();
-        } catch (error) {
-            throw new Error(`Error fetching country: ${error}`);
-        }
-    },
+  type: new GraphQLList(CountryType),
+  resolve: async () => {
+    try {
+      const countries = await Country.find();
+      // console.log(countries.reverse());
+      return countries.reverse();
+    } catch (error) {
+      throw new Error(`Error fetching country: ${error}`);
+    }
+  },
 };
 
+const singleCountry = {
+  type: CountryType,
+  resolve: async () => {
+    try {
+      const countries = await Country.find();
+      // console.log(countries.reverse());
+      return countries.reverse();
+    } catch (error) {
+      throw new Error(`Error fetching country: ${error}`);
+    }
+  },
+};
 
-module.exports = { countries };
+module.exports = { countries, singleCountry };

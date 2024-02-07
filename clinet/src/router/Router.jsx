@@ -28,6 +28,8 @@ import UpdateTourGuide from "../pages/dashboard/TourGuide/action/UpdateTourGuide
 import Destination from "../pages/Destination/Destination";
 import AddTourSpotPlaceForGuide from "../pages/dashboard/TourGuide/action/AddTourSpotPlaceForGuide";
 import AddTourGuideContributionDetail from "../pages/dashboard/TourGuide/action/AddTourGuideContributionDetail";
+import Country from "../components/countries/Country";
+import About from "../pages/About";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +69,10 @@ export const router = createBrowserRouter([
         element: <Continent />,
       },
       {
+        path: "/country/:id",
+        element: <Country />,
+      },
+      {
         path: "/countryListByTour/:id",
         element: <CountryListByTour />,
       },
@@ -89,6 +95,10 @@ export const router = createBrowserRouter([
       {
         path: "/denied",
         element: <DeniedPage />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
       {
         path: "/destination/:id",

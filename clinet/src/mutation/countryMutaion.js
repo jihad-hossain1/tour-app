@@ -24,8 +24,20 @@ const ADD_DIVISION = gql`
 
 const ADD_CITY = gql`
   #graphql
-  mutation addCity($name: String $description: String $divisionId: ID $photo: String) {
-    addCity(name: $name description: $description divisionId: $divisionId photo: $photo) {
+  mutation addCity(
+    $name: String
+    $description: String
+    $divisionId: ID
+    $photo: String
+    $countryId: ID
+  ) {
+    addCity(
+      name: $name
+      description: $description
+      divisionId: $divisionId
+      photo: $photo
+      countryId: $countryId
+    ) {
       id
       name
       photo

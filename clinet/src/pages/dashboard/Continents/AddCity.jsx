@@ -8,7 +8,11 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { GET_DIVISIONS, GET_CITIE } from "../../../queries/countriesQuery";
+import {
+  GET_DIVISIONS,
+  GET_CITIE,
+  GET_COUNTIRES,
+} from "../../../queries/countriesQuery";
 import { useMutation, useQuery } from "@apollo/client";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
@@ -25,11 +29,17 @@ const AddCity = () => {
     error: cError,
     data: divisions,
   } = useQuery(GET_DIVISIONS);
+  const {
+    loading: countryLoad,
+    error: countryError,
+    data: countries,
+  } = useQuery(GET_COUNTIRES);
 
   const scafolding = {
     name: "",
     description: "",
     divisionId: "",
+    countryId: "",
   };
   const [formData, setFormData] = useState(scafolding);
 
@@ -72,11 +82,11 @@ const AddCity = () => {
   };
 
   let photo = { photo: _photo };
-  const { name, divisionId, description } = formData;
+  const { name, divisionId, description, countryId } = formData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addCity(name, divisionId, photo, description);
+    await addCity(name, divisionId, photo, description, countryId);
     setOpen(false);
   };
 
@@ -121,6 +131,30 @@ const AddCity = () => {
               variant="outlined"
             />
             {/* select country  */}
+            <FormControl variant="outlined">
+              <InputLabel id="demo-simple-select-standard-label">
+                Select country
+              </InputLabel>
+              <Select
+                sx={{ width: "100%" }}
+                className="w-full"
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                name="countryId"
+                defaultValue={formData?.countryId}
+                onChange={handleChange}
+                label="Select country"
+              >
+                {!countryLoad &&
+                  !countryError &&
+                  countries?.countries?.map((country) => (
+                    <MenuItem key={country?.id} value={country?.id}>
+                      {country?.name}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+            {/* select division  */}
             <FormControl variant="outlined">
               <InputLabel id="demo-simple-select-standard-label">
                 Select Division
