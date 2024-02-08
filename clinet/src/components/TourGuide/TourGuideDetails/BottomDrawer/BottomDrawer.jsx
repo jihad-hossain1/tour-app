@@ -1,20 +1,32 @@
-import React, { useState } from "react";
-import { BottomDrawer } from "./TourGuideDetails/BottomDrawer/BottomDrawer";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import { Drawer } from "@mui/material";
 
-const ImageGellary = ({ images }) => {
-  const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const handleButtonClick = () => {
-    setDrawerOpen(!isDrawerOpen);
+export const BottomDrawer = ({images}) => {
+  const [state, setState] = React.useState({
+    bottom: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === "keydown") {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
   };
 
-  return (
-    <>
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  const list = (anchor) => (
+    <Box
+      sx={{ height: anchor === "bottom" ? 800 : "" }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-screen-xl mx-auto mt-20">
         <div className="my-2">
           {images?.slice(0, 1).map((img, index) => (
             <div key={index}>
               <img
-                onClick={handleButtonClick}
                 className="h-[400px] w-full rounded-xl hover:bg-black hover:opacity-95 cursor-pointer"
                 src={img?.img}
                 alt="tour guide image"
@@ -27,7 +39,6 @@ const ImageGellary = ({ images }) => {
             {images?.slice(1, 3).map((img, index) => (
               <div key={index}>
                 <img
-                  onClick={handleButtonClick}
                   className="h-[200px] w-[320px] rounded-xl hover:bg-black hover:opacity-95 cursor-pointer"
                   src={img?.img}
                   alt="tour guide image"
@@ -39,7 +50,6 @@ const ImageGellary = ({ images }) => {
             {images?.slice(3, 5).map((img, index) => (
               <div key={index}>
                 <img
-                  onClick={handleButtonClick}
                   className="h-[200px] w-[320px] rounded-xl hover:bg-black hover:opacity-95 cursor-pointer"
                   src={img?.img}
                   alt="tour guide image"
@@ -49,9 +59,21 @@ const ImageGellary = ({ images }) => {
           </div>
         </div>
       </section>
-      {isDrawerOpen && <BottomDrawer images={images} />}
-    </>
+    </Box>
+  );
+
+  React.useEffect(() => {
+    setState({ ...state, bottom: true });
+  }, []);
+  return (
+    <div>
+      <Drawer
+        anchor="bottom"
+        open={state.bottom}
+        onClose={toggleDrawer("bottom", false)}
+      >
+        {list("bottom")}
+      </Drawer>
+    </div>
   );
 };
-
-export default ImageGellary;
