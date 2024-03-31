@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { countries } from "../../../AllDemoDataImporter/AllDemoDataImporter";
+import AccountDropDown from "./AccountDropDown";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,6 +32,9 @@ const Header = () => {
       <Link className="Button" to="/about">
         About Us
       </Link>
+    </li>,
+    <li className="hidden md:block">
+      <AccountDropDown />
     </li>,
   ];
 
