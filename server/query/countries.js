@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Country = require("../models/Country");
 const { CountryType } = require("../typeDef/typeDef");
 const {
@@ -31,4 +32,26 @@ const singleCountry = {
   },
 };
 
-module.exports = { countries, singleCountry };
+const country = {
+  type: CountryType,
+   args: { id: { type: GraphQLID } },
+  resolve: async (parent, {id}) => {
+    try {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw new Error("Invalid ID");
+      }
+
+      const country = await Country.findById(id);
+      // console.log(countries.reverse());
+
+      if (!country) {
+        throw new Error("Country not found");
+      }
+      return country
+    } catch (error) {
+      throw new Error(`Error fetching country: ${error}`);
+    }
+  },
+};
+
+module.exports = { countries, singleCountry ,country};

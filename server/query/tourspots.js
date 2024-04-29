@@ -63,10 +63,25 @@ const relatedTourSpots = {
   },
 };
 
+const tourSpotsByCountryId = {
+  type: new GraphQLList(TourSpotType),
+  args: { countryId: { type: GraphQLID } },
+  resolve: async (parent, args) => {
+    try {
+      const fetchData = await TourSpot.find();
+      let _i = fetchData?.filter((item) => item?.countryId == args?.countryId);
+      return _i;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+}
+
 module.exports = {
   singleCountryTourspotList,
   singleTourspot,
   singleTourspotDetails,
   tourSpots,
   relatedTourSpots,
+  tourSpotsByCountryId
 };

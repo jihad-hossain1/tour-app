@@ -4,7 +4,7 @@ const { projects, project, clientProjects } = require("../query/projects");
 const { user, users } = require("../query/users");
 const { destination, destinations } = require("../query/destinations");
 const { singleContinent, continents } = require("../query/continents");
-const { countries, singleCountry } = require("../query/countries");
+const { countries, singleCountry, country } = require("../query/countries");
 const {
   cities,
   cityByDivision,
@@ -18,6 +18,7 @@ const {
   singleTourspotDetails,
   tourSpots,
   relatedTourSpots,
+  tourSpotsByCountryId
 } = require("../query/tourspots");
 const { reviesByTourSpot, newReviews } = require("../query/reviews");
 const { getTourGuide } = require("../query/tourGuideQuery");
@@ -91,12 +92,14 @@ const RootQuery = new GraphQLObjectType({
     // countries
     countries,
     singleCountry,
+    country,
     // tourspot
     singleCountryTourspotList,
     singleTourspot,
     singleTourspotDetails,
     tourSpots,
     relatedTourSpots,
+    tourSpotsByCountryId,
     // cities
     cities,
     cityByDivision,
