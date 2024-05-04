@@ -32,9 +32,11 @@ const updateCountry = {
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     photo: { type: GraphQLString },
+    continentId: { type: GraphQLID },
   },
   resolve: async (parent, args) => {
     try {
+
       if (!mongoose.Types.ObjectId.isValid(args.id)) {
         throw new Error("Invalid ID");
       }
