@@ -41,7 +41,7 @@ const {
   updateDestination,
   deleteDestination,
 } = require("../mutation/destination");
-const { addCountry } = require("../mutation/country");
+const { addCountry,updateCountry } = require("../mutation/country");
 const {
   addTourSpot,
   updateTourspot,
@@ -140,6 +140,7 @@ const RootMutation = new GraphQLObjectType({
     deleteDestination,
     // country
     addCountry,
+      updateCountry,
     // tourspot
     addTourSpot,
     updateTourspot,
