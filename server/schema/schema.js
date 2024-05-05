@@ -48,7 +48,7 @@ const {
   deleteTourSpotWithCommentReply,
 } = require("../mutation/tourSpot");
 const { addDivision } = require("../mutation/division");
-const { addCity } = require("../mutation/city");
+const { addCity, updateCity } = require("../mutation/city");
 const {
   addReview,
   addReviewReply,
@@ -144,6 +144,7 @@ const RootMutation = new GraphQLObjectType({
     deleteTourSpotWithCommentReply,
     // city
     addCity,
+    updateCity,
     // division
     addDivision,
     // review
