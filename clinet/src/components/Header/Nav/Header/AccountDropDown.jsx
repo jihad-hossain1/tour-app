@@ -22,8 +22,10 @@ const AccountDropDown = () => {
       if (dropDownRef.current && !dropDownRef.current.contains(e.target))
         setOpen(false);
     };
+
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
+      
   }, []);
 
   return (
