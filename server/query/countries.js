@@ -31,4 +31,20 @@ const singleCountry = {
   },
 };
 
-module.exports = { countries, singleCountry };
+const country = {
+  type: CountryType,
+  args: {
+    id: { type: GraphQLID },
+  },
+  resolve: async (parent, args) => {
+    try {
+      const country = await Country.findById(args.id);
+      if(!country) throw new Error("Country not found");
+      return country;
+    } catch (error) {
+      throw new Error(`Error fetching country: ${error.message}`);
+    }
+  },
+}
+
+module.exports = { countries, singleCountry,country };
