@@ -1,6 +1,7 @@
 const { GraphQLID, GraphQLString } = require("graphql");
 const Country = require("../models/Country");
 const { CountryType } = require("../typeDef/typeDef");
+const mongoose = require("mongoose");
 
 const addCountry = {
   type: CountryType,
@@ -24,4 +25,37 @@ const addCountry = {
   },
 };
 
-module.exports = { addCountry };
+const updateCountry = {
+  type: CountryType,
+  args: {
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+    photo: { type: GraphQLString },
+    continentId: { type: GraphQLID },
+  },
+  resolve: async (parent, args) => {
+    try {
+
+      if (!mongoose.Types.ObjectId.isValid(args.id)) {
+        throw new Error("Invalid ID");
+      }
+      const country = await Country.findByIdAndUpdate(args.id, {
+        name: args.name || undefined,
+        description: args.description || undefined,
+        photo: args.photo || undefined,
+        continentId: args.continentId || undefined,
+      }, {
+        new: true,
+      });
+      if (!country) {
+        throw new Error("Country not found");
+      }
+      return country;
+    } catch (error) {
+      throw new Error(`Error updating country: ${error}`);
+    }
+  },
+}
+
+module.exports = { addCountry, updateCountry };
