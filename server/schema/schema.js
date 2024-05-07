@@ -11,7 +11,7 @@ const {
   getCity,
   getCityByCountry,
 } = require("../query/cities");
-const { divisionByCountry, divisions } = require("../query/divisions");
+const { divisionByCountry, divisions,division } = require("../query/divisions");
 const {
   singleCountryTourspotList,
   singleTourspot,
@@ -48,7 +48,7 @@ const {
   deleteTourspot,
   deleteTourSpotWithCommentReply,
 } = require("../mutation/tourSpot");
-const { addDivision } = require("../mutation/division");
+const { addDivision ,updateDivision} = require("../mutation/division");
 const { addCity, updateCity } = require("../mutation/city");
 const {
   addReview,
@@ -108,6 +108,7 @@ const RootQuery = new GraphQLObjectType({
     // divisions
     divisionByCountry,
     divisions,
+    division,
     // reviews
     reviesByTourSpot,
     newReviews,
@@ -151,6 +152,7 @@ const RootMutation = new GraphQLObjectType({
     updateCity,
     // division
     addDivision,
+    updateDivision,
     // review
     addReview,
     addReviewReply,
