@@ -4,10 +4,16 @@ const TourSpotSchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      required: true,
+      max: 100,
+      min: 5,
     },
 
     description: {
       type: String,
+      required: true,
+      max: 3000,
+      min: 20
     },
 
     photo: {
@@ -24,20 +30,6 @@ const TourSpotSchema = new mongoose.Schema(
     },
 
     cityId: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
-
-    perfectTourTime: { type: String },
-
-    howToGoThere: { type: String },
-
-    howToStayThere: { type: String },
-
-    howDoHere: { type: String },
-
-    whereToEat: { type: String },
-
-    tourTipsGuide: { type: String },
-
-    topTourPlace: { type: String },
     
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   },
