@@ -12,7 +12,7 @@ const TourSpotSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
-      max: 3000,
+      max: 5000,
       min: 20
     },
 

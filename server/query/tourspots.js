@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const TourSpot = require("../models/TourSpot");
 const { TourSpotType } = require("../typeDef/typeDef");
 const { GraphQLID, GraphQLList } = require("graphql");
@@ -26,12 +27,21 @@ const tourSpots = {
 const singleTourspot = {
   type: TourSpotType,
   args: { id: { type: GraphQLID } },
-  resolve: async (parent, args) => {
+  resolve: async (parent, { id }) => {
+    
     try {
-      const fetchData = await TourSpot.findById(args?.id);
+       if (!mongoose.Types.ObjectId.isValid(id)) {
+                return new Error("Invalid TourSpot ID");
+      }
+      
+      const fetchData = await TourSpot.findById(id);
+
+      if (!fetchData) {
+        throw new Error("TourSpot are not found")
+      }
       return fetchData;
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message)
     }
   },
 };
