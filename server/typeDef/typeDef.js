@@ -417,6 +417,22 @@ const TourGuideDescriptionType = new GraphQLObjectType({
   }),
 });
 
+const TourGuideProfile = new GraphQLObjectType({
+  name: "TourGuideProfile",
+  fields: () => ({
+    id: { type: GraphQLID },
+    description: { type: GraphQLString },
+    uptoPeople: { type: GraphQLString },
+    cityId: { type: GraphQLID },
+    responseTime: { type: GraphQLString },
+    languages: { type: GraphQLList(GraphQLString) },
+    profileImage: { type: GraphQLString },
+    type: { type: GraphQLString },
+    countryId: {type: GraphQLID },
+    clientId: {type: GraphQLID },
+  })
+})
+
 const TourGuideType = new GraphQLObjectType({
   name: "TourGuide",
   fields: () => ({
@@ -427,7 +443,7 @@ const TourGuideType = new GraphQLObjectType({
     responseTime: { type: GraphQLString },
     languages: { type: GraphQLList(GraphQLString) },
     profileImage: { type: GraphQLString },
-    tourGuideInstructionType: { type: GraphQLString },
+    type: { type: GraphQLString },
     client: { type: ClientType },
     rating: { type: GraphQLInt },
     guideReview: {
@@ -544,4 +560,5 @@ module.exports = {
   TourGuideDescriptionType,
   ImageType,
   ImageInputType,
+  TourGuideProfile
 };

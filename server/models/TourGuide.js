@@ -4,12 +4,14 @@ const TourGuideSchema = new mongoose.Schema(
   {
     description: {
       type: String,
+      max: 1500,
+      min:20
     },
     importenNotice: {
       type: String,
     },
     uptoPeople: {
-      type: String,
+      type: Number,
     },
     responseTime: {
       type: String,
@@ -20,7 +22,7 @@ const TourGuideSchema = new mongoose.Schema(
     profileImage: {
       type: String,
     },
-    tourGuideInstructionType: {
+    type: {
       type: String,
     },
     cityId: {
@@ -31,19 +33,23 @@ const TourGuideSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Client",
     },
-    tours: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "TourSpot",
-      },
-    ],
+    countryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Country",
+    },
+    // tours: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "TourSpot",
+    //   },
+    // ],
 
-    replies: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Review",
-      },
-    ],
+    // replies: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Review",
+    //   },
+    // ],
   },
   { timestamps: true }
 );

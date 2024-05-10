@@ -14,6 +14,7 @@ const {
   TourGuideType,
   ImageType,
   ImageInputType,
+  TourGuideProfile,
 } = require("../../typeDef/typeDef");
 const {
   TourGuideContributionType,
@@ -30,27 +31,72 @@ const {
   TourGuideContributionDetail,
 } = require("../../models/TourGuideContributionDetail");
 const TourGuideReserve = require("../../models/TourGuideReserve");
+const {
+  validateFieldMaxLength,
+  fieldValidate,
+} = require("../../helpers/validateField");
 
 const addTourGuideProfile = {
-  type: TourGuideType,
+  type: TourGuideProfile,
   args: {
     description: { type: GraphQLString },
-    uptoPeople: { type: GraphQLString },
+    uptoPeople: { type: GraphQLInt },
     clientId: { type: GraphQLID },
     cityId: { type: GraphQLID },
+    countryId: { type: GraphQLID },
     responseTime: { type: GraphQLString },
     languages: { type: GraphQLList(GraphQLString) },
     profileImage: { type: GraphQLString },
-    tourGuideInstructionType: { type: GraphQLString },
+    type: { type: GraphQLString },
   },
+
   resolve: async (parent, args) => {
+    const {
+      description,
+      uptoPeople,
+      clientId,
+      cityId,
+      responseTime,
+      languages,
+      profileImage,
+      type,
+      countryId,
+    } = args;
+
+    
     try {
-      // console.log(args);
-      const tourGuideProfile = new TourGuide(args);
+       if (Object.keys(args).length === 0) {
+    throw new Error("Empty object or no fields filled.");
+      }
+      
+      validateFieldMaxLength(description, "Description", 20, 1500);
+      fieldValidate(cityId, "City Name");
+      fieldValidate(countryId, "Country Name");
+      fieldValidate(type, "TourGuide Type");
+
+      const existData = await TourGuide.findOne({ clientId: clientId });
+
+      if (existData) {
+        throw new Error("Your Profile Already Exist, Update your data");
+      }
+
+      const tourGuideProfile = new TourGuide({
+        description,
+        uptoPeople,
+        clientId,
+        cityId,
+        responseTime,
+        languages,
+        profileImage,
+        type,
+      });
+
       const saved = await tourGuideProfile.save();
+      console.log(saved);
       return saved;
     } catch (error) {
-      return new Error("Error adding tourGuideProfile");
+      console.log(error.message);
+      return new Error(error.message);
     }
   },
 };
