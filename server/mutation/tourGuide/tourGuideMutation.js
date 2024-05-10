@@ -65,13 +65,11 @@ const addTourGuideProfile = {
 
     
     try {
-       if (Object.keys(args).length === 0) {
-    throw new Error("Empty object or no fields filled.");
-      }
+       
       
       validateFieldMaxLength(description, "Description", 20, 1500);
-      fieldValidate(cityId, "City Name");
       fieldValidate(countryId, "Country Name");
+      fieldValidate(cityId, "City Name");
       fieldValidate(type, "TourGuide Type");
 
       const existData = await TourGuide.findOne({ clientId: clientId });
@@ -89,12 +87,14 @@ const addTourGuideProfile = {
         languages,
         profileImage,
         type,
+        countryId,
       });
 
       const saved = await tourGuideProfile.save();
-      console.log(saved);
+
       return saved;
     } catch (error) {
+      console.log(countryId);
       console.log(error.message);
       return new Error(error.message);
     }

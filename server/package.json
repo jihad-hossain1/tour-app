@@ -20,7 +20,8 @@
     "graphql": "^15.8.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.1",
-    "resend": "^2.1.0"
+    "resend": "^2.1.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
