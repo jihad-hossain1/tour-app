@@ -34,6 +34,7 @@ const TourGuideReserve = require("../../models/TourGuideReserve");
 const {
   validateFieldMaxLength,
   fieldValidate,
+  validateUptoNumber,
 } = require("../../helpers/validateField");
 
 const addTourGuideProfile = {
@@ -63,11 +64,9 @@ const addTourGuideProfile = {
       countryId,
     } = args;
 
-    
     try {
-       
-      
       validateFieldMaxLength(description, "Description", 20, 1500);
+      validateUptoNumber(args.uptoPeople, "Upto People", 1, 20);
       fieldValidate(countryId, "Country Name");
       fieldValidate(cityId, "City Name");
       fieldValidate(type, "TourGuide Type");
@@ -94,8 +93,6 @@ const addTourGuideProfile = {
 
       return saved;
     } catch (error) {
-      console.log(countryId);
-      console.log(error.message);
       return new Error(error.message);
     }
   },
@@ -127,27 +124,46 @@ const updateTourGuideProfile = {
   args: {
     id: { type: GraphQLID },
     description: { type: GraphQLString },
-    uptoPeople: { type: GraphQLString },
+    uptoPeople: { type: GraphQLInt },
+    clientId: { type: GraphQLID },
     cityId: { type: GraphQLID },
+    countryId: { type: GraphQLID },
     responseTime: { type: GraphQLString },
     languages: { type: GraphQLList(GraphQLString) },
     profileImage: { type: GraphQLString },
-    tourGuideInstructionType: { type: GraphQLString },
+    type: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     try {
-      // console.log(args);
-      return await TourGuide.findByIdAndUpdate(
+      validateFieldMaxLength(args.description, "Description", 20, 1500);
+      validateFieldMaxLength(args.type, "Type", 5, 30);
+      validateUptoNumber(args.uptoPeople, "Upto People", 1, 20);
+      validateUptoNumber(Number(args.responseTime), "Response Time", 1, 10);
+
+      const updateGuide = await TourGuide.findByIdAndUpdate(
         args.id,
         {
-          $set: args,
+          $set: {
+            description: args.description || undefined,
+            uptoPeople: args.uptoPeople || undefined,
+            clientId: args.clientId || undefined,
+            cityId: args.cityId || undefined,
+            responseTime: args.responseTime || undefined,
+            languages: args.languages || undefined,
+            profileImage: args.profileImage || undefined,
+            type: args.type || undefined,
+            countryId: args.countryId || undefined,
+          },
         },
         {
           new: true,
         }
       );
+
+      return updateGuide;
     } catch (error) {
-      throw new Error("Error adding tourGuideProfile");
+      console.log(error.message);
+      throw new Error(error.message);
     }
   },
 };

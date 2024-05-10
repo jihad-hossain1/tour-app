@@ -23,11 +23,20 @@ if (field.trim().length < minLength || field.trim().length > maxLength) {
   // }
 };
 
-const fieldValidate = (field, fieldName) => {
-  if (!field || field.trim() === "" || field === null || field === undefined) {
-    throw new Error(`${fieldName} is required`);
-  }
-}
+ const validateUptoNumber = (field, fieldName, minLength, maxLength) => {
+   if (typeof field !== "number") {
+     throw new Error(`${fieldName} must be number required`);
+   } else if (field < minLength || field > maxLength) {
+     throw new Error(
+       `${fieldName} must be between ${minLength} and ${maxLength} required`
+     );
+   }
+ };
 
+ const fieldValidate = (field, fieldName) => {
+   if (!field || field.trim() === "" || field === null || field === undefined) {
+     throw new Error(`${fieldName} is required`);
+   }
+ };
 
-module.exports = {validateFieldMaxLength,fieldValidate}
+ module.exports = { validateFieldMaxLength, fieldValidate, validateUptoNumber };

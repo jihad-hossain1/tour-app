@@ -13,15 +13,13 @@ const getTourGuide = {
     try {
       const tourGuide = await TourGuide.findById(args.id);
 
-      console.log(tourGuide);
-
       if (!tourGuide) {
         throw new Error("TourGuide not found");
       }
-      
+
       return tourGuide;
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.message);
     }
   },
 };
@@ -35,9 +33,7 @@ const tourGuideProfile = {
   },
   resolve: async (_, args) => {
     try {
-      const tourGuide = await TourGuide.findOne({clientId: args.id});
-
-      console.log(tourGuide);
+      const tourGuide = await TourGuide.findOne({ clientId: args.id });
 
       if (!tourGuide) {
         throw new Error("TourGuide not found");
@@ -45,7 +41,7 @@ const tourGuideProfile = {
 
       return tourGuide;
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.message);
     }
   },
 };
