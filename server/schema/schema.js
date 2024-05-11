@@ -66,6 +66,7 @@ const {
   addGuideTourplace,
   addTourGuideContributionDetail,
   addTourGuideReserve,
+  updateTourGuidePlce,
 } = require("../mutation/tourGuide/tourGuideMutation");
 
 //main query
@@ -142,7 +143,7 @@ const RootMutation = new GraphQLObjectType({
     deleteDestination,
     // country
     addCountry,
-      updateCountry,
+    updateCountry,
     // tourspot
     addTourSpot,
     updateTourspot,
@@ -169,6 +170,7 @@ const RootMutation = new GraphQLObjectType({
     addGuideTourplace,
     addTourGuideContributionDetail,
     addTourGuideReserve,
+    updateTourGuidePlce,
   },
 });
 

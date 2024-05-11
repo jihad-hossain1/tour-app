@@ -66,7 +66,9 @@ const addTourGuideProfile = {
 
     try {
       validateFieldMaxLength(description, "Description", 20, 1500);
-      validateUptoNumber(args.uptoPeople, "Upto People", 1, 20);
+      validateFieldMaxLength(args.type, "Type", 5, 30);
+      validateUptoNumber(uptoPeople, "Upto People", 1, 20);
+      validateUptoNumber(Number(responseTime), "Response Time", 1, 10);
       fieldValidate(countryId, "Country Name");
       fieldValidate(cityId, "City Name");
       fieldValidate(type, "TourGuide Type");
@@ -188,10 +190,68 @@ const addGuideTourplace = {
       }
       const tourGuideContribute = new TourGuideContribution(args);
       const saved = await tourGuideContribute.save();
+
+      const updatePlace = await TourGuide.findOneAndUpdate(
+        { _id: args.clientProfileID },
+        {
+          $push: {
+            guidePlaces: args.tourPlaceId,
+          },
+        },
+        { new: true }
+      );
+
+      console.log(updatePlace);
+
       return saved;
       // console.log(existPlace);
     } catch (error) {
       throw new Error("Error adding TourGuideContribution");
+    }
+  },
+};
+
+const updateTourGuidePlce = {
+  type: TourGuideContributionType,
+  args: {
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    price: { type: GraphQLInt },
+    tourPlaceId: { type: GraphQLID },
+    clientProfileID: { type: GraphQLID },
+    contribute: { type: GraphQLList(TourPlaceContributeInput) },
+  },
+  resolve: async (parent, args) => {
+    try {
+      const existPlace = await TourGuide.findOne({
+        clientId: args.clientProfileID,
+      });
+
+      const findOne = existPlace?.guidePlaces?.find(
+        (item) => item == args.tourPlaceId
+      );
+
+      console.log(findOne);
+
+      const updatePlace = await TourGuideContribution.findByIdAndUpdate(
+        args.id,
+        {
+          $set: {
+            title: args.title || undefined,
+            price: args.price || undefined,
+            tourPlaceId: args.tourPlaceId || undefined,
+            clientProfileID: args.clientProfileID || undefined,
+            contribute: args.contribute || undefined,
+          },
+        },
+        {
+          new: true,
+        }
+      );
+
+      return updatePlace;
+    } catch (error) {
+      throw new Error(error.message);
     }
   },
 };
@@ -301,4 +361,5 @@ module.exports = {
   addGuideTourplace,
   addTourGuideContributionDetail,
   addTourGuideReserve,
+  updateTourGuidePlce,
 };

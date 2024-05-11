@@ -5,7 +5,7 @@ const TourGuideSchema = new mongoose.Schema(
     description: {
       type: String,
       max: 1500,
-      min:20
+      min: 20,
     },
     importenNotice: {
       type: String,
@@ -37,6 +37,12 @@ const TourGuideSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Country",
     },
+    guidePlaces: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "TourGuideContribution",
+      },
+    ],
     // tours: [
     //   {
     //     type: mongoose.Schema.Types.ObjectId,
