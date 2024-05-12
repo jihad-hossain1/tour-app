@@ -446,8 +446,8 @@ const TourGuideType = new GraphQLObjectType({
     type: { type: GraphQLString },
     client: { type: ClientType },
     rating: { type: GraphQLInt },
-    clientId: {type: GraphQLID },
-    countryId: {type: GraphQLID },
+    clientId: { type: GraphQLID },
+    countryId: { type: GraphQLID },
     guideReview: {
       type: new GraphQLList(TourGuideReviewType),
       resolve: async (parent, args) => {

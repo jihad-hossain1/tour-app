@@ -223,16 +223,26 @@ const updateTourGuidePlce = {
   },
   resolve: async (parent, args) => {
     try {
-      const existPlace = await TourGuide.findOne({
-        clientId: args.clientProfileID,
-      });
+      // const existPlace = await TourGuide.findOne({
+      //   clientId: args.clientProfileID,
+      // });
 
-      const findOne = existPlace?.guidePlaces?.find(
-        (item) => item == args.tourPlaceId
-      );
+      // const findOne = existPlace?.guidePlaces?.find(
+      //   (item) => item == args.tourPlaceId
+      // );
 
-      console.log(findOne);
+      // const existPlace = await TourGuide.findById(args.clientProfileID);
 
+      // const _filter = existPlace?.guidePlaces?.filter(
+      //   (item) => item != args.tourPlaceId
+      // )
+
+      // console.log(_filter, "places");
+
+
+      // if (!_filter) {
+      //   return new Error("Tour place are already exist try another tour place");
+      // }
       const updatePlace = await TourGuideContribution.findByIdAndUpdate(
         args.id,
         {
