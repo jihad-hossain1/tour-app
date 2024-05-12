@@ -183,7 +183,9 @@ const addGuideTourplace = {
     try {
       // console.log(args);
       const existPlace = await TourGuideContribution.findOne({
-        tourPlaceId: args?.tourPlaceId,
+      
+        tourPlaceId: args.tourPlaceId,
+        clientProfileID: args.clientProfileID,
       });
       if (existPlace) {
         return new Error("Tour place are already exist try another tour place");
