@@ -21,7 +21,7 @@ const {
   tourSpotsByCountryId
 } = require("../query/tourspots");
 const { reviesByTourSpot, newReviews } = require("../query/reviews");
-const { getTourGuide,tourGuideProfile, tourGuidePlace } = require("../query/tourGuideQuery");
+const { getTourGuide,tourGuideProfile, tourGuidePlace, getGuideContributions } = require("../query/tourGuideQuery");
 
 const {
   addClient,
@@ -117,6 +117,7 @@ const RootQuery = new GraphQLObjectType({
     getTourGuide,
     tourGuideProfile,
     tourGuidePlace,
+    getGuideContributions,
   },
 });
 

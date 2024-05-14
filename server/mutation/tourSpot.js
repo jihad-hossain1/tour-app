@@ -10,7 +10,7 @@ const {
 const TourSpot = require("../models/TourSpot")
 const { TourSpotType } = require("../typeDef/typeDef");
 const Review = require("../models/Review");
-const { validateField } = require("../helpers/validateField");
+const { validateFieldMaxLength } = require("../helpers/validateField");
 
 
 
@@ -31,11 +31,11 @@ const addTourSpot = {
         
         try {
             // console.log(args);
-            validateField(name, "TourSpot Name", 5, 100)
-            validateField(description, "TourSpot Description", 20, 5000)
-            validateField(countryId, "Country Name", 2, 30)
-            validateField(divisionId, "Division Name", 2, 30)
-            validateField(cityId, "City Name", 2, 30)
+            validateFieldMaxLength(name, "TourSpot Name", 5, 100)
+            validateFieldMaxLength(description, "TourSpot Description", 20, 5000)
+            validateFieldMaxLength(countryId, "Country Name", 2, 30)
+            validateFieldMaxLength(divisionId, "Division Name", 2, 30)
+            validateFieldMaxLength(cityId, "City Name", 2, 30)
 
             const tourSpotExists = await TourSpot.findOne({ name: name.trim() });
 

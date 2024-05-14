@@ -1,8 +1,9 @@
-const { GraphQLID} = require("graphql");
+const { GraphQLID, GraphQLNonNull, GraphQLList} = require("graphql");
 const { TourGuideType } = require("../typeDef/typeDef");
 const TourGuide = require("../models/TourGuide");
 const TourGuideContribution = require("../models/TourGuideContribution");
 const { TourGuideContributionType } = require("../typeDef/extraTypeDef");
+const { fieldValidate } = require("../helpers/validateField");
 
 const getTourGuide = {
   type: TourGuideType,
@@ -72,4 +73,32 @@ const tourGuidePlace = {
   }
 }
 
-module.exports = { getTourGuide,tourGuideProfile,tourGuidePlace };
+
+const getGuideContributions = {
+  type: new GraphQLList(TourGuideContributionType),
+  args: {
+    id: {
+      type: GraphQLNonNull(GraphQLID),
+    },
+  },
+
+  resolve: async (_, {id}) => {
+    try {
+      
+      const data = await TourGuideContribution.find({clientProfileID: id});
+
+      if (!data) {
+        throw new Error("TourGuideContribution not found");
+      }
+
+      return data;
+
+    }
+    catch (error) {
+      throw new Error(error.message)
+    }
+  }
+  
+}
+
+module.exports = { getTourGuide,tourGuideProfile,tourGuidePlace,getGuideContributions };

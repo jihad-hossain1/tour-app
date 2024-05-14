@@ -109,9 +109,13 @@ const TourGuideReserveType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
 
+    
     clientProfileID: { type: GraphQLID },
 
+    guideContribution: { type: GraphQLID },
+
     datePic: { type: GraphQLString },
+
 
     personPic: {
       type: new GraphQLObjectType({

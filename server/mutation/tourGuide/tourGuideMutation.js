@@ -41,7 +41,7 @@ const addTourGuideProfile = {
   type: TourGuideProfile,
   args: {
     description: { type: GraphQLString },
-    uptoPeople: { type: GraphQLInt },
+    // uptoPeople: { type: GraphQLInt },
     clientId: { type: GraphQLID },
     cityId: { type: GraphQLID },
     countryId: { type: GraphQLID },
@@ -54,7 +54,7 @@ const addTourGuideProfile = {
   resolve: async (parent, args) => {
     const {
       description,
-      uptoPeople,
+      // uptoPeople,
       clientId,
       cityId,
       responseTime,
@@ -67,7 +67,7 @@ const addTourGuideProfile = {
     try {
       validateFieldMaxLength(description, "Description", 20, 1500);
       validateFieldMaxLength(args.type, "Type", 5, 30);
-      validateUptoNumber(uptoPeople, "Upto People", 1, 20);
+      // validateUptoNumber(uptoPeople, "Upto People", 1, 20);
       validateUptoNumber(Number(responseTime), "Response Time", 1, 10);
       fieldValidate(countryId, "Country Name");
       fieldValidate(cityId, "City Name");
@@ -81,7 +81,7 @@ const addTourGuideProfile = {
 
       const tourGuideProfile = new TourGuide({
         description,
-        uptoPeople,
+        // uptoPeople,
         clientId,
         cityId,
         responseTime,
@@ -126,7 +126,7 @@ const updateTourGuideProfile = {
   args: {
     id: { type: GraphQLID },
     description: { type: GraphQLString },
-    uptoPeople: { type: GraphQLInt },
+    // uptoPeople: { type: GraphQLInt },
     clientId: { type: GraphQLID },
     cityId: { type: GraphQLID },
     countryId: { type: GraphQLID },
@@ -139,7 +139,7 @@ const updateTourGuideProfile = {
     try {
       validateFieldMaxLength(args.description, "Description", 20, 1500);
       validateFieldMaxLength(args.type, "Type", 5, 30);
-      validateUptoNumber(args.uptoPeople, "Upto People", 1, 20);
+      // validateUptoNumber(args.uptoPeople, "Upto People", 1, 20);
       validateUptoNumber(Number(args.responseTime), "Response Time", 1, 10);
 
       const updateGuide = await TourGuide.findByIdAndUpdate(
@@ -147,7 +147,7 @@ const updateTourGuideProfile = {
         {
           $set: {
             description: args.description || undefined,
-            uptoPeople: args.uptoPeople || undefined,
+            // uptoPeople: args.uptoPeople || undefined,
             clientId: args.clientId || undefined,
             cityId: args.cityId || undefined,
             responseTime: args.responseTime || undefined,
@@ -190,6 +190,12 @@ const addGuideTourplace = {
       if (existPlace) {
         return new Error("Tour place are already exist try another tour place");
       }
+
+      if (existPlace.title == title.trim()) {
+        return new Error("Title Already Exist");
+      }
+        
+
       const tourGuideContribute = new TourGuideContribution(args);
       const saved = await tourGuideContribute.save();
 
@@ -328,41 +334,56 @@ const addTourGuideReserve = {
         })
       ),
     },
+    guideContribution: {
+      type: GraphQLID
+    }
   },
 
   resolve: async (parent, args) => {
+    const {guideContribution,startTime,personPic,clientProfileID} = args
     try {
       console.log(args);
 
-      if (args?.startTime?.length == 0) {
+      if (startTime?.length == 0) {
         return new Error("start time are required");
       }
 
-      const uptoPeople = await TourGuide.findById(args?.clientProfileID);
-      const upP =
-        parseInt(uptoPeople.uptoPeople) === args.personPic?.totalPerson;
-      if (!upP) {
-        return new Error(
-          "uptopeople and total person are not match please fill the uptopeople = totalperson"
-        );
-      }
-      console.log(upP);
+      fieldValidate(guideContribution , "Guide Contribution")
 
-      const alreadyInfoAdd = await TourGuideReserve.findOne({
-        clientProfileID: args?.clientProfileID,
+      // const uptoPeople = await TourGuide.findById(args?.clientProfileID);
+
+      // const upP =
+      //   parseInt(uptoPeople.uptoPeople) === args.personPic?.totalPerson;
+      
+      // if (!upP) {
+      //   return new Error(
+      //     "uptopeople and total person are not match please fill the uptopeople = totalperson"
+      //   );
+      // }
+
+      // console.log(upP);
+
+      const alreadyInfoAdd = await TourGuideReserve.find({
+        clientProfileID: args?.clientProfileID, guideContribution: args.guideContribution
+
       });
 
-      if (alreadyInfoAdd) {
+      if (alreadyInfoAdd.length !== 0) {
         return new Error(
           `You are already added TourGuideReserve information! if you want to more info added go to TourGuideReserve update section...`
         );
       }
 
-      const tourGuideReserveSaved = new TourGuideReserve(args);
+      const tourGuideReserveSaved = new TourGuideReserve({
+        clientProfileID,
+        guideContribution,
+        personPic,
+        startTime,
+      });
       const saved = await tourGuideReserveSaved.save();
       return saved;
     } catch (error) {
-      return new Error(error);
+      return new Error(error.message);
     }
   },
 };

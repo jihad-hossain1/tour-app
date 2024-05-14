@@ -31,8 +31,9 @@ const TourGuideReverveSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "TourGuide",
     },
-    datePic: {
-      type: String,
+    guideContribution: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "TourGuideContribution",
     },
     personPic: {
       type: personPicType,
