@@ -10,6 +10,7 @@ const {
 const TourSpot = require("../models/TourSpot")
 const { TourSpotType } = require("../typeDef/typeDef");
 const Review = require("../models/Review");
+const { validateField } = require("../helpers/validateField");
 
 
 
@@ -24,26 +25,38 @@ const addTourSpot = {
         cityId: { type: GraphQLID },
         countryId: { type: GraphQLID },
         divisionId: { type: GraphQLID },
-        perfectTourTime: { type: GraphQLString },
-
-        howToGoThere: { type: GraphQLString },
-
-        howToStayThere: { type: GraphQLString },
-
-        howDoHere: { type: GraphQLString },
-
-        whereToEat: { type: GraphQLString },
-
-        tourTipsGuide: { type: GraphQLString },
-
-        topTourPlace: { type: GraphQLString },
     },
     resolve: async (parent, args) => {
+        const { name, description, photo, cityId, countryId, divisionId } = args
+        
         try {
-            const tourSpot = new TourSpot(args);
-            return await tourSpot.save();
+            // console.log(args);
+            validateField(name, "TourSpot Name", 5, 100)
+            validateField(description, "TourSpot Description", 20, 5000)
+            validateField(countryId, "Country Name", 2, 30)
+            validateField(divisionId, "Division Name", 2, 30)
+            validateField(cityId, "City Name", 2, 30)
+
+            const tourSpotExists = await TourSpot.findOne({ name: name.trim() });
+
+            if (tourSpotExists) {
+                throw new Error("TourSpot Name Already Exist , try another one");
+            }
+
+            const tourSpot = new TourSpot({
+                name: name,
+                description: description,
+                photo: photo,
+                cityId: cityId,
+                countryId: countryId,
+                divisionId: divisionId
+            });
+
+            const result = await tourSpot.save();
+
+            return result;
         } catch (error) {
-            throw new Error("Error adding tourSpot");
+            throw new Error(error.message);
         }
     },
 };
@@ -83,23 +96,39 @@ const updateTourspot = {
         cityId: { type: GraphQLID },
         countryId: { type: GraphQLID },
         divisionId: { type: GraphQLID },
-        perfectTourTime: { type: GraphQLString },
-        howToGoThere: { type: GraphQLString },
-        howToStayThere: { type: GraphQLString },
-        howDoHere: { type: GraphQLString },
-        whereToEat: { type: GraphQLString },
-        tourTipsGuide: { type: GraphQLString },
     },
 
     resolve: async (parent, args) => {
-        return await TourSpot.findByIdAndUpdate(
-            args.id,
-            {
-                $set: args,
+        const { name, description, photo, cityId, countryId, divisionId } = args
         
-            },
-            { new: true }
-        );
+        try {
+
+            if (!args?.id || args?.id == '') {
+            throw new Error("TourSpot Id is required")
+            }
+            
+            const result = await TourSpot.findByIdAndUpdate(
+                args.id,
+                {
+                    $set: {
+                        name: name || undefined,
+                        description: description || undefined,
+                        photo: photo || undefined,
+                        cityId: cityId || undefined,
+                        countryId: countryId || undefined,
+                        divisionId: divisionId || undefined,
+                    },
+            
+                }, 
+                { new: true }
+            );
+    
+            console.log("result from :--->",result);
+            return result;
+
+        } catch (error) {
+            throw new Error(error.message)
+        }
     },
 };
 

@@ -4,6 +4,7 @@ const {
 } = require("graphql");
 const { DivisionType } = require("../typeDef/typeDef");
 const Division = require("../models/Division");
+const { default: mongoose } = require("mongoose");
 
 
 
@@ -31,6 +32,31 @@ const divisions = {
     },
 };
 
+const division = {
+    type: DivisionType,
+    args: { id: { type: GraphQLID } },
+    resolve: async (parent, args) => {
+        try {
+
+            if (!args.id) {
+                throw new Error("ID is required");
+            }
+
+            if (!mongoose.Types.ObjectId.isValid(args.id)) {
+                throw new Error("Invalid ID");
+            }
+
+            const division = await Division.findById(args.id);
+
+            if (!division) {
+                throw new Error("Division not found");
+            }
+            return division
+        } catch (error) {
+            throw new Error(`Error fetching Division: ${error}`);
+        }
+    },
+}
 
 
-module.exports = { divisionByCountry, divisions };
+module.exports = { divisionByCountry, divisions,division };

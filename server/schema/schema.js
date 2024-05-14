@@ -11,7 +11,7 @@ const {
   getCity,
   getCityByCountry,
 } = require("../query/cities");
-const { divisionByCountry, divisions } = require("../query/divisions");
+const { divisionByCountry, divisions,division } = require("../query/divisions");
 const {
   singleCountryTourspotList,
   singleTourspot,
@@ -21,7 +21,7 @@ const {
   tourSpotsByCountryId
 } = require("../query/tourspots");
 const { reviesByTourSpot, newReviews } = require("../query/reviews");
-const { getTourGuide } = require("../query/tourGuideQuery");
+const { getTourGuide,tourGuideProfile, tourGuidePlace } = require("../query/tourGuideQuery");
 
 const {
   addClient,
@@ -48,8 +48,8 @@ const {
   deleteTourspot,
   deleteTourSpotWithCommentReply,
 } = require("../mutation/tourSpot");
-const { addDivision } = require("../mutation/division");
-const { addCity } = require("../mutation/city");
+const { addDivision ,updateDivision} = require("../mutation/division");
+const { addCity, updateCity } = require("../mutation/city");
 const {
   addReview,
   addReviewReply,
@@ -66,6 +66,7 @@ const {
   addGuideTourplace,
   addTourGuideContributionDetail,
   addTourGuideReserve,
+  updateTourGuidePlce,
 } = require("../mutation/tourGuide/tourGuideMutation");
 
 //main query
@@ -108,11 +109,14 @@ const RootQuery = new GraphQLObjectType({
     // divisions
     divisionByCountry,
     divisions,
+    division,
     // reviews
     reviesByTourSpot,
     newReviews,
     // tour guide
     getTourGuide,
+    tourGuideProfile,
+    tourGuidePlace,
   },
 });
 
@@ -140,7 +144,7 @@ const RootMutation = new GraphQLObjectType({
     deleteDestination,
     // country
     addCountry,
-      updateCountry,
+    updateCountry,
     // tourspot
     addTourSpot,
     updateTourspot,
@@ -148,8 +152,10 @@ const RootMutation = new GraphQLObjectType({
     deleteTourSpotWithCommentReply,
     // city
     addCity,
+    updateCity,
     // division
     addDivision,
+    updateDivision,
     // review
     addReview,
     addReviewReply,
@@ -165,6 +171,7 @@ const RootMutation = new GraphQLObjectType({
     addGuideTourplace,
     addTourGuideContributionDetail,
     addTourGuideReserve,
+    updateTourGuidePlce,
   },
 });
 

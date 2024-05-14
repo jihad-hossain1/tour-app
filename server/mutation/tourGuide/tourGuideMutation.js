@@ -14,6 +14,7 @@ const {
   TourGuideType,
   ImageType,
   ImageInputType,
+  TourGuideProfile,
 } = require("../../typeDef/typeDef");
 const {
   TourGuideContributionType,
@@ -30,27 +31,71 @@ const {
   TourGuideContributionDetail,
 } = require("../../models/TourGuideContributionDetail");
 const TourGuideReserve = require("../../models/TourGuideReserve");
+const {
+  validateFieldMaxLength,
+  fieldValidate,
+  validateUptoNumber,
+} = require("../../helpers/validateField");
 
 const addTourGuideProfile = {
-  type: TourGuideType,
+  type: TourGuideProfile,
   args: {
     description: { type: GraphQLString },
-    uptoPeople: { type: GraphQLString },
+    uptoPeople: { type: GraphQLInt },
     clientId: { type: GraphQLID },
     cityId: { type: GraphQLID },
+    countryId: { type: GraphQLID },
     responseTime: { type: GraphQLString },
     languages: { type: GraphQLList(GraphQLString) },
     profileImage: { type: GraphQLString },
-    tourGuideInstructionType: { type: GraphQLString },
+    type: { type: GraphQLString },
   },
+
   resolve: async (parent, args) => {
+    const {
+      description,
+      uptoPeople,
+      clientId,
+      cityId,
+      responseTime,
+      languages,
+      profileImage,
+      type,
+      countryId,
+    } = args;
+
     try {
-      // console.log(args);
-      const tourGuideProfile = new TourGuide(args);
+      validateFieldMaxLength(description, "Description", 20, 1500);
+      validateFieldMaxLength(args.type, "Type", 5, 30);
+      validateUptoNumber(uptoPeople, "Upto People", 1, 20);
+      validateUptoNumber(Number(responseTime), "Response Time", 1, 10);
+      fieldValidate(countryId, "Country Name");
+      fieldValidate(cityId, "City Name");
+      fieldValidate(type, "TourGuide Type");
+
+      const existData = await TourGuide.findOne({ clientId: clientId });
+
+      if (existData) {
+        throw new Error("Your Profile Already Exist, Update your data");
+      }
+
+      const tourGuideProfile = new TourGuide({
+        description,
+        uptoPeople,
+        clientId,
+        cityId,
+        responseTime,
+        languages,
+        profileImage,
+        type,
+        countryId,
+      });
+
       const saved = await tourGuideProfile.save();
+
       return saved;
     } catch (error) {
-      return new Error("Error adding tourGuideProfile");
+      return new Error(error.message);
     }
   },
 };
@@ -81,27 +126,46 @@ const updateTourGuideProfile = {
   args: {
     id: { type: GraphQLID },
     description: { type: GraphQLString },
-    uptoPeople: { type: GraphQLString },
+    uptoPeople: { type: GraphQLInt },
+    clientId: { type: GraphQLID },
     cityId: { type: GraphQLID },
+    countryId: { type: GraphQLID },
     responseTime: { type: GraphQLString },
     languages: { type: GraphQLList(GraphQLString) },
     profileImage: { type: GraphQLString },
-    tourGuideInstructionType: { type: GraphQLString },
+    type: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     try {
-      // console.log(args);
-      return await TourGuide.findByIdAndUpdate(
+      validateFieldMaxLength(args.description, "Description", 20, 1500);
+      validateFieldMaxLength(args.type, "Type", 5, 30);
+      validateUptoNumber(args.uptoPeople, "Upto People", 1, 20);
+      validateUptoNumber(Number(args.responseTime), "Response Time", 1, 10);
+
+      const updateGuide = await TourGuide.findByIdAndUpdate(
         args.id,
         {
-          $set: args,
+          $set: {
+            description: args.description || undefined,
+            uptoPeople: args.uptoPeople || undefined,
+            clientId: args.clientId || undefined,
+            cityId: args.cityId || undefined,
+            responseTime: args.responseTime || undefined,
+            languages: args.languages || undefined,
+            profileImage: args.profileImage || undefined,
+            type: args.type || undefined,
+            countryId: args.countryId || undefined,
+          },
         },
         {
           new: true,
         }
       );
+
+      return updateGuide;
     } catch (error) {
-      throw new Error("Error adding tourGuideProfile");
+      console.log(error.message);
+      throw new Error(error.message);
     }
   },
 };
@@ -119,17 +183,87 @@ const addGuideTourplace = {
     try {
       // console.log(args);
       const existPlace = await TourGuideContribution.findOne({
-        tourPlaceId: args?.tourPlaceId,
+      
+        tourPlaceId: args.tourPlaceId,
+        clientProfileID: args.clientProfileID,
       });
       if (existPlace) {
         return new Error("Tour place are already exist try another tour place");
       }
       const tourGuideContribute = new TourGuideContribution(args);
       const saved = await tourGuideContribute.save();
+
+      const updatePlace = await TourGuide.findOneAndUpdate(
+        { _id: args.clientProfileID },
+        {
+          $push: {
+            guidePlaces: args.tourPlaceId,
+          },
+        },
+        { new: true }
+      );
+
+      console.log(updatePlace);
+
       return saved;
       // console.log(existPlace);
     } catch (error) {
       throw new Error("Error adding TourGuideContribution");
+    }
+  },
+};
+
+const updateTourGuidePlce = {
+  type: TourGuideContributionType,
+  args: {
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    price: { type: GraphQLInt },
+    tourPlaceId: { type: GraphQLID },
+    clientProfileID: { type: GraphQLID },
+    contribute: { type: GraphQLList(TourPlaceContributeInput) },
+  },
+  resolve: async (parent, args) => {
+    try {
+      // const existPlace = await TourGuide.findOne({
+      //   clientId: args.clientProfileID,
+      // });
+
+      // const findOne = existPlace?.guidePlaces?.find(
+      //   (item) => item == args.tourPlaceId
+      // );
+
+      // const existPlace = await TourGuide.findById(args.clientProfileID);
+
+      // const _filter = existPlace?.guidePlaces?.filter(
+      //   (item) => item != args.tourPlaceId
+      // )
+
+      // console.log(_filter, "places");
+
+
+      // if (!_filter) {
+      //   return new Error("Tour place are already exist try another tour place");
+      // }
+      const updatePlace = await TourGuideContribution.findByIdAndUpdate(
+        args.id,
+        {
+          $set: {
+            title: args.title || undefined,
+            price: args.price || undefined,
+            tourPlaceId: args.tourPlaceId || undefined,
+            clientProfileID: args.clientProfileID || undefined,
+            contribute: args.contribute || undefined,
+          },
+        },
+        {
+          new: true,
+        }
+      );
+
+      return updatePlace;
+    } catch (error) {
+      throw new Error(error.message);
     }
   },
 };
@@ -239,4 +373,5 @@ module.exports = {
   addGuideTourplace,
   addTourGuideContributionDetail,
   addTourGuideReserve,
+  updateTourGuidePlce,
 };

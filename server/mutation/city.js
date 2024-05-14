@@ -30,7 +30,6 @@ const addCity = {
   },
 };
 
-
 const updateCity = {
   type: CityForAdd,
   args: {
@@ -43,33 +42,24 @@ const updateCity = {
   },
   resolve: async (parent, args) => {
     try {
-      if (!mongoose.Types.ObjectId.isValid(args.id)) {
-        throw new Error("Invalid ID");
-      }
       const city = await City.findByIdAndUpdate(args.id, {
         name: args.name || undefined,
         description: args.description || undefined,
         photo: args.photo || undefined,
         divisionId: args.divisionId || undefined,
         countryId: args.countryId || undefined,
-      }, {
-        new: true,
-      }
-      );
-      if (!city) {
-        
-        throw new Error("City not found");
-      }
-
+      }, { new: true });
       return city;
     } catch (error) {
-      throw new Error(`Error updating city: ${error}`);
+      throw new Error("Error updating city");
     }
-  },
+  }
 }
 
 
 
 
 
-module.exports = { addCity, updateCity };
+
+
+module.exports = { addCity,updateCity };
