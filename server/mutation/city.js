@@ -31,10 +31,45 @@ const addCity = {
 };
 
 
+const updateCity = {
+  type: CityForAdd,
+  args: {
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+    photo: { type: GraphQLString },
+    divisionId: { type: GraphQLID },
+    countryId: { type: GraphQLID },
+  },
+  resolve: async (parent, args) => {
+    try {
+      if (!mongoose.Types.ObjectId.isValid(args.id)) {
+        throw new Error("Invalid ID");
+      }
+      const city = await City.findByIdAndUpdate(args.id, {
+        name: args.name || undefined,
+        description: args.description || undefined,
+        photo: args.photo || undefined,
+        divisionId: args.divisionId || undefined,
+        countryId: args.countryId || undefined,
+      }, {
+        new: true,
+      }
+      );
+      if (!city) {
+        
+        throw new Error("City not found");
+      }
+
+      return city;
+    } catch (error) {
+      throw new Error(`Error updating city: ${error}`);
+    }
+  },
+}
 
 
 
 
 
-
-module.exports = { addCity };
+module.exports = { addCity, updateCity };
