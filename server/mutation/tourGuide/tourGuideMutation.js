@@ -24,6 +24,10 @@ const {
   NotIncludesInput,
   AdditionalInfoInput,
   TourGuideReserveType,
+  PersonPicInputType,
+  StartTimeInputType,
+  StartTimeType,
+  PersonPicType,
 } = require("../../typeDef/extraTypeDef");
 const Images = require("../../models/Images");
 const TourGuideContribution = require("../../models/TourGuideContribution");
@@ -309,29 +313,18 @@ const addTourGuideContributionDetail = {
   },
 };
 
+
+
 const addTourGuideReserve = {
   type: TourGuideReserveType,
   args: {
     clientProfileID: { type: GraphQLID },
     personPic: {
-      type: new GraphQLInputObjectType({
-        name: "PersonPicInputType",
-        fields: {
-          adult: { type: GraphQLInt },
-          children: { type: GraphQLInt },
-          infant: { type: GraphQLInt },
-          totalPerson: { type: GraphQLInt },
-        },
-      }),
+      type: PersonPicInputType,
     },
     startTime: {
       type: new GraphQLList(
-        new GraphQLInputObjectType({
-          name: "StartTimeInputType",
-          fields: {
-            timePic: { type: GraphQLString },
-          },
-        })
+        StartTimeInputType
       ),
     },
     guideContribution: {
@@ -387,6 +380,77 @@ const addTourGuideReserve = {
     }
   },
 };
+
+const updateGuideReserve = {
+  type: TourGuideReserveType,
+  args: {
+    clientProfileID: { type: GraphQLID },
+    personPic: {
+      type: PersonPicInputType,
+    },
+    startTime: {
+      type: new GraphQLList(
+        new GraphQLInputObjectType({
+          name: "StartTimeInputUpType",
+          fields: {
+            id: { type: GraphQLID },
+            timePic: { type: GraphQLString },
+          },
+        })
+      ),
+    },
+    guideContribution: {
+      type: GraphQLID,
+    },
+    id: { type: GraphQLID },
+  },
+
+  resolve: async (_, args) => {
+    const { clientProfileID, id, startTime, guideContribution, personPic } =
+      args;
+    try {
+      // const findDuplicate = await TourGuideReserve.findOne({
+      //   clientProfileID,
+      //   guideContribution,
+      // });
+
+      // if (findDuplicate) {
+      //   throw new Error(
+      //     "Guide Contribution already exists for this client profile."
+      //   );
+      // }
+
+      const updateFields = { clientProfileID };
+
+      if (personPic) {
+        updateFields.personPic = personPic;
+      }
+      if (startTime) {
+        updateFields.startTime = startTime;
+      }
+      if (guideContribution) {
+        updateFields.guideContribution = guideContribution;
+      }
+
+      const update = await TourGuideReserve.findByIdAndUpdate(
+        id,
+        { $set: updateFields },
+        { new: true }
+      );
+
+      if (!update) {
+        throw new Error("Failed to update the guide reservation.");
+      }
+
+      return update;
+    } catch (error) {
+      console.log(error.message);
+      throw new Error(error.message);
+    }
+  },
+};
+
+
 module.exports = {
   addTourGuideProfile,
   updateTourGuideProfile,
@@ -395,4 +459,5 @@ module.exports = {
   addTourGuideContributionDetail,
   addTourGuideReserve,
   updateTourGuidePlce,
+  updateGuideReserve,
 };

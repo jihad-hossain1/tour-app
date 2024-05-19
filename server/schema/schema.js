@@ -21,7 +21,14 @@ const {
   tourSpotsByCountryId
 } = require("../query/tourspots");
 const { reviesByTourSpot, newReviews } = require("../query/reviews");
-const { getTourGuide,tourGuideProfile, tourGuidePlace, getGuideContributions } = require("../query/tourGuideQuery");
+const {
+  getTourGuide,
+  tourGuideProfile,
+  tourGuidePlace,
+  getGuideContributions,
+  getGuideReservs,
+  getGuideReserve,
+} = require("../query/tourGuideQuery");
 
 const {
   addClient,
@@ -67,6 +74,7 @@ const {
   addTourGuideContributionDetail,
   addTourGuideReserve,
   updateTourGuidePlce,
+  updateGuideReserve,
 } = require("../mutation/tourGuide/tourGuideMutation");
 
 //main query
@@ -118,6 +126,8 @@ const RootQuery = new GraphQLObjectType({
     tourGuideProfile,
     tourGuidePlace,
     getGuideContributions,
+    getGuideReservs,
+    getGuideReserve,
   },
 });
 
@@ -173,6 +183,8 @@ const RootMutation = new GraphQLObjectType({
     addTourGuideContributionDetail,
     addTourGuideReserve,
     updateTourGuidePlce,
+    updateGuideReserve,
+    
   },
 });
 
