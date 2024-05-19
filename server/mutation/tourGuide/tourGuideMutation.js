@@ -184,6 +184,7 @@ const addGuideTourplace = {
     contribute: { type: GraphQLList(TourPlaceContributeInput) },
   },
   resolve: async (parent, args) => {
+    const { title } = args;
     try {
       // console.log(args);
       const existPlace = await TourGuideContribution.findOne({
@@ -195,9 +196,9 @@ const addGuideTourplace = {
         return new Error("Tour place are already exist try another tour place");
       }
 
-      if (existPlace.title == title.trim()) {
-        return new Error("Title Already Exist");
-      }
+      // if (existPlace.title == title.trim()) {
+      //   return new Error("Title Already Exist");
+      // }
         
 
       const tourGuideContribute = new TourGuideContribution(args);
@@ -218,7 +219,8 @@ const addGuideTourplace = {
       return saved;
       // console.log(existPlace);
     } catch (error) {
-      throw new Error("Error adding TourGuideContribution");
+      console.log("🚀 ~ resolve: ~ error:", error.message)
+      throw new Error(error.message);
     }
   },
 };
