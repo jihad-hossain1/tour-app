@@ -37,6 +37,7 @@ const {
   loginClient,
   updateClientPassword,
   clientPasswordReset,
+  addClientImage,
 } = require("../mutation/client");
 const {
   addProject,
@@ -143,6 +144,7 @@ const RootMutation = new GraphQLObjectType({
     loginClient,
     updateClientPassword,
     clientPasswordReset,
+    addClientImage,
     //project
     addProject,
     deleteProject,

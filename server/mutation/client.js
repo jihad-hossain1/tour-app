@@ -36,6 +36,32 @@ const addClient = {
   },
 };
 
+const addClientImage = {
+  type: ClientType,
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+    image: { type: new GraphQLNonNull(GraphQLString) },
+  },
+  resolve: async (parent, args) => {
+    try {
+      const client = await Client.findByIdAndUpdate(args.id, {
+        image: args.image,
+      }, {
+        new: true,
+      });
+
+      if (!client) {
+        throw new Error("Client not found");
+      }
+     
+      return client;
+
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+}
+
 // client login
 const loginClient = {
   type: ClientType,
@@ -191,4 +217,5 @@ module.exports = {
   loginClient,
   updateClientPassword,
   clientPasswordReset,
+  addClientImage,
 };
