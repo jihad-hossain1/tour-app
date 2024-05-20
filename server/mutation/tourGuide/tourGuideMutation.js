@@ -113,14 +113,31 @@ const uploadTourImages = {
     title: { type: GraphQLString },
     urls: { type: GraphQLList(ImageInputType) },
   },
-  resolve: async (parent, args) => {
+  resolve: async (
+    parent,
+    { clientId, clientProfileID, contributionId, title, urls }
+  ) => {
     try {
-      console.log(args);
-      const upImage = new Images(args);
+      console.log(urls);
+
+      fieldValidate(title, "Image title");
+      fieldValidate(contributionId, "Contribution");
+
+      if (!urls || urls?.length == 0) {
+        throw new Error("Please Upload Minimum One image1");
+      }
+
+      const upImage = new Images({
+        clientId,
+        clientProfileID,
+        urls,
+        title,
+        contributionId,
+      });
       const saved = await upImage.save();
       return saved;
     } catch (error) {
-      return new Error(`Error adding tour up images: ${error}`);
+      throw new Error(error.message);
     }
   },
 };
@@ -188,7 +205,6 @@ const addGuideTourplace = {
     try {
       // console.log(args);
       const existPlace = await TourGuideContribution.findOne({
-      
         tourPlaceId: args.tourPlaceId,
         clientProfileID: args.clientProfileID,
       });
@@ -199,7 +215,6 @@ const addGuideTourplace = {
       // if (existPlace.title == title.trim()) {
       //   return new Error("Title Already Exist");
       // }
-        
 
       const tourGuideContribute = new TourGuideContribution(args);
       const saved = await tourGuideContribute.save();
@@ -219,7 +234,7 @@ const addGuideTourplace = {
       return saved;
       // console.log(existPlace);
     } catch (error) {
-      console.log("🚀 ~ resolve: ~ error:", error.message)
+      console.log("🚀 ~ resolve: ~ error:", error.message);
       throw new Error(error.message);
     }
   },
@@ -252,7 +267,6 @@ const updateTourGuidePlce = {
       // )
 
       // console.log(_filter, "places");
-
 
       // if (!_filter) {
       //   return new Error("Tour place are already exist try another tour place");
@@ -315,8 +329,6 @@ const addTourGuideContributionDetail = {
   },
 };
 
-
-
 const addTourGuideReserve = {
   type: TourGuideReserveType,
   args: {
@@ -325,17 +337,15 @@ const addTourGuideReserve = {
       type: PersonPicInputType,
     },
     startTime: {
-      type: new GraphQLList(
-        StartTimeInputType
-      ),
+      type: new GraphQLList(StartTimeInputType),
     },
     guideContribution: {
-      type: GraphQLID
-    }
+      type: GraphQLID,
+    },
   },
 
   resolve: async (parent, args) => {
-    const {guideContribution,startTime,personPic,clientProfileID} = args
+    const { guideContribution, startTime, personPic, clientProfileID } = args;
     try {
       console.log(args);
 
@@ -343,13 +353,13 @@ const addTourGuideReserve = {
         return new Error("start time are required");
       }
 
-      fieldValidate(guideContribution , "Guide Contribution")
+      fieldValidate(guideContribution, "Guide Contribution");
 
       // const uptoPeople = await TourGuide.findById(args?.clientProfileID);
 
       // const upP =
       //   parseInt(uptoPeople.uptoPeople) === args.personPic?.totalPerson;
-      
+
       // if (!upP) {
       //   return new Error(
       //     "uptopeople and total person are not match please fill the uptopeople = totalperson"
@@ -359,8 +369,8 @@ const addTourGuideReserve = {
       // console.log(upP);
 
       const alreadyInfoAdd = await TourGuideReserve.find({
-        clientProfileID: args?.clientProfileID, guideContribution: args.guideContribution
-
+        clientProfileID: args?.clientProfileID,
+        guideContribution: args.guideContribution,
       });
 
       if (alreadyInfoAdd.length !== 0) {
@@ -431,6 +441,21 @@ const updateGuideReserve = {
         updateFields.startTime = startTime;
       }
       if (guideContribution) {
+        // if (!guideContribution) {
+        //   throw new Error("Guide Contribution is required.");
+        // }
+
+        // const findDuplicate = await TourGuideReserve.findOne({
+        //   clientProfileID,
+        //   guideContribution,
+        // });
+
+        // if (findDuplicate) {
+        //   throw new Error(
+        //     "Guide Contribution already exists for this client profile."
+        //   );
+        // }
+
         updateFields.guideContribution = guideContribution;
       }
 

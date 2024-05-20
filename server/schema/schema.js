@@ -28,6 +28,7 @@ const {
   getGuideContributions,
   getGuideReservs,
   getGuideReserve,
+  getGuidePlaceImages,
 } = require("../query/tourGuideQuery");
 
 const {
@@ -48,14 +49,14 @@ const {
   updateDestination,
   deleteDestination,
 } = require("../mutation/destination");
-const { addCountry,updateCountry } = require("../mutation/country");
+const { addCountry, updateCountry } = require("../mutation/country");
 const {
   addTourSpot,
   updateTourspot,
   deleteTourspot,
   deleteTourSpotWithCommentReply,
 } = require("../mutation/tourSpot");
-const { addDivision ,updateDivision} = require("../mutation/division");
+const { addDivision, updateDivision } = require("../mutation/division");
 const { addCity, updateCity } = require("../mutation/city");
 const {
   addReview,
@@ -128,6 +129,7 @@ const RootQuery = new GraphQLObjectType({
     getGuideContributions,
     getGuideReservs,
     getGuideReserve,
+    getGuidePlaceImages,
   },
 });
 

@@ -1,10 +1,14 @@
 const { GraphQLID, GraphQLNonNull, GraphQLList} = require("graphql");
-const { TourGuideType } = require("../typeDef/typeDef");
+const { TourGuideType, ImageType } = require("../typeDef/typeDef");
 const TourGuide = require("../models/TourGuide");
 const TourGuideContribution = require("../models/TourGuideContribution");
-const { TourGuideContributionType, TourGuideReserveType } = require("../typeDef/extraTypeDef");
+const {
+  TourGuideContributionType,
+  TourGuideReserveType,
+} = require("../typeDef/extraTypeDef");
 const { fieldValidate } = require("../helpers/validateField");
 const TourGuideReserve = require("../models/TourGuideReserve");
+const Images = require("../models/Images");
 
 const getTourGuide = {
   type: TourGuideType,
@@ -69,11 +73,10 @@ const tourGuidePlace = {
 
       return contribution;
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     }
-  }
-}
-
+  },
+};
 
 const getGuideContributions = {
   type: new GraphQLList(TourGuideContributionType),
@@ -83,32 +86,27 @@ const getGuideContributions = {
     },
   },
 
-  resolve: async (_, {id}) => {
+  resolve: async (_, { id }) => {
     try {
-      
-      const data = await TourGuideContribution.find({clientProfileID: id});
+      const data = await TourGuideContribution.find({ clientProfileID: id });
 
       if (!data) {
         throw new Error("TourGuideContribution not found");
       }
 
       return data;
-
+    } catch (error) {
+      throw new Error(error.message);
     }
-    catch (error) {
-      throw new Error(error.message)
-    }
-  }
-  
-}
-
+  },
+};
 
 const getGuideReservs = {
   type: new GraphQLList(TourGuideReserveType),
   args: {
     id: {
-      type: GraphQLNonNull(GraphQLID)
-    }
+      type: GraphQLNonNull(GraphQLID),
+    },
   },
   resolve: async (_, { id }) => {
     try {
@@ -116,20 +114,20 @@ const getGuideReservs = {
         throw new Error("Profile id is required");
       }
 
-      const guideReservs = await TourGuideReserve.find({ clientProfileID: id })
+      const guideReservs = await TourGuideReserve.find({ clientProfileID: id });
 
-      console.log("🚀 ~ resolve: ~ guideReservs:", guideReservs)
-      
+      console.log("🚀 ~ resolve: ~ guideReservs:", guideReservs);
+
       if (!guideReservs) {
-        throw new Error("No Guide reserves found!")
+        throw new Error("No Guide reserves found!");
       }
 
       return guideReservs;
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     }
-  }
-}
+  },
+};
 
 const getGuideReserve = {
   type: TourGuideReserveType,
@@ -157,6 +155,24 @@ const getGuideReserve = {
   },
 };
 
+const getGuidePlaceImages = {
+  type: new GraphQLList(ImageType),
+  args: {
+    clientProfileID: {
+      type: GraphQLNonNull(GraphQLID),
+    },
+  },
+
+  resolve: async (_, { clientProfileID }) => {
+    try {
+      const images = await Images.find({ clientProfileID });
+      return images;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+};
+
 module.exports = {
   getTourGuide,
   tourGuideProfile,
@@ -164,4 +180,5 @@ module.exports = {
   getGuideContributions,
   getGuideReservs,
   getGuideReserve,
+  getGuidePlaceImages,
 };
