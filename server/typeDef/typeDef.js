@@ -539,6 +539,16 @@ const ImageType = new GraphQLObjectType({
       type: new GraphQLList(ImageUrlType),
     },
     title: { type: GraphQLString },
+    contribute: {
+      type: TourGuideContributionType,
+      resolve: async (parent, args) => {
+        try {
+          return await TourGuideContribution.findById(parent.contributionId);
+        } catch (error) {
+          return new Error(error.message);
+        }
+      },
+    },
   }),
 });
 

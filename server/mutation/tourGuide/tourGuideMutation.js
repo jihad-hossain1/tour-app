@@ -276,7 +276,7 @@ const updateTourGuidePlce = {
         {
           $set: {
             title: args.title || undefined,
-            price: args.price || undefined,
+            price: +args.price || undefined,
             tourPlaceId: args.tourPlaceId || undefined,
             clientProfileID: args.clientProfileID || undefined,
             contribute: args.contribute || undefined,
